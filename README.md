@@ -18,6 +18,6 @@ The address obtained at this point is：https://raw.githubusercontent.com/yagami
 * I have recently developed a keen interest in Surge4 and Quantumult X. Considering the needs of many of my friends from China and Japan, I will look into adapting some common websites to my personal work and study by means of external Rule Sets, (although I basically don't need this list). Just because many people need it for their work and study, I may maintain this Rule Set for a long time.
 * You can also download these list files, write your own private resource address, upload them to your own server, and give Surge Pro references with your own private URL for a little better privacy.
 
-### Disclaimer Notice
-* I will not use this list to violate any national law or to do anything detrimental with this list
+### Legal Disclaimer Notice
+* I will not use this list to violate any national law
 * The format and content of this list is for reference and learning purposes only, I do not assume any legal responsibility for the reuse or secondary development of the list
