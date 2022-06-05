@@ -1,5 +1,5 @@
 # Customized Surge Pro external rulesets
-***
+
 ###### The Surge Pro external ruleset created because of personal needs. If you are using Quantumult X, the writing process is basically similar. I will gradually assemble relevant domestic and international websites into a few external rules lists according to my personal needs. The external ruleset currently defined includes: common social networking sites and my usual technical, academic and web resource sites，Includes many sites around the world with poor access speeds.
 
 ## Introduction
