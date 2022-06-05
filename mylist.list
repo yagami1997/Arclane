@@ -1,0 +1,17 @@
+
+
+# >github
+- DOMAIN-SUFFIX,github
+
+# >MY site
+- DOMAIN-KEYWORD,mengjiucai.com
+- DOMAIN-SUFFIX,aqaba.cloud
+- DOMAIN-SUFFIX,aqaba.uk
+- DOMAIN-SUFFIX,uucloud.org
+- DOMAIN-SUFFIX,zoho.com
+- DOMAIN-SUFFIX,zerotier.com
+# >MY VPS IP 
+- IP-CIDR,45.32.1.1/16
+- IP-CIDR,66.42.1.1/16
+- IP-CIDR,152.69.1.1/16
+- IP-CIDR,150.230.1.1/16
