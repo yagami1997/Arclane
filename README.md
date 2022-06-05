@@ -1,17 +1,18 @@
-# 自定义的Surge Pro外部规则集
+# Customized Surge Pro external rulesets
 ***
-###### 因为个人需求创建的Surge Pro外部规则集。如果使用的是QuantumultX，写作过程基本类似。我会根据个人需要逐渐把国内外相关网站集合到几个外部规则列表里。目前定义的外部规则集包括：zhihu、常见社交网站和我常用的技术、学术和网络资源网站
+###### The Surge Pro external ruleset created because of personal needs. If you are using Quantumult X, the writing process is basically similar. I will gradually assemble relevant domestic and international websites into a few external rules lists according to my personal needs. The external ruleset currently defined includes: common social networking sites and my usual technical, academic and web resource sites，Includes many sites around the world with poor access speeds.
+
 ## Introduction
-* 如果你也需要使用这些外部规则，请按照下图所示，点击RAW按钮，会打开一个浏览器窗口，复制地址栏里的绝对地址，导入到Surge里即可。
+* If you also need to use these external rules, please click on the RAW button as shown below, a browser window will open, just copy the absolute address in the address bar and import it into Surge.
 ![1654435733563](https://user-images.githubusercontent.com/7695407/172053023-c271bc53-2077-4d36-843b-8d4e57c6beb2.png)
 ![1654435957003](https://user-images.githubusercontent.com/7695407/172053203-0079529d-e232-4b97-9664-6c6ee3423641.png)
-此时获得的地址为：https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/socialsite.list
-### 在Surge Pro上的详细使用过程
-* 首先创建一个托管配置的复制副本，然后启用这个副本。在“出站模式”选择代理规则，选择新增规则——规则集——外部规则集
-* 在外部规则集的URL里粘贴上面复制的地址，例如Sociallist.list的Github地址为：https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/socialsite.list
-* 策略按照你现有的策略组选择一个你需要的即可，例如Proxy、Outside或者其他，然后点击完成。
-* 如何更新外部规则集：在Surge Pro主界面点击配置文件名进入配置文件配置界面，在编辑栏目——外部资源，可以看到配置文件预设的规则集以及刚才导入的外部规则，点击下方全部更新即可获得最新版本。
+The address obtained at this point is：https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/socialsite.list
+### Detailed usage on Surge Pro
+* First create a replica of the managed configuration and then enable it. In "Outbound Mode" select Proxy Rules, select Add Rule - Ruleset - External Ruleset
+* Paste the address copied above into the URL of the external ruleset, e.g. the Github address of Sociallist.list is： https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/socialsite.list
+* Single policy just choose one you need according to your existing policy group, such as Proxy, Outside or others, and click Finish.
+* How to update the external ruleset: Click the profile name in the main interface of Surge Pro to enter the profile configuration interface, in the edit section - External Resources, you can see the profile preset ruleset and the external rules you just imported, click Update All below to get the latest version.
 
-### 我的计划
-* 我最近对Surge4和Quantumult X产生了浓厚的兴趣，因此会研究把一些常用网站通过外部规则集的方式适配到个人的工作和学习中来，我会长期维护这个Rule Set。
-* 你也可以下载这些list文件，写入自己的私人资源地址，上传到自己的服务器上，用自己的私人网址给Surge Pro引用，这样隐私性更好一点。
+### Future Plans
+* I have recently developed a keen interest in Surge4 and Quantumult X. Considering the needs of many of my friends from China and Japan, I will look into adapting some common websites to my personal work and study by means of external Rule Sets, (although I basically don't need this list). Just because many people need it for their work and study, I may maintain this Rule Set for a long time.
+* You can also download these list files, write your own private resource address, upload them to your own server, and give Surge Pro references with your own private URL for a little better privacy.
