@@ -4,13 +4,15 @@
 
 ## Introduction
 * If you also need to use these external rules, please click on the RAW button as shown below, a browser window will open, just copy the absolute address in the address bar and import it into Surge.
-![1654435733563](https://user-images.githubusercontent.com/7695407/172053023-c271bc53-2077-4d36-843b-8d4e57c6beb2.png)
-![image](https://user-images.githubusercontent.com/7695407/172077241-250d234d-cd65-4174-ae31-d9154cc2fad8.png)
+![image](https://user-images.githubusercontent.com/7695407/172099104-a37bc55c-43a7-4b36-b172-75365c7be558.png)
+![image](https://user-images.githubusercontent.com/7695407/172099336-85deee03-c6d3-4120-b833-905df248aaf7.png)
 
-The address obtained at this point is：https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/socialsite.list
+
+
+The address obtained at this point is：https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/scholar.list
 ### Detailed usage on Surge Pro
 * First create a replica of the managed configuration and then enable it. In "Outbound Mode" select Proxy Rules, select Add Rule - Ruleset - External Ruleset
-* Paste the address copied above into the URL of the external ruleset, e.g. the Github address of Sociallist.list is： https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/socialsite.list
+* Paste the address copied above into the URL of the external ruleset, e.g. the Github address of Sociallist.list is： https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/scholar.list
 * Single policy just choose one you need according to your existing policy group, such as Proxy, Outside or others, and click Finish.
 * How to update the external ruleset: Click the profile name in the main interface of Surge Pro to enter the profile configuration interface, in the edit section - External Resources, you can see the profile preset ruleset and the external rules you just imported, click Update All below to get the latest version.
 
