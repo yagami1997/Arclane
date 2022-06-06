@@ -26,6 +26,23 @@ IP-CIDR,69.171.224.0/19,no-resolve
 IP-CIDR,69.63.176.0/20,no-resolve
 IP-CIDR,74.119.76.0/22,no-resolve
 
+# > Bytedance Group
+DOMAIN-SUFFIX,amemv.com
+DOMAIN-SUFFIX,ixigua.com
+DOMAIN-SUFFIX,ixiguavideo.com
+DOMAIN-SUFFIX,pstatp.com
+DOMAIN-SUFFIX,snssdk.com
+DOMAIN-SUFFIX,toutiao.com
+DOMAIN-KEYWORD,bytedance
+DOMAIN-KEYWORD,bytecdn
+DOMAIN-KEYWORD,bytegoofy
+DOMAIN-KEYWORD,toutiaoimg
+DOMAIN-KEYWORD,toutiaoapi
+DOMAIN-KEYWORD,byteorge
+DOMAIN-SUFFIX,miaozhen.com
+DOMAIN-SUFFIX,byteimg.com
+DOMAIN-SUFFIX,zijieapi.com
+
 #> zhihu.com
 USER-AGENT,zhihu*
 USER-AGENT,*zhihu*
