@@ -5,9 +5,7 @@
 ## Introduction
 * If you also need to use these external rules, please click on the RAW button as shown below, a browser window will open, just copy the absolute address in the address bar and import it into Surge.
 ![image](https://user-images.githubusercontent.com/7695407/172099104-a37bc55c-43a7-4b36-b172-75365c7be558.png)
-![image](https://user-images.githubusercontent.com/7695407/172099336-85deee03-c6d3-4120-b833-905df248aaf7.png)
-
-
+![image](https://user-images.githubusercontent.com/7695407/172099581-683d27df-f6d2-44cd-b40b-b762c0043bcb.png)
 
 The address obtained at this point is：https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/scholar.list
 ### Detailed usage on Surge Pro
