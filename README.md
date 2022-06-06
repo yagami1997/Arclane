@@ -19,5 +19,6 @@ The address obtained at this point is：https://raw.githubusercontent.com/yagami
 * You can also download these list files, write your own private resource address, upload them to your own server, and give Surge Pro references with your own private URL for a little better privacy.
 
 ### Legal Disclaimer Notice
-* I will not use this list to violate any national law
+* I will not use this list to violate any national law,we will not use this listing for any commercial purposes
+* Some rules refer to DL's rule set, thank you here.
 * The format and content of this list is for reference and learning purposes only, I do not assume any legal responsibility for the reuse or secondary development of the list
