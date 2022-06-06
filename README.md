@@ -5,7 +5,7 @@
 ## Introduction
 * If you also need to use these external rules, please click on the RAW button as shown below, a browser window will open, just copy the absolute address in the address bar and import it into Surge.
 ![1654435733563](https://user-images.githubusercontent.com/7695407/172053023-c271bc53-2077-4d36-843b-8d4e57c6beb2.png)
-![1654435957003](https://user-images.githubusercontent.com/7695407/172053203-0079529d-e232-4b97-9664-6c6ee3423641.png)
+![image](https://user-images.githubusercontent.com/7695407/172076928-7958f226-0f2c-4aee-86b9-483ba235eba2.png)
 
 The address obtained at this point is：https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/socialsite.list
 ### Detailed usage on Surge Pro
