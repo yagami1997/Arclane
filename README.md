@@ -15,9 +15,8 @@ The address obtained at this point is：https://raw.githubusercontent.com/yagami
 * Surge offers cleaner DNS resolution options, and users can use DoH resolution to circumvent DNS pollution issues and thus speed up web access. Strictly speaking, in today's increasingly poor Internet environment, using network quality tools like Surge can really help improve our application experience.
 * Sites that are otherwise inaccessible or extremely slow can be accessed through Surge using a proxy line. For example, if you are in Japan, accessing a UK site will be slow, but by using a UK proxy line through traffic diversion rules, you can often get a good experience. This is the core value of Surge's existence.
 * Surge maximizes the protection of users' privacy from tracking.
-* You can also get the core values mentioned above if you use the much cheaper Quantumult X. Creating a fast, free and strictly privacy-protected web access environment is the original intention of all authors of such tools. They do not want users to use such tools for purposes that violate the law, and as a rulemaker, I only want users to use these rules to improve their learning and productivity, and not to do anything illegal.
+* You can also get the core values mentioned above if you use the much cheaper Quantumult X. Creating a fast, free and strictly privacy-protected web access environment is the original intention of all authors of such tools. They do not want users to use such tools for purposes that violate the law, and as a tech geeker, I only want users to use these rules to improve their learning and productivity, and not to do anything illegal.
 
-Translated with www.DeepL.com/Translator (free version)
 
 ### Detailed usage on Surge Pro
 * First create a replica of the managed configuration and then enable it. In "Outbound Mode" select Proxy Rules, select Add Rule - Ruleset - External Ruleset
