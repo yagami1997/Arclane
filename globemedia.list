@@ -1,5 +1,5 @@
 # > This list contains the rules of popular streaming sites around the world, so that users can easily access through traffic diversion. 
-# > Tip, even if you can connect directly, the streaming will be very laggy due to regional issues, so it is recommended to use traffic shunting to access.
+# > Tip, even if you can connect directly, the streaming will be very slow due to regional issues, so it is recommended to use traffic shunting to access.
 
 # > Youtube
 USER-AGENT,*youtube*
