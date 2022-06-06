@@ -44,8 +44,8 @@ DOMAIN-SUFFIX,byteimg.com
 DOMAIN-SUFFIX,zijieapi.com
 
 #> zhihu.com
-USER-AGENT,zhihu*
 USER-AGENT,*zhihu*
+USER-AGENT,zhihu*
 DOMAIN-SUFFIX,zhihu.com
 DOMAIN-KEYWORD,in.zhihu.com
 DOMAIN-KEYWORD,zhihu
@@ -54,6 +54,14 @@ DOMAIN-KEYWORD,zhimg
 DOMAIN-SUFFIX,api.zhihu.com
 DOMAIN,datahub.zhihu.com
 DOMAIN,appcloud2.in.zhihu.com
+DOMAIN,zhstatic.zhihu.com
+DOMAIN,mqtt.zhihu.com
+DOMAIN,mqtt-internal-public.zhihu.com
+DOMAIN,m-cloud.zhihu.com
+DOMAIN,lens.zhihu.com
+DOMAIN,gslb-dsa.zhihu.com
+DOMAIN,gslb-dsa-tc.zhihu.com
+
 IP-CIDR,223.109.1.1/16
 IP-CIDR,183.213.20.1/24
 IP-CIDR,103.41.1.1/16
@@ -66,6 +74,7 @@ IP-CIDR,47.246.1.1/16
 IP-CIDR,119.28.1.1/16
 IP-CIDR,116.0.89.1/24
 IP-CIDR,163.181.35.1/24
+IP-CIDR,27.221.120.1/24
 IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128
 
 # > LINE
