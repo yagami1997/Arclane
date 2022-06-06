@@ -1,4 +1,6 @@
 #> zhihu.com
+USER-AGENT,zhihu*
+USER-AGENT,*zhihu*
 DOMAIN-SUFFIX,zhihu.com
 DOMAIN-KEYWORD,in.zhihu.com
 DOMAIN-KEYWORD,zhihu
