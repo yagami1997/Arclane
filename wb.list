@@ -1,0 +1,13 @@
+#>weibo.com
+DOMAIN-KEYWORD,weibo
+DOMAIN-SUFFIX,weibo.com
+DOMAIN-SUFFIX,weibo.cn
+DOMAIN-SUFFIX,weibocdn.com
+DOMAIN-KEYWORD,sinaimg
+DOMAIN-SUFFIX,sinaimg.cn
+DOMAIN-SUFFIX,api.weibo.cn
+DOMAIN-SUFFIX,m.weibo.cn
+DOMAIN-SUFFIX,s.weibo.com
+DOMAIN-SUFFIX,service.weibo.com
+USER-AGENT,weibo*
+USER-AGENT,*weibo*
