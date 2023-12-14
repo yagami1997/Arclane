@@ -18,21 +18,7 @@ DOMAIN-SUFFIX,jsdelivr.com
 DOMAIN-SUFFIX,jsdelivr.net
 DOMAIN-KEYWORD,jsdelivr
 
-# >MY site
-DOMAIN-SUFFIX,uucloud.org
-DOMAIN-SUFFIX,aqaba.cloud
-DOMAIN-SUFFIX,aqabatech.co.uk
-DOMAIN-SUFFIX,aqabatech.edu.rs
-DOMAIN-SUFFIX,aqaba.eu.org
-DOMAIN-SUFFIX,aqaba.uk
-DOMAIN-SUFFIX,mengjiucai.com
-DOMAIN-SUFFIX,cloud.es.eu.org
-DOMAIN-SUFFIX,cell.fr.eu.org
-DOMAIN-SUFFIX,3dfx.eu.org
-DOMAIN-SUFFIX,jerusalem.is.eu.org
-DOMAIN-SUFFIX,naltech.eu.org
-DOMAIN-SUFFIX,calbio.eu.org
-DOMAIN-SUFFIX,mixhub.uk
+# >common site
 DOMAIN-SUFFIX,zoho.com
 DOMAIN-SUFFIX,zerotier.com
 DOMAIN-SUFFIX,Protonmail.com
