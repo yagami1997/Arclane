@@ -24,9 +24,17 @@ IP-CIDR,192.35.50.0/24,no-resolve
 IP-CIDR,198.183.17.0/24,no-resolve
 IP-CIDR,205.180.175.0/24,no-resolve
 
-# > Apple News
-DOMAIN-SUFFIX,apple.comscoreresearch.com
-DOMAIN-SUFFIX,apple.news
+# > Apple News and Apple Map TOMTOM Version
+USER-AGENT,AppleNews*
+USER-AGENT,com.apple.news*
+DOMAIN,gspe1-ssl.ls.apple.com
+# USER-AGENT,News*
+# DOMAIN,apple.comscoreresearch.com
+# DOMAIN,gateway.icloud.com
+# DOMAIN,news-client.apple.com
+# DOMAIN,news-edge.apple.com
+# DOMAIN,news-events.apple.com
+# DOMAIN-SUFFIX,apple.news
 
 # > Apple Maps
 PROCESS-NAME,com.apple.geod
