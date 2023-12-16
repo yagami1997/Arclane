@@ -37,6 +37,10 @@ DOMAIN-SUFFIX,vvacard.com
 DOMAIN-SUFFIX,nssurge.com
 DOMAIN-KEYWORD, vvacard
 
+# >hubstudio
+DOMAIN-SUFFIX,hubstudio.vip
+DOMAIN-KEYWORD,hubstudio
+
 
 # >other
 DOMAIN-SUFFIX,lifecard.co.jp
