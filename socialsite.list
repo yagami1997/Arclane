@@ -1,29 +1,55 @@
 #>douyin
 
-DOMAIN,douyin.com
-DOMAIN-KEYWORD,douyin
-DOMAIN-KEYWORD,douyinpic
-DOMAIN,douyinpic.com
-DOMAIN-KEYWORD,douyinvod
-DOMAIN,douyinvod.com
-DOMAIN,douyinstatic.com
-DOMAIN-KEYWORD,douyinstatic
-DOMAIN,snsssk.com
-DOMAIN-KEYWORD,snsssk
-DOMAIN,amemv.com
-DOMAIN-KEYWORD,amemv
-DOMAIN,ecombdapi.com
-DOMAIN,bdurl.net
-DOMAIN-SUFFIX,ixigua.com
-DOMAIN-SUFFIX,ixiguavideo.com
-DOMAIN-SUFFIX,pstatp.com
-DOMAIN-KEYWORD,core-c-lq
-DOMAIN-KEYWORD,core-lq
-DOMAIN-KEYWORD,normal-c-lq
-DOMAIN-KEYWORD,normal-lq
-DOMAIN-KEYWORD,search-quic-lq
-DOMAIN-KEYWORD,search-lq
-
+# NAME: DouYin
+# AUTHOR: blackmatrix7
+# REPO: https://github.com/blackmatrix7/ios_rule_script
+# UPDATED: 2024-02-03 01:48:29
+# HOST-SUFFIX: 11
+# TOTAL: 11
+HOST-SUFFIX,amemv.com,DouYin
+HOST-SUFFIX,douyincdn.com,DouYin
+HOST-SUFFIX,douyinpic.com,DouYin
+HOST-SUFFIX,douyinstatic.com,DouYin
+HOST-SUFFIX,douyinvod.com,DouYin
+HOST-SUFFIX,idouyinvod.com,DouYin
+HOST-SUFFIX,ixigua.com,DouYin
+HOST-SUFFIX,ixiguavideo.com,DouYin
+HOST-SUFFIX,pstatp.com,DouYin
+HOST-SUFFIX,snssdk.com,DouYin
+HOST-SUFFIX,toutiao.com,DouYin
+host-suffix, amemv.com
+host-suffix, awemeughun.com
+host-suffix, douyincdn.com
+host-suffix, douyinvod.com
+host-suffix, douyinpic.com
+host-suffix, douyinstatic.com
+host-suffix, idouyinvod.com
+host-suffix, byteactivity.com
+host-suffix, bytecdn.cn
+host-suffix, bytecdn.com
+host-suffix, byteeffecttos.com
+host-suffix, bytegecko.com
+host-suffix, bytegoofy.com
+host-suffix, byteimg.com
+host-suffix, bytescm.com
+host-suffix, bytedance.com
+host-suffix, bytemastatic.com
+host-suffix, bytetos.com
+host-suffix, byteacctimg.com
+host-suffix, bytednsdoc.com
+host-suffix, ecombdapi.com
+host-suffix, ecombdimg.com
+host-suffix, ecombdstatic.com
+host-suffix, ibytedapm.com
+host-suffix, umeng.com
+host-suffix, xycdn.com
+host-suffix, zijieapi.com
+host-suffix, zjcdn.com
+host-suffix, douyincdn.com
+host-suffix, douyinvod.com
+host-suffix, douyinpic.com
+host-suffix, douyinstatic.com
+host-suffix, idouyinvod.com
 
 #>bytedance
 
