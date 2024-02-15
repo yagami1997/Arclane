@@ -1,5 +1,20 @@
 #>douyin
 
+DOMAIN,douyin.com
+DOMAIN-KEYWORD,douyin
+DOMAIN-KEYWORD,douyinpic
+DOMAIN,douyinpic.com
+DOMAIN-KEYWORD,douyinvod
+DOMAIN,douyinvod.com
+DOMAIN,douyinstatic.com
+DOMAIN-KEYWORD,douyinstatic
+DOMAIN-KEYWORD,core-c-lq
+DOMAIN-KEYWORD,core-lq
+DOMAIN-KEYWORD,normal-c-lq
+DOMAIN-KEYWORD,normal-lq
+DOMAIN-KEYWORD,search-quic-lq
+DOMAIN-KEYWORD,search-lq
+
 DOMAIN-SUFFIX,amemv.com
 DOMAIN-SUFFIX,douyincdn.com
 DOMAIN-SUFFIX,douyinpic.com
