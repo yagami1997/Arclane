@@ -14,7 +14,8 @@ DOMAIN-KEYWORD,normal-c-lq
 DOMAIN-KEYWORD,normal-lq
 DOMAIN-KEYWORD,search-quic-lq
 DOMAIN-KEYWORD,search-lq
-
+DOMAIN-SUFFIX,dailygn.com
+DOMAIN-KEYWORD,dailygn.com
 DOMAIN-SUFFIX,amemv.com
 DOMAIN-SUFFIX,douyincdn.com
 DOMAIN-SUFFIX,douyinpic.com
@@ -43,6 +44,7 @@ DOMAIN-SUFFIX,byteimg.com
 DOMAIN-SUFFIX,bytescm.com
 DOMAIN-SUFFIX,bytedance.com
 DOMAIN-SUFFIX,bytemastatic.com
+DOMAIN-KEYWORD,bytemastatic.com
 DOMAIN-SUFFIX,bytetos.com
 DOMAIN-SUFFIX,byteacctimg.com
 DOMAIN-SUFFIX,bytednsdoc.com
