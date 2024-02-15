@@ -160,6 +160,7 @@ DOMAIN-KEYWORD,byteorge
 DOMAIN-SUFFIX,miaozhen.com
 DOMAIN-SUFFIX,byteimg.com
 DOMAIN-SUFFIX,zijieapi.com
+IP-CIDR,58.216.1.1/16
 
 
 # > LINE
