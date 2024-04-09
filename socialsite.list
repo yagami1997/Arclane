@@ -95,10 +95,6 @@ DOMAIN,toutiaoimg.com
 DOMAIN-KEYWORD,toutiao
 DOMAIN-KEYWORD,toutiaoimg
 
-# weixin
-DOMAIN,mp.weixin.qq.com 
-DOMAIN-SUFFIX,loseprivacy.net
-
 
 #>tiktok
 DOMAIN,p16-tiktokcdn-com.akamaized.net
