@@ -38,6 +38,8 @@ DOMAIN-SUFFIX,nssurge.com
 DOMAIN-KEYWORD, vvacard
 DOMAIN-SUFFIX,ipjiance.com
 DOMAIN-SUFFIX,ip2location.com
+DOMAIN-SUFFIX,ipqualityscore.com
+
 
 # >hubstudio
 DOMAIN-SUFFIX,hubstudio.vip
@@ -51,6 +53,7 @@ DOMAIN-SUFFIX,macosicons.com
 DOMAIN-SUFFIX,oracle.com
 DOMAIN-SUFFIX,gcore.com
 DOMAIN-SUFFIX,ipinfo.io
+DOMAIN-SUFFIX,scamalytics.com
 DOMAIN-SUFFIX,marriott.com.cn
 DOMAIN-SUFFIX,marriott.com
 DOMAIN-KEYWORD,marriott
