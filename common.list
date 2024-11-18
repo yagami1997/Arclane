@@ -7,6 +7,8 @@ DOMAIN,testflight.apple.com
 # > Finance, government, securities, regulation
 DOMAIN-SUFFIX,capitalone.com
 DOMAIN-SUFFIX,id.me
+DOMAIN-SUFFIX,fiverr.com
+DOMAIN-SUFFIX,wise.com
 
 # >github
 DOMAIN-SUFFIX,github.com
@@ -46,11 +48,10 @@ DOMAIN-SUFFIX,ultramobile.com
 DOMAIN-KEYWORD,ultramobile
 DOMAIN-SUFFIX,vvacard.com
 DOMAIN-SUFFIX,nssurge.com
-DOMAIN-SUFFIX,fiverr.com
 DOMAIN-SUFFIX,ipjiance.com
 DOMAIN-SUFFIX,ip2location.com
 DOMAIN-SUFFIX,ipqualityscore.com
-DOMAIN-SUFFIX,wise.com
+
 DOMAIN-SUFFIX,uucloud.org
 DOMAIN-SUFFIX,aqaba.cloud
 DOMAIN-SUFFIX,mixhub.uk
@@ -64,7 +65,6 @@ DOMAIN-KEYWORD,hubstudio
 
 # >other
 DOMAIN-SUFFIX,lifecard.co.jp
-DOMAIN-SUFFIX,swisscom.ch
 DOMAIN-SUFFIX,columbia.edu
 DOMAIN-SUFFIX,macosicons.com
 DOMAIN-SUFFIX,oracle.com
