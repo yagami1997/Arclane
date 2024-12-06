@@ -42,24 +42,12 @@ DOMAIN-SUFFIX,mypikpak.com
 DOMAIN-SUFFIX,civitai.com
 DOMAIN-SUFFIX,ultramobile.com
 DOMAIN-KEYWORD,ultramobile
-DOMAIN-SUFFIX,vvacard.com
 DOMAIN-SUFFIX,nssurge.com
 DOMAIN-SUFFIX,ipjiance.com
 DOMAIN-SUFFIX,ip2location.com
 DOMAIN-SUFFIX,ipqualityscore.com
 DOMAIN-SUFFIX,interactivebrokers.com
 DOMAIN-KEYWORD,interactivebrokers
-
-DOMAIN-SUFFIX,uucloud.org
-DOMAIN-SUFFIX,aqaba.cloud
-DOMAIN-SUFFIX,mixhub.uk
-
-
-
-# >hubstudio
-DOMAIN-SUFFIX,hubstudio.vip
-DOMAIN-KEYWORD,hubstudio
-
 
 # >other
 DOMAIN-SUFFIX,lifecard.co.jp
@@ -78,8 +66,11 @@ DOMAIN-SUFFIX,canadagoose.com
 DOMAIN-KEYWORD,mobal
 DOMAIN-SUFFIX,fiverr.com
 DOMAIN-SUFFIX,wise.com
+DOMAIN-SUFFIX,uucloud.org
+DOMAIN-SUFFIX,aqaba.cloud
+DOMAIN-SUFFIX,mixhub.uk
 
-# >ultramobile IP wificalling
+# >IP wificalling
 IP-CIDR,208.54.0.0/16
 IP-CIDR,8.219.0.0/16
 DOMAIN-SUFFIX,ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org
