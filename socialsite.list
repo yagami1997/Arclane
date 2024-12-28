@@ -189,3 +189,17 @@ IP-CIDR,203.104.103.0/24,no-resolve
 IP-CIDR,203.104.128.0/20,no-resolve
 IP-CIDR,203.174.66.64/26,no-resolve
 IP-CIDR,203.174.77.0/24,no-resolve
+
+#>weibo.com
+DOMAIN-KEYWORD,weibo
+DOMAIN-SUFFIX,weibo.com
+DOMAIN-SUFFIX,weibo.cn
+DOMAIN-SUFFIX,weibocdn.com
+DOMAIN-KEYWORD,sinaimg
+DOMAIN-SUFFIX,sinaimg.cn
+DOMAIN-SUFFIX,api.weibo.cn
+DOMAIN-SUFFIX,m.weibo.cn
+DOMAIN-SUFFIX,s.weibo.com
+DOMAIN-SUFFIX,service.weibo.com
+USER-AGENT,weibo*
+USER-AGENT,*weibo*
