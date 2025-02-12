@@ -22,7 +22,6 @@ IP-CIDR,144.178.36.0/22,no-resolve
 IP-CIDR,144.178.48.0/20,no-resolve
 IP-CIDR,192.35.50.0/24,no-resolve
 IP-CIDR,198.183.17.0/24,no-resolve
-IP-CIDR,205.180.175.0/24,no-resolve
 
 # > Apple News and Apple Map TOMTOM Version
 USER-AGENT,AppleNews*
