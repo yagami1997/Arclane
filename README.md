@@ -60,13 +60,7 @@ These custom rulesets are designed to optimize your network experience by:
 
 ## 🚀 Quick Setup Guide
 
-<div align="center">
-  <img src="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/.github/setup-guide.png" width="800">
-</div>
-
-<details>
-<summary><b>📋 Step-by-Step Instructions</b></summary>
-<br>
+### Step-by-Step Instructions
 
 1. Click the **RAW** button on the ruleset file you want to use:
 
@@ -87,7 +81,6 @@ These custom rulesets are designed to optimize your network experience by:
    - Go to your profile configuration
    - Navigate to **Edit → External Resources**
    - Click **Update All** to get the latest versions
-</details>
 
 ## 💡 Pro Tips
 
