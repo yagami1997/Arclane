@@ -1,35 +1,68 @@
-# 🌊 Customized Surge 5 Rulesets
+# <img src="https://cdn-icons-png.flaticon.com/512/1329/1329016.png" width="36" align="center"> Surge 5 Rulesets Collection
 
 <div align="center">
-  
-![Surge](https://img.shields.io/badge/Surge-5-blue)
-![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20macOS-lightgrey)
-![License](https://img.shields.io/badge/License-MIT-green)
-  
+
+![Surge](https://img.shields.io/badge/Surge-5-0075F8?style=for-the-badge&logo=surge&logoColor=white)
+![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20macOS-000000?style=for-the-badge&logo=apple&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-22B455?style=for-the-badge&logo=opensourceinitiative&logoColor=white)
+![Maintained](https://img.shields.io/badge/Maintained-Yes-brightgreen?style=for-the-badge&logo=github&logoColor=white)
+
 </div>
 
-> Custom external rulesets for Surge 5 designed for optimizing network access to social, technical, academic, and global resource websites. Compatible with Quantumult X with similar implementation.
+<p align="center">
+  <i>Optimized network routing rules for a faster, more reliable browsing experience across global websites</i>
+</p>
 
-## ✨ Features
+<hr>
 
-- **Social media** sites optimized for better access
-- **Technical & academic resources** with improved connection speeds
-- **Global websites** with routing optimizations
-- **Privacy-focused** configurations
-- **Regularly maintained** and updated rulesets
+## 🗂️ Ruleset Collection
 
-## 📋 Available Rulesets
+<table>
+<tr>
+  <td><img src="https://cdn-icons-png.flaticon.com/512/3637/3637704.png" width="22" align="center"></td>
+  <td><b>Common Sites</b></td>
+  <td>Essential services, developer tools, mail providers</td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/common.list">common.list</a></td>
+</tr>
+<tr>
+  <td><img src="https://cdn-icons-png.flaticon.com/512/2830/2830284.png" width="22" align="center"></td>
+  <td><b>Payment Services</b></td>
+  <td>Financial institutions, banking, payment processors</td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/paypal.list">paypal.list</a></td>
+</tr>
+<tr>
+  <td><img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" width="22" align="center"></td>
+  <td><b>Social Media</b></td>
+  <td>Content platforms, streaming services, social networks</td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/social.list">social.list</a></td>
+</tr>
+<tr>
+  <td><img src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" width="22" align="center"></td>
+  <td><b>Academic</b></td>
+  <td>Research databases, journals, educational resources</td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/scholar.list">scholar.list</a></td>
+</tr>
+</table>
 
-| Ruleset | Description | Link |
-|---------|-------------|------|
-| Scholar | Academic and research websites | [scholar.list](https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/scholar.list) |
-| Social | Common social networking sites | [social.list](https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/social.list) |
-| Common | Frequently accessed websites | [common.list](https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/common.list) |
-| PayPal | Financial services | [paypal.list](https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/paypal.list) |
+## ✨ Why Use These Rulesets?
 
-## 🚀 Getting Started
+These custom rulesets are designed to optimize your network experience by:
 
-### How to Import Rulesets
+- **Bypassing network congestion** for faster access to global sites
+- **Improving connection reliability** for critical online services
+- **Enhancing privacy** by using cleaner DNS resolution
+- **Optimizing media streaming** for smoother playback
+- **Ensuring access stability** across different geographical regions
+
+## 🚀 Quick Setup Guide
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/.github/setup-guide.png" width="800">
+</div>
+
+<details>
+<summary><b>📋 Step-by-Step Instructions</b></summary>
+<br>
 
 1. Click the **RAW** button on the ruleset file you want to use:
 
@@ -39,60 +72,64 @@
 
    ![Copy URL](https://user-images.githubusercontent.com/7695407/172099581-683d27df-f6d2-44cd-b40b-b762c0043bcb.png)
 
-3. The URL will look like: `https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/scholar.list`
+3. In Surge 5:
+   - Create a replica of your managed configuration
+   - In **Outbound Mode**, select **Proxy Rules**
+   - Navigate to **Add Rule → Ruleset → External Ruleset**
+   - Paste the copied URL and select an appropriate policy
+   - Click **Finish** to apply
 
-### Implementation in Surge 5
+4. To update your rulesets later:
+   - Go to your profile configuration
+   - Navigate to **Edit → External Resources**
+   - Click **Update All** to get the latest versions
+</details>
 
-1. Create a replica of your managed configuration and enable it
-2. In **Outbound Mode**, select **Proxy Rules**
-3. Navigate to **Add Rule → Ruleset → External Ruleset**
-4. Paste the copied URL in the external ruleset field
-5. Select an appropriate policy (e.g., Proxy, Outside) based on your existing policy groups
-6. Click **Finish** to apply
+## 💡 Pro Tips
 
-### Updating Rulesets
+<table>
+<tr>
+<td width="50%" valign="top">
 
-To keep your rulesets up-to-date:
+### Optimal Configuration
+- Use with DoH/DoT for cleaner DNS resolution
+- Combine with region-specific proxy policies
+- Apply rule-based routing for better performance
+- Consider network conditions when selecting proxies
 
-1. Go to the main interface of Surge 5
-2. Click on your profile name to enter the configuration interface
-3. Navigate to **Edit → External Resources**
-4. Click **Update All** at the bottom to get the latest versions
+</td>
+<td width="50%" valign="top">
 
-## 🔍 Why Surge 5?
+### Common Use Cases
+- Accessing developer resources like GitHub
+- Smooth experience with international payment systems
+- Stable connections to cloud services
+- Enhanced media streaming quality
+- Better performance for collaboration tools
 
-### Enhanced Web Experience for Apple Devices
+</td>
+</tr>
+</table>
 
-- **Powerful debugging tool** for network optimization in the Apple ecosystem
-- **Clean DNS resolution** with DoH support to bypass DNS pollution
-- **Geographical routing optimization** for faster access to international websites
-- **Privacy protection** against tracking and monitoring
-- **Traffic diversion** through proxy lines for otherwise slow or inaccessible websites
+## 🔮 Roadmap
 
-> While Quantumult X offers similar functionality at a lower price point, both tools aim to create a fast, free, and privacy-protected web browsing environment.
+- [ ] Regular updates for new services and domains
+- [ ] Performance optimization for specific regions
+- [ ] Enhanced compatibility with Quantumult X
+- [ ] User-contributed rule suggestions
+- [ ] Documentation in multiple languages
 
-## 🔮 Future Plans
+## ⚖️ Legal & Credits
 
-- **Continuous updates** based on user feedback and personal needs
-- **Adaptation of common websites** for users from various regions
-- **Support for private hosting** of ruleset files for enhanced privacy
+This project is licensed under the [MIT License](LICENSE).
 
-## ⚖️ License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📝 Legal Disclaimer
-
-- These rulesets are intended for legitimate network optimization, learning, and productivity enhancement
-- Some rules reference DL's ruleset (credits acknowledged)
-- The format and content are for reference and educational purposes only
-- No legal responsibility is assumed for reuse or secondary development
-- Not to be used for any purposes that violate applicable laws or regulations
-
----
+**Disclaimer:** These rulesets are intended for legitimate network optimization and educational purposes only. Some rules reference DL's ruleset (credit acknowledged).
 
 <div align="center">
-  
-Made with ❤️ for a better browsing experience
-
+  <br>
+  <p>
+    <sub>Made with ❤️ for a faster, more reliable internet</sub>
+    <br>
+    <sub>Copyright © 2023-2025</sub>
+  </p>
 </div>
