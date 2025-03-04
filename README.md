@@ -33,11 +33,11 @@
 
 1. Click the **RAW** button on the ruleset file you want to use:
 
-   <img src="https://user-images.githubusercontent.com/7695407/172099104-a37bc55c-43a7-4b36-b172-75365c7be558.png" width="700px" />
+   ![Click RAW button](https://user-images.githubusercontent.com/7695407/172099104-a37bc55c-43a7-4b36-b172-75365c7be558.png)
 
 2. Copy the URL from your browser's address bar:
 
-   <img src="https://user-images.githubusercontent.com/7695407/172099581-683d27df-f6d2-44cd-b40b-b762c0043bcb.png" width="700px" />
+   ![Copy URL](https://user-images.githubusercontent.com/7695407/172099581-683d27df-f6d2-44cd-b40b-b762c0043bcb.png)
 
 3. The URL will look like: `https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/scholar.list`
 
