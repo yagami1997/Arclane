@@ -1,38 +1,96 @@
-# Customized Surge Pro external rulesets
+# 🌊 Customized Surge Pro Rulesets
 
-###### The Surge Pro external ruleset created because of personal needs. If you are using Quantumult X, the writing process is basically similar. I will gradually assemble relevant domestic and international websites into a few external rules lists according to my personal needs. The external ruleset currently defined includes: common social networking sites and my usual technical, academic and web resource sites，Includes many sites around the world with poor access speeds.
+<div align="center">
+  
+![Surge Pro](https://img.shields.io/badge/Surge-Pro-blue)
+![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20macOS-lightgrey)
+![License](https://img.shields.io/badge/License-MIT-green)
+  
+</div>
 
-## Introduction
-* If you also need to use these external rules, please click on the RAW button as shown below, a browser window will open, just copy the absolute address in the address bar and import it into Surge.
-![image](https://user-images.githubusercontent.com/7695407/172099104-a37bc55c-43a7-4b36-b172-75365c7be558.png)
-![image](https://user-images.githubusercontent.com/7695407/172099581-683d27df-f6d2-44cd-b40b-b762c0043bcb.png)
+> Custom external rulesets for Surge Pro designed for optimizing network access to social, technical, academic, and global resource websites. Compatible with Quantumult X with similar implementation.
 
-The address obtained at this point is：https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/scholar.list
+## ✨ Features
 
-### Why Improve the Quality of Our Web Access on iPhones and Macs with Surge
+- **Social media** sites optimized for better access
+- **Technical & academic resources** with improved connection speeds
+- **Global websites** with routing optimizations
+- **Privacy-focused** configurations
+- **Regularly maintained** and updated rulesets
 
-* Surge is a very important network debugging tool in apple ecology, which allows users to use certain proxy lines to access those difficulties that are blocked or caused by the geographical routing problems of the operator's network causing extremely slow access.
-* Surge offers cleaner DNS resolution options, and users can use DoH resolution to circumvent DNS pollution issues and thus speed up web access. Strictly speaking, in today's increasingly poor Internet environment, using network quality tools like Surge can really help improve our application experience.
-* Sites that are otherwise inaccessible or extremely slow can be accessed through Surge using a proxy line. For example, if you are in Japan, accessing a UK site will be slow, but by using a UK proxy line through traffic diversion rules, you can often get a good experience. This is the core value of Surge's existence.
-* Surge maximizes the protection of users' privacy from tracking.
-* You can also get the core values mentioned above if you use the much cheaper Quantumult X. Creating a fast, free and strictly privacy-protected web access environment is the original intention of all authors of such tools. They do not want users to use such tools for purposes that violate the law, and as a tech geeker, I only want users to use these rules to improve their learning and productivity, and not to do anything illegal.
+## 📋 Available Rulesets
 
+| Ruleset | Description | Link |
+|---------|-------------|------|
+| Scholar | Academic and research websites | [scholar.list](https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/scholar.list) |
+| Social | Common social networking sites | [social.list](https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/social.list) |
 
-### Detailed usage on Surge Pro
-* First create a replica of the managed configuration and then enable it. In "Outbound Mode" select Proxy Rules, select Add Rule - Ruleset - External Ruleset
-* Paste the address copied above into the URL of the external ruleset, e.g. the Github address of Sociallist.list is： https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/scholar.list
-* Single policy just choose one you need according to your existing policy group, such as Proxy, Outside or others, and click Finish.
-* How to update the external ruleset: Click the profile name in the main interface of Surge Pro to enter the profile configuration interface, in the edit section - External Resources, you can see the profile preset ruleset and the external rules you just imported, click Update All below to get the latest version.
+## 🚀 Getting Started
 
-### Future Plans
-* I have recently developed a keen interest in Surge4 and Quantumult X. Considering the needs of many of my friends from China and Japan, I will look into adapting some common websites to my personal work and study by means of external Rule Sets, (although I basically don't need this list). Just because many people need it for their work and study, I may maintain this Rule Set for a long time.
-* You can also download these list files, write your own private resource address, upload them to your own server, and give Surge Pro references with your own private URL for a little better privacy.
+### How to Import Rulesets
 
-## License
+1. Click the **RAW** button on the ruleset file you want to use:
+
+   <img src="https://user-images.githubusercontent.com/7695407/172099104-a37bc55c-43a7-4b36-b172-75365c7be558.png" width="500px" />
+
+2. Copy the URL from your browser's address bar:
+
+   <img src="https://user-images.githubusercontent.com/7695407/172099581-683d27df-f6d2-44cd-b40b-b762c0043bcb.png" width="500px" />
+
+3. The URL will look like: `https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/scholar.list`
+
+### Implementation in Surge Pro
+
+1. Create a replica of your managed configuration and enable it
+2. In **Outbound Mode**, select **Proxy Rules**
+3. Navigate to **Add Rule → Ruleset → External Ruleset**
+4. Paste the copied URL in the external ruleset field
+5. Select an appropriate policy (e.g., Proxy, Outside) based on your existing policy groups
+6. Click **Finish** to apply
+
+### Updating Rulesets
+
+To keep your rulesets up-to-date:
+
+1. Go to the main interface of Surge Pro
+2. Click on your profile name to enter the configuration interface
+3. Navigate to **Edit → External Resources**
+4. Click **Update All** at the bottom to get the latest versions
+
+## 🔍 Why Surge Pro?
+
+### Enhanced Web Experience for Apple Devices
+
+- **Powerful debugging tool** for network optimization in the Apple ecosystem
+- **Clean DNS resolution** with DoH support to bypass DNS pollution
+- **Geographical routing optimization** for faster access to international websites
+- **Privacy protection** against tracking and monitoring
+- **Traffic diversion** through proxy lines for otherwise slow or inaccessible websites
+
+> While Quantumult X offers similar functionality at a lower price point, both tools aim to create a fast, free, and privacy-protected web browsing environment.
+
+## 🔮 Future Plans
+
+- **Continuous updates** based on user feedback and personal needs
+- **Adaptation of common websites** for users from various regions
+- **Support for private hosting** of ruleset files for enhanced privacy
+
+## ⚖️ License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-### Legal Disclaimer Notice
-* I will not use this list to violate any national law,we will not use this listing for any commercial purposes.
-* Some rules refer to DL's rule set, thank you here.
-* The format and content of this list is for reference and learning purposes only, I do not assume any legal responsibility for the reuse or secondary development of the list
+## 📝 Legal Disclaimer
+
+- These rulesets are intended for legitimate network optimization, learning, and productivity enhancement
+- Some rules reference DL's ruleset (credits acknowledged)
+- The format and content are for reference and educational purposes only
+- No legal responsibility is assumed for reuse or secondary development
+- Not to be used for any purposes that violate applicable laws or regulations
+
+---
+
+<div align="center">
+  
+Made with ❤️ for a better browsing experience
+
+</div>
