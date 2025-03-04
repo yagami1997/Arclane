@@ -1,4 +1,4 @@
-# <img src="https://nssurge.com/img/logo.png" width="45" align="center"> Surge 5 Rulesets Collection
+# <img src="https://cdn-icons-png.flaticon.com/512/5261/5261929.png" width="45" align="center"> Surge 5 Rulesets Collection
 
 <div align="center">
 
