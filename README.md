@@ -1,11 +1,11 @@
-# <img src="https://cdn-icons-png.flaticon.com/512/3841/3841715.png" width="36" align="center"> Surge 5 Rulesets Collection
+# <img src="https://cdn-icons-png.flaticon.com/512/6911/6911466.png" width="40" align="center"> Surge 5 Rulesets Collection
 
 <div align="center">
 
-![Surge](https://img.shields.io/badge/Surge-5-3E86F5?style=for-the-badge&logo=surge&logoColor=white)
-![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20macOS-919191?style=for-the-badge&logo=apple&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-7CB798?style=for-the-badge&logo=opensourceinitiative&logoColor=white)
-![Maintained](https://img.shields.io/badge/Maintained-Yes-7DB9B6?style=for-the-badge&logo=github&logoColor=white)
+![Surge](https://img.shields.io/badge/Surge-5-4D9DE0?style=for-the-badge&logo=surge&logoColor=white)
+![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20macOS-E87A90?style=for-the-badge&logo=apple&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-92D293?style=for-the-badge&logo=opensourceinitiative&logoColor=white)
+![Maintained](https://img.shields.io/badge/Maintained-Yes-F5C05A?style=for-the-badge&logo=github&logoColor=white)
 
 </div>
 
