@@ -1,11 +1,11 @@
-# <img src="https://cdn-icons-png.flaticon.com/512/8729/8729045.png" width="36" align="center"> Surge 5 Rulesets Collection
+# <img src="https://cdn-icons-png.flaticon.com/512/3841/3841715.png" width="36" align="center"> Surge 5 Rulesets Collection
 
 <div align="center">
 
-![Surge](https://img.shields.io/badge/Surge-5-0075F8?style=for-the-badge&logo=surge&logoColor=white)
-![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20macOS-000000?style=for-the-badge&logo=apple&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-22B455?style=for-the-badge&logo=opensourceinitiative&logoColor=white)
-![Maintained](https://img.shields.io/badge/Maintained-Yes-brightgreen?style=for-the-badge&logo=github&logoColor=white)
+![Surge](https://img.shields.io/badge/Surge-5-3E86F5?style=for-the-badge&logo=surge&logoColor=white)
+![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20macOS-919191?style=for-the-badge&logo=apple&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-7CB798?style=for-the-badge&logo=opensourceinitiative&logoColor=white)
+![Maintained](https://img.shields.io/badge/Maintained-Yes-7DB9B6?style=for-the-badge&logo=github&logoColor=white)
 
 </div>
 
@@ -41,7 +41,6 @@
   <td><b>Academic</b></td>
   <td>Research databases, journals, educational resources</td>
   <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/scholar.list">scholar.list</a></td>
-</tr>
 </tr>
 </table>
 
