@@ -1,14 +1,14 @@
-# 🌊 Customized Surge Pro Rulesets
+# 🌊 Customized Surge 5 Rulesets
 
 <div align="center">
   
-![Surge Pro](https://img.shields.io/badge/Surge-Pro-blue)
+![Surge](https://img.shields.io/badge/Surge-5-blue)
 ![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20macOS-lightgrey)
 ![License](https://img.shields.io/badge/License-MIT-green)
   
 </div>
 
-> Custom external rulesets for Surge Pro designed for optimizing network access to social, technical, academic, and global resource websites. Compatible with Quantumult X with similar implementation.
+> Custom external rulesets for Surge 5 designed for optimizing network access to social, technical, academic, and global resource websites. Compatible with Quantumult X with similar implementation.
 
 ## ✨ Features
 
@@ -24,6 +24,8 @@
 |---------|-------------|------|
 | Scholar | Academic and research websites | [scholar.list](https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/scholar.list) |
 | Social | Common social networking sites | [social.list](https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/social.list) |
+| Common | Frequently accessed websites | [common.list](https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/common.list) |
+| PayPal | Financial services | [paypal.list](https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/paypal.list) |
 
 ## 🚀 Getting Started
 
@@ -39,7 +41,7 @@
 
 3. The URL will look like: `https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/scholar.list`
 
-### Implementation in Surge Pro
+### Implementation in Surge 5
 
 1. Create a replica of your managed configuration and enable it
 2. In **Outbound Mode**, select **Proxy Rules**
@@ -52,12 +54,12 @@
 
 To keep your rulesets up-to-date:
 
-1. Go to the main interface of Surge Pro
+1. Go to the main interface of Surge 5
 2. Click on your profile name to enter the configuration interface
 3. Navigate to **Edit → External Resources**
 4. Click **Update All** at the bottom to get the latest versions
 
-## 🔍 Why Surge Pro?
+## 🔍 Why Surge 5?
 
 ### Enhanced Web Experience for Apple Devices
 
