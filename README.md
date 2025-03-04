@@ -1,4 +1,4 @@
-# <img src="https://cdn-icons-png.flaticon.com/512/1329/1329016.png" width="36" align="center"> Surge 5 Rulesets Collection
+# <img src="https://cdn-icons-png.flaticon.com/512/8729/8729045.png" width="36" align="center"> Surge 5 Rulesets Collection
 
 <div align="center">
 
@@ -19,28 +19,29 @@
 
 <table>
 <tr>
-  <td><img src="https://cdn-icons-png.flaticon.com/512/3637/3637704.png" width="22" align="center"></td>
+  <td><img src="https://cdn-icons-png.flaticon.com/512/9458/9458326.png" width="22" align="center"></td>
   <td><b>Common Sites</b></td>
   <td>Essential services, developer tools, mail providers</td>
   <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/common.list">common.list</a></td>
 </tr>
 <tr>
-  <td><img src="https://cdn-icons-png.flaticon.com/512/2830/2830284.png" width="22" align="center"></td>
+  <td><img src="https://cdn-icons-png.flaticon.com/512/2936/2936660.png" width="22" align="center"></td>
   <td><b>Payment Services</b></td>
   <td>Financial institutions, banking, payment processors</td>
   <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/paypal.list">paypal.list</a></td>
 </tr>
 <tr>
-  <td><img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" width="22" align="center"></td>
+  <td><img src="https://cdn-icons-png.flaticon.com/512/9073/9073032.png" width="22" align="center"></td>
   <td><b>Social Media</b></td>
   <td>Content platforms, streaming services, social networks</td>
   <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/social.list">social.list</a></td>
 </tr>
 <tr>
-  <td><img src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" width="22" align="center"></td>
+  <td><img src="https://cdn-icons-png.flaticon.com/512/3330/3330314.png" width="22" align="center"></td>
   <td><b>Academic</b></td>
   <td>Research databases, journals, educational resources</td>
   <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/scholar.list">scholar.list</a></td>
+</tr>
 </tr>
 </table>
 
