@@ -49,6 +49,8 @@ DOMAIN-SUFFIX,interactivebrokers.com
 DOMAIN-KEYWORD,interactivebrokers
 DOMAIN-SUFFIX,freecarrierlookup.com
 DOMAIN-SUFFIX,telnyx.com
+DOMAIN-SUFFIX,claw.cloud
+DOMAIN-SUFFIX,run.claw.cloud
 
 # >other
 DOMAIN-SUFFIX,lifecard.co.jp
