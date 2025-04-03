@@ -1,4 +1,4 @@
-#>douyin
+# douyin
 
 DOMAIN,douyin.com
 DOMAIN-KEYWORD,douyin
@@ -96,7 +96,7 @@ DOMAIN-KEYWORD,toutiao
 DOMAIN-KEYWORD,toutiaoimg
 
 
-#>tiktok
+# tiktok
 # DOMAIN,p16-tiktokcdn-com.akamaized.net
 # DOMAIN-SUFFIX,byteoversea.com
 # DOMAIN-SUFFIX,ibytedtos.com
@@ -113,7 +113,7 @@ DOMAIN-KEYWORD,toutiaoimg
 # DOMAIN-KEYWORD,-tiktokcdn-com
 # USER-AGENT,TikTok*
 
-#>bilibili
+# bilibili
 
 USER-AGENT,bili*
 DOMAIN-SUFFIX,biliapi.net
@@ -154,7 +154,7 @@ DOMAIN,nga.178.com
 
 
 
-# > Bytedance Group
+# Bytedance Group
 DOMAIN-SUFFIX,amemv.com
 DOMAIN-SUFFIX,ixigua.com
 DOMAIN-SUFFIX,ixiguavideo.com
@@ -172,7 +172,7 @@ DOMAIN-SUFFIX,byteimg.com
 DOMAIN-SUFFIX,zijieapi.com
 
 
-# > LINE
+# LINE
 IP-CIDR,103.2.28.0/22,no-resolve
 IP-CIDR,119.235.224.0/21,no-resolve
 IP-CIDR,119.235.232.0/23,no-resolve
@@ -187,7 +187,7 @@ IP-CIDR,203.104.128.0/20,no-resolve
 IP-CIDR,203.174.66.64/26,no-resolve
 IP-CIDR,203.174.77.0/24,no-resolve
 
-#>weibo.com
+# weibo.com
 DOMAIN-KEYWORD,weibo
 DOMAIN-SUFFIX,weibo.com
 DOMAIN-SUFFIX,weibo.cn
