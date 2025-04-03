@@ -1,4 +1,4 @@
-#> Zhihu.com
+# Zhihu.com
 USER-AGENT,*zhihu*
 USER-AGENT,zhihu*
 DOMAIN-SUFFIX,zhihu.com
