@@ -70,7 +70,7 @@ DOMAIN-SUFFIX,usps.com
 DOMAIN-SUFFIX,wise.com
 DOMAIN-SUFFIX,uucloud.org
 DOMAIN-SUFFIX,aqaba.cloud
-DOMAIN-SUFFIX,mixhub.uk
+DOMAIN-SUFFIX,xns.one
 
 # >IP wificalling
 IP-CIDR,208.54.0.0/16
