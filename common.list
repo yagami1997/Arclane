@@ -74,6 +74,7 @@ DOMAIN-SUFFIX,wise.com
 DOMAIN-SUFFIX,uucloud.org
 DOMAIN-SUFFIX,aqaba.cloud
 DOMAIN-SUFFIX,xns.one
+DOMAIN-SUFFIX,airalo.com
 
 # >IP wificalling
 IP-CIDR,208.54.0.0/16
