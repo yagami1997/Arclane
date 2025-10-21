@@ -17,6 +17,8 @@ DOMAIN,lens.zhihu.com
 DOMAIN,gslb-dsa.zhihu.com
 DOMAIN,gslb-dsa-tc.zhihu.com
 
+DOMAIN-SUFFIX,xiaohongshu.com
+DOMAIN-KEYWORD,xiaohongshu
 IP-CIDR,223.109.1.1/16
 IP-CIDR,103.41.167.0/24
 IP-CIDR,183.213.20.1/24
