@@ -137,7 +137,6 @@ USER-AGENT,bili-inter*
 DOMAIN,apiintl.biliapi.net
 
 
-DOMAIN-SUFFIX,xiaohongshu.com
 DOMAIN,keylol.com
 DOMAIN-SUFFIX,ixigua.com
 DOMAIN,www.wenshushu.cn
@@ -200,3 +199,4 @@ DOMAIN-SUFFIX,s.weibo.com
 DOMAIN-SUFFIX,service.weibo.com
 USER-AGENT,weibo*
 USER-AGENT,*weibo*
+
