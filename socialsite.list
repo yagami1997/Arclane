@@ -41,7 +41,6 @@ DOMAIN,nga.178.com
 
 
 # Bytedance Group
-DOMAIN-SUFFIX,amemv.com
 DOMAIN-SUFFIX,ixigua.com
 DOMAIN-SUFFIX,ixiguavideo.com
 DOMAIN-SUFFIX,pstatp.com
@@ -86,6 +85,7 @@ DOMAIN-SUFFIX,s.weibo.com
 DOMAIN-SUFFIX,service.weibo.com
 USER-AGENT,weibo*
 USER-AGENT,*weibo*
+
 
 
 
