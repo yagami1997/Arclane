@@ -1,23 +1,5 @@
 
 
-#>bytedance
-
-DOMAIN,bytedance.com
-DOMAIN,byteimg.com
-DOMAIN,zijieapi.com
-DOMAIN,toutiaoapi.com
-DOMAIN,bytemastatic.com
-DOMAIN-KEYWORD,bytemastatic
-DOMAIN-KEYWORD,zijieapi
-DOMAIN-KEYWORD,toutiaoapi
-DOMAIN-KEYWORD,byteimg
-DOMAIN-KEYWORD,bytedance
-DOMAIN,toutiao.com
-DOMAIN,toutiaoimg.com
-DOMAIN-KEYWORD,toutiao
-DOMAIN-KEYWORD,toutiaoimg
-
-
 # tiktok
 # DOMAIN,p16-tiktokcdn-com.akamaized.net
 # DOMAIN-SUFFIX,byteoversea.com
@@ -121,6 +103,7 @@ DOMAIN-SUFFIX,s.weibo.com
 DOMAIN-SUFFIX,service.weibo.com
 USER-AGENT,weibo*
 USER-AGENT,*weibo*
+
 
 
 
