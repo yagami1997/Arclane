@@ -40,22 +40,6 @@ DOMAIN,nga.178.com
 
 
 
-# Bytedance Group
-DOMAIN-SUFFIX,ixigua.com
-DOMAIN-SUFFIX,ixiguavideo.com
-DOMAIN-SUFFIX,pstatp.com
-DOMAIN-SUFFIX,snssdk.com
-DOMAIN-SUFFIX,toutiao.com
-DOMAIN-KEYWORD,bytedance
-DOMAIN-KEYWORD,bytecdn
-DOMAIN-KEYWORD,bytegoofy
-DOMAIN-KEYWORD,toutiaoimg
-DOMAIN-KEYWORD,toutiaoapi
-DOMAIN-KEYWORD,byteorge
-DOMAIN-SUFFIX,miaozhen.com
-DOMAIN-SUFFIX,byteimg.com
-DOMAIN-SUFFIX,zijieapi.com
-
 
 # LINE
 IP-CIDR,103.2.28.0/22,no-resolve
@@ -85,6 +69,7 @@ DOMAIN-SUFFIX,s.weibo.com
 DOMAIN-SUFFIX,service.weibo.com
 USER-AGENT,weibo*
 USER-AGENT,*weibo*
+
 
 
 
