@@ -25,61 +25,61 @@
 <tr>
   <td><img src="https://cdn-icons-png.flaticon.com/512/9458/9458326.png" width="22" align="center"></td>
   <td><b>Common Sites</b></td>
-  <td>Essential services, developer tools, and productivity platforms</td>
+  <td>Common services and tools</td>
   <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/common.list">common.list</a></td>
 </tr>
 <tr>
   <td><img src="https://cdn-icons-png.flaticon.com/512/2936/2936660.png" width="22" align="center"></td>
   <td><b>Payment Services</b></td>
-  <td>Financial institutions and payment platforms</td>
+  <td>Payment related services</td>
   <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/paypal.list">paypal.list</a></td>
 </tr>
 <tr>
   <td><img src="https://cdn-icons-png.flaticon.com/512/9073/9073032.png" width="22" align="center"></td>
   <td><b>Social Media ⭐</b></td>
-  <td>Chinese and international social platforms</td>
+  <td>Social networking services</td>
   <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/socialsite.list">socialsite.list</a></td>
 </tr>
 <tr>
   <td><img src="https://cdn-icons-png.flaticon.com/512/5968/5968846.png" width="22" align="center"></td>
-  <td><b>Zhihu & RED ⭐</b></td>
-  <td>Q&A and lifestyle sharing platforms</td>
+  <td><b>Community Sites ⭐</b></td>
+  <td>Community platforms</td>
   <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/hulo.list">hulo.list</a></td>
 </tr>
 <tr>
   <td><img src="https://cdn-icons-png.flaticon.com/512/3330/3330314.png" width="22" align="center"></td>
   <td><b>Academic</b></td>
-  <td>Research databases and educational resources</td>
+  <td>Academic resources</td>
   <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/scholar.list">scholar.list</a></td>
 </tr>
 <tr>
   <td><img src="https://cdn-icons-png.flaticon.com/512/3178/3178285.png" width="22" align="center"></td>
-  <td><b>ByteDance Apps ⭐</b></td>
-  <td>ByteDance ecosystem applications</td>
+  <td><b>Content Apps ⭐</b></td>
+  <td>Content platforms</td>
   <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/bytedance.list">bytedance.list</a></td>
 </tr>
 <tr>
   <td><img src="https://cdn-icons-png.flaticon.com/512/888/888859.png" width="22" align="center"></td>
   <td><b>Global Media</b></td>
-  <td>International streaming services</td>
+  <td>Streaming services</td>
   <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/globemedia.list">globemedia.list</a></td>
 </tr>
 <tr>
   <td><img src="https://cdn-icons-png.flaticon.com/512/2504/2504929.png" width="22" align="center"></td>
   <td><b>Microsoft</b></td>
-  <td>Microsoft cloud services and ecosystem</td>
+  <td>Microsoft services</td>
   <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/microsoft.list">microsoft.list</a></td>
 </tr>
 <tr>
   <td><img src="https://cdn-icons-png.flaticon.com/512/5968/5968866.png" width="22" align="center"></td>
   <td><b>AI Services</b></td>
-  <td>AI platforms and APIs</td>
+  <td>AI platforms</td>
   <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/openai.list">openai.list</a></td>
 </tr>
 <tr>
   <td><img src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" width="22" align="center"></td>
   <td><b>Special Rules</b></td>
-  <td>Platform-specific routing rules</td>
+  <td>Platform-specific rules</td>
   <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/special.list">special.list</a></td>
 </tr>
 </table>
