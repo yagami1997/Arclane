@@ -64,11 +64,19 @@ rules:
 - DOMAIN-SUFFIX,calbio.eu.org,Proxy
 - DOMAIN-SUFFIX,mixhub.uk,Proxy
 
-## Universities & Educational
-- DOMAIN-SUFFIX,columbia.edu,Proxy
-- DOMAIN-SUFFIX,edu,Proxy
-- DOMAIN-SUFFIX,ac.uk,Proxy
-- DOMAIN-SUFFIX,edu.cn,Proxy
+## Chinese Educational (Direct)
+- DOMAIN-SUFFIX,edu.cn,DIRECT
+
+## International Universities & Educational (Scholar)
+- DOMAIN-SUFFIX,columbia.edu,Scholar
+- DOMAIN-SUFFIX,edu,Scholar
+- DOMAIN-SUFFIX,ac.uk,Scholar
+- DOMAIN-SUFFIX,mit.edu,Scholar
+- DOMAIN-SUFFIX,stanford.edu,Scholar
+- DOMAIN-SUFFIX,harvard.edu,Scholar
+- DOMAIN-SUFFIX,berkeley.edu,Scholar
+- DOMAIN-SUFFIX,ox.ac.uk,Scholar
+- DOMAIN-SUFFIX,cam.ac.uk,Scholar
 
 ## Academic Resources & Journals
 - DOMAIN-SUFFIX,researchgate.net,Proxy
@@ -120,9 +128,8 @@ rules:
 - DOMAIN-SUFFIX,encveil.dev,Others
 - DOMAIN-KEYWORD,encveil,Others
 
-## Personal Services → Others
-- DOMAIN-SUFFIX,javbus.com,Others
-- DOMAIN-SUFFIX,haloemail.org,Others
+## Personal Services → Proxy
+- DOMAIN-SUFFIX,javbus.com,Proxy
 
 # ========================================
 # Section 4: Financial Services
