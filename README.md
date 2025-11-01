@@ -11,8 +11,7 @@
 ![Surge](https://img.shields.io/badge/Surge-Pro%206-4D9DE0?style=for-the-badge&logo=surge&logoColor=white)
 ![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20macOS-E87A90?style=for-the-badge&logo=apple&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-92D293?style=for-the-badge&logo=opensourceinitiative&logoColor=white)
-![Maintained](https://img.shields.io/badge/Maintained-Yes-F5C05A?style=for-the-badge&logo=github&logoColor=white)
-![Rules](https://img.shields.io/badge/Total_Rules-2000%2B-FF6B6B?style=for-the-badge&logo=databricks&logoColor=white)
+![Rules](https://img.shields.io/badge/Rules-2000%2B-FF6B6B?style=for-the-badge&logo=databricks&logoColor=white)
 
 </div>
 
