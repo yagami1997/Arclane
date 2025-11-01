@@ -44,6 +44,8 @@
 
 ## 📦 Ruleset Collection
 
+<div align="center">
+
 <table>
 <tr>
   <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/9458/9458326.png" width="40" align="center"></td>
@@ -96,6 +98,8 @@
   <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/special.list">special.list</a></td>
 </tr>
 </table>
+
+</div>
 
 ## 🎯 Advanced Features
 
