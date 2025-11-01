@@ -1,85 +1,223 @@
-# > This list is a list of the most common websites that are recommended to follow the diversion rules. 
-# > If you directly connect to these websites and the speed is very slow, it is recommended to use the following diversion rules. 
-# > Some of these rules come from DLer, thank you.
-# > TestFlight
+# > Common Sites - Essential Services & Tools
+# > This list contains frequently used services that benefit from proxy routing
+# > Use these rules when direct connection is slow or unreliable
+# > Some rules reference DLer's ruleset (credit acknowledged)
+
+# ========================================
+# Development & Testing Tools
+# ========================================
+
+# > TestFlight - iOS App Beta Testing Platform
 DOMAIN,testflight.apple.com
 
-
-# >github
+# > GitHub - Code Hosting & Version Control
 DOMAIN-SUFFIX,github.com
 DOMAIN-KEYWORD,github
 
-# >Weather
-
-DOMAIN-SUFFIX,weather.com
-DOMAIN-KEYWORD,weather
-
-# >jsdelivr
+# > jsDelivr - Open Source CDN
 DOMAIN-SUFFIX,jsdelivr.com
 DOMAIN-SUFFIX,jsdelivr.net
 DOMAIN-KEYWORD,jsdelivr
 
-# >common site
-DOMAIN-SUFFIX,anytimemailbox.com
-DOMAIN-SUFFIX,ipostal1.com
-DOMAIN-SUFFIX,ipostalmail.net
-DOMAIN-SUFFIX,ipdata.co
-DOMAIN-SUFFIX,zoho.com
-DOMAIN-SUFFIX,moomoo.com
-DOMAIN-KEYWORD,moomoo
-DOMAIN-SUFFIX,ipostalmail.net
-DOMAIN-SUFFIX,zerotier.com
-DOMAIN-SUFFIX,Protonmail.com
+# ========================================
+# Email Services
+# ========================================
+
+# > ProtonMail - Encrypted Email Service
+DOMAIN-SUFFIX,protonmail.com
 DOMAIN-SUFFIX,proton.me
-DOMAIN-SUFFIX,zaobao.com
-DOMAIN-SUFFIX,zaobao.com.sg
 DOMAIN-KEYWORD,proton
+
+# > Zoho - Business Email & Productivity Suite
+DOMAIN-SUFFIX,zoho.com
+
+# ========================================
+# Personal & Custom Services
+# ========================================
+
+# > User Personal Domains
+DOMAIN-SUFFIX,kyowarp.com  # Personal domain
+DOMAIN-SUFFIX,encveil.dev  # Personal domain
+DOMAIN-KEYWORD,kyowarp
+DOMAIN-KEYWORD,encveil
+
+# > Claw Cloud - Related Services
+DOMAIN-SUFFIX,claw.cloud
+DOMAIN-SUFFIX,run.claw.cloud
+
+# ========================================
+# Domain & Hosting Services
+# ========================================
+
+# > GoDaddy - Domain Registrar & Web Hosting
 DOMAIN-SUFFIX,godaddy.com
 DOMAIN-KEYWORD,godaddy
-DOMAIN-SUFFIX,geekbench.com
-DOMAIN-SUFFIX,mypikpak.com
-DOMAIN-SUFFIX,civitai.com
-DOMAIN-SUFFIX,nssurge.com
-DOMAIN-SUFFIX,ipjiance.com
-DOMAIN-SUFFIX,ip2location.com
-DOMAIN-SUFFIX,ipqualityscore.com
-DOMAIN-SUFFIX,interactivebrokers.com
-DOMAIN-KEYWORD,interactivebrokers
-DOMAIN-SUFFIX,freecarrierlookup.com
-DOMAIN-SUFFIX,claw.cloud
-DOMAIN-SUFFIX,kyowarp.com
-DOMAIN-SUFFIX,run.claw.cloud
-DOMAIN-SUFFIX,iproyal.com
-DOMAIN-SUFFIX,ip.sb
+
+# ========================================
+# IP & Network Testing Tools
+# ========================================
+
+# > IP Information & Geolocation Services
+DOMAIN-SUFFIX,ipinfo.io  # IP address information lookup
+DOMAIN-SUFFIX,ip2location.com  # IP geolocation database
+DOMAIN-SUFFIX,ipqualityscore.com  # IP quality & fraud detection
+DOMAIN-SUFFIX,ipdata.co  # IP geolocation API
+DOMAIN-SUFFIX,ip.sb  # Simple IP lookup service
+DOMAIN-SUFFIX,ipjiance.com  # IP detection service (CN)
+DOMAIN-SUFFIX,scamalytics.com  # IP fraud score checker
+DOMAIN-SUFFIX,freecarrierlookup.com  # Phone carrier lookup
+
+# ========================================
+# Cloud & CDN Services
+# ========================================
+
+# > Cloudflare Pages - Static Site Hosting
 DOMAIN-SUFFIX,pages.dev
 
-
-# >other
-DOMAIN-SUFFIX,lifecard.co.jp
-DOMAIN-SUFFIX,columbia.edu
-DOMAIN-SUFFIX,macosicons.com
-DOMAIN-SUFFIX,oracle.com
+# > G-Core Labs - CDN & Cloud Services
 DOMAIN-SUFFIX,gcore.com
-DOMAIN-SUFFIX,ipinfo.io
-DOMAIN-SUFFIX,scamalytics.com
+
+# > iProyal - Proxy & Data Collection Services
+DOMAIN-SUFFIX,iproyal.com
+
+# > Airalo - eSIM & Mobile Data Provider
+DOMAIN-SUFFIX,airalo.com
+
+# ========================================
+# Virtual Address & Mail Services
+# ========================================
+
+# > Anytime Mailbox - Virtual Address Service
+DOMAIN-SUFFIX,anytimemailbox.com
+
+# > iPostal1 - Virtual Mailbox Service
+DOMAIN-SUFFIX,ipostal1.com
+DOMAIN-SUFFIX,ipostalmail.net
+
+# > Mobal - International Mail Forwarding
+DOMAIN-SUFFIX,mobal.com.cn
+DOMAIN-SUFFIX,mobal.com
+DOMAIN-KEYWORD,mobal
+
+# ========================================
+# Financial & Investment Services
+# ========================================
+
+# > Interactive Brokers - Online Brokerage Platform
+DOMAIN-SUFFIX,interactivebrokers.com
+DOMAIN-KEYWORD,interactivebrokers
+
+# > Moomoo - Stock Trading & Investment App
+DOMAIN-SUFFIX,moomoo.com
+DOMAIN-KEYWORD,moomoo
+
+# ========================================
+# E-commerce & Shopping
+# ========================================
+
+# > Canada Goose - Luxury Winter Outerwear
+DOMAIN-SUFFIX,canadagoose.com
+
+# ========================================
+# Travel & Hospitality
+# ========================================
+
+# > Marriott - International Hotel Chain
 DOMAIN-SUFFIX,marriott.com.cn
 DOMAIN-SUFFIX,marriott.com
 DOMAIN-KEYWORD,marriott
-DOMAIN-SUFFIX,mobal.com.cn
-DOMAIN-SUFFIX,mobal.com
-DOMAIN-SUFFIX,canadagoose.com
-DOMAIN-KEYWORD,mobal
+
+# ========================================
+# Storage & File Services
+# ========================================
+
+# > PikPak - Cloud Storage & Download Service
+DOMAIN-SUFFIX,mypikpak.com
+
+# ========================================
+# Networking & VPN Services
+# ========================================
+
+# > ZeroTier - Software-Defined Networking
+DOMAIN-SUFFIX,zerotier.com
+
+# > Surge - Network Debugging Tool
+DOMAIN-SUFFIX,nssurge.com
+
+# ========================================
+# Creative & Design Tools
+# ========================================
+
+# > Civitai - AI Art Models Community
+DOMAIN-SUFFIX,civitai.com
+
+# > macOS Icons - Icon Resource Collection
+DOMAIN-SUFFIX,macosicons.com
+
+# ========================================
+# Education & Research
+# ========================================
+
+# > Columbia University - Ivy League Institution
+DOMAIN-SUFFIX,columbia.edu
+
+# ========================================
+# Business & Enterprise Services
+# ========================================
+
+# > Oracle - Enterprise Software & Cloud Solutions
+DOMAIN-SUFFIX,oracle.com
+
+# > Fiverr - Freelance Services Marketplace
 DOMAIN-SUFFIX,fiverr.com
-DOMAIN-SUFFIX,usps.com
-DOMAIN-SUFFIX,wise.com
+
+# > Business Cloud Services
 DOMAIN-SUFFIX,uucloud.org
 DOMAIN-SUFFIX,aqaba.cloud
 DOMAIN-SUFFIX,xns.one
-DOMAIN-SUFFIX,airalo.com
 
-# >IP wificalling
-IP-CIDR,208.54.0.0/16
-IP-CIDR,8.219.0.0/16
-DOMAIN-SUFFIX,ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org
-DOMAIN-SUFFIX,ss.epdg.epc.geo.mnc260.mcc310.pub.3gppnetwork.org
-DOMAIN-SUFFIX,epdg.epc.mnc260.mcc310.pub.3gppnetwork.org
+# ========================================
+# Regional Services
+# ========================================
+
+# > Zaobao - Singapore Chinese Newspaper
+DOMAIN-SUFFIX,zaobao.com
+DOMAIN-SUFFIX,zaobao.com.sg
+
+# > LifeCard - Japan Prepaid Card Service
+DOMAIN-SUFFIX,lifecard.co.jp
+
+# > USPS - United States Postal Service
+DOMAIN-SUFFIX,usps.com
+
+# > Wise - International Money Transfer
+DOMAIN-SUFFIX,wise.com
+
+# ========================================
+# Weather Services
+# ========================================
+
+# > Weather.com - Weather Forecast & Conditions
+DOMAIN-SUFFIX,weather.com
+DOMAIN-KEYWORD,weather
+
+# ========================================
+# Performance & Benchmarking
+# ========================================
+
+# > Geekbench - Cross-Platform Benchmark Tool
+DOMAIN-SUFFIX,geekbench.com
+
+# ========================================
+# WiFi Calling IP Ranges (DISABLED)
+# ========================================
+# Temporarily disabled - uncomment if needed
+
+# # > T-Mobile US WiFi Calling
+# IP-CIDR,208.54.0.0/16,no-resolve
+# IP-CIDR,8.219.0.0/16,no-resolve
+
+# # > WiFi Calling DNS
+# DOMAIN-SUFFIX,ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org
+# DOMAIN-SUFFIX,ss.epdg.epc.geo.mnc260.mcc310.pub.3gppnetwork.org
+# DOMAIN-SUFFIX,epdg.epc.mnc260.mcc310.pub.3gppnetwork.org

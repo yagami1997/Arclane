@@ -1,47 +1,193 @@
+# > socialsite.list - Social Media & Community Platforms
+# > This ruleset contains rules for social media platforms and communities
+# > Use this to route traffic through specific proxy nodes to display desired IP location
+# > ⭐ Platforms marked with IP will show your IP location when posting
 
+# ========================================
+# Chinese Social Media Platforms (中国社交媒体)
+# ========================================
 
-# bilibili
+# ========================================
+# Bilibili (哔哩哔哩) - Video & Community ⭐ Shows IP
+# ========================================
+# China's largest ACG video platform and community
 
+# > User-Agent Rules
 USER-AGENT,bili*
-DOMAIN-SUFFIX,biliapi.net
-DOMAIN,api.bilibili.com
-DOMAIN,api.bilibili.tv
-DOMAIN,app.bilibili.com
-DOMAIN-SUFFIX,biliapi.com
-DOMAIN,api.live.bilibili.com
-DOMAIN,api.vc.bilibili.com
-DOMAIN,passport.bilibili.com 
-DOMAIN,live-trace.bilibili.com 
-DOMAIN,message.bilibili.com 
-DOMAIN,cm.bilibili.com 
-DOMAIN-SUFFIX,bilibili.com 
-DOMAIN-SUFFIX,im9.com
-DOMAIN-SUFFIX,acg.tv
-DOMAIN-SUFFIX,biligame.com
-IP-CIDR,203.107.1.0/24,REJECT
-
 USER-AGENT,bili-inter*
-DOMAIN,apiintl.biliapi.net
 
+# > Domain Rules
+DOMAIN-SUFFIX,bilibili.com  # Main domain
+DOMAIN-SUFFIX,bilibili.tv  # International version
+DOMAIN-SUFFIX,biliapi.com  # API services
+DOMAIN-SUFFIX,biliapi.net  # API backup
+DOMAIN-SUFFIX,biligame.com  # Bilibili Games
+DOMAIN-SUFFIX,hdslb.com  # Bilibili CDN (important!)
+DOMAIN-SUFFIX,bilivideo.com  # Video CDN
+DOMAIN-SUFFIX,bilivideo.cn  # Video CDN backup
+DOMAIN-SUFFIX,biliimg.com  # Image CDN
+DOMAIN-SUFFIX,bilibili.com  # Main site
+DOMAIN-SUFFIX,acg.tv  # ACG related
+DOMAIN-SUFFIX,im9.com  # Instant messaging
 
-DOMAIN,keylol.com
-DOMAIN-SUFFIX,ixigua.com
-DOMAIN,www.wenshushu.cn
-DOMAIN,frodo.douban.com
-DOMAIN,www.douban.com
-DOMAIN,api.coolapk.com
-DOMAIN,api.taptapdada.com
-DOMAIN,god.gameyw.netease.com
-DOMAIN-SUFFIX,huya.com
-DOMAIN-SUFFIX,dongqiudi.com
-DOMAIN,ngabbs.com
+# ========================================
+# Weibo (微博) - Microblogging ⭐ Shows IP
+# ========================================
+# China's largest microblogging platform
+
+# > User-Agent Rules
+USER-AGENT,weibo*
+USER-AGENT,*weibo*
+
+# > Domain Rules
+DOMAIN-SUFFIX,weibo.com  # Main domain
+DOMAIN-SUFFIX,weibo.cn  # Backup domain
+DOMAIN-SUFFIX,weibo.com.cn  # Alternative domain
+DOMAIN-SUFFIX,weibocdn.com  # Weibo CDN
+DOMAIN-SUFFIX,sinaimg.cn  # Sina image CDN (most important!)
+DOMAIN-SUFFIX,sinaimg.com  # Sina image backup
+DOMAIN-SUFFIX,sina.com.cn  # Sina main domain
+DOMAIN-KEYWORD,weibo
+DOMAIN-KEYWORD,sinaimg
+
+# ========================================
+# Baidu Tieba (百度贴吧) - Forum Community ⭐ Shows IP
+# ========================================
+# China's largest interest-based forum platform
+
+# > User-Agent Rules
+USER-AGENT,*tieba*
+USER-AGENT,*baidu*
+
+# > Domain Rules
+DOMAIN-SUFFIX,tieba.baidu.com  # Main forum
+DOMAIN-SUFFIX,tbcdn.bcebos.com  # Tieba CDN
+DOMAIN-SUFFIX,tiebaimg.com  # Tieba images
+DOMAIN-SUFFIX,bdstatic.com  # Baidu static resources
+DOMAIN-KEYWORD,tieba
+
+# ========================================
+# Douban (豆瓣) - Book/Movie/Music Reviews ⭐ Shows IP
+# ========================================
+# Cultural and lifestyle community platform
+
+# > User-Agent Rules
+USER-AGENT,*douban*
+
+# > Domain Rules
+DOMAIN-SUFFIX,douban.com  # Main domain
+DOMAIN-SUFFIX,doubanio.com  # Static resources & images
+DOMAIN-KEYWORD,douban
+
+# ========================================
+# Hupu (虎扑) - Sports Community ⭐ Shows IP
+# ========================================
+# China's largest sports and male lifestyle community
+
+# > User-Agent Rules
+USER-AGENT,*hupu*
+
+# > Domain Rules
+DOMAIN-SUFFIX,hupu.com  # Main domain
+DOMAIN-SUFFIX,hoopchina.com  # Old domain
+DOMAIN-SUFFIX,hupucdn.com  # CDN
+DOMAIN-KEYWORD,hupu
+
+# ========================================
+# Jike (即刻) - Social Network ⭐ Shows IP
+# ========================================
+# Modern social platform for young people
+
+# > User-Agent Rules
+USER-AGENT,*jike*
+USER-AGENT,*ruguoapp*
+
+# > Domain Rules
+DOMAIN-SUFFIX,okjike.com  # Main domain
+DOMAIN-SUFFIX,ruguoapp.com  # Original name
+DOMAIN-SUFFIX,jikeapp.cn  # App domain
+DOMAIN-KEYWORD,jike
+
+# ========================================
+# QQ Zone (QQ空间) - Social Network ⭐ Shows IP
+# ========================================
+# Tencent's social networking platform
+
+# > User-Agent Rules
+USER-AGENT,*qzone*
+
+# > Domain Rules
+DOMAIN-SUFFIX,qzone.qq.com  # QQ Zone
+DOMAIN-SUFFIX,qpic.cn  # QQ pictures CDN
+DOMAIN-SUFFIX,qlogo.cn  # QQ avatars
+DOMAIN-SUFFIX,gtimg.cn  # Tencent images
+DOMAIN-KEYWORD,qzone
+
+# ========================================
+# Other Chinese Communities
+# ========================================
+
+# > NGA (玩家社区) - Gaming Community
+DOMAIN-SUFFIX,nga.178.com
+DOMAIN-SUFFIX,ngabbs.com
 DOMAIN,bbs.nga.cn
-DOMAIN,nga.178.com
 
+# > Keylol (机核网) - Gaming & Tech Community
+DOMAIN-SUFFIX,keylol.com
 
+# > TapTap - Mobile Game Community
+DOMAIN-SUFFIX,taptapdada.com
+DOMAIN,api.taptapdada.com
 
+# > Coolapk (酷安) - Android Community
+DOMAIN-SUFFIX,coolapk.com
+DOMAIN,api.coolapk.com
 
-# LINE
+# > Wenshushu (文叔叔) - File Sharing
+DOMAIN,www.wenshushu.cn
+
+# > NetEase Games
+DOMAIN,god.gameyw.netease.com
+
+# > Huya (虎牙) - Live Streaming
+DOMAIN-SUFFIX,huya.com
+
+# > Dongqiudi (懂球帝) - Football Community
+DOMAIN-SUFFIX,dongqiudi.com
+
+# ========================================
+# International Social Media (国际社交媒体)
+# ========================================
+
+# ========================================
+# Reddit - Social News & Discussion ⭐ Shows Location
+# ========================================
+# The front page of the internet
+
+# > User-Agent Rules
+USER-AGENT,*reddit*
+USER-AGENT,*Reddit*
+
+# > Domain Rules
+DOMAIN-SUFFIX,reddit.com  # Main domain
+DOMAIN-SUFFIX,redd.it  # Short link
+DOMAIN-SUFFIX,redditstatic.com  # Static resources
+DOMAIN-SUFFIX,redditmedia.com  # Media CDN
+DOMAIN-SUFFIX,redditinc.com  # Reddit Inc
+DOMAIN-KEYWORD,reddit
+
+# ========================================
+# LINE - Messaging Platform
+# ========================================
+# Popular messaging app in Asia
+
+# > Domain Rules
+DOMAIN-SUFFIX,line.me  # Main domain
+DOMAIN-SUFFIX,line.naver.jp  # Japan domain
+DOMAIN-SUFFIX,line-scdn.net  # LINE CDN
+DOMAIN-SUFFIX,line-apps.com  # LINE apps
+
+# > LINE IP Ranges (Asia Pacific)
 IP-CIDR,103.2.28.0/22,no-resolve
 IP-CIDR,119.235.224.0/21,no-resolve
 IP-CIDR,119.235.232.0/23,no-resolve
@@ -55,24 +201,3 @@ IP-CIDR,203.104.103.0/24,no-resolve
 IP-CIDR,203.104.128.0/20,no-resolve
 IP-CIDR,203.174.66.64/26,no-resolve
 IP-CIDR,203.174.77.0/24,no-resolve
-
-# weibo.com
-DOMAIN-KEYWORD,weibo
-DOMAIN-SUFFIX,weibo.com
-DOMAIN-SUFFIX,weibo.cn
-DOMAIN-SUFFIX,weibocdn.com
-DOMAIN-KEYWORD,sinaimg
-DOMAIN-SUFFIX,sinaimg.cn
-DOMAIN-SUFFIX,api.weibo.cn
-DOMAIN-SUFFIX,m.weibo.cn
-DOMAIN-SUFFIX,s.weibo.com
-DOMAIN-SUFFIX,service.weibo.com
-USER-AGENT,weibo*
-USER-AGENT,*weibo*
-
-
-
-
-
-
-

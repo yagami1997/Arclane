@@ -1,45 +1,68 @@
-# Zhihu.com
+# > hulo.list - Chinese Social Media Rules
+# > This ruleset contains rules for Chinese social media platforms
+# > Included: Zhihu (知乎) and Xiaohongshu (小红书/RED)
+# > Use this ruleset to route traffic through proxy for better performance
+
+# ========================================
+# Zhihu (知乎) - Q&A Community Platform
+# ========================================
+# China's largest question-and-answer platform
+
+# > User-Agent Rules
 USER-AGENT,*zhihu*
 USER-AGENT,zhihu*
-DOMAIN-SUFFIX,zhihu.com
-DOMAIN-KEYWORD,in.zhihu.com
+
+# > Domain Rules
+DOMAIN-SUFFIX,zhihu.com  # Main domain (covers all subdomains)
+DOMAIN-SUFFIX,zhimg.com  # Zhihu image CDN
 DOMAIN-KEYWORD,zhihu
-DOMAIN-SUFFIX,zhimg.com
 DOMAIN-KEYWORD,zhimg
-DOMAIN-SUFFIX,api.zhihu.com
-DOMAIN,datahub.zhihu.com
-DOMAIN,appcloud2.in.zhihu.com
-DOMAIN,zhstatic.zhihu.com
-DOMAIN,mqtt.zhihu.com
-DOMAIN,mqtt-internal-public.zhihu.com
-DOMAIN,m-cloud.zhihu.com
-DOMAIN,lens.zhihu.com
-DOMAIN,gslb-dsa.zhihu.com
-DOMAIN,gslb-dsa-tc.zhihu.com
 
-DOMAIN-SUFFIX,xiaohongshu.com
+# ========================================
+# Xiaohongshu (小红书) - Lifestyle Sharing Platform
+# ========================================
+# Also known as RED, a lifestyle and social e-commerce platform
+
+# > User-Agent Rules
+USER-AGENT,*xiaohongshu*
+USER-AGENT,xiaohongshu*
+USER-AGENT,*redbook*
+
+# > Domain Rules
+DOMAIN-SUFFIX,xiaohongshu.com  # Main domain
+DOMAIN-SUFFIX,xhscdn.com  # Xiaohongshu CDN
+DOMAIN-SUFFIX,xhscdn.net  # Xiaohongshu CDN backup
+DOMAIN-SUFFIX,xhslink.com  # Xiaohongshu short links
+DOMAIN-SUFFIX,xhsstatic.com  # Static resources
 DOMAIN-KEYWORD,xiaohongshu
-IP-CIDR,223.109.1.1/16
-IP-CIDR,103.41.167.0/24
-IP-CIDR,183.213.20.1/24
-IP-CIDR,103.41.1.1/16
-IP-CIDR,118.89.204.1/24
-IP-CIDR,36.156.1.1/16
-IP-CIDR,58.216.1.1/16
-IP-CIDR,58.243.1.1/16
-IP-CIDR,203.205.136.1/24
-IP-CIDR,47.246.1.1/16
-IP-CIDR,119.28.1.1/16
-IP-CIDR,116.0.89.1/24
-IP-CIDR,163.181.35.1/24
-IP-CIDR,27.221.120.1/24
-IP-CIDR,211.152.146.1/24
 
-IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128
+# > Xiaohongshu IP Ranges
+# Xiaohongshu server and CDN IP addresses in China
 
+# > Primary Service IPs
+IP-CIDR,223.109.0.0/16,no-resolve
+IP-CIDR,103.41.0.0/16,no-resolve
 
+# > CDN Node IPs (China Telecom)
+IP-CIDR,183.213.20.0/24,no-resolve
+IP-CIDR,203.205.136.0/24,no-resolve
+IP-CIDR,211.152.146.0/24,no-resolve
 
+# > CDN Node IPs (China Unicom)
+IP-CIDR,103.41.167.0/24,no-resolve
+IP-CIDR,118.89.204.0/24,no-resolve
+IP-CIDR,163.181.35.0/24,no-resolve
 
+# > CDN Node IPs (China Mobile)
+IP-CIDR,116.0.89.0/24,no-resolve
+IP-CIDR,27.221.120.0/24,no-resolve
 
+# > CDN Node IPs (Multi-ISP/BGP)
+IP-CIDR,36.156.0.0/16,no-resolve
+IP-CIDR,58.216.0.0/16,no-resolve
+IP-CIDR,58.243.0.0/16,no-resolve
+IP-CIDR,47.246.0.0/16,no-resolve
+IP-CIDR,119.28.0.0/16,no-resolve
 
-
+# > Xiaohongshu IPv6
+IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,no-resolve

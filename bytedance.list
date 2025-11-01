@@ -1,0 +1,167 @@
+# > ByteDance & Douyin Rules
+# > This list contains rules for ByteDance services and Douyin (Chinese version only)
+# > Use this ruleset to route Douyin traffic through specific proxy (e.g., Japan node) 
+# > so your posts and comments show IP from that region
+# > 
+# > Included Apps: Douyin, Douyin Lite, Huoshan (Volcano), Xigua Video, Dongchedi (Auto), Pipixia (Comedy), Fanqie Novel
+# > NOT included: TikTok International (user has separate ruleset)
+
+# > Douyin (抖音) - Main Domains
+DOMAIN-SUFFIX,douyin.com
+DOMAIN-SUFFIX,douyinvod.com
+DOMAIN-SUFFIX,douyinpic.com
+DOMAIN-SUFFIX,douyincdn.com
+DOMAIN-SUFFIX,douyinstatic.com
+DOMAIN-SUFFIX,idouyinvod.com
+DOMAIN-SUFFIX,ixigua.com
+DOMAIN-SUFFIX,ixiguavideo.com
+
+# > Douyin - API & Services
+DOMAIN-SUFFIX,amemv.com
+DOMAIN,api.amemv.com
+DOMAIN,aweme.snssdk.com
+DOMAIN,mon.snssdk.com
+DOMAIN,log.snssdk.com
+DOMAIN,toblog.snssdk.com
+DOMAIN,xlog.snssdk.com
+DOMAIN,i.snssdk.com
+DOMAIN,is.snssdk.com
+DOMAIN,security.snssdk.com
+DOMAIN,msync-im.snssdk.com
+
+# > Douyin - Upload Services (视频/图片上传)
+DOMAIN-KEYWORD,upload-
+DOMAIN-KEYWORD,v-upload
+DOMAIN,upload.douyinvod.com
+DOMAIN,upload.douyinpic.com
+
+# > Douyin - CDN & Static Resources
+DOMAIN-KEYWORD,p-douyinpic
+DOMAIN-KEYWORD,p-ixigua
+DOMAIN-KEYWORD,s-douyinpic
+DOMAIN-KEYWORD,v-douyinvod
+
+# > Douyin - Live Streaming (直播)
+DOMAIN-KEYWORD,webcast
+DOMAIN-KEYWORD,pull-
+DOMAIN-KEYWORD,push-
+DOMAIN-SUFFIX,douyinliving.com
+DOMAIN-SUFFIX,douyintv.com
+
+# > Huoshan/Volcano (火山版)
+DOMAIN-SUFFIX,huoshan.com
+DOMAIN-SUFFIX,hotsoon.com
+DOMAIN-SUFFIX,hs-live.com
+
+# > Dongchedi (懂车帝) - Auto Platform
+DOMAIN-SUFFIX,dongchedi.com
+DOMAIN-SUFFIX,dcdeisu.com
+DOMAIN-SUFFIX,dcarapi.com
+DOMAIN-SUFFIX,dcarimg.com
+DOMAIN-SUFFIX,dcdapp.com
+
+# > Pipixia (皮皮虾) - Comedy Video Community
+DOMAIN-SUFFIX,pipix.com
+DOMAIN-SUFFIX,pipixia.com
+DOMAIN-SUFFIX,ippzone.com
+DOMAIN-SUFFIX,pipigx.com
+
+# > Fanqie Novel (番茄小说) - Free Novel Reading
+DOMAIN-SUFFIX,fqnovel.com
+DOMAIN-SUFFIX,fanqienovel.com
+DOMAIN-SUFFIX,zijieapi.com
+DOMAIN-SUFFIX,zjcdn.com
+DOMAIN-SUFFIX,novel.snssdk.com
+DOMAIN,novel-api.snssdk.com
+DOMAIN,p3-novelstaticoss.byteimg.com
+
+# > ByteDance Core Services (字节跳动核心服务)
+DOMAIN-SUFFIX,bytedance.com
+DOMAIN-SUFFIX,bytedance.net
+DOMAIN-SUFFIX,byteimg.com
+DOMAIN-SUFFIX,bytedns.net
+DOMAIN-SUFFIX,bytednsdoc.com
+DOMAIN-SUFFIX,bytecdn.cn
+DOMAIN-SUFFIX,bytegoofy.com
+DOMAIN-SUFFIX,bytescm.com
+DOMAIN-SUFFIX,bytedance.map.fastly.net
+
+# > ByteDance - CDN & Infrastructure
+DOMAIN-SUFFIX,pstatp.com
+DOMAIN-SUFFIX,snssdk.com
+DOMAIN-SUFFIX,toutiaoapi.com
+DOMAIN-SUFFIX,toutiaocloud.com
+DOMAIN-SUFFIX,toutiaocdn.com
+DOMAIN-SUFFIX,toutiaocdn.net
+DOMAIN-SUFFIX,toutiaostatic.com
+DOMAIN-SUFFIX,toutiaopage.com
+DOMAIN-SUFFIX,bdxiguaimg.com
+DOMAIN-SUFFIX,bdxiguastatic.com
+
+# > ByteDance - Analytics & Monitoring
+DOMAIN-SUFFIX,byteacctimg.com
+DOMAIN-SUFFIX,bytegecko.com
+DOMAIN-SUFFIX,bytetos.com
+DOMAIN-SUFFIX,ibytedtos.com
+DOMAIN-SUFFIX,ibyteimg.com
+
+# > User-Agent Rules
+USER-AGENT,Aweme*
+USER-AGENT,aweme*
+USER-AGENT,Douyin*
+USER-AGENT,douyin*
+USER-AGENT,Huoshan*
+USER-AGENT,live_stream*
+USER-AGENT,Dongchedi*
+USER-AGENT,dongchedi*
+USER-AGENT,Pipixia*
+USER-AGENT,pipixia*
+USER-AGENT,FanqieNovel*
+USER-AGENT,fanqie*
+
+# > ByteDance IP Ranges (字节跳动主要IP段)
+# > Note: These IPs are from ByteDance's main infrastructure and CDN nodes in China
+
+# > ByteDance Primary IPs
+IP-CIDR,110.249.200.0/21,no-resolve
+IP-CIDR,111.225.0.0/21,no-resolve
+IP-CIDR,111.63.0.0/19,no-resolve
+
+# > Douyin Service IPs
+IP-CIDR,180.184.0.0/16,no-resolve
+IP-CIDR,220.243.128.0/17,no-resolve
+IP-CIDR,223.109.0.0/16,no-resolve
+
+# > ByteDance CDN IPs (China Telecom)
+IP-CIDR,101.132.0.0/16,no-resolve
+IP-CIDR,106.11.0.0/16,no-resolve
+IP-CIDR,116.128.0.0/14,no-resolve
+IP-CIDR,117.128.0.0/10,no-resolve
+
+# > ByteDance CDN IPs (China Unicom)
+IP-CIDR,113.207.0.0/16,no-resolve
+IP-CIDR,123.56.0.0/16,no-resolve
+IP-CIDR,124.236.0.0/16,no-resolve
+
+# > ByteDance CDN IPs (China Mobile)
+IP-CIDR,39.105.0.0/16,no-resolve
+IP-CIDR,112.60.0.0/16,no-resolve
+IP-CIDR,183.131.0.0/16,no-resolve
+
+# > ByteDance BGP IPs
+IP-CIDR,60.8.0.0/16,no-resolve
+IP-CIDR,60.181.0.0/16,no-resolve
+IP-CIDR,110.242.68.0/24,no-resolve
+IP-CIDR,111.206.0.0/16,no-resolve
+IP-CIDR,220.194.0.0/16,no-resolve
+
+# > Xigua Video IPs
+IP-CIDR,58.220.0.0/16,no-resolve
+IP-CIDR,61.135.0.0/16,no-resolve
+IP-CIDR,163.171.0.0/16,no-resolve
+
+# > IPv6 Support
+IP-CIDR6,2400:da00::/32,no-resolve
+IP-CIDR6,2408:8711::/32,no-resolve
+IP-CIDR6,240e::/16,no-resolve
+
