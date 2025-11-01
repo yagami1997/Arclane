@@ -171,9 +171,17 @@ DOMAIN-SUFFIX,oracle.com
 # > Fiverr - Freelance Services Marketplace
 DOMAIN-SUFFIX,fiverr.com
 
-# > Business Cloud Services
-DOMAIN-SUFFIX,uucloud.org
+# > Personal Business Domains
 DOMAIN-SUFFIX,aqaba.cloud
+DOMAIN-SUFFIX,aqabatech.co.uk
+DOMAIN-SUFFIX,clashmail.org
+DOMAIN-SUFFIX,eaglescapital.co.uk
+DOMAIN-SUFFIX,icloudapp.co.uk
+DOMAIN-SUFFIX,mengjiucai.com
+DOMAIN-SUFFIX,mixhub.uk
+DOMAIN-SUFFIX,oleafcapital.com
+DOMAIN-SUFFIX,protostarholding.com
+DOMAIN-SUFFIX,uucloud.org
 DOMAIN-SUFFIX,xns.one
 
 # ========================================
