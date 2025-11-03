@@ -4,30 +4,44 @@
 # > Use this ruleset to route traffic through proxy for better performance
 
 # ========================================
-# Zhihu (知乎) - Q&A Community Platform
+# Zhihu (知乎) - Q&A Community Platform ⭐ IP Control
 # ========================================
 # China's largest question-and-answer platform
-# ⭐ Issue: APP may use direct IP connections, bypassing domain rules
+# Purpose: Control IP location display for posts and comments
 
 # > User-Agent Rules
 USER-AGENT,*zhihu*
 USER-AGENT,zhihu*
-USER-AGENT,*ZhihuHybrid*
-USER-AGENT,*osee*
+USER-AGENT,*ZhihuHybrid*  # Zhihu APP hybrid framework
+USER-AGENT,*osee*  # Zhihu internal codename
 
 # > Domain Rules
 DOMAIN-SUFFIX,zhihu.com  # Main domain (includes all subdomains: api, www, link, etc.)
-DOMAIN-SUFFIX,zhimg.com  # Zhihu image CDN
+DOMAIN-SUFFIX,zhimg.com  # Zhihu image CDN (pic1.zhimg.com, pic2.zhimg.com, etc.)
 DOMAIN-KEYWORD,zhihu
 
-# > Zhihu IP Ranges - To be added based on actual APP traffic
-# ⚠️ Note: Do NOT add broad IP ranges that conflict with other services
-# TODO: Use Surge "Recent Requests" to identify exact Zhihu APP IPs
-#
-# Known issues with broad ranges:
-# - 103.41.167.0/24 conflicts with Xiaohongshu
-# - 118.89.204.0/22 conflicts with Xiaohongshu  
-# - 47.96.0.0/12, 121.196.0.0/16 too broad (Aliyun shared infrastructure)
+# > Zhihu IP Ranges - For APP IP Location Display ⭐
+# Note: Carefully selected to avoid conflicts with Xiaohongshu
+
+# > Zhihu Main Service IPs (Aliyun Beijing)
+IP-CIDR,47.94.0.0/16,no-resolve  # Aliyun Beijing - Zhihu API servers
+IP-CIDR,47.95.0.0/16,no-resolve  # Aliyun Beijing - Zhihu web services
+
+# > Zhihu CDN IPs (Aliyun Hangzhou)
+IP-CIDR,47.96.0.0/16,no-resolve  # Aliyun Hangzhou zone A
+IP-CIDR,47.97.0.0/16,no-resolve  # Aliyun Hangzhou zone B
+IP-CIDR,47.98.0.0/16,no-resolve  # Aliyun Hangzhou zone C
+
+# > Zhihu Image CDN (zhimg.com)
+IP-CIDR,121.196.0.0/16,no-resolve  # Zhihu image CDN
+IP-CIDR,121.199.0.0/16,no-resolve  # Zhihu image CDN backup
+
+# > Zhihu API Servers (Specific)
+IP-CIDR,106.75.0.0/16,no-resolve  # Zhihu API backend
+IP-CIDR,120.55.0.0/16,no-resolve  # Zhihu API backend backup
+
+# > Zhihu Video CDN
+IP-CIDR,121.43.0.0/16,no-resolve  # Zhihu video CDN
 
 # ========================================
 # Xiaohongshu (小红书) - Lifestyle Sharing Platform
