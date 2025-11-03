@@ -1,0 +1,112 @@
+#!name=🍟 Fries: 🌐 ASN China Lite (WeChat & Gov Optimized)
+#!desc=精简版ASN分流 - 仅保留微信和政府网站必需的ASN，避免与社交媒体规则冲突
+#!author=KyoWarp
+#!homepage=https://github.com/yagami1997/Surgerulesets
+#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
+#!category=🍟 Fries
+
+[Rule]
+# ========================================
+# 核心运营商骨干网 (Essential ISP Backbones)
+# 用途：确保微信、政府网站基础连接
+# ========================================
+
+# 中国电信骨干网
+IP-ASN,4134,DIRECT,no-resolve // 中国电信骨干网 (China Telecom Backbone)
+IP-ASN,4809,DIRECT,no-resolve // 中国电信下一代承载网
+IP-ASN,4811,DIRECT,no-resolve // 中国电信集团
+IP-ASN,4812,DIRECT,no-resolve // 中国电信集团
+IP-ASN,4813,DIRECT,no-resolve // 中国电信集团
+IP-ASN,4816,DIRECT,no-resolve // 中国电信集团
+IP-ASN,4835,DIRECT,no-resolve // 中国电信集团
+
+# 中国联通骨干网
+IP-ASN,4808,DIRECT,no-resolve // 中国联通北京省网
+IP-ASN,4837,DIRECT,no-resolve // 中国联通骨干网 (China Unicom Backbone)
+IP-ASN,9800,DIRECT,no-resolve // 中国联通
+IP-ASN,9929,DIRECT,no-resolve // 中国联通工业互联网骨干网
+
+# 中国移动骨干网
+IP-ASN,9808,DIRECT,no-resolve // 广东移动通信有限公司
+IP-ASN,24311,DIRECT,no-resolve // 中国移动 IPv6 网络
+IP-ASN,56040,DIRECT,no-resolve // 中国移动通信公司
+IP-ASN,56041,DIRECT,no-resolve // 中国移动通信公司
+IP-ASN,56042,DIRECT,no-resolve // 中国移动通信公司
+IP-ASN,56044,DIRECT,no-resolve // 中国移动通信公司
+IP-ASN,56046,DIRECT,no-resolve // 中国移动通信公司
+IP-ASN,56047,DIRECT,no-resolve // 中国移动通信公司
+IP-ASN,56048,DIRECT,no-resolve // 中国移动通信公司
+
+# 中国铁通
+IP-ASN,9394,DIRECT,no-resolve // 中国铁通电讯公司
+IP-ASN,24138,DIRECT,no-resolve // 中国铁通电信公司
+
+# ========================================
+# 政府机构与国家信息中心
+# 用途：政府网站正常访问
+# ========================================
+IP-ASN,4859,DIRECT,no-resolve // 中华人民共和国国家信息中心
+IP-ASN,7640,DIRECT,no-resolve // 中国国际信托投资公司管理信息中心
+IP-ASN,9306,DIRECT,no-resolve // 中国国际电子商务中心
+IP-ASN,9401,DIRECT,no-resolve // 中国国家图书馆
+IP-ASN,9807,DIRECT,no-resolve // 中国国家统计局数据管理中心
+IP-ASN,9811,DIRECT,no-resolve // 国务院发展研究中心网
+IP-ASN,18118,DIRECT,no-resolve // 中信网络管理有限公司
+IP-ASN,18239,DIRECT,no-resolve // 北京首都公共信息平台
+IP-ASN,18241,DIRECT,no-resolve // 国家电力信息网
+IP-ASN,37937,DIRECT,no-resolve // 中国电子政务信息中心
+IP-ASN,45074,DIRECT,no-resolve // 中国国家统计局数据管理中心
+
+# ========================================
+# 教育网 (CERNET/CERNET2)
+# 用途：教育机构网站访问
+# ========================================
+IP-ASN,4538,DIRECT,no-resolve // 中国教育科研网络中心 (CERNET)
+IP-ASN,4789,DIRECT,no-resolve // 中国北京清华大学教育网
+IP-ASN,9806,DIRECT,no-resolve // 北京教育信息网
+IP-ASN,18011,DIRECT,no-resolve // 中国教育实验网
+IP-ASN,38255,DIRECT,no-resolve // 中国教育研究网 (CERNET)
+IP-ASN,38272,DIRECT,no-resolve // 中国教育研究网 (CERNET)
+
+# CERNET2 核心节点（主要大学）
+IP-ASN,24348,DIRECT,no-resolve // 清华大学 (CERNET2 IX)
+IP-ASN,24349,DIRECT,no-resolve // 北京大学 (CERNET2 IX)
+IP-ASN,24350,DIRECT,no-resolve // 北京邮电大学 (CERNET2 IX)
+IP-ASN,24362,DIRECT,no-resolve // 中国科学技术大学 (CERNET2 IX)
+IP-ASN,24364,DIRECT,no-resolve // 上海交通大学 (CERNET2 IX)
+IP-ASN,24365,DIRECT,no-resolve // 复旦大学 (CERNET2 IX)
+IP-ASN,24367,DIRECT,no-resolve // 浙江大学 (CERNET2 IX)
+
+# ========================================
+# 广电网络
+# 用途：广播电视网络服务
+# ========================================
+IP-ASN,7641,DIRECT,no-resolve // 中国广播电视网
+IP-ASN,23771,DIRECT,no-resolve // 陕西广电网络
+IP-ASN,24150,DIRECT,no-resolve // 四川有线电视网络有限公司
+IP-ASN,24423,DIRECT,no-resolve // 福建广电网络集团
+IP-ASN,38355,DIRECT,no-resolve // 重庆广播电视宽带IP城域网
+
+# ========================================
+# 微信专用 (WeChat Specific)
+# ⚠️ 关键：微信图片上传需要
+# ========================================
+IP-ASN,45090,DIRECT,no-resolve // 深圳市腾讯计算机系统有限公司 (Tencent/WeChat)
+
+# ========================================
+# 说明
+# ========================================
+# 本模块已删除以下内容以避免与社交媒体规则冲突：
+# - 阿里云CDN (37963) - 影响小红书、知乎等
+# - 百度云 (38340, 55967) - 影响其他服务
+# - 各类商业CDN和数据中心
+# 
+# 保留内容仅包含：
+# 1. 四大运营商骨干网（微信基础连接需要）
+# 2. 政府机构和国家信息中心
+# 3. 教育网核心节点
+# 4. 广电网络
+# 5. 腾讯ASN（微信图片上传需要）
+#
+# 规则数量：从955条精简至约80条
+
