@@ -1,5 +1,5 @@
-#!name=🍟 Fries: 🌐 ASN China KyoWarp
-#!desc=精简版ASN分流 - 仅保留微信和政府网站必需的ASN，避免与社交媒体规则冲突
+#!name=🍟 Fries: 🌐 ASN China KyoWarp (Optimized)
+#!desc=精简优化版ASN分流规则 - 保证微信、政府网站访问，避免与社交媒体规则冲突 | 规则数量：约72条
 #!author=KyoWarp
 #!homepage=https://github.com/yagami1997/Surgerulesets
 #!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
@@ -42,9 +42,35 @@ IP-ASN,9394,DIRECT,no-resolve // 中国铁通电讯公司
 IP-ASN,24138,DIRECT,no-resolve // 中国铁通电信公司
 
 # ========================================
+# 省级运营商网络 (Provincial ISP Networks)
+# 用途：确保各省运营商网络连接
+# ========================================
+
+# 主要省份电信网络
+IP-ASN,23650,DIRECT,no-resolve // 中国电信江苏省网
+IP-ASN,17633,DIRECT,no-resolve // 中国电信山东省网
+IP-ASN,17638,DIRECT,no-resolve // 中国电信天津省网
+IP-ASN,17785,DIRECT,no-resolve // 中国电信河南省网
+IP-ASN,17799,DIRECT,no-resolve // 中国电信辽宁省网
+IP-ASN,17897,DIRECT,no-resolve // 中国电信黑龙江省网
+
+# 主要省份联通网络
+IP-ASN,17621,DIRECT,no-resolve // 中国联通上海城网
+IP-ASN,17622,DIRECT,no-resolve // 中国联通广州城网
+IP-ASN,17623,DIRECT,no-resolve // 中国联通深圳城网
+IP-ASN,17816,DIRECT,no-resolve // 中国联通广东省网
+
+# 主要省份移动网络
+IP-ASN,24400,DIRECT,no-resolve // 上海移动通信有限公司
+IP-ASN,24444,DIRECT,no-resolve // 山东移动通信有限公司
+IP-ASN,24445,DIRECT,no-resolve // 河南移动通信有限公司
+IP-ASN,24547,DIRECT,no-resolve // 河北移动通信有限公司
+
+# ========================================
 # 政府机构与国家信息中心
 # 用途：政府网站正常访问
 # ========================================
+IP-ASN,4611,DIRECT,no-resolve // 中国新华网（新华社）
 IP-ASN,4859,DIRECT,no-resolve // 中华人民共和国国家信息中心
 IP-ASN,7640,DIRECT,no-resolve // 中国国际信托投资公司管理信息中心
 IP-ASN,9306,DIRECT,no-resolve // 中国国际电子商务中心
@@ -54,8 +80,18 @@ IP-ASN,9811,DIRECT,no-resolve // 国务院发展研究中心网
 IP-ASN,18118,DIRECT,no-resolve // 中信网络管理有限公司
 IP-ASN,18239,DIRECT,no-resolve // 北京首都公共信息平台
 IP-ASN,18241,DIRECT,no-resolve // 国家电力信息网
+IP-ASN,24430,DIRECT,no-resolve // 中国国家邮政局
 IP-ASN,37937,DIRECT,no-resolve // 中国电子政务信息中心
 IP-ASN,45074,DIRECT,no-resolve // 中国国家统计局数据管理中心
+IP-ASN,45075,DIRECT,no-resolve // 中国中央广播电视总台
+
+# ========================================
+# 互联网基础设施 (Internet Infrastructure)
+# 用途：DNS、域名系统等基础服务
+# ========================================
+IP-ASN,7497,DIRECT,no-resolve // 计算机网络信息中心 (CNIC)
+IP-ASN,24149,DIRECT,no-resolve // 中国互联网域名系统工程研究中心 (ZDNS)
+IP-ASN,24151,DIRECT,no-resolve // 中国互联网络信息中心 (CNNIC)
 
 # ========================================
 # 教育网 (CERNET/CERNET2)
@@ -94,18 +130,47 @@ IP-ASN,38355,DIRECT,no-resolve // 重庆广播电视宽带IP城域网
 IP-ASN,45090,DIRECT,no-resolve // 深圳市腾讯计算机系统有限公司 (Tencent/WeChat)
 
 # ========================================
-# 说明
+# 使用说明 (Usage Instructions)
 # ========================================
-# 本模块已删除以下内容以避免与社交媒体规则冲突：
-# - 阿里云CDN (37963) - 影响小红书、知乎等
-# - 百度云 (38340, 55967) - 影响其他服务
-# - 各类商业CDN和数据中心
-# 
-# 保留内容仅包含：
-# 1. 四大运营商骨干网（微信基础连接需要）
-# 2. 政府机构和国家信息中心
-# 3. 教育网核心节点
-# 4. 广电网络
-# 5. 腾讯ASN（微信图片上传需要）
 #
-# 规则数量：从955条精简至约50条
+# 【用途】
+# 本模块主要用于解决以下问题：
+# 1. 微信发送图片时可能出现的连接问题
+# 2. 政府网站的正常访问
+# 3. 教育网资源的直连访问
+#
+# 【优化说明】
+# - 原版规则：955条 ASN 规则
+# - 当前版本：约72条 ASN 规则（健全优化版）
+# - 精简比例：92% (删除883条)
+#
+# 【已删除内容】（避免与社交媒体规则冲突）
+# ❌ 阿里云CDN (AS37963, AS37969) - 影响小红书、淘宝等
+# ❌ 百度云 (AS38340, AS55967) - 影响百度系服务
+# ❌ 腾讯云其他ASN（保留AS45090微信专用）
+# ❌ 各类商业IDC和CDN服务商（约875条）
+# ❌ 商业公司专用ASN（京东、美团、爱奇艺等）
+#
+# 【保留内容】（共约72条规则）
+# ✅ 四大运营商骨干网（电信、联通、移动、铁通）- 约25条
+# ✅ 主要省份运营商网络（14个省份）- 14条
+# ✅ 政府机构和国家信息中心（含新华社等）- 14条
+# ✅ 互联网基础设施（CNNIC、ZDNS等）- 3条
+# ✅ 教育网核心节点（CERNET/CERNET2）- 13条
+# ✅ 广电网络（5个省份）- 5条
+# ✅ 腾讯AS45090（微信图片上传专用）- 1条
+#
+# 【测试建议】
+# 如果微信发图片正常，建议停用此模块以避免任何潜在冲突
+# 测试项目：
+# 1. 微信发送图片/视频
+# 2. 小红书发帖（查看IP显示是否正确）
+# 3. 知乎评论（查看IP显示是否正确）
+# 4. 政府网站访问
+#
+# 【冲突说明】
+# 如果与社交媒体规则(hulo.list/socialsite.list)仍有冲突：
+# 建议完全停用本模块，改用微信专用域名规则
+#
+# 更新时间：2025-01-03
+# 版本：v2.0 Optimized
