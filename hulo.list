@@ -16,7 +16,8 @@ USER-AGENT,*ZhihuHybrid*  # Zhihu APP hybrid framework
 USER-AGENT,*osee*  # Zhihu internal codename
 
 # > Domain Rules
-DOMAIN-SUFFIX,zhihu.com  # Main domain (includes all subdomains: api, www, link, etc.)
+DOMAIN,api.zhihu.com  # Zhihu API - Critical for APP (must be first!)
+DOMAIN-SUFFIX,zhihu.com  # Main domain (includes all subdomains: www, link, etc.)
 DOMAIN-SUFFIX,zhimg.com  # Zhihu image CDN (pic1.zhimg.com, pic2.zhimg.com, etc.)
 DOMAIN-KEYWORD,zhihu
 
