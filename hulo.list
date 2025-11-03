@@ -7,62 +7,94 @@
 # Zhihu (知乎) - Q&A Community Platform
 # ========================================
 # China's largest question-and-answer platform
+# CRITICAL: IP display control for answers/comments
 
 # > User-Agent Rules
 USER-AGENT,*zhihu*
 USER-AGENT,zhihu*
+USER-AGENT,*ZhihuHybrid*
 
-# > Domain Rules
-DOMAIN-SUFFIX,zhihu.com  # Main domain (covers all subdomains)
-DOMAIN-SUFFIX,zhimg.com  # Zhihu image CDN
+# > Main Domain Rules
+DOMAIN-SUFFIX,zhihu.com  # Main domain (covers all subdomains including www, api, link, etc.)
 DOMAIN-KEYWORD,zhihu
-DOMAIN-KEYWORD,zhimg
+
+# > API & Backend Domains (CRITICAL - these handle answer/comment submissions)
+DOMAIN,api.zhihu.com  # Main API endpoint
+DOMAIN,www.zhihu.com  # Web version
+DOMAIN,zhuanlan.zhihu.com  # Zhihu Column (articles)
+DOMAIN,link.zhihu.com  # Link redirector
+DOMAIN,lens.zhihu.com  # Lens service
+DOMAIN,sugar.zhihu.com  # Sugar service (ads/recommendations)
+
+# > CDN & Media Domains (CRITICAL - image/video content)
+DOMAIN-SUFFIX,zhimg.com  # Primary image CDN (covers pic1.zhimg.com, pic2.zhimg.com, etc.)
+DOMAIN-SUFFIX,zhihu-web-analytics.zhihu.com  # Analytics
+DOMAIN-KEYWORD,zhimg  # Catch all image CDN variants
+DOMAIN-KEYWORD,video.zhihu  # Video CDN
+DOMAIN-KEYWORD,vdn.zhihu  # Video delivery network
+
+# > Static & Resources
+DOMAIN,static.zhihu.com  # Static resources
+DOMAIN,static-legacy.zhihu.com  # Legacy static resources
+
+# > Core Zhihu Server IPs (API servers)
+# Note: Zhihu uses distributed CDN heavily, domain-based rules are primary
+IP-CIDR,118.89.204.198/32,no-resolve  # Main API server
+IP-CIDR,103.41.167.234/32,no-resolve  # Backup API server
+
+# NOTE: Zhihu heavily relies on third-party CDN services (Alibaba Cloud, Tencent Cloud)
+# Domain-based rules are more reliable for IP location control than IP-CIDR rules
 
 # ========================================
 # Xiaohongshu (小红书) - Lifestyle Sharing Platform
 # ========================================
 # Also known as RED, a lifestyle and social e-commerce platform
+# CRITICAL: IP display control for posts/comments
 
 # > User-Agent Rules
 USER-AGENT,*xiaohongshu*
 USER-AGENT,xiaohongshu*
 USER-AGENT,*redbook*
+USER-AGENT,*RED*
 
-# > Domain Rules
-DOMAIN-SUFFIX,xiaohongshu.com  # Main domain
-DOMAIN-SUFFIX,xhscdn.com  # Xiaohongshu CDN
-DOMAIN-SUFFIX,xhscdn.net  # Xiaohongshu CDN backup
-DOMAIN-SUFFIX,xhslink.com  # Xiaohongshu short links
-DOMAIN-SUFFIX,xhsstatic.com  # Static resources
+# > Main Domain Rules
+DOMAIN-SUFFIX,xiaohongshu.com  # Main domain (covers all subdomains)
+DOMAIN-SUFFIX,xhslink.com  # Short links
 DOMAIN-KEYWORD,xiaohongshu
 
-# > Xiaohongshu IP Ranges
-# Xiaohongshu server and CDN IP addresses in China
+# > API & Backend Domains (CRITICAL - these handle post submissions)
+DOMAIN,edith.xiaohongshu.com  # Main API endpoint
+DOMAIN,fe-api.xiaohongshu.com  # Frontend API
+DOMAIN,api.xiaohongshu.com  # General API
+DOMAIN,customer.xiaohongshu.com  # Customer service API
+DOMAIN,referee.xiaohongshu.com  # Referral system
+DOMAIN,ads.xiaohongshu.com  # Advertising API
 
-# > Primary Service IPs
-IP-CIDR,223.109.0.0/16,no-resolve
-IP-CIDR,103.41.0.0/16,no-resolve
+# > CDN & Media Domains (CRITICAL - image/video uploads)
+DOMAIN-SUFFIX,xhscdn.com  # Primary CDN
+DOMAIN-SUFFIX,xhscdn.net  # CDN backup
+DOMAIN-SUFFIX,xhsstatic.com  # Static resources
+DOMAIN,ci.xiaohongshu.com  # Image processing/upload
+DOMAIN,picasso.xiaohongshu.com  # Image service
+DOMAIN-KEYWORD,xhscdn  # Catch all CDN variants
+DOMAIN-KEYWORD,fe-video-qc  # Video CDN
+DOMAIN-KEYWORD,sns-video  # Social video CDN
+DOMAIN-KEYWORD,sns-img-qc  # Social image CDN
 
-# > CDN Node IPs (China Telecom)
-IP-CIDR,183.213.20.0/24,no-resolve
-IP-CIDR,203.205.136.0/24,no-resolve
-IP-CIDR,211.152.146.0/24,no-resolve
+# > Web & Frontend Domains
+DOMAIN,www.xiaohongshu.com  # Web version
+DOMAIN,m.xiaohongshu.com  # Mobile web
 
-# > CDN Node IPs (China Unicom)
-IP-CIDR,103.41.167.0/24,no-resolve
-IP-CIDR,118.89.204.0/24,no-resolve
-IP-CIDR,163.181.35.0/24,no-resolve
+# > IMPORTANT: Remove most IP-CIDR rules - they may conflict with proxy routing
+# Only keep essential IPs that are confirmed Xiaohongshu exclusive
+# Most CDN IPs are shared with other services and should not be force-routed
 
-# > CDN Node IPs (China Mobile)
-IP-CIDR,116.0.89.0/24,no-resolve
-IP-CIDR,27.221.120.0/24,no-resolve
+# > Core Xiaohongshu Server IPs (API servers)
+IP-CIDR,223.109.0.0/16,no-resolve  # Primary server range
+IP-CIDR,103.41.167.0/24,no-resolve  # Backup server
 
-# > CDN Node IPs (Multi-ISP/BGP)
-IP-CIDR,36.156.0.0/16,no-resolve
-IP-CIDR,58.216.0.0/16,no-resolve
-IP-CIDR,58.243.0.0/16,no-resolve
-IP-CIDR,47.246.0.0/16,no-resolve
-IP-CIDR,119.28.0.0/16,no-resolve
-
-# > Xiaohongshu IPv6
+# > IPv6 Support
 IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,no-resolve
+
+# NOTE: CDN IP ranges removed - they are shared infrastructure and may cause
+# routing conflicts. Domain-based rules are more reliable for IP location control.
