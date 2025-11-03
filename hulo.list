@@ -7,16 +7,32 @@
 # Zhihu (知乎) - Q&A Community Platform
 # ========================================
 # China's largest question-and-answer platform
+# ⭐ Issue: APP may use direct IP connections, bypassing domain rules
 
 # > User-Agent Rules
 USER-AGENT,*zhihu*
 USER-AGENT,zhihu*
+USER-AGENT,*ZhihuHybrid*
+USER-AGENT,*osee*
 
 # > Domain Rules
-DOMAIN-SUFFIX,zhihu.com  # Main domain (covers all subdomains)
+DOMAIN-SUFFIX,zhihu.com  # Main domain (includes all subdomains: api, www, link, etc.)
 DOMAIN-SUFFIX,zhimg.com  # Zhihu image CDN
 DOMAIN-KEYWORD,zhihu
-DOMAIN-KEYWORD,zhimg
+
+# > Zhihu IP Ranges - Critical for APP IP Location Display ⭐
+# Zhihu APP may use direct IP connections
+
+# > Zhihu Main Servers (Aliyun)
+IP-CIDR,103.41.167.0/24,no-resolve  # Zhihu API servers
+IP-CIDR,118.89.204.0/22,no-resolve  # Zhihu main service cluster
+
+# > Zhihu CDN (Aliyun CDN)
+IP-CIDR,47.96.0.0/12,no-resolve  # Aliyun Hangzhou (Zhihu CDN)
+IP-CIDR,121.196.0.0/16,no-resolve  # Aliyun Shanghai (Zhihu CDN)
+
+# > Zhihu Image CDN
+IP-CIDR,106.75.0.0/16,no-resolve  # Zhihu image servers
 
 # ========================================
 # Xiaohongshu (小红书) - Lifestyle Sharing Platform
