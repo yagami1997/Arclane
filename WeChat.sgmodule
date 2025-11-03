@@ -1,5 +1,5 @@
 #!name=💬 WeChat ASN Direct Rules
-#!desc=微信专用ASN直连规则 - 确保微信图片/视频发送功能正常，不影响其他服务
+#!desc=WeChat-specific ASN direct rules - Ensure WeChat image/video sending works properly without affecting other services
 #!author=KyoWarp
 #!homepage=https://github.com/yagami1997/Surgerulesets
 #!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/WeChat.png
@@ -7,42 +7,41 @@
 
 [Rule]
 # ========================================
-# 微信核心服务 (WeChat Core Services)
+# WeChat Core Services
 # ========================================
-# 用途：解决微信发送图片/视频时的连接问题
-# 原理：确保微信流量走腾讯直连路径
+# Purpose: Solve WeChat image/video sending connection issues
+# Principle: Ensure WeChat traffic uses Tencent direct routing path
 
-# 微信实际使用的ASN（通过抓包验证）⭐
-IP-ASN,9808,DIRECT,no-resolve // 广东移动通信（微信服务器托管）- 用户验证
-IP-ASN,45090,DIRECT,no-resolve // 深圳市腾讯计算机系统有限公司（腾讯自有）- 用户验证
+# WeChat Verified ASNs (Based on Packet Capture) ⭐
+IP-ASN,9808,DIRECT,no-resolve // Guangdong Mobile Communications (WeChat server hosting) - User verified
+IP-ASN,45090,DIRECT,no-resolve // Shenzhen Tencent Computer Systems (Tencent owned network) - User verified
 
-# 腾讯数据中心（备用）
-IP-ASN,132203,DIRECT,no-resolve // 腾讯大厦数据中心
+# Tencent Datacenter (Backup)
+IP-ASN,132203,DIRECT,no-resolve // Tencent Building Datacenter
 
 # ========================================
-# 使用说明
+# Usage Instructions
 # ========================================
 # 
-# 【功能】
-# - 解决微信发送图片失败问题
-# - 解决微信视频通话连接问题
-# - 确保微信语音消息正常
+# [Features]
+# - Solve WeChat image sending failures
+# - Solve WeChat video call connection issues
+# - Ensure WeChat voice messages work properly
 #
-# 【优势】
-# - 规则极简：仅3条ASN规则（实测验证）
-# - 无副作用：不影响其他应用和服务
-# - 精准定位：基于实际抓包数据
-# - 不冲突：与社交媒体规则完全独立
+# [Advantages]
+# - Minimal rules: Only 3 ASN rules (verified by testing)
+# - No side effects: Does not affect other apps and services
+# - Precise targeting: Based on actual packet capture data
+# - No conflicts: Completely independent from social media rulesets
 #
-# 【测试方法】
-# 1. 启用本模块
-# 2. 发送微信图片/视频给好友
-# 3. 检查是否能正常发送
+# [Testing Method]
+# 1. Enable this module
+# 2. Send WeChat images/videos to friends
+# 3. Check if sending works properly
 #
-# 【如果仍然失败】
-# 可能需要添加微信域名规则（非ASN方案）
-# 请联系作者获取微信域名列表
+# [If Still Failing]
+# May need to add WeChat domain rules (non-ASN approach)
+# Please contact author for WeChat domain list
 #
-# 更新时间：2025-01-03
-# 版本：v1.0
-
+# Last Updated: 2025-01-03
+# Version: v1.1
