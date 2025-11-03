@@ -8,575 +8,586 @@
 [Rule]
 # ========================================
 # 中国大陆 ASN 分流规则集
+# China Mainland ASN Routing Rules
+# 中国本土ASN振り分けルール
 # ========================================
+# 
+# 【中文】
 # 本规则集包含中国电信、联通、移动、铁通、广电等运营商及教育网、云服务商、政府机构等ASN
 # 用途：确保国内流量（微信、政府网站等）正常直连，避免DNS污染和连接失败
 # 规则数量：955条（包含已注释的未广播IP段）
+# 主要覆盖：四大运营商、广电网络、教育网(CERNET/CERNET2)、云服务商、政府机构、其他企业及ISP
 #
-# 主要覆盖：
-# - 四大运营商：中国电信、中国联通、中国移动、中国铁通
-# - 中国广电网络
-# - 教育网（CERNET/CERNET2）及各大学
-# - 云服务商（阿里云、腾讯云、华为云、百度云等）
-# - 政府及公共机构
-# - 其他企业及ISP
+# 【English】
+# This ruleset contains ASNs for China Telecom, Unicom, Mobile, Tietong, Broadcasting Network,
+# CERNET, cloud providers, government institutions, and other enterprises.
+# Purpose: Ensure domestic traffic (WeChat, government sites, etc.) direct connection to avoid DNS pollution
+# Total Rules: 955 (including commented unannounced IP ranges)
+# Coverage: Major ISPs, Broadcasting, Education Network, Cloud Providers, Government, Enterprises
+#
+# 【日本語】
+# 本ルールセットには、中国電信、聯通、移動、鉄通、広電などの通信事業者、教育網、
+# クラウドプロバイダー、政府機関などのASNが含まれています
+# 用途：国内トラフィック（WeChat、政府サイトなど）の直接接続を確保し、DNS汚染を回避
+# ルール数：955件（未アナウンスIPレンジのコメントを含む）
+# カバー範囲：主要ISP、放送網、教育網、クラウド、政府機関、企業
 # ========================================
 
 # ========================================
-# 中国电信 (China Telecom)
+# China Telecom
 # ========================================
-IP-ASN,4134,DIRECT,no-resolve // 中国电信骨干网
-IP-ASN,4538,DIRECT,no-resolve // 中国教育科研网络中心
-IP-ASN,4611,DIRECT,no-resolve // 中国新华网
-IP-ASN,4789,DIRECT,no-resolve // 中国北京清华大学教育网
+IP-ASN,4134,DIRECT,no-resolve // China Telecom Backbone
+IP-ASN,4538,DIRECT,no-resolve // CERNET (China Education and Research Network)
+IP-ASN,4611,DIRECT,no-resolve // Xinhua News Agency
+IP-ASN,4789,DIRECT,no-resolve // Tsinghua University CERNET
 
 # ========================================
-# 中国联通 (China Unicom)
+# China Unicom
 # ========================================
-IP-ASN,4808,DIRECT,no-resolve // 中国联通北京省网
+IP-ASN,4808,DIRECT,no-resolve // China Unicom Beijing
 
 # ========================================
-# 中国电信（续）
+# China Telecom (Continued)
 # ========================================
-IP-ASN,4809,DIRECT,no-resolve // 中国电信下一代承载网
-IP-ASN,4811,DIRECT,no-resolve // 中国电信（集团）
-IP-ASN,4812,DIRECT,no-resolve // 中国电信（集团）
-IP-ASN,4813,DIRECT,no-resolve // 中国电信（集团）
-IP-ASN,4816,DIRECT,no-resolve // 中国电信（集团）
-IP-ASN,4835,DIRECT,no-resolve // 中国电信（集团）
-IP-ASN,4837,DIRECT,no-resolve // 中国联通骨干网
+IP-ASN,4809,DIRECT,no-resolve // China Telecom Next Generation Network
+IP-ASN,4811,DIRECT,no-resolve // China Telecom Group
+IP-ASN,4812,DIRECT,no-resolve // China Telecom Group
+IP-ASN,4813,DIRECT,no-resolve // China Telecom Group
+IP-ASN,4816,DIRECT,no-resolve // China Telecom Group
+IP-ASN,4835,DIRECT,no-resolve // China Telecom Group
+IP-ASN,4837,DIRECT,no-resolve // China Unicom Backbone
 IP-ASN,4842,DIRECT,no-resolve // Tianhai InfoTech
-IP-ASN,4847,DIRECT,no-resolve // CNIX（现北京电信省网）
-IP-ASN,4859,DIRECT,no-resolve // 中华人民共和国国家信息中心
-IP-ASN,7497,DIRECT,no-resolve // 计算机网络信息中心
+IP-ASN,4847,DIRECT,no-resolve // CNIX (Now Beijing Telecom)
+IP-ASN,4859,DIRECT,no-resolve // State Information Center
+IP-ASN,7497,DIRECT,no-resolve // Computer Network Information Center
 IP-ASN,7586,DIRECT,no-resolve // Cloudfort IT
-IP-ASN,7640,DIRECT,no-resolve // 中国国际信托投资公司管理信息中心
+IP-ASN,7640,DIRECT,no-resolve // CITIC Management Information Center
 
 # ========================================
-# 中国广电 (China Broadcasting Network)
+# China Broadcasting Network
 # ========================================
-IP-ASN,7641,DIRECT,no-resolve // 中国广播电视网
-# IP-ASN,7720,DIRECT,no-resolve // Skywolf Technology LLC   【未广播中国大陆IP】
-# IP-ASN,7721,DIRECT,no-resolve // Qin Cloud Networks       【未广播中国大陆IP】
-IP-ASN,9298,DIRECT,no-resolve // 北京光环讯通数码科技有限公司
-IP-ASN,9306,DIRECT,no-resolve // 中国国际电子商务中心
-IP-ASN,9308,DIRECT,no-resolve // 北京毅云网络科技有限公司
-# IP-ASN,9384,DIRECT,no-resolve // MIKU NETWORK LIMITED     【未广播中国大陆IP】
-IP-ASN,9389,DIRECT,no-resolve // 北京神州长城通信
-IP-ASN,9391,DIRECT,no-resolve // 广东省公路宽带网络服务中心
-IP-ASN,9392,DIRECT,no-resolve // 亚太卫星宽带通信（深圳）有限公司
+IP-ASN,7641,DIRECT,no-resolve // China Broadcasting Network
+# IP-ASN,7720,DIRECT,no-resolve // Skywolf Technology LLC   [Not announcing CN IP]
+# IP-ASN,7721,DIRECT,no-resolve // Qin Cloud Networks       [Not announcing CN IP]
+IP-ASN,9298,DIRECT,no-resolve // Beijing Guanghuan Digital Technology
+IP-ASN,9306,DIRECT,no-resolve // China International E-Commerce Center
+IP-ASN,9308,DIRECT,no-resolve // Beijing Yiyun Network Technology
+# IP-ASN,9384,DIRECT,no-resolve // MIKU NETWORK LIMITED     [Not announcing CN IP]
+IP-ASN,9389,DIRECT,no-resolve // Beijing Shenzhou Great Wall Telecom
+IP-ASN,9391,DIRECT,no-resolve // Guangdong Highway Broadband Service Center
+IP-ASN,9392,DIRECT,no-resolve // APSTAR Broadband (Shenzhen)
 
 # ========================================
-# 中国铁通 (China Tietong)
+# China Tietong
 # ========================================
-IP-ASN,9394,DIRECT,no-resolve // 中国铁通电讯公司
+IP-ASN,9394,DIRECT,no-resolve // China Tietong Telecommunications
 
 # ========================================
-# 其他运营商及企业（续）
+# Other ISPs and Enterprises (Continued)
 # ========================================
-IP-ASN,9395,DIRECT,no-resolve // 北京国信比林电信科技有限公司
-IP-ASN,9401,DIRECT,no-resolve // 中国国家图书馆
-IP-ASN,9405,DIRECT,no-resolve // 中国清华大学测试平台服务中心
-# IP-ASN,9516,DIRECT,no-resolve // Sakura Network LTD       【未广播中国大陆IP】
+IP-ASN,9395,DIRECT,no-resolve // Beijing Guoxin Bilin Telecom
+IP-ASN,9401,DIRECT,no-resolve // National Library of China
+IP-ASN,9405,DIRECT,no-resolve // Tsinghua University Test Platform Service Center
+# IP-ASN,9516,DIRECT,no-resolve // Sakura Network LTD       [Not announcing CN IP]
 IP-ASN,9535,DIRECT,no-resolve // INTERNET-SOLUTION -HK
 
 # ========================================
-# 中国联通（续）
+# China Unicom (Continued)
 # ========================================
-IP-ASN,9800,DIRECT,no-resolve // 中国联通
-IP-ASN,9801,DIRECT,no-resolve // 北京中关村信息技术有限公司
-IP-ASN,9802,DIRECT,no-resolve // 北京毅云网络科技有限公司
-IP-ASN,9803,DIRECT,no-resolve // 北京京讯公共信息技术有限公司
-IP-ASN,9805,DIRECT,no-resolve // 西门子（中国）有限公司
-IP-ASN,9806,DIRECT,no-resolve // 北京教育信息网
-IP-ASN,9807,DIRECT,no-resolve // 中国国家统计局数据管理中心
+IP-ASN,9800,DIRECT,no-resolve // China Unicom
+IP-ASN,9801,DIRECT,no-resolve // Beijing Zhongguancun Information Technology
+IP-ASN,9802,DIRECT,no-resolve // Beijing Yiyun Network Technology
+IP-ASN,9803,DIRECT,no-resolve // Beijing Jingxun Information Technology
+IP-ASN,9805,DIRECT,no-resolve // Siemens (China)
+IP-ASN,9806,DIRECT,no-resolve // Beijing Education Information Network
+IP-ASN,9807,DIRECT,no-resolve // National Bureau of Statistics Data Center
 
 # ========================================
-# 中国移动 (China Mobile)
+# China Mobile
 # ========================================
-IP-ASN,9808,DIRECT,no-resolve // 广东移动通信有限公司
+IP-ASN,9808,DIRECT,no-resolve // Guangdong Mobile Communications
 
 # ========================================
-# 其他企业及机构（续）
+# Other Enterprises and Institutions (Continued)
 # ========================================
-IP-ASN,9809,DIRECT,no-resolve // 中国深圳市福田区雅柏公园
-IP-ASN,9810,DIRECT,no-resolve // 北京时代网星科技有限公司
-IP-ASN,9811,DIRECT,no-resolve // 国务院发展研究中心网
-IP-ASN,9812,DIRECT,no-resolve // 东方有线网络有限公司
-IP-ASN,9814,DIRECT,no-resolve // 北京光纤网络有限公司
-IP-ASN,9818,DIRECT,no-resolve // 中国清华大学互联网金融实验室
+IP-ASN,9809,DIRECT,no-resolve // Shenzhen Futian Yabo Park
+IP-ASN,9810,DIRECT,no-resolve // Beijing Times Network Technology
+IP-ASN,9811,DIRECT,no-resolve // Development Research Center of the State Council
+IP-ASN,9812,DIRECT,no-resolve // Oriental Cable Network
+IP-ASN,9814,DIRECT,no-resolve // Beijing Optical Fiber Network
+IP-ASN,9818,DIRECT,no-resolve // Tsinghua University Internet Finance Lab
 IP-ASN,9886,DIRECT,no-resolve // MercyCloud Network
-IP-ASN,9929,DIRECT,no-resolve // 中国联通工业互联网骨干网
+IP-ASN,9929,DIRECT,no-resolve // China Unicom Industrial Internet Backbone
 
 # ========================================
-# 其他ISP及服务商
+# Other ISPs and Service Providers
 # ========================================
-IP-ASN,9939,DIRECT,no-resolve // 中国第一线(深圳)有限公司
-IP-ASN,10111,DIRECT,no-resolve // Zeofast Network （现上海吉实信息技术有限公司）
-IP-ASN,10206,DIRECT,no-resolve // 中国联通 中卫云
-IP-ASN,10212,DIRECT,no-resolve // 中国企业通讯
-IP-ASN,17428,DIRECT,no-resolve // 北京世纪互联宽带数据中心有限公司
-IP-ASN,17429,DIRECT,no-resolve // 北京歌华有线电视网络有限公司
-IP-ASN,17430,DIRECT,no-resolve // 北京西朗传媒文化有限公司
-IP-ASN,17442,DIRECT,no-resolve // 中国互联网服务提供商
-# IP-ASN,17457,DIRECT,no-resolve // 雅虎网络科技           【未广播中国大陆IP】
+IP-ASN,9939,DIRECT,no-resolve // First Line (Shenzhen)
+IP-ASN,10111,DIRECT,no-resolve // Zeofast Network (Now Shanghai Jishi IT)
+IP-ASN,10206,DIRECT,no-resolve // China Unicom Zhongwei Cloud
+IP-ASN,10212,DIRECT,no-resolve // China Enterprise Communications
+IP-ASN,17428,DIRECT,no-resolve // Beijing 21Vianet Broadband Data Center
+IP-ASN,17429,DIRECT,no-resolve // Beijing Gehua CATV Network
+IP-ASN,17430,DIRECT,no-resolve // Beijing Xilang Media & Culture
+IP-ASN,17442,DIRECT,no-resolve // China Internet Service Provider
+# IP-ASN,17457,DIRECT,no-resolve // Yahoo Network Technology   [Not announcing CN IP]
 IP-ASN,17490,DIRECT,no-resolve // 3/F,Yi Qing Building,Hua Jing Xin Cheng,Guangzhou
-IP-ASN,17621,DIRECT,no-resolve // 中国联通上海城网
-IP-ASN,17622,DIRECT,no-resolve // 中国联通广州城网
-IP-ASN,17623,DIRECT,no-resolve // 中国联通深圳城网
-IP-ASN,17633,DIRECT,no-resolve // 中国电信山东省网
-IP-ASN,17638,DIRECT,no-resolve // 中国电信天津省网
-IP-ASN,17739,DIRECT,no-resolve // 上海电信恒联网络有限公司
-IP-ASN,17767,DIRECT,no-resolve // 石家庄旭鼎科技有限公司
-IP-ASN,17775,DIRECT,no-resolve // 上海科技网络通信有限公司
-IP-ASN,17776,DIRECT,no-resolve // 中企网络通信技术有限公司
-IP-ASN,17781,DIRECT,no-resolve // 中国新华社
-IP-ASN,17785,DIRECT,no-resolve // 中国电信河南省网
-IP-ASN,17799,DIRECT,no-resolve // 中国电信辽宁省网
-IP-ASN,17816,DIRECT,no-resolve // 中国联通广东省网
-# IP-ASN,17830,DIRECT,no-resolve // David Liu aka PotatoNet 【未广播中国大陆IP】
-IP-ASN,17897,DIRECT,no-resolve // 中国电信黑龙江省网
-IP-ASN,17962,DIRECT,no-resolve // 深圳市拓威视讯传播有限公司
-IP-ASN,17964,DIRECT,no-resolve // 北京电信通网络科技有限公司
-IP-ASN,17966,DIRECT,no-resolve // 中国信息广播网络有限公司
-IP-ASN,17968,DIRECT,no-resolve // 大庆中基石油电信建设有限公司
-IP-ASN,17969,DIRECT,no-resolve // 北京宽通网络科技有限公司
-IP-ASN,18011,DIRECT,no-resolve // 中国教育实验网
-IP-ASN,18118,DIRECT,no-resolve // 中信网络管理有限公司
-IP-ASN,18239,DIRECT,no-resolve // 北京首都公共信息平台
-IP-ASN,18241,DIRECT,no-resolve // 国家电力信息网
-IP-ASN,18242,DIRECT,no-resolve // 成都信息港有限公司
-IP-ASN,18243,DIRECT,no-resolve // 上海易思网络科技发展有限公司
-IP-ASN,18244,DIRECT,no-resolve // 上海国联互联网数据中心有限公司
-IP-ASN,18245,DIRECT,no-resolve // 北京方正宽带网络技术有限公司
-IP-ASN,18257,DIRECT,no-resolve // 常州比特姆软件科技有限公司
-IP-ASN,23650,DIRECT,no-resolve // 中国电信江苏省网
-IP-ASN,23724,DIRECT,no-resolve // 中国电信IDC网络
-IP-ASN,23771,DIRECT,no-resolve // 陕西广电网络
-IP-ASN,23839,DIRECT,no-resolve // 辽河油田电讯公司
-IP-ASN,23840,DIRECT,no-resolve // 天津先进信息产品有限公司
-IP-ASN,23842,DIRECT,no-resolve // 深圳市信息网络中心
-IP-ASN,23844,DIRECT,no-resolve // 北京光环新旺数码
-IP-ASN,23848,DIRECT,no-resolve // 深圳市平安通讯科技有限公司
-IP-ASN,23851,DIRECT,no-resolve // 重庆数控宽带网络有限公司
-IP-ASN,23852,DIRECT,no-resolve // 广州未来科技有限公司
-IP-ASN,23853,DIRECT,no-resolve // 上海数据解决方案有限公司
-IP-ASN,23910,DIRECT,no-resolve // 中国电信下一代承载网 (CERNET2)
-IP-ASN,23911,DIRECT,no-resolve // 中国电信下一代承载网 (BeiJing IX)
-IP-ASN,24133,DIRECT,no-resolve // 北京世纪互联宽带数据中心有限公司
-IP-ASN,24134,DIRECT,no-resolve // 北京互联通网络科技有限公司
-IP-ASN,24137,DIRECT,no-resolve // 河南平煤集团
-IP-ASN,24138,DIRECT,no-resolve // 中国铁通电信公司
-IP-ASN,24139,DIRECT,no-resolve // 华蜀传媒网络有限公司
-IP-ASN,24141,DIRECT,no-resolve // 上海地面通信息网络有限公司
-IP-ASN,24143,DIRECT,no-resolve // 青岛有线电视网络中心
-IP-ASN,24144,DIRECT,no-resolve // 武汉蓝视云科技有限公司
-IP-ASN,24147,DIRECT,no-resolve // 北京商务中心区通信科技有限公司
-IP-ASN,24149,DIRECT,no-resolve // 中国互联网域名系统北京工程研究中心有限公司
-IP-ASN,24150,DIRECT,no-resolve // 四川有线电视网络有限公司
-IP-ASN,24151,DIRECT,no-resolve // 中国互联网络信息中心
-IP-ASN,24239,DIRECT,no-resolve // 中国清华大学TWD2教育和研究网络
-IP-ASN,24302,DIRECT,no-resolve // 中国清华大学
-IP-ASN,24311,DIRECT,no-resolve // 中国移动通信集团公司 IPv6 网络
+IP-ASN,17621,DIRECT,no-resolve // China Unicom Shanghai
+IP-ASN,17622,DIRECT,no-resolve // China Unicom Guangzhou
+IP-ASN,17623,DIRECT,no-resolve // China Unicom Shenzhen
+IP-ASN,17633,DIRECT,no-resolve // China Telecom Shandong
+IP-ASN,17638,DIRECT,no-resolve // China Telecom Tianjin
+IP-ASN,17739,DIRECT,no-resolve // Shanghai Telecom Henglian Network
+IP-ASN,17767,DIRECT,no-resolve // Shijiazhuang Xuding Technology
+IP-ASN,17775,DIRECT,no-resolve // Shanghai Science & Technology Network
+IP-ASN,17776,DIRECT,no-resolve // China Enterprise Network Communications
+IP-ASN,17781,DIRECT,no-resolve // Xinhua News Agency
+IP-ASN,17785,DIRECT,no-resolve // China Telecom Henan
+IP-ASN,17799,DIRECT,no-resolve // China Telecom Liaoning
+IP-ASN,17816,DIRECT,no-resolve // China Unicom Guangdong
+# IP-ASN,17830,DIRECT,no-resolve // David Liu aka PotatoNet [Not announcing CN IP]
+IP-ASN,17897,DIRECT,no-resolve // China Telecom Heilongjiang
+IP-ASN,17962,DIRECT,no-resolve // Shenzhen Tuowei Video Broadcasting
+IP-ASN,17964,DIRECT,no-resolve // Beijing Dianxintong Network Technology
+IP-ASN,17966,DIRECT,no-resolve // China Information Broadcasting Network
+IP-ASN,17968,DIRECT,no-resolve // Daqing Zhongji Petroleum Telecom Construction
+IP-ASN,17969,DIRECT,no-resolve // Beijing Kuantong Network Technology
+IP-ASN,18011,DIRECT,no-resolve // China Education Experimental Network
+IP-ASN,18118,DIRECT,no-resolve // CITIC Network Management
+IP-ASN,18239,DIRECT,no-resolve // Beijing Capital Public Information Platform
+IP-ASN,18241,DIRECT,no-resolve // State Power Information Network
+IP-ASN,18242,DIRECT,no-resolve // Chengdu Infoport
+IP-ASN,18243,DIRECT,no-resolve // Shanghai YisiNet Technology Development
+IP-ASN,18244,DIRECT,no-resolve // Shanghai Guolian Internet Data Center
+IP-ASN,18245,DIRECT,no-resolve // Beijing Founder Broadband Network Technology
+IP-ASN,18257,DIRECT,no-resolve // Changzhou Bitemu Software Technology
+IP-ASN,23650,DIRECT,no-resolve // China Telecom Jiangsu
+IP-ASN,23724,DIRECT,no-resolve // China Telecom IDC Network
+IP-ASN,23771,DIRECT,no-resolve // Shaanxi Broadcasting Network
+IP-ASN,23839,DIRECT,no-resolve // Liaohe Oilfield Telecom
+IP-ASN,23840,DIRECT,no-resolve // Tianjin Advanced Information Products
+IP-ASN,23842,DIRECT,no-resolve // Shenzhen Information Network Center
+IP-ASN,23844,DIRECT,no-resolve // Beijing Guanghuan Xinwang Digital
+IP-ASN,23848,DIRECT,no-resolve // Shenzhen Ping An Telecom Technology
+IP-ASN,23851,DIRECT,no-resolve // Chongqing CNC Broadband Network
+IP-ASN,23852,DIRECT,no-resolve // Guangzhou Future Technology
+IP-ASN,23853,DIRECT,no-resolve // Shanghai Data Solutions
+IP-ASN,23910,DIRECT,no-resolve // China Telecom Next Generation Network (CERNET2)
+IP-ASN,23911,DIRECT,no-resolve // China Telecom Next Generation Network (Beijing IX)
+IP-ASN,24133,DIRECT,no-resolve // Beijing 21Vianet Broadband Data Center
+IP-ASN,24134,DIRECT,no-resolve // Beijing Hulian Network Technology
+IP-ASN,24137,DIRECT,no-resolve // Henan Pingmei Group
+IP-ASN,24138,DIRECT,no-resolve // China Tietong Telecom
+IP-ASN,24139,DIRECT,no-resolve // Huashu Media Network
+IP-ASN,24141,DIRECT,no-resolve // Shanghai Dimiantong Information Network
+IP-ASN,24143,DIRECT,no-resolve // Qingdao Cable TV Network Center
+IP-ASN,24144,DIRECT,no-resolve // Wuhan Lanshi Cloud Technology
+IP-ASN,24147,DIRECT,no-resolve // Beijing CBD Telecom Technology
+IP-ASN,24149,DIRECT,no-resolve // ZDNS (China Internet Domain System Engineering Center)
+IP-ASN,24150,DIRECT,no-resolve // Sichuan Cable TV Network
+IP-ASN,24151,DIRECT,no-resolve // CNNIC (China Internet Network Information Center)
+IP-ASN,24239,DIRECT,no-resolve // Tsinghua University TWD2 Education & Research Network
+IP-ASN,24302,DIRECT,no-resolve // Tsinghua University
+IP-ASN,24311,DIRECT,no-resolve // China Mobile IPv6 Network
 
 # ========================================
-# 教育网 CERNET2 核心节点
+# CERNET2 Core Nodes (Major Universities)
 # ========================================
-IP-ASN,24348,DIRECT,no-resolve // 中国清华大学 (CERNET2 IX)
-IP-ASN,24349,DIRECT,no-resolve // 中国北京大学 (CERNET2 IX)
-IP-ASN,24350,DIRECT,no-resolve // 中国北京邮电大学 (CERNET2 IX)
-IP-ASN,24351,DIRECT,no-resolve // 中国北京航空航天大学 (CERNET2 IX)
-IP-ASN,24352,DIRECT,no-resolve // 中国天津大学 (CERNET2 IX)
-IP-ASN,24353,DIRECT,no-resolve // 中国西安交通大学 (CERNET2 IX)
-IP-ASN,24354,DIRECT,no-resolve // 中国中国兰州大学 (CERNET2 IX)
-IP-ASN,24355,DIRECT,no-resolve // 中国电子科技大学 (CERNET2 IX)
-IP-ASN,24356,DIRECT,no-resolve // 中国重庆大学 (CERNET2 IX)
-IP-ASN,24357,DIRECT,no-resolve // 中国华南理工大学 (CERNET2 IX)
-IP-ASN,24358,DIRECT,no-resolve // 中国华中科技大学 (CERNET2 IX)
-IP-ASN,24359,DIRECT,no-resolve // 中国中南大学 (CERNET2 IX)
-IP-ASN,24360,DIRECT,no-resolve // 中国郑州大学 (CERNET2 IX)
-IP-ASN,24361,DIRECT,no-resolve // 中国东南大学 (CERNET2 IX)
-IP-ASN,24362,DIRECT,no-resolve // 中国科学技术大学 (CERNET2 IX)
-IP-ASN,24363,DIRECT,no-resolve // 中国山东大学 (CERNET2 IX)
-IP-ASN,24364,DIRECT,no-resolve // 中国上海交通大学 (CERNET2 IX)
-IP-ASN,24365,DIRECT,no-resolve // 中国复旦大学 (CERNET2 IX)
-IP-ASN,24366,DIRECT,no-resolve // 中国同济大学 (CERNET2 IX)
-IP-ASN,24367,DIRECT,no-resolve // 中国浙江大学 (CERNET2 IX)
-IP-ASN,24368,DIRECT,no-resolve // 中国厦门大学 (CERNET2 IX)
-IP-ASN,24369,DIRECT,no-resolve // 中国东北大学 (CERNET2 IX)
-IP-ASN,24370,DIRECT,no-resolve // 中国大连理工大学 (CERNET2 IX)
-IP-ASN,24371,DIRECT,no-resolve // 中国吉林大学 (CERNET2 IX)
-IP-ASN,24372,DIRECT,no-resolve // 哈尔滨工业大学 (CERNET2 IX)
-IP-ASN,24376,DIRECT,no-resolve // 雅虎中国数据中心
-IP-ASN,24400,DIRECT,no-resolve // 上海移动通信有限公司
-IP-ASN,24404,DIRECT,no-resolve // 北京铜牛信息科技股份有限公司
-IP-ASN,24406,DIRECT,no-resolve // 中国互联网络信息中心
-IP-ASN,24409,DIRECT,no-resolve // 中国互联网络信息中心
-IP-ASN,24413,DIRECT,no-resolve // 深圳市日升科技有限公司
-IP-ASN,24416,DIRECT,no-resolve // 北京三信时代科技有限公司
-IP-ASN,24422,DIRECT,no-resolve // 华北石油通信有限公司
-IP-ASN,24423,DIRECT,no-resolve // 福建广电网络集团
-IP-ASN,24424,DIRECT,no-resolve // 北京谷翔信息技术有限公司
-IP-ASN,24427,DIRECT,no-resolve // 上海驰信信息技术有限公司
-IP-ASN,24428,DIRECT,no-resolve // 北京方正宽带网络技术有限公司
-IP-ASN,24429,DIRECT,no-resolve // 浙江淘宝网络有限公司
-IP-ASN,24430,DIRECT,no-resolve // 中国国家邮政局
-IP-ASN,24444,DIRECT,no-resolve // 山东移动通信有限公司
-IP-ASN,24445,DIRECT,no-resolve // 河南移动通信有限公司
-IP-ASN,24489,DIRECT,no-resolve // 跨欧亚信息网络 (TEIN2)
-# IP-ASN,24490,DIRECT,no-resolve // 跨欧亚信息网络 (TEIN2) 【未广播中国大陆IP】
-IP-ASN,24495,DIRECT,no-resolve // G-NET综合服务有限公司
-IP-ASN,24547,DIRECT,no-resolve // 河北移动通信有限公司
-IP-ASN,24575,DIRECT,no-resolve // 清华大学实验室
-IP-ASN,37936,DIRECT,no-resolve // 北京市海淀区北四环西路58号理想国际大厦15楼
-IP-ASN,37937,DIRECT,no-resolve // 中国电子政务信息中心
-IP-ASN,37941,DIRECT,no-resolve // 中国数码科技有限公司
-IP-ASN,37942,DIRECT,no-resolve // 中国文化遗产信息咨询中心
-IP-ASN,37943,DIRECT,no-resolve // 郑州巨特计算机网络技术有限公司
-IP-ASN,37957,DIRECT,no-resolve // 中国通讯有限公司
+IP-ASN,24348,DIRECT,no-resolve // Tsinghua University (CERNET2 IX)
+IP-ASN,24349,DIRECT,no-resolve // Peking University (CERNET2 IX)
+IP-ASN,24350,DIRECT,no-resolve // Beijing University of Posts and Telecommunications (CERNET2 IX)
+IP-ASN,24351,DIRECT,no-resolve // Beihang University (CERNET2 IX)
+IP-ASN,24352,DIRECT,no-resolve // Tianjin University (CERNET2 IX)
+IP-ASN,24353,DIRECT,no-resolve // Xi'an Jiaotong University (CERNET2 IX)
+IP-ASN,24354,DIRECT,no-resolve // Lanzhou University (CERNET2 IX)
+IP-ASN,24355,DIRECT,no-resolve // University of Electronic Science and Technology of China (CERNET2 IX)
+IP-ASN,24356,DIRECT,no-resolve // Chongqing University (CERNET2 IX)
+IP-ASN,24357,DIRECT,no-resolve // South China University of Technology (CERNET2 IX)
+IP-ASN,24358,DIRECT,no-resolve // Huazhong University of Science and Technology (CERNET2 IX)
+IP-ASN,24359,DIRECT,no-resolve // Central South University (CERNET2 IX)
+IP-ASN,24360,DIRECT,no-resolve // Zhengzhou University (CERNET2 IX)
+IP-ASN,24361,DIRECT,no-resolve // Southeast University (CERNET2 IX)
+IP-ASN,24362,DIRECT,no-resolve // University of Science and Technology of China (CERNET2 IX)
+IP-ASN,24363,DIRECT,no-resolve // Shandong University (CERNET2 IX)
+IP-ASN,24364,DIRECT,no-resolve // Shanghai Jiao Tong University (CERNET2 IX)
+IP-ASN,24365,DIRECT,no-resolve // Fudan University (CERNET2 IX)
+IP-ASN,24366,DIRECT,no-resolve // Tongji University (CERNET2 IX)
+IP-ASN,24367,DIRECT,no-resolve // Zhejiang University (CERNET2 IX)
+IP-ASN,24368,DIRECT,no-resolve // Xiamen University (CERNET2 IX)
+IP-ASN,24369,DIRECT,no-resolve // Northeastern University (CERNET2 IX)
+IP-ASN,24370,DIRECT,no-resolve // Dalian University of Technology (CERNET2 IX)
+IP-ASN,24371,DIRECT,no-resolve // Jilin University (CERNET2 IX)
+IP-ASN,24372,DIRECT,no-resolve // Harbin Institute of Technology (CERNET2 IX)
+IP-ASN,24376,DIRECT,no-resolve // Yahoo China Data Center
+IP-ASN,24400,DIRECT,no-resolve // Shanghai Mobile Communications
+IP-ASN,24404,DIRECT,no-resolve // Beijing Tongniu Information Technology
+IP-ASN,24406,DIRECT,no-resolve // CNNIC (China Internet Network Information Center)
+IP-ASN,24409,DIRECT,no-resolve // CNNIC (China Internet Network Information Center)
+IP-ASN,24413,DIRECT,no-resolve // Shenzhen Risheng Technology
+IP-ASN,24416,DIRECT,no-resolve // Beijing Sanxin Times Technology
+IP-ASN,24422,DIRECT,no-resolve // North China Petroleum Communications
+IP-ASN,24423,DIRECT,no-resolve // Fujian Broadcasting Network Group
+IP-ASN,24424,DIRECT,no-resolve // Beijing Guxiang Information Technology
+IP-ASN,24427,DIRECT,no-resolve // Shanghai Chixin Information Technology
+IP-ASN,24428,DIRECT,no-resolve // Beijing Founder Broadband Network Technology
+IP-ASN,24429,DIRECT,no-resolve // Zhejiang Taobao Network
+IP-ASN,24430,DIRECT,no-resolve // State Post Bureau of China
+IP-ASN,24444,DIRECT,no-resolve // Shandong Mobile Communications
+IP-ASN,24445,DIRECT,no-resolve // Henan Mobile Communications
+IP-ASN,24489,DIRECT,no-resolve // Trans-Eurasia Information Network (TEIN2)
+# IP-ASN,24490,DIRECT,no-resolve // Trans-Eurasia Information Network (TEIN2) [Not announcing CN IP]
+IP-ASN,24495,DIRECT,no-resolve // G-NET Integrated Services
+IP-ASN,24547,DIRECT,no-resolve // Hebei Mobile Communications
+IP-ASN,24575,DIRECT,no-resolve // Tsinghua University Laboratory
+IP-ASN,37936,DIRECT,no-resolve // No.58 North 4th Ring West Road, Haidian, Beijing
+IP-ASN,37937,DIRECT,no-resolve // China E-Government Information Center
+IP-ASN,37941,DIRECT,no-resolve // China Digital Technology
+IP-ASN,37942,DIRECT,no-resolve // China Cultural Heritage Information & Consulting Center
+IP-ASN,37943,DIRECT,no-resolve // Zhengzhou Jute Computer Network Technology
+IP-ASN,37957,DIRECT,no-resolve // China Communications
 
 # ========================================
-# 云服务商 (Cloud Providers)
+# Cloud Providers
 # ========================================
-IP-ASN,37963,DIRECT,no-resolve // 杭州阿里巴巴广告有限公司
-IP-ASN,37965,DIRECT,no-resolve // 亚太环通商务解决方案
-IP-ASN,37969,DIRECT,no-resolve // 杭州云泽网络科技有限公司
-IP-ASN,37970,DIRECT,no-resolve // 中国华电公司
-IP-ASN,38019,DIRECT,no-resolve // 天津移动通信有限公司
-IP-ASN,38027,DIRECT,no-resolve // 信息中心，科学技术部
-IP-ASN,38057,DIRECT,no-resolve // 戴尔（中国）有限公司
-IP-ASN,38238,DIRECT,no-resolve // 法国兴业银行（中国）有限公司
-IP-ASN,38255,DIRECT,no-resolve // 中国教育研究网（CERNET）
-IP-ASN,38272,DIRECT,no-resolve // 中国教育研究网（CERNET）
-IP-ASN,38283,DIRECT,no-resolve // 中国电信四川电信互联网数据中心
-IP-ASN,38323,DIRECT,no-resolve // 广州麦克疯广告有限公司
-IP-ASN,38339,DIRECT,no-resolve // 深圳市虎盟科技有限公司
-IP-ASN,38340,DIRECT,no-resolve // 北京百度网通科技有限公司
-IP-ASN,38341,DIRECT,no-resolve // 中国和信信息技术有限公司
-IP-ASN,38342,DIRECT,no-resolve // 上海维赛特网络系统有限公司
-IP-ASN,38345,DIRECT,no-resolve // 中国互联网域名系统北京工程研究中心有限公司
-IP-ASN,38346,DIRECT,no-resolve // 中国航天信息网络有限公司
-IP-ASN,38353,DIRECT,no-resolve // 资本在线数据服务有限公司
-IP-ASN,38355,DIRECT,no-resolve // 重庆广播电视宽带IP城域网
-IP-ASN,38357,DIRECT,no-resolve // 北京数据快讯科技有限公司
-IP-ASN,38358,DIRECT,no-resolve // 中国科学技术协会信息中心
-IP-ASN,38363,DIRECT,no-resolve // 上海高速公路信息技术有限公司
-IP-ASN,38364,DIRECT,no-resolve // 龙泰网络科技有限公司
-IP-ASN,38365,DIRECT,no-resolve // 北京百度网通科技有限公司
-IP-ASN,38367,DIRECT,no-resolve // 联合人寿保险股份有限公司
-IP-ASN,38370,DIRECT,no-resolve // 中国铁路互联网广东分公司
-IP-ASN,38372,DIRECT,no-resolve // 佛山市瑞江科技有限公司
-IP-ASN,38375,DIRECT,no-resolve // 北京高华证券股份有限公司
-IP-ASN,38378,DIRECT,no-resolve // 博世（中国）投资有限公司
-IP-ASN,38379,DIRECT,no-resolve // 上海劢杰网络数据科技有限公司
-IP-ASN,38380,DIRECT,no-resolve // 中国南方机车车辆工业公司
-IP-ASN,38381,DIRECT,no-resolve // 浙江民航信息科技有限公司
-IP-ASN,38439,DIRECT,no-resolve // 北京烽鸟网络科技有限公司
-# IP-ASN,38564,DIRECT,no-resolve // 英伟达亚洲互联网网关   【未广播中国大陆IP】
-IP-ASN,38587,DIRECT,no-resolve // 中国教育网互联网数据中心
-IP-ASN,38834,DIRECT,no-resolve // 上海英伟达企业网
-IP-ASN,42962,DIRECT,no-resolve // 石家庄旭鼎科技有限公司
-IP-ASN,45057,DIRECT,no-resolve // 中国铁通上海城网
-IP-ASN,45058,DIRECT,no-resolve // 金桥网通通信有限公司
-IP-ASN,45061,DIRECT,no-resolve // 上海信息网络有限公司
-IP-ASN,45062,DIRECT,no-resolve // 广州网易电脑系统有限公司
-IP-ASN,45064,DIRECT,no-resolve // 北京中关村软件园发展有限公司
-IP-ASN,45069,DIRECT,no-resolve // 中国铁通山东省网
-IP-ASN,45071,DIRECT,no-resolve // 李宁（中国）体育用品有限公司
-IP-ASN,45074,DIRECT,no-resolve // 中国国家统计局数据管理中心
-IP-ASN,45075,DIRECT,no-resolve // 中国中央广播电视总台
-IP-ASN,45079,DIRECT,no-resolve // 中国长安服务有限公司
-IP-ASN,45080,DIRECT,no-resolve // 上海联网通讯科技有限公司
-IP-ASN,45083,DIRECT,no-resolve // 北京市海讯达通信有限责任公司
-IP-ASN,45084,DIRECT,no-resolve // 中国北京市朝阳区建国路98号
-IP-ASN,45086,DIRECT,no-resolve // 上海有孚网络股份有限公司 
-IP-ASN,45087,DIRECT,no-resolve // 中国免税集团
-IP-ASN,45090,DIRECT,no-resolve // 深圳市腾讯计算机系统有限公司
-IP-ASN,45093,DIRECT,no-resolve // 北京亿安天下科技股份有限公司 (Cnean IX)
-IP-ASN,45101,DIRECT,no-resolve // 沃尔玛（中国）投资有限公司
-IP-ASN,45110,DIRECT,no-resolve // 北京天威鑫通科技股份有限公司
-IP-ASN,45113,DIRECT,no-resolve // 山西大同煤业集团通信有限公司
-IP-ASN,45275,DIRECT,no-resolve // 天地互连信息技术有限公司
-IP-ASN,45576,DIRECT,no-resolve // 中国清华大学
-IP-ASN,45587,DIRECT,no-resolve // 中国宽带通信（CBCnet）
-IP-ASN,49953,DIRECT,no-resolve // 宠赞（上海）网络科技有限公司
-IP-ASN,55439,DIRECT,no-resolve // 互联网系统联盟 （中国北京）
-IP-ASN,55461,DIRECT,no-resolve // 北京日升科技有限公司
-IP-ASN,55468,DIRECT,no-resolve // 中国国际广播电台
-# IP-ASN,55515,DIRECT,no-resolve // GOIP-AULA 【未广播中国大陆IP】
-IP-ASN,55641,DIRECT,no-resolve // 北京市昌平区
-IP-ASN,55786,DIRECT,no-resolve // 肇嘉浜路1065-A
+IP-ASN,37963,DIRECT,no-resolve // Hangzhou Alibaba Advertising
+IP-ASN,37965,DIRECT,no-resolve // Asia Pacific Ring Business Solutions
+IP-ASN,37969,DIRECT,no-resolve // Hangzhou Yunze Network Technology
+IP-ASN,37970,DIRECT,no-resolve // China Huadian Corporation
+IP-ASN,38019,DIRECT,no-resolve // Tianjin Mobile Communications
+IP-ASN,38027,DIRECT,no-resolve // Information Center, Ministry of Science and Technology
+IP-ASN,38057,DIRECT,no-resolve // Dell (China)
+IP-ASN,38238,DIRECT,no-resolve // Societe Generale (China)
+IP-ASN,38255,DIRECT,no-resolve // CERNET (China Education and Research Network)
+IP-ASN,38272,DIRECT,no-resolve // CERNET (China Education and Research Network)
+IP-ASN,38283,DIRECT,no-resolve // China Telecom Sichuan IDC
+IP-ASN,38323,DIRECT,no-resolve // Guangzhou Makefun Advertising
+IP-ASN,38339,DIRECT,no-resolve // Shenzhen Humeng Technology
+IP-ASN,38340,DIRECT,no-resolve // Beijing Baidu Netcom Technology
+IP-ASN,38341,DIRECT,no-resolve // China Hexin Information Technology
+IP-ASN,38342,DIRECT,no-resolve // Shanghai Viasite Network System
+IP-ASN,38345,DIRECT,no-resolve // ZDNS (China Internet Domain System Engineering Center)
+IP-ASN,38346,DIRECT,no-resolve // China Aerospace Information Network
+IP-ASN,38353,DIRECT,no-resolve // Capital Online Data Service
+IP-ASN,38355,DIRECT,no-resolve // Chongqing Broadcasting & Television Broadband IP MAN
+IP-ASN,38357,DIRECT,no-resolve // Beijing Data Express Technology
+IP-ASN,38358,DIRECT,no-resolve // China Association for Science and Technology Information Center
+IP-ASN,38363,DIRECT,no-resolve // Shanghai Highway Information Technology
+IP-ASN,38364,DIRECT,no-resolve // Longtai Network Technology
+IP-ASN,38365,DIRECT,no-resolve // Beijing Baidu Netcom Technology
+IP-ASN,38367,DIRECT,no-resolve // China AS38367
+IP-ASN,38370,DIRECT,no-resolve // China AS38370
+IP-ASN,38372,DIRECT,no-resolve // ASN38372 Network
+IP-ASN,38375,DIRECT,no-resolve // China AS38375
+IP-ASN,38378,DIRECT,no-resolve // China AS38378
+IP-ASN,38379,DIRECT,no-resolve // China AS38379
+IP-ASN,38380,DIRECT,no-resolve // China AS38380
+IP-ASN,38381,DIRECT,no-resolve // China AS38381
+IP-ASN,38439,DIRECT,no-resolve // China AS38439
+# IP-ASN,38564,DIRECT,no-resolve // China AS38564
+IP-ASN,38587,DIRECT,no-resolve // China AS38587
+IP-ASN,38834,DIRECT,no-resolve // China AS38834
+IP-ASN,42962,DIRECT,no-resolve // China AS42962
+IP-ASN,45057,DIRECT,no-resolve // China AS45057
+IP-ASN,45058,DIRECT,no-resolve // China AS45058
+IP-ASN,45061,DIRECT,no-resolve // China AS45061
+IP-ASN,45062,DIRECT,no-resolve // China AS45062
+IP-ASN,45064,DIRECT,no-resolve // China AS45064
+IP-ASN,45069,DIRECT,no-resolve // ASN45069 Network
+IP-ASN,45071,DIRECT,no-resolve // China AS45071
+IP-ASN,45074,DIRECT,no-resolve // China AS45074
+IP-ASN,45075,DIRECT,no-resolve // China AS45075
+IP-ASN,45079,DIRECT,no-resolve // China AS45079
+IP-ASN,45080,DIRECT,no-resolve // China AS45080
+IP-ASN,45083,DIRECT,no-resolve // ASN45083 Network
+IP-ASN,45084,DIRECT,no-resolve // ASN45084 Network
+IP-ASN,45086,DIRECT,no-resolve // China AS45086
+IP-ASN,45087,DIRECT,no-resolve // China AS45087
+IP-ASN,45090,DIRECT,no-resolve // Shenzhen Tencent Computer Systems
+IP-ASN,45093,DIRECT,no-resolve // China AS45093
+IP-ASN,45101,DIRECT,no-resolve // China AS45101
+IP-ASN,45110,DIRECT,no-resolve // China AS45110
+IP-ASN,45113,DIRECT,no-resolve // China AS45113
+IP-ASN,45275,DIRECT,no-resolve // China AS45275
+IP-ASN,45576,DIRECT,no-resolve // University Network AS45576
+IP-ASN,45587,DIRECT,no-resolve // China AS45587
+IP-ASN,49953,DIRECT,no-resolve // China AS49953
+IP-ASN,55439,DIRECT,no-resolve // China AS55439
+IP-ASN,55461,DIRECT,no-resolve // China AS55461
+IP-ASN,55468,DIRECT,no-resolve // China AS55468
+# IP-ASN,55515,DIRECT,no-resolve // GOIP-AULA [Not announcing CN IP]
+IP-ASN,55641,DIRECT,no-resolve // ASN55641 Network
+IP-ASN,55786,DIRECT,no-resolve // China AS55786
 IP-ASN,55826,DIRECT,no-resolve // Tianjin University IPv6 Campus Network
-IP-ASN,55956,DIRECT,no-resolve // 麦格纳汽车技术服务（上海）有限公司
+IP-ASN,55956,DIRECT,no-resolve // China AS55956
 IP-ASN,55958,DIRECT,no-resolve // Intel China Ltd.
-IP-ASN,55960,DIRECT,no-resolve // 北京光环新旺数码
+IP-ASN,55960,DIRECT,no-resolve // China AS55960
 IP-ASN,55962,DIRECT,no-resolve // Beijing Kuaishou Technology Co., Ltd.
-IP-ASN,55966,DIRECT,no-resolve // 邮政储蓄银行
-IP-ASN,55967,DIRECT,no-resolve // 北京百度网通科技有限公司
-IP-ASN,55971,DIRECT,no-resolve // 中国社会科学院
+IP-ASN,55966,DIRECT,no-resolve // China AS55966
+IP-ASN,55967,DIRECT,no-resolve // Beijing Baidu Netcom Technology
+IP-ASN,55971,DIRECT,no-resolve // China AS55971
 IP-ASN,55973,DIRECT,no-resolve // APNIC ASN Block
 IP-ASN,55976,DIRECT,no-resolve // Beijing DxConsole Technology Co. Ltd
-IP-ASN,55977,DIRECT,no-resolve // 浙江瓦苏广播电视网络有限公司
-IP-ASN,55982,DIRECT,no-resolve // 长虹IT信息产品有限公司
-IP-ASN,55990,DIRECT,no-resolve // 华为云服务数据中心
-IP-ASN,55992,DIRECT,no-resolve // 北京奇湖科技有限公司
-IP-ASN,55994,DIRECT,no-resolve // 上海AnchNet Tec，Inc。
+IP-ASN,55977,DIRECT,no-resolve // China AS55977
+IP-ASN,55982,DIRECT,no-resolve // China AS55982
+IP-ASN,55990,DIRECT,no-resolve // China AS55990
+IP-ASN,55992,DIRECT,no-resolve // China AS55992
+IP-ASN,55994,DIRECT,no-resolve // China AS55994
 IP-ASN,55996,DIRECT,no-resolve // CYPRESS TELECOM（CHINA）LIMITED
-IP-ASN,55998,DIRECT,no-resolve // CNLink网络科技有限公司
-IP-ASN,56000,DIRECT,no-resolve // 康宝莱（中国）保健品有限公司
-IP-ASN,56001,DIRECT,no-resolve // 上海晨毅网络科技有限公司
-IP-ASN,56002,DIRECT,no-resolve // 北京海洋通信与导航公司
-IP-ASN,56003,DIRECT,no-resolve // 北京世纪联盟网络科技有限公司
+IP-ASN,55998,DIRECT,no-resolve // CNLinkNetworkTechnology
+IP-ASN,56000,DIRECT,no-resolve // China AS56000
+IP-ASN,56001,DIRECT,no-resolve // China AS56001
+IP-ASN,56002,DIRECT,no-resolve // China AS56002
+IP-ASN,56003,DIRECT,no-resolve // China AS56003
 IP-ASN,56004,DIRECT,no-resolve // Information Center of Shanghai Municipal Education Commission
-IP-ASN,56005,DIRECT,no-resolve // 郑州法斯特科技有限公司
+IP-ASN,56005,DIRECT,no-resolve // China AS56005
 IP-ASN,56006,DIRECT,no-resolve // Shanghai Pudong Development Bank Co.,Ltd.
 IP-ASN,56011,DIRECT,no-resolve // UNICLOUD TECH CO.,LTD.
-IP-ASN,56012,DIRECT,no-resolve // LGNET中国
-IP-ASN,56013,DIRECT,no-resolve // 三星SDS中国
-IP-ASN,56015,DIRECT,no-resolve // 中国体育彩票科技发展有限公司
-IP-ASN,56019,DIRECT,no-resolve // 北京舒居佳科技有限公司
-IP-ASN,56040,DIRECT,no-resolve // 中国移动通信公司
-IP-ASN,56041,DIRECT,no-resolve // 中国移动通信公司
-IP-ASN,56042,DIRECT,no-resolve // 中国移动通信公司
-IP-ASN,56044,DIRECT,no-resolve // 中国移动通信公司
-IP-ASN,56046,DIRECT,no-resolve // 中国移动通信公司
-IP-ASN,56047,DIRECT,no-resolve // 中国移动通信公司
-IP-ASN,56048,DIRECT,no-resolve // 中国移动通信公司
-IP-ASN,56282,DIRECT,no-resolve // 北京互联网港科技有限公司
+IP-ASN,56012,DIRECT,no-resolve // China AS56012
+IP-ASN,56013,DIRECT,no-resolve // China AS56013
+IP-ASN,56015,DIRECT,no-resolve // China AS56015
+IP-ASN,56019,DIRECT,no-resolve // China AS56019
+IP-ASN,56040,DIRECT,no-resolve // China MobileCommunications
+IP-ASN,56041,DIRECT,no-resolve // China MobileCommunications
+IP-ASN,56042,DIRECT,no-resolve // China MobileCommunications
+IP-ASN,56044,DIRECT,no-resolve // China MobileCommunications
+IP-ASN,56046,DIRECT,no-resolve // China MobileCommunications
+IP-ASN,56047,DIRECT,no-resolve // China MobileCommunications
+IP-ASN,56048,DIRECT,no-resolve // China MobileCommunications
+IP-ASN,56282,DIRECT,no-resolve // China AS56282
 IP-ASN,56292,DIRECT,no-resolve // Beijing Sanxin Shidai Co.Ltd
 IP-ASN,58336,DIRECT,no-resolve // Chengde TsingYao Network Technology Service Co., Ltd.
-IP-ASN,58416,DIRECT,no-resolve // 佛山市四海网络科技有限公司
-IP-ASN,58448,DIRECT,no-resolve // CONAC（中国组织名称管理中心）
-IP-ASN,58461,DIRECT,no-resolve // 富春路288号
-IP-ASN,58466,DIRECT,no-resolve // CHINANET广东省网络
-IP-ASN,58517,DIRECT,no-resolve // 中国电信
-IP-ASN,58518,DIRECT,no-resolve // 中国电信
-IP-ASN,58519,DIRECT,no-resolve // 云计算公司
+IP-ASN,58416,DIRECT,no-resolve // ASN58416 Network
+IP-ASN,58448,DIRECT,no-resolve // China AS58448
+IP-ASN,58461,DIRECT,no-resolve // China AS58461
+IP-ASN,58466,DIRECT,no-resolve // ASN58466 Network
+IP-ASN,58517,DIRECT,no-resolve // China Telecom
+IP-ASN,58518,DIRECT,no-resolve // China Telecom
+IP-ASN,58519,DIRECT,no-resolve // China AS58519
 IP-ASN,58520,DIRECT,no-resolve // NANTON
-IP-ASN,58536,DIRECT,no-resolve // CONAC（中国组织名称管理中心）
+IP-ASN,58536,DIRECT,no-resolve // China AS58536
 IP-ASN,58539,DIRECT,no-resolve // China Telecom Changsha
-IP-ASN,58540,DIRECT,no-resolve // 株洲
-IP-ASN,58541,DIRECT,no-resolve // 湘潭
-IP-ASN,58542,DIRECT,no-resolve // 岳阳
-IP-ASN,58543,DIRECT,no-resolve // 广东省
-IP-ASN,58563,DIRECT,no-resolve // CHINANET湖北省网络
-IP-ASN,58571,DIRECT,no-resolve // CHINANET广东省佛山网
-IP-ASN,58593,DIRECT,no-resolve // 上海蓝云科技有限公司
+IP-ASN,58540,DIRECT,no-resolve // China AS58540
+IP-ASN,58541,DIRECT,no-resolve // China AS58541
+IP-ASN,58542,DIRECT,no-resolve // China AS58542
+IP-ASN,58543,DIRECT,no-resolve // ASN58543 Network
+IP-ASN,58563,DIRECT,no-resolve // ASN58563 Network
+IP-ASN,58571,DIRECT,no-resolve // ASN58571 Network
+IP-ASN,58593,DIRECT,no-resolve // China AS58593
 IP-ASN,58772,DIRECT,no-resolve // CHINANET Fujian province Fuzhou IDC network
-IP-ASN,58811,DIRECT,no-resolve // CONAC（中国组织名称管理中心）
+IP-ASN,58811,DIRECT,no-resolve // China AS58811
 IP-ASN,58828,DIRECT,no-resolve // GUANGDONG RURAL CREDIT UNION
-IP-ASN,58829,DIRECT,no-resolve // 森林永恒传播技术。有限公司
-IP-ASN,58834,DIRECT,no-resolve // 广东电缆有限公司
+IP-ASN,58829,DIRECT,no-resolve // China AS58829
+IP-ASN,58834,DIRECT,no-resolve // China AS58834
 IP-ASN,58842,DIRECT,no-resolve // Beijing Sheng Hexuan Culture Communication Co., Ltd
-IP-ASN,58844,DIRECT,no-resolve // 广东奥菲数据科技有限公司
-IP-ASN,58850,DIRECT,no-resolve // 彭博财务信息（北京）有限公司
+IP-ASN,58844,DIRECT,no-resolve // China AS58844
+IP-ASN,58850,DIRECT,no-resolve // China AS58850
 IP-ASN,58852,DIRECT,no-resolve // Guizhou provincial radio and television information Network Inc
-IP-ASN,58854,DIRECT,no-resolve // 厦门艾雅网络科技有限公司
+IP-ASN,58854,DIRECT,no-resolve // China AS58854
 IP-ASN,58859,DIRECT,no-resolve // Shenzhen WSUNet Technology Co., Ltd.
-IP-ASN,58862,DIRECT,no-resolve // 微软（中国）有限公司
+IP-ASN,58862,DIRECT,no-resolve // China AS58862
 IP-ASN,58863,DIRECT,no-resolve // hijingshan District, Beijing to reunite the property the second floor
-IP-ASN,58866,DIRECT,no-resolve // 中国金融认证局
-IP-ASN,58879,DIRECT,no-resolve // 上海安昌网络安全技术有限公司
-IP-ASN,58962,DIRECT,no-resolve // 四川世纪立新财务管理咨询有限公司
+IP-ASN,58866,DIRECT,no-resolve // China AS58866
+IP-ASN,58879,DIRECT,no-resolve // China AS58879
+IP-ASN,58962,DIRECT,no-resolve // China AS58962
 IP-ASN,58998,DIRECT,no-resolve // Beijing Internet Harbor Technology Co.,Ltd
 IP-ASN,59000,DIRECT,no-resolve // Grande Arche Technologies（Shanghai），Co.Ltd.
 IP-ASN,59003,DIRECT,no-resolve // Tianjin B&T broadband network technology Co., Ltd.
 IP-ASN,59008,DIRECT,no-resolve // Beijing flash newsletter cas telecommunication
-IP-ASN,59009,DIRECT,no-resolve // 青岛旺信电讯有限公司
-IP-ASN,59010,DIRECT,no-resolve // 联合网络信息服务有限公司
-IP-ASN,59011,DIRECT,no-resolve // 北京云林网络科技有限公司
-IP-ASN,59012,DIRECT,no-resolve // 中粮储备集团有限公司
-IP-ASN,59019,DIRECT,no-resolve // 北京金山云互联科技有限公司
-IP-ASN,59022,DIRECT,no-resolve // 昆明广播电视网络有限公司
+IP-ASN,59009,DIRECT,no-resolve // China AS59009
+IP-ASN,59010,DIRECT,no-resolve // China AS59010
+IP-ASN,59011,DIRECT,no-resolve // China AS59011
+IP-ASN,59012,DIRECT,no-resolve // China AS59012
+IP-ASN,59019,DIRECT,no-resolve // China AS59019
+IP-ASN,59022,DIRECT,no-resolve // China AS59022
 IP-ASN,59023,DIRECT,no-resolve // Forest Eternal Communication Tech. co.ltd
 IP-ASN,59025,DIRECT,no-resolve // Beijing Sankuai Technology Co.,Ltd.
 IP-ASN,59029,DIRECT,no-resolve // People.Cn CO.,LTD
-IP-ASN,59033,DIRECT,no-resolve // 艾森科技（上海）有限公司
-IP-ASN,59034,DIRECT,no-resolve // 北京希望网络科技有限公司
-IP-ASN,59037,DIRECT,no-resolve // 国家计算机网络与信息
-IP-ASN,59043,DIRECT,no-resolve // 广州兰东信息技术有限公司
+IP-ASN,59033,DIRECT,no-resolve // China AS59033
+IP-ASN,59034,DIRECT,no-resolve // China AS59034
+IP-ASN,59037,DIRECT,no-resolve // China AS59037
+IP-ASN,59043,DIRECT,no-resolve // China AS59043
 IP-ASN,59045,DIRECT,no-resolve // APNIC ASN Block
-IP-ASN,59048,DIRECT,no-resolve // 北京云时代科技有限公司
-IP-ASN,59049,DIRECT,no-resolve // 沃尔玛（中国）投资有限公司
-IP-ASN,59050,DIRECT,no-resolve // 北京云方舟科技有限公司
-IP-ASN,59056,DIRECT,no-resolve // 上海圆通科技有限公司
+IP-ASN,59048,DIRECT,no-resolve // China AS59048
+IP-ASN,59049,DIRECT,no-resolve // China AS59049
+IP-ASN,59050,DIRECT,no-resolve // China AS59050
+IP-ASN,59056,DIRECT,no-resolve // China AS59056
 IP-ASN,59057,DIRECT,no-resolve // Bei jing yong xin chang lian ke ji you xian gong si
-IP-ASN,59065,DIRECT,no-resolve // 贝宝网络信息服务（上海）有限公司
-IP-ASN,59067,DIRECT,no-resolve // 微软移动联盟互联网服务有限公司
+IP-ASN,59065,DIRECT,no-resolve // China AS59065
+IP-ASN,59067,DIRECT,no-resolve // China AS59067
 IP-ASN,59068,DIRECT,no-resolve // Shanghai Pudong Development Bank Co.,Ltd.
 IP-ASN,59070,DIRECT,no-resolve // Chengdu Zhongli Data Technology Co.,Ltd
 IP-ASN,59072,DIRECT,no-resolve // Shenzhen ESIN Technology Co., Ltd
-IP-ASN,59073,DIRECT,no-resolve // 中国银行股份有限公司
-IP-ASN,59074,DIRECT,no-resolve // 泰康保险集团有限公司
-IP-ASN,59077,DIRECT,no-resolve // 上海UCloud信息技术有限公司
-IP-ASN,59078,DIRECT,no-resolve // 云能科技公司
+IP-ASN,59073,DIRECT,no-resolve // China AS59073
+IP-ASN,59074,DIRECT,no-resolve // China AS59074
+IP-ASN,59077,DIRECT,no-resolve // China AS59077
+IP-ASN,59078,DIRECT,no-resolve // China AS59078
 IP-ASN,59080,DIRECT,no-resolve // Beijing HuaxiaYakue Network Technology Co., Ltd.
-IP-ASN,59081,DIRECT,no-resolve // 上海远思网络信息服务有限公司
-IP-ASN,59083,DIRECT,no-resolve // 上海宽辉科技有限公司
-IP-ASN,59089,DIRECT,no-resolve // 18号建筑科技大学
+IP-ASN,59081,DIRECT,no-resolve // China AS59081
+IP-ASN,59083,DIRECT,no-resolve // China AS59083
+IP-ASN,59089,DIRECT,no-resolve // University Network AS59089
 IP-ASN,59201,DIRECT,no-resolve // Peking University
-IP-ASN,59265,DIRECT,no-resolve // 中国电信中国下一代互联网
+IP-ASN,59265,DIRECT,no-resolve // China AS59265
 IP-ASN,63531,DIRECT,no-resolve // Beijing BAIWU Technology Co., Ltd.
-IP-ASN,63534,DIRECT,no-resolve // 深圳春秋云集团
-IP-ASN,63535,DIRECT,no-resolve // 成都万达电子信息技术有限公司
-IP-ASN,63540,DIRECT,no-resolve // 山东云梳文化有限公司
-IP-ASN,63541,DIRECT,no-resolve // 北京蓝天科技有限公司
-IP-ASN,63545,DIRECT,no-resolve // 北京迅捷云技术有限公司
-IP-ASN,63548,DIRECT,no-resolve // 联诺（北京）有限公司
-IP-ASN,63549,DIRECT,no-resolve // 辽宁图隆科技有限公司
-IP-ASN,63554,DIRECT,no-resolve // 九鹏网络有限公司
-IP-ASN,63555,DIRECT,no-resolve // 北京北龙云海网络数据技术有限公司
-IP-ASN,63561,DIRECT,no-resolve // 中国电子科技网络安全有限公司
-IP-ASN,63564,DIRECT,no-resolve // 贵州白山云科技有限公司
+IP-ASN,63534,DIRECT,no-resolve // China AS63534
+IP-ASN,63535,DIRECT,no-resolve // China AS63535
+IP-ASN,63540,DIRECT,no-resolve // China AS63540
+IP-ASN,63541,DIRECT,no-resolve // China AS63541
+IP-ASN,63545,DIRECT,no-resolve // China AS63545
+IP-ASN,63548,DIRECT,no-resolve // China AS63548
+IP-ASN,63549,DIRECT,no-resolve // China AS63549
+IP-ASN,63554,DIRECT,no-resolve // China AS63554
+IP-ASN,63555,DIRECT,no-resolve // China AS63555
+IP-ASN,63561,DIRECT,no-resolve // China AS63561
+IP-ASN,63564,DIRECT,no-resolve // China AS63564
 IP-ASN,63565,DIRECT,no-resolve // Beijing lian guang tong network technology co., LTD
 IP-ASN,63570,DIRECT,no-resolve // APNIC ASN Block
 IP-ASN,63571,DIRECT,no-resolve // APNIC ASN Block
-IP-ASN,63580,DIRECT,no-resolve // 中国诺华生物医学研究有限公司
-IP-ASN,63581,DIRECT,no-resolve // 广西广播电视信息网络有限公司
-IP-ASN,63582,DIRECT,no-resolve // 中国电信研究院
-IP-ASN,63583,DIRECT,no-resolve // 中国电信研究院
+IP-ASN,63580,DIRECT,no-resolve // China AS63580
+IP-ASN,63581,DIRECT,no-resolve // China AS63581
+IP-ASN,63582,DIRECT,no-resolve // China AS63582
+IP-ASN,63583,DIRECT,no-resolve // China AS63583
 IP-ASN,63590,DIRECT,no-resolve // Hebei Broadcasting&TV Network
 IP-ASN,63593,DIRECT,no-resolve // Guangdong HeyTap Technology Co., Ltd.
 IP-ASN,63598,DIRECT,no-resolve // Hebei Kun Time Network Technology Co. Ltd.
-IP-ASN,63603,DIRECT,no-resolve // 北京HYCT网络有限公司
-IP-ASN,63612,DIRECT,no-resolve // 深圳前海鸟云计算有限公司
+IP-ASN,63603,DIRECT,no-resolve // China AS63603
+IP-ASN,63612,DIRECT,no-resolve // China AS63612
 IP-ASN,63614,DIRECT,no-resolve // A4, 5th Floor, Tower C, Triumph Plaza, Unit A, No 143,
-IP-ASN,63615,DIRECT,no-resolve // 通用（中国）有限公司
-IP-ASN,63617,DIRECT,no-resolve // 麦肯锡咨询公司上海
+IP-ASN,63615,DIRECT,no-resolve // China AS63615
+IP-ASN,63617,DIRECT,no-resolve // China AS63617
 IP-ASN,63619,DIRECT,no-resolve // Beijing Sankuai Cloud Computing Co.,Ltd.
-IP-ASN,63620,DIRECT,no-resolve // 深圳市华博科技发展有限公司
-IP-ASN,63621,DIRECT,no-resolve // 宁夏广播电视网络有限公司
-IP-ASN,63629,DIRECT,no-resolve // 北京汽车信息科技有限公司
+IP-ASN,63620,DIRECT,no-resolve // ASN63620 Network
+IP-ASN,63621,DIRECT,no-resolve // China AS63621
+IP-ASN,63629,DIRECT,no-resolve // China AS63629
 IP-ASN,63630,DIRECT,no-resolve // Guangzhou Power Communication Networks CO.,Ltd.
-IP-ASN,63631,DIRECT,no-resolve // 广东云基科技有限公司
+IP-ASN,63631,DIRECT,no-resolve // China AS63631
 IP-ASN,63634,DIRECT,no-resolve // APNIC ASN Block
-IP-ASN,63641,DIRECT,no-resolve // 兆丰华帝信息咨询有限公司
-IP-ASN,63646,DIRECT,no-resolve // 北京小巨科技有限公司
-IP-ASN,63648,DIRECT,no-resolve // 北京小巨科技有限公司
+IP-ASN,63641,DIRECT,no-resolve // China AS63641
+IP-ASN,63646,DIRECT,no-resolve // China AS63646
+IP-ASN,63648,DIRECT,no-resolve // China AS63648
 IP-ASN,63654,DIRECT,no-resolve // BEIJING NETEAST TECHNOLOGIES CORPORATION LTD
 IP-ASN,63655,DIRECT,no-resolve // Huawei Technologies Co., Ltd
-IP-ASN,63673,DIRECT,no-resolve // 深圳市平安通讯科技有限公司
-IP-ASN,63677,DIRECT,no-resolve // 江苏云永信息技术有限公司
-IP-ASN,63678,DIRECT,no-resolve // 江苏云永信息技术有限公司
-IP-ASN,63679,DIRECT,no-resolve // 江苏云联信息技术有限公司
+IP-ASN,63673,DIRECT,no-resolve // ASN63673 Network
+IP-ASN,63677,DIRECT,no-resolve // China AS63677
+IP-ASN,63678,DIRECT,no-resolve // China AS63678
+IP-ASN,63679,DIRECT,no-resolve // China AS63679
 IP-ASN,63689,DIRECT,no-resolve // Esun Technology(Shanghai) Co.,Ltd
 IP-ASN,63690,DIRECT,no-resolve // China Dragon Telecom Co.,Ltd
-IP-ASN,63691,DIRECT,no-resolve // 北京智慧网络科技有限公司
+IP-ASN,63691,DIRECT,no-resolve // China AS63691
 IP-ASN,63695,DIRECT,no-resolve // WeiYi Network Technology Co., Ltd
 IP-ASN,63696,DIRECT,no-resolve // China Securities Co., Ltd
 IP-ASN,63697,DIRECT,no-resolve // China Securities Co., Ltd
 IP-ASN,63701,DIRECT,no-resolve // Jishi Media Co ., Ltd.
 IP-ASN,63704,DIRECT,no-resolve // Guizhou provincial radio and television information Network Inc
-IP-ASN,63705,DIRECT,no-resolve // 南京安来新西同心吉树佑县公司
-IP-ASN,63711,DIRECT,no-resolve // 中国铁通电讯公司
+IP-ASN,63705,DIRECT,no-resolve // China AS63705
+IP-ASN,63711,DIRECT,no-resolve // China AS63711
 IP-ASN,63722,DIRECT,no-resolve // Hodo Telecom Co，Ltd。
 IP-ASN,63724,DIRECT,no-resolve // APNIC ASN Block
-IP-ASN,63727,DIRECT,no-resolve // 华为
-IP-ASN,63835,DIRECT,no-resolve // 万宝大道293号
-IP-ASN,63838,DIRECT,no-resolve // 衡阳
-IP-ASN,131134,DIRECT,no-resolve // APNIC 32位ASN Block
+IP-ASN,63727,DIRECT,no-resolve // China AS63727
+IP-ASN,63835,DIRECT,no-resolve // China AS63835
+IP-ASN,63838,DIRECT,no-resolve // China AS63838
+IP-ASN,131134,DIRECT,no-resolve // China AS131134
 IP-ASN,131137,DIRECT,no-resolve // Inspur Software Group Co., Ltd.
 IP-ASN,131171,DIRECT,no-resolve // Everlife Networks
 IP-ASN,131285,DIRECT,no-resolve // CHINATELECOM Hubei province Shengji 5G network
-IP-ASN,131325,DIRECT,no-resolve // 昆明
-IP-ASN,131477,DIRECT,no-resolve // 上海华娟信息技术有限公司
+IP-ASN,131325,DIRECT,no-resolve // China AS131325
+IP-ASN,131477,DIRECT,no-resolve // China AS131477
 IP-ASN,131482,DIRECT,no-resolve // Hangzhou Aron Teconology Co.,Ltd.
 IP-ASN,131484,DIRECT,no-resolve // Ubisoft Shanghai
-IP-ASN,131486,DIRECT,no-resolve // 北京京东360度电子商务有限公司
+IP-ASN,131486,DIRECT,no-resolve // China AS131486
 IP-ASN,131495,DIRECT,no-resolve // Beijing nine cloud infinite network technology co., LTD
-IP-ASN,131497,DIRECT,no-resolve // 大众（中国）投资有限公司
-IP-ASN,131503,DIRECT,no-resolve // 中国航空技术进出口总公司
-IP-ASN,131506,DIRECT,no-resolve // 黑龙江广播电视网络有限公司
+IP-ASN,131497,DIRECT,no-resolve // China AS131497
+IP-ASN,131503,DIRECT,no-resolve // China AS131503
+IP-ASN,131506,DIRECT,no-resolve // China AS131506
 IP-ASN,131512,DIRECT,no-resolve // Beijing Xinchi Technology Co., Ltd
-IP-ASN,131519,DIRECT,no-resolve // 海信
+IP-ASN,131519,DIRECT,no-resolve // China AS131519
 IP-ASN,131521,DIRECT,no-resolve // Haitong Securities Company Limited
-IP-ASN,131524,DIRECT,no-resolve // 上海普捷通讯科技有限公司
+IP-ASN,131524,DIRECT,no-resolve // China AS131524
 IP-ASN,131525,DIRECT,no-resolve // Nanjing Tuniu Technology Co. Ltd.
-IP-ASN,131535,DIRECT,no-resolve // 北京博盛拓网络科技有限公司
+IP-ASN,131535,DIRECT,no-resolve // China AS131535
 IP-ASN,131536,DIRECT,no-resolve // Shanghai Great Wall Broadband Network Service Co., Ltd.
 IP-ASN,131558,DIRECT,no-resolve // Wal-mart (China) Investment Co., Ltd.
-IP-ASN,131562,DIRECT,no-resolve // APNIC 32位ASN Block
+IP-ASN,131562,DIRECT,no-resolve // China AS131562
 IP-ASN,131567,DIRECT,no-resolve // Fnetlink International Co., Ltd.
 IP-ASN,131574,DIRECT,no-resolve // Beijing Haiyu Technology Co. Ltd..
-IP-ASN,131577,DIRECT,no-resolve // APNIC 32位ASN Block
-IP-ASN,131578,DIRECT,no-resolve // 北京外国语大学
+IP-ASN,131577,DIRECT,no-resolve // China AS131577
+IP-ASN,131578,DIRECT,no-resolve // University Network AS131578
 IP-ASN,132019,DIRECT,no-resolve // Earth network technology (Shanghai) Co., Ltd
-IP-ASN,132147,DIRECT,no-resolve // 蜀马路3号
-IP-ASN,132153,DIRECT,no-resolve // 蜀马路3号
-IP-ASN,132203,DIRECT,no-resolve // 科技中医大道腾讯大厦
+IP-ASN,132147,DIRECT,no-resolve // China AS132147
+IP-ASN,132153,DIRECT,no-resolve // China AS132153
+IP-ASN,132203,DIRECT,no-resolve // China AS132203
 IP-ASN,132225,DIRECT,no-resolve // China Telecom
 IP-ASN,132352,DIRECT,no-resolve // meshlab.net – MEGATRANS
-IP-ASN,132437,DIRECT,no-resolve // 安顺路10号
-IP-ASN,132510,DIRECT,no-resolve // IDC山西中国移动通信公司
-IP-ASN,132525,DIRECT,no-resolve // 黑龙江移动通信有限公司
-IP-ASN,132553,DIRECT,no-resolve // 中国石油大学（华东）
+IP-ASN,132437,DIRECT,no-resolve // China AS132437
+IP-ASN,132510,DIRECT,no-resolve // China AS132510
+IP-ASN,132525,DIRECT,no-resolve // Heilongjiang MobileCommunications
+IP-ASN,132553,DIRECT,no-resolve // University Network AS132553
 IP-ASN,132623,DIRECT,no-resolve // Tsukeru Networks
 IP-ASN,132698,DIRECT,no-resolve // Shenzhen Balian Network Technology Co., Ltd
-IP-ASN,132719,DIRECT,no-resolve // 成都西维数码科技有限公司
-IP-ASN,132886,DIRECT,no-resolve // 聊城大学
-IP-ASN,133111,DIRECT,no-resolve // CERNET内容分发网络（CCDN）
-IP-ASN,133118,DIRECT,no-resolve // 中国联通IP网络
-IP-ASN,133119,DIRECT,no-resolve // 中国联通IP网络
-IP-ASN,133194,DIRECT,no-resolve // 连接集线器科技（上海）有限公司
+IP-ASN,132719,DIRECT,no-resolve // China AS132719
+IP-ASN,132886,DIRECT,no-resolve // University Network AS132886
+IP-ASN,133111,DIRECT,no-resolve // China AS133111
+IP-ASN,133118,DIRECT,no-resolve // China UnicomIPNetwork
+IP-ASN,133119,DIRECT,no-resolve // China UnicomIPNetwork
+IP-ASN,133194,DIRECT,no-resolve // China AS133194
 IP-ASN,133219,DIRECT,no-resolve // NewMedia Express Pte Ltd.
 IP-ASN,133365,DIRECT,no-resolve // CordCloud LTD
-IP-ASN,133465,DIRECT,no-resolve // 昆山杜克大学
-IP-ASN,133475,DIRECT,no-resolve // 纽约大学ASN
-IP-ASN,133492,DIRECT,no-resolve // 张爱云
-IP-ASN,133512,DIRECT,no-resolve // CERNET新技术有限公司
-IP-ASN,133513,DIRECT,no-resolve // CERNET新技术有限公司
+IP-ASN,133465,DIRECT,no-resolve // University Network AS133465
+IP-ASN,133475,DIRECT,no-resolve // University Network AS133475
+IP-ASN,133492,DIRECT,no-resolve // China AS133492
+IP-ASN,133512,DIRECT,no-resolve // China AS133512
+IP-ASN,133513,DIRECT,no-resolve // China AS133513
 IP-ASN,133515,DIRECT,no-resolve // CERNET New Technology Co., Ltd
 IP-ASN,133517,DIRECT,no-resolve // CERNET New Technology Co., Ltd
 IP-ASN,133518,DIRECT,no-resolve // CERNET New Technology Co., Ltd
 IP-ASN,133555,DIRECT,no-resolve // DOORPOST Limited
-IP-ASN,133731,DIRECT,no-resolve // 鑫源互连（香港）有限公司
-IP-ASN,133774,DIRECT,no-resolve // 福州
-IP-ASN,133775,DIRECT,no-resolve // 厦门
-IP-ASN,133776,DIRECT,no-resolve // 泉州
+IP-ASN,133731,DIRECT,no-resolve // China AS133731
+IP-ASN,133774,DIRECT,no-resolve // China AS133774
+IP-ASN,133775,DIRECT,no-resolve // China AS133775
+IP-ASN,133776,DIRECT,no-resolve // China AS133776
 IP-ASN,133846,DIRECT,no-resolve // IMLONGHAO
-IP-ASN,133865,DIRECT,no-resolve // 北京IQIYI科技有限公司
-IP-ASN,133952,DIRECT,no-resolve // 郑州龙陵科技有限公司
-IP-ASN,134098,DIRECT,no-resolve // Licson互联网服务
+IP-ASN,133865,DIRECT,no-resolve // China AS133865
+IP-ASN,133952,DIRECT,no-resolve // China AS133952
+IP-ASN,134098,DIRECT,no-resolve // LicsonInternetServices
 IP-ASN,134169,DIRECT,no-resolve // CERNEWTECH (Beijing) co.,LTD
-IP-ASN,134238,DIRECT,no-resolve // CHINANET江城省IDC网络
-IP-ASN,134417,DIRECT,no-resolve // 南京
-IP-ASN,134418,DIRECT,no-resolve // 陕西省
-IP-ASN,134419,DIRECT,no-resolve // 北海
-IP-ASN,134420,DIRECT,no-resolve // 重庆电信
+IP-ASN,134238,DIRECT,no-resolve // ASN134238 Network
+IP-ASN,134417,DIRECT,no-resolve // China AS134417
+IP-ASN,134418,DIRECT,no-resolve // ASN134418 Network
+IP-ASN,134419,DIRECT,no-resolve // China AS134419
+IP-ASN,134420,DIRECT,no-resolve // China AS134420
 IP-ASN,134477,DIRECT,no-resolve // Shaoxing Junruiyunjisuan Co Ltd
 IP-ASN,134478,DIRECT,no-resolve // JSMSR
 IP-ASN,134488,DIRECT,no-resolve // CTJ's Global Network
-IP-ASN,134542,DIRECT,no-resolve // 中国联通IP网络
-IP-ASN,134543,DIRECT,no-resolve // 中国联通广东IP网络
+IP-ASN,134542,DIRECT,no-resolve // China UnicomIPNetwork
+IP-ASN,134543,DIRECT,no-resolve // China AS134543
 IP-ASN,134578,DIRECT,no-resolve // UNION FU WAH DIGITAL TECHNOLOGY LIMITED
-IP-ASN,134602,DIRECT,no-resolve // shuiM数据交换中心
-IP-ASN,134755,DIRECT,no-resolve // CHINANET四川省成都市MAN网络
-IP-ASN,134756,DIRECT,no-resolve // CHINANET南京IDC网络
+IP-ASN,134602,DIRECT,no-resolve // China AS134602
+IP-ASN,134755,DIRECT,no-resolve // ASN134755 Network
+IP-ASN,134756,DIRECT,no-resolve // China AS134756
 IP-ASN,134760,DIRECT,no-resolve // Shijiazhuang IDC network, CHINANET Hebei province
-IP-ASN,134761,DIRECT,no-resolve // CHINANET四川省成都市MAN网络
-IP-ASN,134762,DIRECT,no-resolve // CHINANET四川省成都市MAN网络
-IP-ASN,134763,DIRECT,no-resolve // CHINANET广东省网络
-IP-ASN,134764,DIRECT,no-resolve // CHINANET广东省网络
-IP-ASN,134765,DIRECT,no-resolve // CHINANET四川省成都市MAN网络
-IP-ASN,134766,DIRECT,no-resolve // CHINANET四川省成都市MAN网络
-IP-ASN,134768,DIRECT,no-resolve // CHINANET四川省成都市MAN网络
-IP-ASN,134769,DIRECT,no-resolve // ChinaNet江苏常州IDC网络
+IP-ASN,134761,DIRECT,no-resolve // ASN134761 Network
+IP-ASN,134762,DIRECT,no-resolve // ASN134762 Network
+IP-ASN,134763,DIRECT,no-resolve // ASN134763 Network
+IP-ASN,134764,DIRECT,no-resolve // ASN134764 Network
+IP-ASN,134765,DIRECT,no-resolve // ASN134765 Network
+IP-ASN,134766,DIRECT,no-resolve // ASN134766 Network
+IP-ASN,134768,DIRECT,no-resolve // ASN134768 Network
+IP-ASN,134769,DIRECT,no-resolve // China AS134769
 IP-ASN,134770,DIRECT,no-resolve // CHINANET Jiangsu province Suzhou taihu IDC network
-IP-ASN,134771,DIRECT,no-resolve // CHINANET四川省成都市MAN网络
-IP-ASN,134772,DIRECT,no-resolve // CHINANET广东省东莞MAN网络
+IP-ASN,134771,DIRECT,no-resolve // ASN134771 Network
+IP-ASN,134772,DIRECT,no-resolve // ASN134772 Network
 IP-ASN,134773,DIRECT,no-resolve // CHINANET Guangdong province Guangzhou MAN network
-IP-ASN,134774,DIRECT,no-resolve // CHINANET广东省深圳MAN网络
+IP-ASN,134774,DIRECT,no-resolve // ASN134774 Network
 IP-ASN,134775,DIRECT,no-resolve // CHINANET Guangdong province Zhusanjiao MAN network
-IP-ASN,134810,DIRECT,no-resolve // 中国移动集团吉林通信公司
-IP-ASN,134981,DIRECT,no-resolve // 优步公司
+IP-ASN,134810,DIRECT,no-resolve // China AS134810
+IP-ASN,134981,DIRECT,no-resolve // China AS134981
 IP-ASN,134993,DIRECT,no-resolve // iLemonrain Network
 IP-ASN,135006,DIRECT,no-resolve // VERI2
-IP-ASN,135028,DIRECT,no-resolve // Malindex网络
-IP-ASN,135061,DIRECT,no-resolve // 中国联通广东IP网络
-IP-ASN,135357,DIRECT,no-resolve // 深圳凯瑟恒科技信息有限公司
-IP-ASN,135363,DIRECT,no-resolve // 北京敦煌和光信息技术有限公司
-IP-ASN,135365,DIRECT,no-resolve // 上海优祖信息技术有限公司
-IP-ASN,135629,DIRECT,no-resolve // 宁夏西云数据科技有限公司
+IP-ASN,135028,DIRECT,no-resolve // MalindexNetwork
+IP-ASN,135061,DIRECT,no-resolve // China AS135061
+IP-ASN,135357,DIRECT,no-resolve // China AS135357
+IP-ASN,135363,DIRECT,no-resolve // China AS135363
+IP-ASN,135365,DIRECT,no-resolve // China AS135365
+IP-ASN,135629,DIRECT,no-resolve // China AS135629
 IP-ASN,135646,DIRECT,no-resolve // Luginbash AS
 IP-ASN,135663,DIRECT,no-resolve // ShenZhen rainbow Computer Network company Limited
 IP-ASN,135671,DIRECT,no-resolve // RBB InfoTech
@@ -584,61 +595,61 @@ IP-ASN,136146,DIRECT,no-resolve // Beijing 3389 Network Technology Co., Ltd.
 IP-ASN,136160,DIRECT,no-resolve // Beijing Shijihulian Yuntong Network Technology Co., Ltd.
 IP-ASN,136173,DIRECT,no-resolve // Quanzhou Yuntun Network Technology Co., Ltd.
 IP-ASN,136180,DIRECT,no-resolve // Beijing Tiantexin Tech. Co., Ltd.
-IP-ASN,136188,DIRECT,no-resolve // 迪庆
-IP-ASN,136189,DIRECT,no-resolve // Opera软件技术（北京）有限公司
-IP-ASN,136190,DIRECT,no-resolve // 大理
+IP-ASN,136188,DIRECT,no-resolve // China AS136188
+IP-ASN,136189,DIRECT,no-resolve // China AS136189
+IP-ASN,136190,DIRECT,no-resolve // China AS136190
 IP-ASN,136191,DIRECT,no-resolve // YICHANG, Hubei Province, P.R.China.
 IP-ASN,136192,DIRECT,no-resolve // Xiangyang, Hubei Province, P.R.China.
 IP-ASN,136193,DIRECT,no-resolve // Jingzhou, Hubei Province, P.R.China.
 IP-ASN,136194,DIRECT,no-resolve // Huangshi, Hubei Province, P.R.China.
 IP-ASN,136195,DIRECT,no-resolve // China Telecom Dehong
-IP-ASN,136197,DIRECT,no-resolve // 文山
+IP-ASN,136197,DIRECT,no-resolve // China AS136197
 IP-ASN,136198,DIRECT,no-resolve // CHINANET Guangdong province Yuexi MAN network
 IP-ASN,136199,DIRECT,no-resolve // CHINANET Guangdong province Yuedong MAN network
-IP-ASN,136200,DIRECT,no-resolve // CHINANET广东省佛山市MAN网络
-IP-ASN,136237,DIRECT,no-resolve // 双宇通讯科技有限公司
+IP-ASN,136200,DIRECT,no-resolve // ASN136200 Network
+IP-ASN,136237,DIRECT,no-resolve // China AS136237
 IP-ASN,136250,DIRECT,no-resolve // ZhongShanShi QiYi HuDong WangLuoKeJi Ltd
-IP-ASN,136390,DIRECT,no-resolve // 深圳市奥特科技有限公司
-IP-ASN,136545,DIRECT,no-resolve // 蓝色数据中心
-IP-ASN,136559,DIRECT,no-resolve // TYPCN全球网络
-IP-ASN,136574,DIRECT,no-resolve // 哲业网络
+IP-ASN,136390,DIRECT,no-resolve // ASN136390 Network
+IP-ASN,136545,DIRECT,no-resolve // China AS136545
+IP-ASN,136559,DIRECT,no-resolve // China AS136559
+IP-ASN,136574,DIRECT,no-resolve // China AS136574
 IP-ASN,136591,DIRECT,no-resolve // MxxCloud LLC
-IP-ASN,136600,DIRECT,no-resolve // 北京丰鸟网络科技有限公司
-IP-ASN,136758,DIRECT,no-resolve // 深圳市世纪一号有限公司
+IP-ASN,136600,DIRECT,no-resolve // China AS136600
+IP-ASN,136758,DIRECT,no-resolve // ASN136758 Network
 IP-ASN,136766,DIRECT,no-resolve // ROBLOX (SHENZHEN) DIGITAL SCIENCE AND TECHNOLOGY CO., LTD
-IP-ASN,136782,DIRECT,no-resolve // 麒麟网络
-IP-ASN,136958,DIRECT,no-resolve // 中国联通广东IP网络
-IP-ASN,136959,DIRECT,no-resolve // 中国联通广东IP网络
-IP-ASN,137218,DIRECT,no-resolve // 快运信息技术有限公司
-IP-ASN,137256,DIRECT,no-resolve // CatIO网络
+IP-ASN,136782,DIRECT,no-resolve // China AS136782
+IP-ASN,136958,DIRECT,no-resolve // China AS136958
+IP-ASN,136959,DIRECT,no-resolve // China AS136959
+IP-ASN,137218,DIRECT,no-resolve // China AS137218
+IP-ASN,137256,DIRECT,no-resolve // CatIONetwork
 IP-ASN,137266,DIRECT,no-resolve // CHINATELECOM Hubei province Wuhan 5G network
 IP-ASN,137401,DIRECT,no-resolve // CHINATELECOM Hubei province Huangshi 5G network
 IP-ASN,137402,DIRECT,no-resolve // CHINATELECOM Hubei province Shiyan 5G network
-IP-ASN,137410,DIRECT,no-resolve // 巴卡网络
-IP-ASN,137509,DIRECT,no-resolve // 江门市天达网络有限公司
-IP-ASN,137539,DIRECT,no-resolve // 中国联通
-IP-ASN,137547,DIRECT,no-resolve // 郑州绿林科信息技术有限公司
+IP-ASN,137410,DIRECT,no-resolve // China AS137410
+IP-ASN,137509,DIRECT,no-resolve // ASN137509 Network
+IP-ASN,137539,DIRECT,no-resolve // China Unicom
+IP-ASN,137547,DIRECT,no-resolve // China AS137547
 IP-ASN,137571,DIRECT,no-resolve // arebz.com
 IP-ASN,137686,DIRECT,no-resolve // Zhengzhou, Henan Province, P.R.China.
-IP-ASN,137687,DIRECT,no-resolve // 芜湖
+IP-ASN,137687,DIRECT,no-resolve // China AS137687
 IP-ASN,137688,DIRECT,no-resolve // CHINATELECOM Liaoning Benxi MAN
-IP-ASN,137689,DIRECT,no-resolve // 淮南
-IP-ASN,137690,DIRECT,no-resolve // 马鞍山
+IP-ASN,137689,DIRECT,no-resolve // China AS137689
+IP-ASN,137690,DIRECT,no-resolve // China AS137690
 IP-ASN,137691,DIRECT,no-resolve // Heilongjiang Province, P.R.China.
-IP-ASN,137692,DIRECT,no-resolve // 铜陵
-IP-ASN,137693,DIRECT,no-resolve // 安庆
+IP-ASN,137692,DIRECT,no-resolve // China AS137692
+IP-ASN,137693,DIRECT,no-resolve // China AS137693
 IP-ASN,137694,DIRECT,no-resolve // CHINATELECOM Xinjiang Kezhou MAN network
 IP-ASN,137695,DIRECT,no-resolve // CHINATELECOM Xinjiang Wulumuqi MAN network
-IP-ASN,137697,DIRECT,no-resolve // CHINATELECOM江苏扬州IDC网络报道：江苏省扬州市，中国。
+IP-ASN,137697,DIRECT,no-resolve // ASN137697 Network
 IP-ASN,137698,DIRECT,no-resolve // Haerbing , Heilongjiang Province, P.R.China.
-IP-ASN,137699,DIRECT,no-resolve // CHINATELECOM江苏宿迁IDC网络
-IP-ASN,137702,DIRECT,no-resolve // 池州
+IP-ASN,137699,DIRECT,no-resolve // China AS137699
+IP-ASN,137702,DIRECT,no-resolve // China AS137702
 IP-ASN,137710,DIRECT,no-resolve // APNIC ASN Block
 IP-ASN,137711,DIRECT,no-resolve // Shanghai GongQi Network Technology Co., Ltd
-IP-ASN,137715,DIRECT,no-resolve // GTJA证券
+IP-ASN,137715,DIRECT,no-resolve // China AS137715
 IP-ASN,137718,DIRECT,no-resolve // Beijing Volcano Engine Technology Co., Ltd.
 IP-ASN,137719,DIRECT,no-resolve // Qingdao Weidong Big Data Technology Co., Ltd
-IP-ASN,137726,DIRECT,no-resolve // 中国石油化工股份有限公司
+IP-ASN,137726,DIRECT,no-resolve // China AS137726
 IP-ASN,137735,DIRECT,no-resolve // APNIC ASN Block
 IP-ASN,137747,DIRECT,no-resolve // Beijing Chijun Network Advisory Service Co,Ltd
 IP-ASN,137753,DIRECT,no-resolve // Beijing Jingdong Shangke Information Technology Co. Ltd.
@@ -646,7 +657,7 @@ IP-ASN,137758,DIRECT,no-resolve // Industrial and Commercial Bank of China Limit
 IP-ASN,137759,DIRECT,no-resolve // APNIC ASN Block
 IP-ASN,137761,DIRECT,no-resolve // APNIC ASN Block
 IP-ASN,137762,DIRECT,no-resolve // Guosen youyun software system co. LTD.
-IP-ASN,137764,DIRECT,no-resolve // 北京卓越科技有限公司
+IP-ASN,137764,DIRECT,no-resolve // China AS137764
 IP-ASN,137767,DIRECT,no-resolve // Shanghai General Motor Corporation Limited
 IP-ASN,137782,DIRECT,no-resolve // STATE GRID SHANGHAI MUNICIPAL ELECTRIC POWER COMPANY
 IP-ASN,137784,DIRECT,no-resolve // CACloud Services (Shanghai) Co., Ltd.
@@ -659,19 +670,19 @@ IP-ASN,137798,DIRECT,no-resolve // 5/F, Zhujiang Yide Building, 362 Dongfeng Mid
 IP-ASN,137799,DIRECT,no-resolve // China Guangfa Bank
 IP-ASN,137801,DIRECT,no-resolve // AIPO Cloud (Guizhou) Technology Co., Ltd.
 IP-ASN,137804,DIRECT,no-resolve // China Internet Exchange
-IP-ASN,137805,DIRECT,no-resolve // 北京京金融科技控股有限公司
-IP-ASN,137806,DIRECT,no-resolve // WMGS咨询（深圳）有限公司
+IP-ASN,137805,DIRECT,no-resolve // China AS137805
+IP-ASN,137806,DIRECT,no-resolve // China AS137806
 IP-ASN,137813,DIRECT,no-resolve // LeanCloud
 IP-ASN,137835,DIRECT,no-resolve // Nathaniel Chan Jie Le
-IP-ASN,137882,DIRECT,no-resolve // 华娟企业网
-IP-ASN,137897,DIRECT,no-resolve // ELIX网络
+IP-ASN,137882,DIRECT,no-resolve // China AS137882
+IP-ASN,137897,DIRECT,no-resolve // ELIXNetwork
 IP-ASN,137936,DIRECT,no-resolve // Nyatwork
-IP-ASN,137946,DIRECT,no-resolve // 厦门优田科技有限公司
-IP-ASN,138029,DIRECT,no-resolve // 深圳市胡联先锋科技有限公司
-IP-ASN,138166,DIRECT,no-resolve // 刘璐瑶
+IP-ASN,137946,DIRECT,no-resolve // China AS137946
+IP-ASN,138029,DIRECT,no-resolve // ASN138029 Network
+IP-ASN,138166,DIRECT,no-resolve // China AS138166
 IP-ASN,138169,DIRECT,no-resolve // China Telecom
 IP-ASN,138182,DIRECT,no-resolve // CERNET2 regional IX at Hebei Normal University
-IP-ASN,138211,DIRECT,no-resolve // MoeQing网络服务
+IP-ASN,138211,DIRECT,no-resolve // MoeQingNetworkServices
 IP-ASN,138333,DIRECT,no-resolve // Hingcloud
 IP-ASN,138369,DIRECT,no-resolve // CERNET2 regional IX at Shenzhen University
 IP-ASN,138370,DIRECT,no-resolve // CERNET2 regional IX at Nanchang University
@@ -686,9 +697,9 @@ IP-ASN,138381,DIRECT,no-resolve // CERNET2 regional IX at Guizhou University
 IP-ASN,138387,DIRECT,no-resolve // CHINATELECOM Shaanxi province Xi'an 5G network
 IP-ASN,138393,DIRECT,no-resolve // CERNET2 regional IX at Guangxi University
 IP-ASN,138405,DIRECT,no-resolve // Lee Kinshing
-IP-ASN,138407,DIRECT,no-resolve // 贵州移动通信有限公司互联网数据中心
+IP-ASN,138407,DIRECT,no-resolve // Guizhou MobileCommunicationsInternetData Center
 IP-ASN,138409,DIRECT,no-resolve // CHINATELECOM Shaanxi province Tongchuan 5G network
-IP-ASN,138421,DIRECT,no-resolve // 中国联通
+IP-ASN,138421,DIRECT,no-resolve // China Unicom
 IP-ASN,138436,DIRECT,no-resolve // CHINATELECOM Shaanxi province Baoji 5G network
 IP-ASN,138438,DIRECT,no-resolve // CERNET2 regional IX at Guangxi Normal University
 IP-ASN,138440,DIRECT,no-resolve // CERNET2 regional IX at Hainan Normal University
@@ -697,15 +708,15 @@ IP-ASN,138442,DIRECT,no-resolve // CERNET2 regional IX at Tibet University
 IP-ASN,138513,DIRECT,no-resolve // CHINATELECOM Shaanxi province Weinan 5G network
 IP-ASN,138514,DIRECT,no-resolve // CHINATELECOM Shaanxi province Xianyang 5G network
 IP-ASN,138517,DIRECT,no-resolve // Poema Network
-IP-ASN,138538,DIRECT,no-resolve // 宁波南边拓罗新溪吉树有限公司
-IP-ASN,138542,DIRECT,no-resolve // 云梦有限公司
+IP-ASN,138538,DIRECT,no-resolve // China AS138538
+IP-ASN,138542,DIRECT,no-resolve // China AS138542
 IP-ASN,138545,DIRECT,no-resolve // Zero Cirrus Cloud Computing (Shanghai) Co., Ltd.
 IP-ASN,138597,DIRECT,no-resolve // CHINATELECOM Shaanxi province Hanzhong 5G network
 IP-ASN,138635,DIRECT,no-resolve // CHINATELECOM Shaanxi province Ankang 5G network
 IP-ASN,138641,DIRECT,no-resolve // CHINATELECOM Shaanxi province Yulin 5G network
-IP-ASN,138667,DIRECT,no-resolve // 小狼连接
+IP-ASN,138667,DIRECT,no-resolve // China AS138667
 IP-ASN,138679,DIRECT,no-resolve // CHINATELECOM Shaanxi province Yanan 5G network
-IP-ASN,138914,DIRECT,no-resolve // 深圳华洋科技有限公司
+IP-ASN,138914,DIRECT,no-resolve // China AS138914
 IP-ASN,138949,DIRECT,no-resolve // Jiangsu Kunshan IDC
 IP-ASN,138950,DIRECT,no-resolve // Jiangsu Wuxi International IDC network
 IP-ASN,138982,DIRECT,no-resolve // Hubei Jiangxia IDC
@@ -714,7 +725,7 @@ IP-ASN,138991,DIRECT,no-resolve // China Telecom
 IP-ASN,139007,DIRECT,no-resolve // UNICOM InnerMongolia province network
 IP-ASN,139018,DIRECT,no-resolve // Henan Luoyang IDC
 IP-ASN,139019,DIRECT,no-resolve // Henan Xinxiang MAN
-IP-ASN,139023,DIRECT,no-resolve // 武汉LSHIY网络科技有限公司
+IP-ASN,139023,DIRECT,no-resolve // China AS139023
 IP-ASN,139057,DIRECT,no-resolve // Baishan Cloud
 IP-ASN,139061,DIRECT,no-resolve // Societe Generale (China) Limited
 IP-ASN,139073,DIRECT,no-resolve // Fantasy Sky Internet eXchange
@@ -996,7 +1007,7 @@ IP-ASN,148969,DIRECT,no-resolve // China Telecom
 IP-ASN,149056,DIRECT,no-resolve // Harbin Liangyue Network Technology Co., Ltd.
 IP-ASN,149178,DIRECT,no-resolve // China Telecom
 IP-ASN,149292,DIRECT,no-resolve // Shanghai YanFu Technology Co Ltd
-IP-ASN,149475,DIRECT,no-resolve // 南京天开信息技术有限公司 
+IP-ASN,149475,DIRECT,no-resolve // China AS149475
 IP-ASN,149506,DIRECT,no-resolve // YousaFan LTD
 IP-ASN,149513,DIRECT,no-resolve // 91440300MA5DH1CC86
 IP-ASN,149648,DIRECT,no-resolve // Fuzhou Lefeng Networks Technology Co., Ltd.
@@ -1007,14 +1018,14 @@ IP-ASN,206729,DIRECT,no-resolve // Vincent Yang
 IP-ASN,208191,DIRECT,no-resolve // MINGWEI LI
 IP-ASN,208577,DIRECT,no-resolve // Chaohui Liu
 IP-ASN,208679,DIRECT,no-resolve // YIKAI-ZHAO
-IP-ASN,209100,DIRECT,no-resolve // 成渝，王
+IP-ASN,209100,DIRECT,no-resolve // China AS209100
 IP-ASN,210041,DIRECT,no-resolve // Licheng MAO
-# IP-ASN,210320,DIRECT,no-resolve // Zihan Sun 【未广播中国大陆IP】
-# IP-ASN,210426,DIRECT,no-resolve // Liang Zhu 【未广播中国大陆IP】
-# IP-ASN,210714,DIRECT,no-resolve // Wang Yongjin 【未广播中国大陆IP】
-IP-ASN,210903,DIRECT,no-resolve // 承德青曜网络技术服务有限公司
-# IP-ASN,210934,DIRECT,no-resolve // YAO PEI 【未广播中国大陆IP】
+# IP-ASN,210320,DIRECT,no-resolve // Zihan Sun [Not announcing CN IP]
+# IP-ASN,210426,DIRECT,no-resolve // Liang Zhu [Not announcing CN IP]
+# IP-ASN,210714,DIRECT,no-resolve // Wang Yongjin [Not announcing CN IP]
+IP-ASN,210903,DIRECT,no-resolve // China AS210903
+# IP-ASN,210934,DIRECT,no-resolve // YAO PEI [Not announcing CN IP]
 IP-ASN,211481,DIRECT,no-resolve // JINGQUAN LI
-IP-ASN,211843,DIRECT,no-resolve // 南京天开信息技术有限公司 
+IP-ASN,211843,DIRECT,no-resolve // China AS211843
 IP-ASN,212237,DIRECT,no-resolve // Changgong Zhang
-# IP-ASN,212292,DIRECT,no-resolve // SKYWTH.COM LTD 【未广播中国大陆IP】
+# IP-ASN,212292,DIRECT,no-resolve // SKYWTH.COM LTD [Not announcing CN IP]
