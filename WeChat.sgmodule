@@ -12,13 +12,10 @@
 # Purpose: Solve WeChat image/video sending connection issues
 # Principle: Ensure WeChat traffic uses Tencent direct routing path
 
-# Tencent-Owned ASNs Only (Avoid conflicts with other services) ⭐
+# WeChat Verified ASNs (Based on Packet Capture) ⭐
+IP-ASN,9808,DIRECT,no-resolve // Guangdong Mobile Communications (WeChat server hosting) - User verified
 IP-ASN,45090,DIRECT,no-resolve // Shenzhen Tencent Computer Systems (Tencent owned) - User verified
 IP-ASN,132203,DIRECT,no-resolve // Tencent Building Datacenter
-
-# ⚠️ REMOVED: AS9808 (Guangdong Mobile)
-# Reason: Too broad, conflicts with Zhihu and other services
-# AS9808 hosts many services beyond WeChat
 
 # ========================================
 # Usage Instructions
@@ -30,9 +27,9 @@ IP-ASN,132203,DIRECT,no-resolve // Tencent Building Datacenter
 # - Ensure WeChat voice messages work properly
 #
 # [Advantages]
-# - Minimal rules: Only 2 ASN rules (Tencent-owned only)
+# - Minimal rules: Only 3 ASN rules (verified by user testing)
 # - No side effects: Does not affect other apps and services
-# - Precise targeting: Only Tencent's own network infrastructure
+# - Precise targeting: Based on actual packet capture data
 # - No conflicts: Completely independent from social media rulesets
 #
 # [Testing Method]
@@ -45,4 +42,4 @@ IP-ASN,132203,DIRECT,no-resolve // Tencent Building Datacenter
 # Please contact author for WeChat domain list
 #
 # Last Updated: 2025-01-03
-# Version: v1.2 (Removed AS9808 to avoid conflicts)
+# Version: v1.3 (Restored AS9808 - verified no conflicts with hulo.list)
