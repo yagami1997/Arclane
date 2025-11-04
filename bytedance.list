@@ -105,6 +105,10 @@ DOMAIN-SUFFIX,bytetos.com
 DOMAIN-SUFFIX,ibytedtos.com
 DOMAIN-SUFFIX,ibyteimg.com
 
+# Apple Relay 与智能代理域名
+DOMAIN,apple-relay.apple.com
+DOMAIN,gspe1-ssl.ls.apple.com
+
 # > User-Agent Rules
 USER-AGENT,Aweme*
 USER-AGENT,aweme*
