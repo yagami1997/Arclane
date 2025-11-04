@@ -105,7 +105,7 @@ DOMAIN-SUFFIX,bytetos.com
 DOMAIN-SUFFIX,ibytedtos.com
 DOMAIN-SUFFIX,ibyteimg.com
 
-# Apple Relay 与智能代理域名
+# Apple AI & GPT Domain
 DOMAIN,apple-relay.apple.com
 DOMAIN,gspe1-ssl.ls.apple.com
 
