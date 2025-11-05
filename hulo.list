@@ -62,40 +62,42 @@ DOMAIN-SUFFIX,xhslink.com  # Xiaohongshu short links
 DOMAIN-SUFFIX,xhsstatic.com  # Static resources
 DOMAIN-KEYWORD,xiaohongshu
 # Image & Video CDN (explicit for better performance)
-DOMAIN,ci.xiaohongshu.com  # Image processing service
-DOMAIN,picasso.xiaohongshu.com  # Image upload service
-DOMAIN,edith.xiaohongshu.com  # Content editor API
-DOMAIN,sns-img-qc.xhscdn.com  # Image CDN - Qingdao node
-DOMAIN,sns-img-bd.xhscdn.com  # Image CDN - Beijing node
-DOMAIN,sns-img-hw.xhscdn.com  # Image CDN - Huawei Cloud node
+# ⚠️ DISABLED: Causing "network status poor" warnings (node issue)
+# DOMAIN,ci.xiaohongshu.com  # Image processing service
+# DOMAIN,picasso.xiaohongshu.com  # Image upload service
+# DOMAIN,edith.xiaohongshu.com  # Content editor API
+# DOMAIN,sns-img-qc.xhscdn.com  # Image CDN - Qingdao node
+# DOMAIN,sns-img-bd.xhscdn.com  # Image CDN - Beijing node
+# DOMAIN,sns-img-hw.xhscdn.com  # Image CDN - Huawei Cloud node
 
 # > Xiaohongshu IP Ranges
 # Xiaohongshu server and CDN IP addresses in China
+# ⚠️ DISABLED: IP rules cause slower matching and "network status poor" warnings
 
 # > Primary Service IPs
-IP-CIDR,223.109.0.0/16,no-resolve
-IP-CIDR,103.41.0.0/16,no-resolve
+# IP-CIDR,223.109.0.0/16,no-resolve
+# IP-CIDR,103.41.0.0/16,no-resolve
 
 # > CDN Node IPs (China Telecom)
-IP-CIDR,183.213.20.0/24,no-resolve
-IP-CIDR,203.205.136.0/24,no-resolve
-IP-CIDR,211.152.146.0/24,no-resolve
+# IP-CIDR,183.213.20.0/24,no-resolve
+# IP-CIDR,203.205.136.0/24,no-resolve
+# IP-CIDR,211.152.146.0/24,no-resolve
 
 # > CDN Node IPs (China Unicom)
-IP-CIDR,103.41.167.0/24,no-resolve
-IP-CIDR,118.89.204.0/24,no-resolve
-IP-CIDR,163.181.35.0/24,no-resolve
+# IP-CIDR,103.41.167.0/24,no-resolve
+# IP-CIDR,118.89.204.0/24,no-resolve
+# IP-CIDR,163.181.35.0/24,no-resolve
 
 # > CDN Node IPs (China Mobile)
-IP-CIDR,116.0.89.0/24,no-resolve
-IP-CIDR,27.221.120.0/24,no-resolve
+# IP-CIDR,116.0.89.0/24,no-resolve
+# IP-CIDR,27.221.120.0/24,no-resolve
 
 # > CDN Node IPs (Multi-ISP/BGP)
-IP-CIDR,36.156.0.0/16,no-resolve
-IP-CIDR,58.216.0.0/16,no-resolve
-IP-CIDR,58.243.0.0/16,no-resolve
-IP-CIDR,47.246.0.0/16,no-resolve
-IP-CIDR,119.28.0.0/16,no-resolve
+# IP-CIDR,36.156.0.0/16,no-resolve
+# IP-CIDR,58.216.0.0/16,no-resolve
+# IP-CIDR,58.243.0.0/16,no-resolve
+# IP-CIDR,47.246.0.0/16,no-resolve
+# IP-CIDR,119.28.0.0/16,no-resolve
 
 # > Xiaohongshu IPv6
-IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,no-resolve
+# IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,no-resolve
