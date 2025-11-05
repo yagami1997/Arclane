@@ -54,22 +54,13 @@ USER-AGENT,*xiaohongshu*
 USER-AGENT,xiaohongshu*
 USER-AGENT,*redbook*
 
-# > Domain Rules - Critical Image Services First!
-DOMAIN,ci.xiaohongshu.com  # Image processing service (CI/CD for images)
-DOMAIN,picasso.xiaohongshu.com  # Image upload service
-DOMAIN,edith.xiaohongshu.com  # Content editor API
-DOMAIN,sns-img-qc.xhscdn.com  # Image CDN - Qingdao node
-DOMAIN,sns-img-bd.xhscdn.com  # Image CDN - Beijing node
-DOMAIN,sns-img-hw.xhscdn.com  # Image CDN - Huawei Cloud node
-DOMAIN,sns-avatar-qc.xhscdn.com  # Avatar CDN - Qingdao
-DOMAIN,sns-video-qc.xhscdn.com  # Video CDN - Qingdao
-DOMAIN,sns-video-bd.xhscdn.com  # Video CDN - Beijing
-DOMAIN-SUFFIX,xiaohongshu.com  # Main domain (includes all subdomains)
-DOMAIN-SUFFIX,xhscdn.com  # Xiaohongshu CDN (fallback for any other CDN nodes)
+# > Domain Rules
+DOMAIN-SUFFIX,xiaohongshu.com  # Main domain
+DOMAIN-SUFFIX,xhscdn.com  # Xiaohongshu CDN
 DOMAIN-SUFFIX,xhscdn.net  # Xiaohongshu CDN backup
 DOMAIN-SUFFIX,xhslink.com  # Xiaohongshu short links
 DOMAIN-SUFFIX,xhsstatic.com  # Static resources
-DOMAIN-KEYWORD,xiaohongshu  # Catch-all for any xiaohongshu related domains
+DOMAIN-KEYWORD,xiaohongshu
 
 # > Xiaohongshu IP Ranges
 # Xiaohongshu server and CDN IP addresses in China
