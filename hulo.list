@@ -51,16 +51,13 @@ IP-CIDR,121.43.0.0/16,no-resolve  # Zhihu video CDN
 
 # > User-Agent Rules
 USER-AGENT,*xiaohongshu*
-USER-AGENT,xiaohongshu*
 USER-AGENT,*redbook*
 
-# > Domain Rules
+# > Domain Rules (Optimized for speed)
 DOMAIN-SUFFIX,xiaohongshu.com  # Main domain
-DOMAIN-SUFFIX,xhscdn.com  # Xiaohongshu CDN
-DOMAIN-SUFFIX,xhscdn.net  # Xiaohongshu CDN backup
-DOMAIN-SUFFIX,xhslink.com  # Xiaohongshu short links
+DOMAIN-SUFFIX,xhscdn.com  # Xiaohongshu CDN (primary)
 DOMAIN-SUFFIX,xhsstatic.com  # Static resources
-DOMAIN-KEYWORD,xiaohongshu
+DOMAIN-SUFFIX,xhslink.com  # Xiaohongshu short links
 # Image & Video CDN (explicit for better performance)
 # ⚠️ DISABLED: Causing "network status poor" warnings (node issue)
 # DOMAIN,ci.xiaohongshu.com  # Image processing service
