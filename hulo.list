@@ -1,10 +1,10 @@
 # > hulo.list - Chinese Social Media Rules
 # > This ruleset contains rules for Chinese social media platforms
-# > Included: Zhihu (知乎) and Xiaohongshu (小红书/RED)
+# > Included: Zhihu and Xiaohongshu (RED)
 # > Use this ruleset to route traffic through proxy for better performance
 
 # ========================================
-# Zhihu (知乎) - Q&A Community Platform ⭐ IP Control
+# Zhihu - Q&A Community Platform ⭐ IP Control
 # ========================================
 # China's largest question-and-answer platform
 # Purpose: Control IP location display for posts and comments
@@ -45,7 +45,7 @@ IP-CIDR,120.55.0.0/16,no-resolve  # Zhihu API backend backup
 IP-CIDR,121.43.0.0/16,no-resolve  # Zhihu video CDN
 
 # ========================================
-# Xiaohongshu (小红书) - Lifestyle Sharing Platform
+# Xiaohongshu - Lifestyle Sharing Platform
 # ========================================
 # Also known as RED, a lifestyle and social e-commerce platform
 

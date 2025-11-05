@@ -4,11 +4,11 @@
 # > ⭐ Platforms marked with IP will show your IP location when posting
 
 # ========================================
-# Chinese Social Media Platforms (中国社交媒体)
+# Chinese Social Media Platforms
 # ========================================
 
 # ========================================
-# Bilibili (哔哩哔哩) - Video & Community ⭐ Shows IP
+# Bilibili - Video & Community ⭐ Shows IP
 # ========================================
 # China's largest ACG video platform and community
 
@@ -31,7 +31,7 @@ DOMAIN-SUFFIX,acg.tv  # ACG related
 DOMAIN-SUFFIX,im9.com  # Instant messaging
 
 # ========================================
-# Weibo (微博) - Microblogging ⭐ Shows IP
+# Weibo - Microblogging ⭐ Shows IP
 # ========================================
 # China's largest microblogging platform
 
@@ -51,7 +51,7 @@ DOMAIN-KEYWORD,weibo
 DOMAIN-KEYWORD,sinaimg
 
 # ========================================
-# Baidu Tieba (百度贴吧) - Forum Community ⭐ Shows IP
+# Baidu Tieba - Forum Community ⭐ Shows IP
 # ========================================
 # China's largest interest-based forum platform
 
@@ -67,7 +67,7 @@ DOMAIN-SUFFIX,bdstatic.com  # Baidu static resources
 DOMAIN-KEYWORD,tieba
 
 # ========================================
-# Douban (豆瓣) - Book/Movie/Music Reviews ⭐ Shows IP
+# Douban - Book/Movie/Music Reviews ⭐ Shows IP
 # ========================================
 # Cultural and lifestyle community platform
 
@@ -80,7 +80,7 @@ DOMAIN-SUFFIX,doubanio.com  # Static resources & images
 DOMAIN-KEYWORD,douban
 
 # ========================================
-# Hupu (虎扑) - Sports Community ⭐ Shows IP
+# Hupu - Sports Community ⭐ Shows IP
 # ========================================
 # China's largest sports and male lifestyle community
 
@@ -94,7 +94,7 @@ DOMAIN-SUFFIX,hupucdn.com  # CDN
 DOMAIN-KEYWORD,hupu
 
 # ========================================
-# Jike (即刻) - Social Network ⭐ Shows IP
+# Jike - Social Network ⭐ Shows IP
 # ========================================
 # Modern social platform for young people
 
@@ -109,7 +109,7 @@ DOMAIN-SUFFIX,jikeapp.cn  # App domain
 DOMAIN-KEYWORD,jike
 
 # ========================================
-# QQ Zone (QQ空间) - Social Network ⭐ Shows IP
+# QQ Zone - Social Network ⭐ Shows IP
 # ========================================
 # Tencent's social networking platform
 
@@ -127,36 +127,36 @@ DOMAIN-KEYWORD,qzone
 # Other Chinese Communities
 # ========================================
 
-# > NGA (玩家社区) - Gaming Community
+# > NGA - Gaming Community
 DOMAIN-SUFFIX,nga.178.com
 DOMAIN-SUFFIX,ngabbs.com
 DOMAIN,bbs.nga.cn
 
-# > Keylol (机核网) - Gaming & Tech Community
+# > Keylol - Gaming & Tech Community
 DOMAIN-SUFFIX,keylol.com
 
 # > TapTap - Mobile Game Community
 DOMAIN-SUFFIX,taptapdada.com
 DOMAIN,api.taptapdada.com
 
-# > Coolapk (酷安) - Android Community
+# > Coolapk - Android Community
 DOMAIN-SUFFIX,coolapk.com
 DOMAIN,api.coolapk.com
 
-# > Wenshushu (文叔叔) - File Sharing
+# > Wenshushu - File Sharing
 DOMAIN,www.wenshushu.cn
 
 # > NetEase Games
 DOMAIN,god.gameyw.netease.com
 
-# > Huya (虎牙) - Live Streaming
+# > Huya - Live Streaming
 DOMAIN-SUFFIX,huya.com
 
-# > Dongqiudi (懂球帝) - Football Community
+# > Dongqiudi - Football Community
 DOMAIN-SUFFIX,dongqiudi.com
 
 # ========================================
-# International Social Media (国际社交媒体)
+# International Social Media
 # ========================================
 
 # ========================================

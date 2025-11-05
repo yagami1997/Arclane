@@ -6,7 +6,7 @@
 # > Included Apps: Douyin, Douyin Lite, Huoshan (Volcano), Xigua Video, Dongchedi (Auto), Pipixia (Comedy), Fanqie Novel
 # > NOT included: TikTok International (user has separate ruleset)
 
-# > Douyin (抖音) - Main Domains
+# > Douyin - Main Domains
 DOMAIN-SUFFIX,douyin.com
 DOMAIN-SUFFIX,douyinvod.com
 DOMAIN-SUFFIX,douyinpic.com
@@ -29,7 +29,7 @@ DOMAIN,is.snssdk.com
 DOMAIN,security.snssdk.com
 DOMAIN,msync-im.snssdk.com
 
-# > Douyin - Upload Services (视频/图片上传)
+# > Douyin - Upload Services
 DOMAIN-KEYWORD,upload-
 DOMAIN-KEYWORD,v-upload
 DOMAIN,upload.douyinvod.com
@@ -41,32 +41,32 @@ DOMAIN-KEYWORD,p-ixigua
 DOMAIN-KEYWORD,s-douyinpic
 DOMAIN-KEYWORD,v-douyinvod
 
-# > Douyin - Live Streaming (直播)
+# > Douyin - Live Streaming
 DOMAIN-KEYWORD,webcast
 DOMAIN-KEYWORD,pull-
 DOMAIN-KEYWORD,push-
 DOMAIN-SUFFIX,douyinliving.com
 DOMAIN-SUFFIX,douyintv.com
 
-# > Huoshan/Volcano (火山版)
+# > Huoshan/Volcano
 DOMAIN-SUFFIX,huoshan.com
 DOMAIN-SUFFIX,hotsoon.com
 DOMAIN-SUFFIX,hs-live.com
 
-# > Dongchedi (懂车帝) - Auto Platform
+# > Dongchedi - Auto Platform
 DOMAIN-SUFFIX,dongchedi.com
 DOMAIN-SUFFIX,dcdeisu.com
 DOMAIN-SUFFIX,dcarapi.com
 DOMAIN-SUFFIX,dcarimg.com
 DOMAIN-SUFFIX,dcdapp.com
 
-# > Pipixia (皮皮虾) - Comedy Video Community
+# > Pipixia - Comedy Video Community
 DOMAIN-SUFFIX,pipix.com
 DOMAIN-SUFFIX,pipixia.com
 DOMAIN-SUFFIX,ippzone.com
 DOMAIN-SUFFIX,pipigx.com
 
-# > Fanqie Novel (番茄小说) - Free Novel Reading
+# > Fanqie Novel - Free Novel Reading
 DOMAIN-SUFFIX,fqnovel.com
 DOMAIN-SUFFIX,fanqienovel.com
 DOMAIN-SUFFIX,zijieapi.com
@@ -75,7 +75,7 @@ DOMAIN-SUFFIX,novel.snssdk.com
 DOMAIN,novel-api.snssdk.com
 DOMAIN,p3-novelstaticoss.byteimg.com
 
-# > ByteDance Core Services (字节跳动核心服务)
+# > ByteDance Core Services
 DOMAIN-SUFFIX,bytedance.com
 DOMAIN-SUFFIX,bytedance.net
 DOMAIN-SUFFIX,byteimg.com
@@ -123,7 +123,7 @@ USER-AGENT,pipixia*
 USER-AGENT,FanqieNovel*
 USER-AGENT,fanqie*
 
-# > ByteDance IP Ranges (字节跳动主要IP段)
+# > ByteDance IP Ranges
 # > Note: These IPs are from ByteDance's main infrastructure and CDN nodes in China
 
 # > ByteDance Primary IPs
