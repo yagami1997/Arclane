@@ -177,6 +177,22 @@ DOMAIN-SUFFIX,redditinc.com  # Reddit Inc
 DOMAIN-KEYWORD,reddit
 
 # ========================================
+# Truth Social - Social Network 🚫 Blocks HK IP
+# ========================================
+# Conservative social media platform by Trump
+# Note: Hong Kong IP addresses are blocked, proxy required
+
+# > User-Agent Rules
+USER-AGENT,*TruthSocial*
+USER-AGENT,*Truth Social*
+
+# > Domain Rules
+DOMAIN-SUFFIX,truthsocial.com  # Main domain
+DOMAIN-SUFFIX,tmtg.com  # Trump Media & Technology Group
+DOMAIN-SUFFIX,truthsocial.co.uk  # UK domain
+DOMAIN-KEYWORD,truthsocial
+
+# ========================================
 # LINE - Messaging Platform
 # ========================================
 # Popular messaging app in Asia
