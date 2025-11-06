@@ -48,11 +48,14 @@ IP-CIDR,121.43.0.0/16,no-resolve  # Zhihu video CDN
 # Xiaohongshu - Lifestyle Sharing Platform ⭐ IP Control
 # ========================================
 # Also known as RED, a lifestyle and social e-commerce platform
-# Optimized to MINIMAL rules to avoid "network status poor" warnings
+# Strategy: Only proxy core domains, let CDN go direct to avoid "network status poor"
 
-# > Domain Rules (Ultra-minimal for best performance)
-DOMAIN-SUFFIX,xiaohongshu.com  # Main domain (includes all subdomains: www, edith, etc.)
-DOMAIN-SUFFIX,xhscdn.com  # Xiaohongshu CDN (includes all image/video nodes)
+# > Domain Rules (Precise matching - CORE ONLY)
+DOMAIN,www.xiaohongshu.com  # Main website
+DOMAIN,edith.xiaohongshu.com  # Editor API (for posting)
+DOMAIN,api.xiaohongshu.com  # Main API
+
+# ⚠️ NOTE: xhscdn.com (CDN) is NOT proxied to avoid health check interference
 # Image & Video CDN (explicit for better performance)
 # ⚠️ DISABLED: Causing "network status poor" warnings (node issue)
 # DOMAIN,ci.xiaohongshu.com  # Image processing service
