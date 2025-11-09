@@ -50,16 +50,20 @@ IP-CIDR,121.43.0.0/16,no-resolve  # Zhihu video CDN
 # Also known as RED, a lifestyle and social e-commerce platform
 # Ultra-optimized strategy: Minimal rules for maximum performance
 
-# > Domain Rules (Precise API domains only - OpenClash compatible)
+# > Domain Rules (Precise API domains only)
 DOMAIN,www.xiaohongshu.com  # Main website
 DOMAIN,api.xiaohongshu.com  # Core API - determines IP location
 DOMAIN,edith.xiaohongshu.com  # Editor API (for posting)
 DOMAIN,customer.xiaohongshu.com  # Customer service API
 DOMAIN,fe-video-qc.xhscdn.com  # Frontend video processing (non-CDN)
 
-# ⚠️ DOMAIN-ONLY STRATEGY (NO IP RULES):
-# 1. NO IP-CIDR rules - they conflict with OpenClash and slow down CDN
-# 2. Only precise DOMAIN rules - ensures API requests get proxied
-# 3. NO User-Agent rules - they match ALL requests including CDN
-# 4. NO DOMAIN-SUFFIX - too broad, breaks image loading
-# 5. Result: Fast CDN (DIRECT), stable IP display (API proxied)
+# > IP Rules (Balanced - moderate coverage for stability)
+IP-CIDR,223.109.0.0/19,no-resolve  # Xiaohongshu core API cluster (8,192 IPs - balanced)
+IP-CIDR,103.41.160.0/21,no-resolve  # Xiaohongshu API backend (2,048 IPs - covers 160-167 range)
+
+# ⚠️ BALANCED STRATEGY:
+# 1. NO User-Agent rules - they match ALL requests including CDN (performance killer!)
+# 2. NO DOMAIN-SUFFIX - too broad, may catch CDN subdomains
+# 3. Moderate IP ranges - /19 and /21 (balanced coverage vs performance)
+# 4. xhscdn.com CDN → DIRECT for best performance (domestic nodes)
+# 5. Trade-off: 8K+2K IPs for stable IP display without over-proxying
