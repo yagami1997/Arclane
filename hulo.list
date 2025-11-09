@@ -50,12 +50,13 @@ IP-CIDR,121.43.0.0/16,no-resolve  # Zhihu video CDN
 # Also known as RED, a lifestyle and social e-commerce platform
 # Ultra-optimized strategy: Minimal rules for maximum performance
 
-# > Domain Rules (Precise API domains only)
+# > Domain Rules (Precise API domains + wildcard fallback)
 DOMAIN,www.xiaohongshu.com  # Main website
 DOMAIN,api.xiaohongshu.com  # Core API - determines IP location
 DOMAIN,edith.xiaohongshu.com  # Editor API (for posting)
 DOMAIN,customer.xiaohongshu.com  # Customer service API
 DOMAIN,fe-video-qc.xhscdn.com  # Frontend video processing (non-CDN)
+DOMAIN-SUFFIX,xiaohongshu.com  # Fallback: catch all subdomains (creator/profile/sns/community)
 
 # > IP Rules (Core API servers - ensure stable IP display)
 IP-CIDR,223.109.0.0/16,no-resolve  # Xiaohongshu primary service cluster (expanded for stability)
@@ -63,7 +64,7 @@ IP-CIDR,103.41.0.0/16,no-resolve  # Xiaohongshu API backend (expanded for comple
 
 # ⚠️ BALANCED STRATEGY:
 # 1. NO User-Agent rules - prevent CDN from being proxied
-# 2. 5 precise DOMAIN rules - only proxy essential APIs
+# 2. 5 precise DOMAIN rules + wildcard fallback - cover creator pages & comments
 # 3. /16 IP ranges - wider coverage to prevent "IP drop" issues
 # 4. xhscdn.com CDN → DIRECT for best performance (domestic nodes)
-# 5. Trade-off: Slightly broader IP matching for stable IP display
+# 5. Trade-off: Slightly broader matching for comprehensive coverage
