@@ -48,27 +48,23 @@ IP-CIDR,121.43.0.0/16,no-resolve  # Zhihu video CDN
 # Xiaohongshu - Lifestyle Sharing Platform ⭐ IP Control
 # ========================================
 # Also known as RED, a lifestyle and social e-commerce platform
-# Balanced strategy: Ensure IP accuracy while maintaining performance
+# Optimized strategy: Proxy business API only, let CDN direct connect
 
 # > User-Agent Rules (APP identification)
 USER-AGENT,*xiaohongshu*  # Xiaohongshu APP
 USER-AGENT,*redbook*  # International version
 
-# > Domain Rules (Comprehensive coverage)
+# > Domain Rules (Business API only)
 DOMAIN-SUFFIX,xiaohongshu.com  # Main domain (covers all subdomains: www, api, edith, etc.)
 
-# > CDN Rules (Selective - only core content delivery)
-DOMAIN,sns-img-qc.xhscdn.com  # Image CDN - Qingdao (China Unicom)
-DOMAIN,sns-img-bd.xhscdn.com  # Image CDN - Beijing (China Telecom)
-DOMAIN,sns-img-hw.xhscdn.com  # Image CDN - Huawei Cloud
-DOMAIN,sns-video-qc.xhscdn.com  # Video CDN - Qingdao
-DOMAIN,sns-video-bd.xhscdn.com  # Video CDN - Beijing
-DOMAIN,sns-video-hw.xhscdn.com  # Video CDN - Huawei Cloud
-
 # > IP Rules (Critical service IPs only - for accurate IP display)
-# Only the most essential IPs to prevent IP leakage
+# Only the most essential IPs to prevent IP leakage when accessing by IP
 IP-CIDR,223.109.0.0/16,no-resolve  # Xiaohongshu primary service IP
 IP-CIDR,103.41.0.0/16,no-resolve  # Xiaohongshu API backend
 
-# ⚠️ NOTE: Generic xhscdn.com and other monitoring/health-check domains are NOT proxied
-# This prevents "network status poor" warnings caused by proxy latency on health checks
+# ⚠️ IMPORTANT: xhscdn.com (CDN) is NOT proxied - DIRECT CONNECT for best performance
+# Reasons:
+# 1. CDN has domestic nodes - proxying causes "China → Overseas → Back to China" routing
+# 2. Direct connect is faster and more stable
+# 3. CDN does not affect IP location display (IP is determined by API requests)
+# 4. Avoid double-proxy issue when used with router-level proxy (OpenClash, etc.)
