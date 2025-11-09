@@ -57,13 +57,13 @@ DOMAIN,edith.xiaohongshu.com  # Editor API (for posting)
 DOMAIN,customer.xiaohongshu.com  # Customer service API
 DOMAIN,fe-video-qc.xhscdn.com  # Frontend video processing (non-CDN)
 
-# > IP Rules (Minimal - only for IP-based connections)
-IP-CIDR,223.109.0.0/20,no-resolve  # Xiaohongshu core API (narrowed from /16)
-IP-CIDR,103.41.167.0/24,no-resolve  # Xiaohongshu API gateway (precise range)
+# > IP Rules (Core API servers - ensure stable IP display)
+IP-CIDR,223.109.0.0/16,no-resolve  # Xiaohongshu primary service cluster (expanded for stability)
+IP-CIDR,103.41.0.0/16,no-resolve  # Xiaohongshu API backend (expanded for complete coverage)
 
-# ⚠️ PERFORMANCE OPTIMIZATIONS:
-# 1. NO User-Agent rules - they match ALL requests including CDN (performance killer!)
-# 2. NO DOMAIN-SUFFIX - too broad, may catch CDN subdomains
-# 3. Narrowed IP ranges - /20 and /24 instead of /16 (less false positives)
+# ⚠️ BALANCED STRATEGY:
+# 1. NO User-Agent rules - prevent CDN from being proxied
+# 2. 5 precise DOMAIN rules - only proxy essential APIs
+# 3. /16 IP ranges - wider coverage to prevent "IP drop" issues
 # 4. xhscdn.com CDN → DIRECT for best performance (domestic nodes)
-# 5. Only 5 precise domains + 2 narrow IPs = fastest matching
+# 5. Trade-off: Slightly broader IP matching for stable IP display
