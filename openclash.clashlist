@@ -21,6 +21,14 @@ rules:
 - DOMAIN-SUFFIX,sinaimg.com,Proxy
 - DOMAIN-SUFFIX,weibocdn.com,Proxy
 
+## Xiaohongshu (小红书) - RED
+- DOMAIN,www.xiaohongshu.com,Steam
+- DOMAIN,api.xiaohongshu.com,Steam
+- DOMAIN,edith.xiaohongshu.com,Steam
+- DOMAIN,customer.xiaohongshu.com,Steam
+- DOMAIN,fe-video-qc.xhscdn.com,Steam
+# Note: xhscdn.com CDN is NOT proxied for best performance
+
 # ========================================
 # Section 2: Developer Tools & Academic
 # Policy: Scholar
