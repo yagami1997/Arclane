@@ -50,17 +50,20 @@ IP-CIDR,121.43.0.0/16,no-resolve  # Zhihu video CDN
 # Also known as RED, a lifestyle and social e-commerce platform
 # Ultra-optimized strategy: Minimal rules for maximum performance
 
-# > Domain Rules (Comprehensive for OpenClash compatibility)
-DOMAIN-SUFFIX,xiaohongshu.com  # All Xiaohongshu domains (ensure Surge handles ALL requests)
+# > Domain Rules (Precise API domains only - NO DOMAIN-SUFFIX!)
+DOMAIN,www.xiaohongshu.com  # Main website
+DOMAIN,api.xiaohongshu.com  # Core API - determines IP location
+DOMAIN,edith.xiaohongshu.com  # Editor API (for posting)
+DOMAIN,customer.xiaohongshu.com  # Customer service API
 DOMAIN,fe-video-qc.xhscdn.com  # Frontend video processing (non-CDN)
 
 # > IP Rules (Balanced - moderate coverage for stability)
 IP-CIDR,223.109.0.0/19,no-resolve  # Xiaohongshu core API cluster (8,192 IPs - balanced)
 IP-CIDR,103.41.160.0/21,no-resolve  # Xiaohongshu API backend (2,048 IPs - covers 160-167 range)
 
-# ⚠️ OPENCLASH-COMPATIBLE STRATEGY:
-# 1. DOMAIN-SUFFIX for xiaohongshu.com - ensure Surge handles ALL requests (comments, emojis, etc)
-# 2. Safe to use SUFFIX - xiaohongshu.com doesn't include xhscdn.com (different domains)
-# 3. NO User-Agent rules - they match ALL requests including CDN (performance killer!)
-# 4. Moderate IP ranges - /19 and /21 (balanced coverage vs performance)
-# 5. xhscdn.com CDN → DIRECT for best performance (domestic nodes)
+# ⚠️ BALANCED STRATEGY:
+# 1. Precise DOMAIN rules only - DOMAIN-SUFFIX breaks image loading!
+# 2. NO User-Agent rules - they match ALL requests including CDN (performance killer!)
+# 3. Moderate IP ranges - /19 and /21 (balanced coverage vs performance)
+# 4. xhscdn.com CDN → DIRECT for best performance (domestic nodes)
+# 5. OpenClash issue: Some features may fail, trade-off for overall performance
