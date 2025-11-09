@@ -48,23 +48,22 @@ IP-CIDR,121.43.0.0/16,no-resolve  # Zhihu video CDN
 # Xiaohongshu - Lifestyle Sharing Platform ⭐ IP Control
 # ========================================
 # Also known as RED, a lifestyle and social e-commerce platform
-# Optimized strategy: Proxy business API only, let CDN direct connect
+# Ultra-optimized strategy: Minimal rules for maximum performance
 
-# > User-Agent Rules (APP identification)
-USER-AGENT,*xiaohongshu*  # Xiaohongshu APP
-USER-AGENT,*redbook*  # International version
+# > Domain Rules (Precise API domains only)
+DOMAIN,www.xiaohongshu.com  # Main website
+DOMAIN,api.xiaohongshu.com  # Core API - determines IP location
+DOMAIN,edith.xiaohongshu.com  # Editor API (for posting)
+DOMAIN,customer.xiaohongshu.com  # Customer service API
+DOMAIN,fe-video-qc.xhscdn.com  # Frontend video processing (non-CDN)
 
-# > Domain Rules (Business API only)
-DOMAIN-SUFFIX,xiaohongshu.com  # Main domain (covers all subdomains: www, api, edith, etc.)
+# > IP Rules (Minimal - only for IP-based connections)
+IP-CIDR,223.109.0.0/20,no-resolve  # Xiaohongshu core API (narrowed from /16)
+IP-CIDR,103.41.167.0/24,no-resolve  # Xiaohongshu API gateway (precise range)
 
-# > IP Rules (Critical service IPs only - for accurate IP display)
-# Only the most essential IPs to prevent IP leakage when accessing by IP
-IP-CIDR,223.109.0.0/16,no-resolve  # Xiaohongshu primary service IP
-IP-CIDR,103.41.0.0/16,no-resolve  # Xiaohongshu API backend
-
-# ⚠️ IMPORTANT: xhscdn.com (CDN) is NOT proxied - DIRECT CONNECT for best performance
-# Reasons:
-# 1. CDN has domestic nodes - proxying causes "China → Overseas → Back to China" routing
-# 2. Direct connect is faster and more stable
-# 3. CDN does not affect IP location display (IP is determined by API requests)
-# 4. Avoid double-proxy issue when used with router-level proxy (OpenClash, etc.)
+# ⚠️ PERFORMANCE OPTIMIZATIONS:
+# 1. NO User-Agent rules - they match ALL requests including CDN (performance killer!)
+# 2. NO DOMAIN-SUFFIX - too broad, may catch CDN subdomains
+# 3. Narrowed IP ranges - /20 and /24 instead of /16 (less false positives)
+# 4. xhscdn.com CDN → DIRECT for best performance (domestic nodes)
+# 5. Only 5 precise domains + 2 narrow IPs = fastest matching
