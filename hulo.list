@@ -50,20 +50,24 @@ IP-CIDR,121.43.0.0/16,no-resolve  # Zhihu video CDN
 # Also known as RED, a lifestyle and social e-commerce platform
 # Ultra-optimized strategy: Minimal rules for maximum performance
 
-# > Domain Rules (Precise API domains only)
+# > Domain Rules (Extended API coverage - precise domains only)
 DOMAIN,www.xiaohongshu.com  # Main website
 DOMAIN,api.xiaohongshu.com  # Core API - determines IP location
 DOMAIN,edith.xiaohongshu.com  # Editor API (for posting)
 DOMAIN,customer.xiaohongshu.com  # Customer service API
 DOMAIN,fe-video-qc.xhscdn.com  # Frontend video processing (non-CDN)
+DOMAIN,sns.xiaohongshu.com  # Social network services
+DOMAIN,ci.xiaohongshu.com  # Image processing/upload
+DOMAIN,referee.xiaohongshu.com  # Referral/recommendation system
 
-# > IP Rules (Balanced - moderate coverage for stability)
-IP-CIDR,223.109.0.0/19,no-resolve  # Xiaohongshu core API cluster (8,192 IPs - balanced)
-IP-CIDR,103.41.160.0/21,no-resolve  # Xiaohongshu API backend (2,048 IPs - covers 160-167 range)
+# > IP Rules (Expanded - wider coverage for WiFi stability)
+IP-CIDR,223.109.0.0/16,no-resolve  # Xiaohongshu core API cluster (65,536 IPs - expanded for WiFi)
+IP-CIDR,103.41.0.0/16,no-resolve  # Xiaohongshu API backend (65,536 IPs - full range coverage)
 
-# ⚠️ BALANCED STRATEGY:
+# ⚠️ OPTIMIZED STRATEGY FOR WIFI STABILITY:
 # 1. NO User-Agent rules - they match ALL requests including CDN (performance killer!)
-# 2. NO DOMAIN-SUFFIX - too broad, may catch CDN subdomains
-# 3. Moderate IP ranges - /19 and /21 (balanced coverage vs performance)
-# 4. xhscdn.com CDN → DIRECT for best performance (domestic nodes)
-# 5. Trade-off: 8K+2K IPs for stable IP display without over-proxying
+# 2. NO DOMAIN-SUFFIX - causes image loading errors
+# 3. EXPANDED IP ranges - /16 (131K IPs total) for WiFi environment stability
+# 4. EXTENDED domain coverage - 8 precise domains (API + services)
+# 5. xhscdn.com CDN → handled by OpenClash DIRECT for best performance
+# 6. Trade-off: Wider IP coverage for stable IP display in WiFi environments
