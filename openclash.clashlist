@@ -13,8 +13,14 @@ rules:
 # OpenClash handles CDN → DIRECT, Surge handles API → Proxy
 
 ## Xiaohongshu CDN (images/videos)
+## Plan A: Minimal (2 rules, covers 99% cases) - ACTIVE
 - DOMAIN-SUFFIX,xhscdn.com,DIRECT
 - DOMAIN-SUFFIX,xhscdn.net,DIRECT
+
+## Plan B: Complete (4 rules, 100% coverage) - BACKUP
+## Uncomment below if Plan A misses some images:
+# - DOMAIN,qimg.xiaohongshu.com,DIRECT               # Legacy image domain
+# - DOMAIN,picasso-static.xiaohongshu.com,DIRECT     # Static resources
 
 # ========================================
 # Section 1: Social Media
