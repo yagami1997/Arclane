@@ -54,6 +54,7 @@ IP-CIDR,121.43.0.0/16,no-resolve  # Zhihu video CDN
 DOMAIN,www.xiaohongshu.com  # Main website
 DOMAIN,api.xiaohongshu.com  # Core API - determines IP location
 DOMAIN,edith.xiaohongshu.com  # Editor API (for posting)
+DOMAIN,edith-seb.xiaohongshu.com  # Editor API (for posting)
 DOMAIN,customer.xiaohongshu.com  # Customer service API
 DOMAIN,fe-video-qc.xhscdn.com  # Frontend video processing (non-CDN)
 DOMAIN,sns.xiaohongshu.com  # Social network services
