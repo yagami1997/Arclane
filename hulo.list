@@ -48,22 +48,24 @@ IP-CIDR,121.43.0.0/16,no-resolve  # Zhihu video CDN
 # Xiaohongshu - Lifestyle Sharing Platform ⭐ IP Control
 # ========================================
 # Also known as RED, a lifestyle and social e-commerce platform
-# Ultra-optimized strategy: Minimal rules for maximum performance
+# Ultra-minimal strategy: Optimized for OpenClash double-proxy environment
 
-# > Domain Rules (Precise API domains only)
+# > Domain Rules (API-only - most stable for OpenClash)
 DOMAIN,www.xiaohongshu.com  # Main website
 DOMAIN,api.xiaohongshu.com  # Core API - determines IP location
 DOMAIN,edith.xiaohongshu.com  # Editor API (for posting)
 DOMAIN,customer.xiaohongshu.com  # Customer service API
 DOMAIN,fe-video-qc.xhscdn.com  # Frontend video processing (non-CDN)
 
-# > IP Rules (Expanded - better coverage for stability)
-IP-CIDR,223.109.0.0/18,no-resolve  # Xiaohongshu core API cluster (16,384 IPs - expanded)
-IP-CIDR,103.41.160.0/20,no-resolve  # Xiaohongshu API backend (4,096 IPs - wider coverage)
-
-# ⚠️ EXPANDED STRATEGY:
-# 1. NO User-Agent rules - they match ALL requests including CDN (performance killer!)
-# 2. NO DOMAIN-SUFFIX - too broad, may catch CDN subdomains
-# 3. Expanded IP ranges - /18 and /20 (16K+4K IPs for better coverage)
-# 4. xhscdn.com CDN → DIRECT for best performance (domestic nodes)
-# 5. Trade-off: Larger ranges for more stable IP display, minimal CDN impact
+# ⚠️ OPENCLASH-OPTIMIZED STRATEGY:
+# 1. NO User-Agent rules - avoid CDN matching
+# 2. NO DOMAIN-SUFFIX - avoid broad subdomain conflicts
+# 3. NO IP-CIDR rules - cause severe routing conflicts in OpenClash environment!
+# 4. Only precise DOMAIN rules - most stable in double-proxy setup
+# 5. Trade-off: IP display may be less precise, but won't drop proxy connection
+#
+# Why NO IP rules?
+# - OpenClash (router) + Surge (device) = double-proxy routing
+# - IP-CIDR rules conflict with router-level routing table
+# - Result: proxy connection drops frequently
+# - Solution: Domain-only routing is most stable
