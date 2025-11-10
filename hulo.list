@@ -50,11 +50,12 @@ IP-CIDR,121.43.0.0/16,no-resolve  # Zhihu video CDN
 # Also known as RED, a lifestyle and social e-commerce platform
 # Extended domain rules: Complete API coverage for OpenClash compatibility
 
-# > Domain Rules (Complete API coverage - 11 rules total)
-# Core Services (5 rules)
+# > Domain Rules (Complete API coverage - 12 rules total)
+# Core Services (6 rules)
 DOMAIN,www.xiaohongshu.com              # Main website
 DOMAIN,api.xiaohongshu.com              # Core API - determines IP location
 DOMAIN,edith.xiaohongshu.com            # Editor API (for posting)
+DOMAIN,edith-seb.xiaohongshu.com        # Editor service backend (publishing pipeline)
 DOMAIN,customer.xiaohongshu.com         # Customer service API
 DOMAIN,fe-video-qc.xhscdn.com           # Frontend video processing
 
@@ -71,7 +72,7 @@ DOMAIN,fe-static.xhscdn.com             # Static resources (emojis, icons)
 # 2. NO DOMAIN-SUFFIX - avoid CDN interference (xhscdn.com image/video CDN → DIRECT)
 # 3. NO IP-CIDR rules - cause severe routing conflicts in OpenClash Redir mode!
 # 4. NO shield.xiaohongshu.com - security validation may detect proxy usage
-# 5. Only precise DOMAIN rules (11 total) - most stable in double-proxy setup
+# 5. Only precise DOMAIN rules (12 total) - most stable in double-proxy setup
 #
 # Function Coverage:
 # ✅ Home feed → referee.xiaohongshu.com
@@ -80,7 +81,7 @@ DOMAIN,fe-static.xhscdn.com             # Static resources (emojis, icons)
 # ✅ Note detail → ci.xiaohongshu.com
 # ✅ Comments → ci.xiaohongshu.com
 # ✅ Emojis → fe-static.xhscdn.com
-# ✅ Posting → edith.xiaohongshu.com
+# ✅ Posting → edith.xiaohongshu.com + edith-seb.xiaohongshu.com
 #
 # Why NO IP rules in OpenClash?
 # - OpenClash (router iptables) + Surge (device) = double NAT conflict
