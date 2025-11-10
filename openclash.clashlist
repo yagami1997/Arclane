@@ -7,6 +7,16 @@ rules:
 ## Rules are applied from top to bottom
 
 # ========================================
+# Section 0: CDN Whitelist (Force Direct)
+# ========================================
+# Purpose: Avoid "return-to-China" traffic in double-proxy setup
+# OpenClash handles CDN → DIRECT, Surge handles API → Proxy
+
+## Xiaohongshu CDN (images/videos)
+- DOMAIN-SUFFIX,xhscdn.com,DIRECT
+- DOMAIN-SUFFIX,xhscdn.net,DIRECT
+
+# ========================================
 # Section 1: Social Media
 # Policy: Proxy
 # ========================================
@@ -21,13 +31,8 @@ rules:
 - DOMAIN-SUFFIX,sinaimg.com,Proxy
 - DOMAIN-SUFFIX,weibocdn.com,Proxy
 
-## Xiaohongshu (小红书) - RED
-- DOMAIN,www.xiaohongshu.com,Steam
-- DOMAIN,api.xiaohongshu.com,Steam
-- DOMAIN,edith.xiaohongshu.com,Steam
-- DOMAIN,customer.xiaohongshu.com,Steam
-- DOMAIN,fe-video-qc.xhscdn.com,Steam
-# Note: xhscdn.com CDN is NOT proxied for best performance
+## Xiaohongshu API rules are now handled by Surge (hulo.list)
+## OpenClash only handles CDN whitelist (see Section 0)
 
 # ========================================
 # Section 2: Developer Tools & Academic
