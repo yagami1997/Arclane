@@ -102,14 +102,19 @@ DOMAIN,rn-resource-app.xiaohongshu.com  # React Native resource (APP framework)
 # - After connection established, domain rules may not re-evaluate
 # - IP rules work at network layer, match every packet (including existing connections)
 #
-# Strategy: Use /20 segments (narrower than Zhihu) for performance balance
+# Strategy: Use /16 segments (same as Zhihu) with extended coverage for maximum stability
 
-# > Xiaohongshu Core Service IPs (Aliyun + Tencent Cloud)
-IP-CIDR,101.132.0.0/20,no-resolve   # Aliyun Shanghai - XHS main API servers
-IP-CIDR,106.52.0.0/20,no-resolve    # Tencent Cloud Beijing - XHS API backend
-IP-CIDR,117.184.0.0/20,no-resolve   # XHS core services (publish/comment/feed)
-IP-CIDR,183.131.0.0/20,no-resolve   # XHS mobile APP API endpoints
+# > Xiaohongshu Core Service IPs (Primary)
+IP-CIDR,101.132.0.0/16,no-resolve   # Aliyun Shanghai - XHS main API servers
+IP-CIDR,106.52.0.0/16,no-resolve    # Tencent Cloud Beijing - XHS API backend
+IP-CIDR,117.184.0.0/16,no-resolve   # XHS core services (publish/comment/feed)
+IP-CIDR,183.131.0.0/16,no-resolve   # XHS mobile APP API endpoints
 
-# Total coverage: ~16K IPs (4 × /20 segments, ~94% reduction from /16)
-# Trade-off: Narrower coverage for better performance (avoid CDN image traffic)
-# Precision: Focus on core API servers, let CDN images/videos go direct for speed
+# > Xiaohongshu Extended Service IPs (Additional Coverage)
+IP-CIDR,42.81.0.0/16,no-resolve     # Aliyun backup segment - secondary API
+IP-CIDR,47.103.0.0/16,no-resolve    # Aliyun East China - extended services
+IP-CIDR,120.27.0.0/16,no-resolve    # XHS API extension segment
+
+# Total coverage: ~459K IPs (7 × /16 segments)
+# Trade-off: Wider coverage for IP stability (priority: prevent IP drops)
+# Benefit: Maximum protection against long-connection IP leaks
