@@ -48,24 +48,41 @@ IP-CIDR,121.43.0.0/16,no-resolve  # Zhihu video CDN
 # Xiaohongshu - Lifestyle Sharing Platform ⭐ IP Control
 # ========================================
 # Also known as RED, a lifestyle and social e-commerce platform
-# Ultra-minimal strategy: Optimized for OpenClash double-proxy environment
+# Extended domain rules: Complete API coverage for OpenClash compatibility
 
-# > Domain Rules (API-only - most stable for OpenClash)
-DOMAIN,www.xiaohongshu.com  # Main website
-DOMAIN,api.xiaohongshu.com  # Core API - determines IP location
-DOMAIN,edith.xiaohongshu.com  # Editor API (for posting)
-DOMAIN,customer.xiaohongshu.com  # Customer service API
-DOMAIN,fe-video-qc.xhscdn.com  # Frontend video processing (non-CDN)
+# > Domain Rules (Complete API coverage - 11 rules total)
+# Core Services (5 rules)
+DOMAIN,www.xiaohongshu.com              # Main website
+DOMAIN,api.xiaohongshu.com              # Core API - determines IP location
+DOMAIN,edith.xiaohongshu.com            # Editor API (for posting)
+DOMAIN,customer.xiaohongshu.com         # Customer service API
+DOMAIN,fe-video-qc.xhscdn.com           # Frontend video processing
+
+# Extended Services (6 rules - NEW)
+DOMAIN,sns.xiaohongshu.com              # Social functions (following page, fans list)
+DOMAIN,ci.xiaohongshu.com               # Content interface (comments, note content)
+DOMAIN,referee.xiaohongshu.com          # Recommendation system (home feed)
+DOMAIN,user.xiaohongshu.com             # User service (profile pages)
+DOMAIN,search.xiaohongshu.com           # Search functionality
+DOMAIN,fe-static.xhscdn.com             # Static resources (emojis, icons)
 
 # ⚠️ OPENCLASH-OPTIMIZED STRATEGY:
 # 1. NO User-Agent rules - avoid CDN matching
-# 2. NO DOMAIN-SUFFIX - avoid broad subdomain conflicts
-# 3. NO IP-CIDR rules - cause severe routing conflicts in OpenClash environment!
-# 4. Only precise DOMAIN rules - most stable in double-proxy setup
-# 5. Trade-off: IP display may be less precise, but won't drop proxy connection
+# 2. NO DOMAIN-SUFFIX - avoid CDN interference (xhscdn.com image/video CDN → DIRECT)
+# 3. NO IP-CIDR rules - cause severe routing conflicts in OpenClash Redir mode!
+# 4. NO shield.xiaohongshu.com - security validation may detect proxy usage
+# 5. Only precise DOMAIN rules (11 total) - most stable in double-proxy setup
 #
-# Why NO IP rules?
-# - OpenClash (router) + Surge (device) = double-proxy routing
-# - IP-CIDR rules conflict with router-level routing table
-# - Result: proxy connection drops frequently
-# - Solution: Domain-only routing is most stable
+# Function Coverage:
+# ✅ Home feed → referee.xiaohongshu.com
+# ✅ Following page → sns.xiaohongshu.com
+# ✅ Profile pages → user.xiaohongshu.com
+# ✅ Note detail → ci.xiaohongshu.com
+# ✅ Comments → ci.xiaohongshu.com
+# ✅ Emojis → fe-static.xhscdn.com
+# ✅ Posting → edith.xiaohongshu.com
+#
+# Why NO IP rules in OpenClash?
+# - OpenClash (router iptables) + Surge (device) = double NAT conflict
+# - IP-CIDR rules trigger routing loops in Redir mode
+# - Domain-only routing avoids kernel-layer conflicts
