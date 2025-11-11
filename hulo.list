@@ -48,42 +48,25 @@ IP-CIDR,121.43.0.0/16,no-resolve  # Zhihu video CDN
 # Xiaohongshu - Lifestyle Sharing Platform ⭐ IP Control
 # ========================================
 # Also known as RED, a lifestyle and social e-commerce platform
-# Ultra-optimized strategy: Minimal rules for maximum performance
+# Purpose: Control IP location display for posts and comments
 
-# > Domain Rules (Extended API coverage - precise domains only)
-DOMAIN,www.xiaohongshu.com  # Main website
-DOMAIN,api.xiaohongshu.com  # Core API - determines IP location
-DOMAIN,edith.xiaohongshu.com  # Editor API (for posting)
-DOMAIN,edith-seb.xiaohongshu.com  # Editor API (for posting)
-DOMAIN,customer.xiaohongshu.com  # Customer service API
-DOMAIN,fe-video-qc.xhscdn.com  # Frontend video processing (non-CDN)
-DOMAIN,sns.xiaohongshu.com  # Social network services
-DOMAIN,ci.xiaohongshu.com  # Image processing/upload
-DOMAIN,referee.xiaohongshu.com  # Referral/recommendation system
+# > User-Agent Rules
+USER-AGENT,*xiaohongshu*
+USER-AGENT,xiaohongshu*
+USER-AGENT,*redbook*
 
-# > Xiaohongshu IP Ranges - For APP IP Location Stability ⭐
-# Note: Selected core IP segments to prevent "IP drop" in persistent connections
-# Purpose: Ensure proxy IP remains stable during posting/commenting sessions
-#
-# Why IP rules are needed:
-# - Xiaohongshu APP uses long-lived HTTP/2 connections
-# - Domain-only rules trigger at DNS resolution (connection start)
-# - After connection established, domain rules may not re-evaluate
-# - IP rules work at network layer, match every packet (including existing connections)
-#
-# Strategy: Use /16 segments (same as Zhihu) with extended coverage for maximum stability
+# > Domain Rules
+DOMAIN-SUFFIX,xiaohongshu.com  # Main domain (includes all subdomains: api, www, edith, sns, etc.)
+DOMAIN-SUFFIX,xhscdn.com  # Xiaohongshu CDN (images/videos)
+DOMAIN-SUFFIX,xhscdn.net  # Xiaohongshu CDN backup
+DOMAIN-KEYWORD,xiaohongshu
 
-# > Xiaohongshu Core Service IPs (Primary)
-IP-CIDR,101.132.0.0/16,no-resolve   # Aliyun Shanghai - XHS main API servers
-IP-CIDR,106.52.0.0/16,no-resolve    # Tencent Cloud Beijing - XHS API backend
-IP-CIDR,117.184.0.0/16,no-resolve   # XHS core services (publish/comment/feed)
-IP-CIDR,183.131.0.0/16,no-resolve   # XHS mobile APP API endpoints
-
-# > Xiaohongshu Extended Service IPs (Additional Coverage)
-IP-CIDR,42.81.0.0/16,no-resolve     # Aliyun backup segment - secondary API
-IP-CIDR,47.103.0.0/16,no-resolve    # Aliyun East China - extended services
-IP-CIDR,120.27.0.0/16,no-resolve    # XHS API extension segment
-
-# Total coverage: ~459K IPs (7 × /16 segments)
-# Trade-off: Wider coverage for IP stability (priority: prevent IP drops)
-# Benefit: Maximum protection against long-connection IP leaks
+# > Xiaohongshu IP Ranges - For APP IP Location Display ⭐
+# Note: Carefully selected to prevent IP drops in long connections
+IP-CIDR,101.132.0.0/16,no-resolve  # Aliyun Shanghai - XHS API servers
+IP-CIDR,106.52.0.0/16,no-resolve  # Tencent Cloud - XHS API backend
+IP-CIDR,117.184.0.0/16,no-resolve  # XHS core services
+IP-CIDR,183.131.0.0/16,no-resolve  # XHS mobile APP endpoints
+IP-CIDR,42.81.0.0/16,no-resolve  # Aliyun backup segment
+IP-CIDR,47.103.0.0/16,no-resolve  # Aliyun East China
+IP-CIDR,120.27.0.0/16,no-resolve  # XHS API extension
