@@ -63,12 +63,10 @@ DOMAIN-KEYWORD,xiaohongshu
 
 # > Xiaohongshu IP Ranges - For APP IP Location Display ⭐
 # Note: Carefully selected to prevent IP drops in long connections
-# ⚠️ TEMPORARILY DISABLED FOR TESTING (to avoid conflict with Alibaba Cloud BGP nodes)
-# If IP drops occur after 15-30 minutes, UNCOMMENT these rules
-#IP-CIDR,101.132.0.0/16,no-resolve  # Aliyun Shanghai - XHS API servers
-#IP-CIDR,106.52.0.0/16,no-resolve  # Tencent Cloud - XHS API backend
-#IP-CIDR,117.184.0.0/16,no-resolve  # XHS core services
-#IP-CIDR,183.131.0.0/16,no-resolve  # XHS mobile APP endpoints
-#IP-CIDR,42.81.0.0/16,no-resolve  # Aliyun backup segment
-#IP-CIDR,47.103.0.0/16,no-resolve  # Aliyun East China
-#IP-CIDR,120.27.0.0/16,no-resolve  # XHS API extension
+IP-CIDR,101.132.0.0/16,no-resolve  # Aliyun Shanghai - XHS API servers
+IP-CIDR,106.52.0.0/16,no-resolve  # Tencent Cloud - XHS API backend
+IP-CIDR,117.184.0.0/16,no-resolve  # XHS core services
+IP-CIDR,183.131.0.0/16,no-resolve  # XHS mobile APP endpoints
+IP-CIDR,42.81.0.0/16,no-resolve  # Aliyun backup segment
+IP-CIDR,47.103.0.0/16,no-resolve  # Aliyun East China
+IP-CIDR,120.27.0.0/16,no-resolve  # XHS API extension
