@@ -50,6 +50,14 @@ IP-CIDR,121.43.0.0/16,no-resolve  # Zhihu video CDN
 # Also known as RED, a lifestyle and social e-commerce platform
 # Ultra-optimized strategy: Minimal rules for maximum performance
 
+# > User-Agent Rules (Catch-all - prevents IP drops) ⭐
+USER-AGENT,*xiaohongshu*
+USER-AGENT,xiaohongshu*
+USER-AGENT,*redbook*
+# ⚠️ Note: User-Agent rules match ALL Xiaohongshu requests (including CDN)
+# Trade-off: Slightly slower image loading, but PREVENTS IP drops in long connections
+# Benefit: Ensures stable proxy IP even when backend switches servers
+
 # > Domain Rules (Extended API coverage - precise domains only)
 DOMAIN,www.xiaohongshu.com  # Main website
 DOMAIN,api.xiaohongshu.com  # Core API - determines IP location
@@ -61,14 +69,29 @@ DOMAIN,sns.xiaohongshu.com  # Social network services
 DOMAIN,ci.xiaohongshu.com  # Image processing/upload
 DOMAIN,referee.xiaohongshu.com  # Referral/recommendation system
 
-# > IP Rules (Expanded - wider coverage for WiFi stability)
-IP-CIDR,223.109.0.0/16,no-resolve  # Xiaohongshu core API cluster (65,536 IPs - expanded for WiFi)
-IP-CIDR,103.41.0.0/16,no-resolve  # Xiaohongshu API backend (65,536 IPs - full range coverage)
+# > Xiaohongshu IP Ranges - For APP IP Location Stability ⭐
+# Note: Selected core IP segments to prevent "IP drop" in persistent connections
+# Purpose: Ensure proxy IP remains stable during posting/commenting sessions
+#
+# Why IP rules are needed:
+# - Xiaohongshu APP uses long-lived HTTP/2 connections
+# - Domain-only rules trigger at DNS resolution (connection start)
+# - After connection established, domain rules may not re-evaluate
+# - IP rules work at network layer, match every packet (including existing connections)
+#
+# Strategy: Use /16 segments (same as Zhihu) with extended coverage for maximum stability
 
-# ⚠️ OPTIMIZED STRATEGY FOR WIFI STABILITY:
-# 1. NO User-Agent rules - they match ALL requests including CDN (performance killer!)
-# 2. NO DOMAIN-SUFFIX - causes image loading errors
-# 3. EXPANDED IP ranges - /16 (131K IPs total) for WiFi environment stability
-# 4. EXTENDED domain coverage - 8 precise domains (API + services)
-# 5. xhscdn.com CDN → handled by OpenClash DIRECT for best performance
-# 6. Trade-off: Wider IP coverage for stable IP display in WiFi environments
+# > Xiaohongshu Core Service IPs (Primary)
+IP-CIDR,101.132.0.0/16,no-resolve   # Aliyun Shanghai - XHS main API servers
+IP-CIDR,106.52.0.0/16,no-resolve    # Tencent Cloud Beijing - XHS API backend
+IP-CIDR,117.184.0.0/16,no-resolve   # XHS core services (publish/comment/feed)
+IP-CIDR,183.131.0.0/16,no-resolve   # XHS mobile APP API endpoints
+
+# > Xiaohongshu Extended Service IPs (Additional Coverage)
+IP-CIDR,42.81.0.0/16,no-resolve     # Aliyun backup segment - secondary API
+IP-CIDR,47.103.0.0/16,no-resolve    # Aliyun East China - extended services
+IP-CIDR,120.27.0.0/16,no-resolve    # XHS API extension segment
+
+# Total coverage: ~459K IPs (7 × /16 segments)
+# Trade-off: Wider coverage for IP stability (priority: prevent IP drops)
+# Benefit: Maximum protection against long-connection IP leaks
