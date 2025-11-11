@@ -50,14 +50,6 @@ IP-CIDR,121.43.0.0/16,no-resolve  # Zhihu video CDN
 # Also known as RED, a lifestyle and social e-commerce platform
 # Ultra-optimized strategy: Minimal rules for maximum performance
 
-# > User-Agent Rules (Catch-all - prevents IP drops) ⭐
-USER-AGENT,*xiaohongshu*
-USER-AGENT,xiaohongshu*
-USER-AGENT,*redbook*
-# ⚠️ Note: User-Agent rules match ALL Xiaohongshu requests (including CDN)
-# Trade-off: Slightly slower image loading, but PREVENTS IP drops in long connections
-# Benefit: Ensures stable proxy IP even when backend switches servers
-
 # > Domain Rules (Extended API coverage - precise domains only)
 DOMAIN,www.xiaohongshu.com  # Main website
 DOMAIN,api.xiaohongshu.com  # Core API - determines IP location
