@@ -61,6 +61,14 @@ DOMAIN-SUFFIX,xhscdn.com  # Xiaohongshu CDN (images/videos)
 DOMAIN-SUFFIX,xhscdn.net  # Xiaohongshu CDN backup
 DOMAIN-KEYWORD,xiaohongshu
 
+# > Xiaohongshu Search & Share APIs - Critical for Search Function ⭐
+DOMAIN,search.xiaohongshu.com  # Search API (fixes "server lost" error)
+DOMAIN,fe-api.xiaohongshu.com  # Frontend API gateway
+DOMAIN,edith-api.xiaohongshu.com  # Unified API gateway (search/feed/profile)
+DOMAIN,mp.xiaohongshu.com  # WeChat Mini Program share
+DOMAIN,wx.xiaohongshu.com  # WeChat share bridge
+DOMAIN,ws.xiaohongshu.com  # WebSocket for real-time search suggestions
+
 # > Xiaohongshu IP Ranges - For APP IP Location Display ⭐
 # Note: Carefully selected to prevent IP drops in long connections
 IP-CIDR,101.132.0.0/16,no-resolve  # Aliyun Shanghai - XHS API servers
