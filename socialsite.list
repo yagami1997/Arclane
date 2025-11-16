@@ -134,6 +134,7 @@ DOMAIN,bbs.nga.cn
 
 # > Keylol - Gaming & Tech Community
 DOMAIN-SUFFIX,keylol.com
+DOMAIN-SUFFIX,xiaohuangwen.com
 
 # > TapTap - Mobile Game Community
 DOMAIN-SUFFIX,taptapdada.com
@@ -217,3 +218,4 @@ IP-CIDR,203.104.103.0/24,no-resolve
 IP-CIDR,203.104.128.0/20,no-resolve
 IP-CIDR,203.174.66.64/26,no-resolve
 IP-CIDR,203.174.77.0/24,no-resolve
+
