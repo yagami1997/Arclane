@@ -8,6 +8,8 @@ DOMAIN-SUFFIX,paypalobjects.com
 # > Finance, government, securities, regulation
 DOMAIN-SUFFIX,revolut.com
 DOMAIN-KEYWORD,revolut
+DOMAIN-SUFFIX,sofi.com
+DOMAIN-KEYWORD,sofi
 DOMAIN-SUFFIX,capitalone.com
 DOMAIN-SUFFIX,americanexpress.com
 DOMAIN-KEYWORD,capitalone
