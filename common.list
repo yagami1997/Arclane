@@ -103,9 +103,11 @@ DOMAIN-KEYWORD,mobal
 # Financial & Investment Services
 # ========================================
 
-# > Interactive Brokers - Online Brokerage Platform
+# > Interactive Brokers (IBKR) - Online Brokerage Platform
 DOMAIN-SUFFIX,interactivebrokers.com
 DOMAIN-KEYWORD,interactivebrokers
+DOMAIN-SUFFIX,ibkr.com
+DOMAIN-KEYWORD,ibkr
 
 # > Moomoo - Stock Trading & Investment App
 DOMAIN-SUFFIX,moomoo.com
