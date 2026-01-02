@@ -1,9 +1,9 @@
 # ============================================
 # US IP-Sensitive Services (Static Residential IP)
-# 仅限美国本地服务，全球性服务不在此列
 # ============================================
 
-# > PayPal (US)
+
+# > PayPal
 USER-AGENT,PayPal*
 DOMAIN-KEYWORD,paypal
 DOMAIN-SUFFIX,paypal.com
