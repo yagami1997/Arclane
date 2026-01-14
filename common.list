@@ -59,6 +59,7 @@ DOMAIN-KEYWORD,godaddy
 
 # > IP Information & Geolocation Services
 DOMAIN-SUFFIX,ipinfo.io  # IP address information lookup
+DOMAIN-SUFFIX,ip138.com #IP 138 
 DOMAIN-SUFFIX,ip2location.com  # IP geolocation database
 DOMAIN-SUFFIX,ipqualityscore.com  # IP quality & fraud detection
 DOMAIN-SUFFIX,ipdata.co  # IP geolocation API
