@@ -59,6 +59,7 @@ USER-AGENT,*redbook*
 DOMAIN-SUFFIX,xiaohongshu.com  # Main domain (includes all subdomains: api, www, edith, sns, etc.)
 DOMAIN-SUFFIX,xhscdn.com  # Xiaohongshu CDN (images/videos)
 DOMAIN-SUFFIX,xhscdn.net  # Xiaohongshu CDN backup
+DOMAIN-SUFFIX,xhslink.com  # Share/redirect short link
 DOMAIN-KEYWORD,xiaohongshu
 
 # > Xiaohongshu Search & Share APIs - Critical for Search Function ⭐
@@ -70,11 +71,12 @@ DOMAIN,wx.xiaohongshu.com  # WeChat share bridge
 DOMAIN,ws.xiaohongshu.com  # WebSocket for real-time search suggestions
 
 # > Xiaohongshu IP Ranges - For APP IP Location Display ⭐
-# Note: Carefully selected to prevent IP drops in long connections
-IP-CIDR,101.132.0.0/16,no-resolve  # Aliyun Shanghai - XHS API servers
-IP-CIDR,106.52.0.0/16,no-resolve  # Tencent Cloud - XHS API backend
-IP-CIDR,117.184.0.0/16,no-resolve  # XHS core services
-IP-CIDR,183.131.0.0/16,no-resolve  # XHS mobile APP endpoints
-IP-CIDR,42.81.0.0/16,no-resolve  # Aliyun backup segment
-IP-CIDR,47.103.0.0/16,no-resolve  # Aliyun East China
-IP-CIDR,120.27.0.0/16,no-resolve  # XHS API extension
+# Note: These large CN IP ranges can cause intermittent "no network" when proxied.
+# If search/feed is unstable, keep these commented and rely on domain rules only.
+# IP-CIDR,101.132.0.0/16,no-resolve  # Aliyun Shanghai - XHS API servers
+# IP-CIDR,106.52.0.0/16,no-resolve  # Tencent Cloud - XHS API backend
+# IP-CIDR,117.184.0.0/16,no-resolve  # XHS core services
+# IP-CIDR,183.131.0.0/16,no-resolve  # XHS mobile APP endpoints
+# IP-CIDR,42.81.0.0/16,no-resolve  # Aliyun backup segment
+# IP-CIDR,47.103.0.0/16,no-resolve  # Aliyun East China
+# IP-CIDR,120.27.0.0/16,no-resolve  # XHS API extension
