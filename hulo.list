@@ -57,6 +57,9 @@ USER-AGENT,*redbook*
 
 # > Domain Rules
 DOMAIN-SUFFIX,xiaohongshu.com  # Main domain (includes all subdomains: api, www, edith, sns, etc.)
+DOMAIN-SUFFIX,xiaohongshu.net  # Alternate domain (fallback services)
+DOMAIN-SUFFIX,redbook.com  # Xiaohongshu brand domain
+DOMAIN-SUFFIX,redbook.net  # Xiaohongshu brand domain (alt)
 DOMAIN-SUFFIX,xhscdn.com  # Xiaohongshu CDN (images/videos)
 DOMAIN-SUFFIX,xhscdn.net  # Xiaohongshu CDN backup
 DOMAIN-SUFFIX,xhslink.com  # Share/redirect short link
@@ -66,6 +69,9 @@ DOMAIN-KEYWORD,xiaohongshu
 DOMAIN,search.xiaohongshu.com  # Search API (fixes "server lost" error)
 DOMAIN,fe-api.xiaohongshu.com  # Frontend API gateway
 DOMAIN,edith-api.xiaohongshu.com  # Unified API gateway (search/feed/profile)
+DOMAIN,edith.xiaohongshu.com  # App API gateway (legacy)
+DOMAIN,api.xiaohongshu.com  # App API (legacy)
+DOMAIN,sns.xiaohongshu.com  # Social APIs (legacy)
 DOMAIN,mp.xiaohongshu.com  # WeChat Mini Program share
 DOMAIN,wx.xiaohongshu.com  # WeChat share bridge
 DOMAIN,ws.xiaohongshu.com  # WebSocket for real-time search suggestions
