@@ -65,24 +65,32 @@ DOMAIN-SUFFIX,xhscdn.net  # Xiaohongshu CDN backup
 DOMAIN-SUFFIX,xhslink.com  # Share/redirect short link
 DOMAIN-KEYWORD,xiaohongshu
 
-# > Xiaohongshu Search & Share APIs - Critical for Search Function ⭐
+# > Xiaohongshu Search & API Domains - Critical for Search Function ⭐
 DOMAIN,search.xiaohongshu.com  # Search API (fixes "server lost" error)
 DOMAIN,fe-api.xiaohongshu.com  # Frontend API gateway
 DOMAIN,edith-api.xiaohongshu.com  # Unified API gateway (search/feed/profile)
 DOMAIN,edith.xiaohongshu.com  # App API gateway (legacy)
 DOMAIN,api.xiaohongshu.com  # App API (legacy)
 DOMAIN,sns.xiaohongshu.com  # Social APIs (legacy)
+DOMAIN,rec.xiaohongshu.com  # Recommendation service (affects search results)
+DOMAIN,ark.xiaohongshu.com  # AI/ML service (search ranking)
+DOMAIN,feast.xiaohongshu.com  # Feature service (search features)
+DOMAIN,passport.xiaohongshu.com  # Auth service (search auth)
+DOMAIN,customer.xiaohongshu.com  # Customer service API
 DOMAIN,mp.xiaohongshu.com  # WeChat Mini Program share
 DOMAIN,wx.xiaohongshu.com  # WeChat share bridge
 DOMAIN,ws.xiaohongshu.com  # WebSocket for real-time search suggestions
+DOMAIN-KEYWORD,xhs  # Catch xhs-prefixed domains (xhs-api, xhs-search, etc.)
 
-# > Xiaohongshu IP Ranges - For APP IP Location Display ⭐
-# Note: These large CN IP ranges can cause intermittent "no network" when proxied.
-# If search/feed is unstable, keep these commented and rely on domain rules only.
-# IP-CIDR,101.132.0.0/16,no-resolve  # Aliyun Shanghai - XHS API servers
-# IP-CIDR,106.52.0.0/16,no-resolve  # Tencent Cloud - XHS API backend
+# > Xiaohongshu IP Ranges - Required for Search (APP uses IP direct connection) ⭐
+# Note: Search API likely uses IP direct connection bypassing DNS.
+# These IPs are essential for search function. If other features break, comment selectively.
+IP-CIDR,101.132.0.0/16,no-resolve  # Aliyun Shanghai - XHS Search API servers
+IP-CIDR,106.52.0.0/16,no-resolve  # Tencent Cloud - XHS API backend
+IP-CIDR,47.103.0.0/16,no-resolve  # Aliyun East China - XHS core services
+
+# > Optional: Enable if search still fails (may affect other CN services)
 # IP-CIDR,117.184.0.0/16,no-resolve  # XHS core services
 # IP-CIDR,183.131.0.0/16,no-resolve  # XHS mobile APP endpoints
 # IP-CIDR,42.81.0.0/16,no-resolve  # Aliyun backup segment
-# IP-CIDR,47.103.0.0/16,no-resolve  # Aliyun East China
 # IP-CIDR,120.27.0.0/16,no-resolve  # XHS API extension
