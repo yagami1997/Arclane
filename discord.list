@@ -1,0 +1,137 @@
+# > discord.list - Discord Communication Platform Rules
+# > Complete ruleset for Discord voice, video, messaging and media services
+# > Use this ruleset to route all Discord traffic through proxy
+
+# ========================================
+# Discord - Communication Platform ⭐
+# ========================================
+# Discord is a VoIP and instant messaging platform
+# Purpose: Ensure stable access to Discord services including voice/video
+
+# > User-Agent Rules
+USER-AGENT,*Discord*
+USER-AGENT,Discord*
+
+# ========================================
+# Core Domains - Main Services
+# ========================================
+
+# > Primary Domains (highest priority)
+DOMAIN,discord.com
+DOMAIN,discordapp.com
+DOMAIN,discord.gg  # Invite links
+DOMAIN,discord.media  # Media services
+DOMAIN,discordapp.net
+
+# > Domain Suffix Rules (matches all subdomains)
+DOMAIN-SUFFIX,discord.com
+DOMAIN-SUFFIX,discordapp.com
+DOMAIN-SUFFIX,discordapp.net
+DOMAIN-SUFFIX,discord.gg
+DOMAIN-SUFFIX,discord.media
+
+# ========================================
+# CDN & Media Services
+# ========================================
+
+# > Discord CDN (images, attachments, avatars)
+DOMAIN,cdn.discordapp.com
+DOMAIN,media.discordapp.net
+DOMAIN,images-ext-1.discordapp.net  # External image proxy
+DOMAIN,images-ext-2.discordapp.net  # External image proxy backup
+
+# > Additional CDN endpoints
+DOMAIN,cdn.discord.com
+DOMAIN,media.discord.com
+DOMAIN,attachments.discordapp.net
+
+# ========================================
+# API & Gateway Services
+# ========================================
+
+# > REST API
+DOMAIN,api.discord.com
+DOMAIN,api.discordapp.com
+
+# > WebSocket Gateway (real-time messaging)
+DOMAIN,gateway.discord.gg
+DOMAIN,gateway.discordapp.com
+
+# > Client Variants
+DOMAIN,ptb.discord.com  # Public Test Build
+DOMAIN,canary.discord.com  # Canary Build
+DOMAIN,ptb.discordapp.com
+DOMAIN,canary.discordapp.com
+
+# ========================================
+# Voice & Video Services (RTC)
+# ========================================
+
+# > Voice/Video Regions (WebRTC signaling)
+DOMAIN-SUFFIX,discord.media
+DOMAIN-KEYWORD,discord
+
+# > Regional Voice Servers (examples)
+# Discord uses dynamic regional endpoints like:
+# us-west.discord.media, eu-central.discord.media, etc.
+# These are covered by DOMAIN-SUFFIX,discord.media above
+
+# ========================================
+# Status & Monitoring
+# ========================================
+
+DOMAIN,status.discord.com
+DOMAIN,discordstatus.com
+DOMAIN-SUFFIX,discordstatus.com
+DOMAIN,latency.discord.com
+
+# ========================================
+# Short Links & Misc
+# ========================================
+
+DOMAIN,dis.gd  # Discord short links
+DOMAIN-SUFFIX,dis.gd
+DOMAIN,click.discord.com  # Email tracking links
+DOMAIN,support.discord.com
+DOMAIN,blog.discord.com
+
+# ========================================
+# Discord Nitro & Store
+# ========================================
+
+DOMAIN,store.discord.com
+DOMAIN,dl.discordapp.net  # Desktop app downloads
+DOMAIN,updates.discord.com
+
+# ========================================
+# Third-party Integrations (Discord uses these)
+# ========================================
+
+# > Cloudflare (Discord's CDN provider)
+# Note: Too broad to include, may affect other services
+
+# > Google Cloud (Discord infrastructure)
+# Note: Covered by domain rules above
+
+# ========================================
+# IP Ranges - Voice/Video Servers ⭐
+# ========================================
+# Discord voice uses UDP with dynamic IPs.
+# These IP ranges are known Discord voice server ranges.
+# Enable if voice/video has issues; may affect other services.
+
+# > Discord Primary Voice Server Ranges
+IP-CIDR,66.22.196.0/22,no-resolve  # Discord voice servers
+IP-CIDR,66.22.200.0/21,no-resolve  # Discord voice servers
+IP-CIDR,66.22.208.0/20,no-resolve  # Discord voice servers
+IP-CIDR,66.22.224.0/20,no-resolve  # Discord voice servers
+IP-CIDR,66.22.240.0/21,no-resolve  # Discord voice servers
+IP-CIDR,66.22.248.0/22,no-resolve  # Discord voice servers
+
+# > Discord Additional Ranges
+IP-CIDR,35.214.0.0/16,no-resolve  # Google Cloud (Discord infra)
+IP-CIDR,35.215.0.0/16,no-resolve  # Google Cloud (Discord infra)
+
+# > Optional: Uncomment if voice still has issues
+# IP-CIDR,162.159.128.0/17,no-resolve  # Cloudflare (Discord CDN)
+# IP-CIDR,104.16.0.0/12,no-resolve  # Cloudflare (may be too broad)
