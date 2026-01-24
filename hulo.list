@@ -84,6 +84,6 @@ DOMAIN-KEYWORD,xhs  # Catch xhs-prefixed domains (xhs-api, xhs-search, etc.)
 
 # > Xiaohongshu IP Ranges ⭐
 # Note: These IP ranges help ensure stable connection for search/feed.
-IP-CIDR,101.132.0.0/16,no-resolve  # Aliyun Shanghai - XHS Search API servers
-IP-CIDR,106.52.0.0/16,no-resolve  # Tencent Cloud - XHS API backend
-IP-CIDR,47.103.0.0/16,no-resolve  # Aliyun East China - XHS core services
+# IP-CIDR,101.132.0.0/16,no-resolve  # Aliyun Shanghai - XHS Search API servers
+# IP-CIDR,106.52.0.0/16,no-resolve  # Tencent Cloud - XHS API backend
+# IP-CIDR,47.103.0.0/16,no-resolve  # Aliyun East China - XHS core services
