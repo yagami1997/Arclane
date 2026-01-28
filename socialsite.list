@@ -1,210 +1,188 @@
-# > socialsite.list - Social Media & Community Platforms
-# > This ruleset contains rules for social media platforms and communities
-# > Use this to route traffic through specific proxy nodes to display desired IP location
-# > ⭐ Platforms marked with IP will show your IP location when posting
+# > socialsite.list - Social Platform Routing Rules
+# > Domain-based routing for network optimization
 
 # ========================================
-# Chinese Social Media Platforms
+# CN Platform - Video Community
 # ========================================
-
-# ========================================
-# Bilibili - Video & Community ⭐ Shows IP
-# ========================================
-# China's largest ACG video platform and community
 
 # > User-Agent Rules
 USER-AGENT,bili*
 USER-AGENT,bili-inter*
 
 # > Domain Rules
-DOMAIN-SUFFIX,bilibili.com  # Main domain
-DOMAIN-SUFFIX,bilibili.tv  # International version
-DOMAIN-SUFFIX,biliapi.com  # API services
-DOMAIN-SUFFIX,biliapi.net  # API backup
-DOMAIN-SUFFIX,biligame.com  # Bilibili Games
-DOMAIN-SUFFIX,hdslb.com  # Bilibili CDN (important!)
-DOMAIN-SUFFIX,bilivideo.com  # Video CDN
-DOMAIN-SUFFIX,bilivideo.cn  # Video CDN backup
-DOMAIN-SUFFIX,biliimg.com  # Image CDN
-DOMAIN-SUFFIX,bilibili.com  # Main site
-DOMAIN-SUFFIX,acg.tv  # ACG related
-DOMAIN-SUFFIX,im9.com  # Instant messaging
+DOMAIN-SUFFIX,bilibili.com
+DOMAIN-SUFFIX,bilibili.tv
+DOMAIN-SUFFIX,biliapi.com
+DOMAIN-SUFFIX,biliapi.net
+DOMAIN-SUFFIX,biligame.com
+DOMAIN-SUFFIX,hdslb.com
+DOMAIN-SUFFIX,bilivideo.com
+DOMAIN-SUFFIX,bilivideo.cn
+DOMAIN-SUFFIX,biliimg.com
+DOMAIN-SUFFIX,acg.tv
+DOMAIN-SUFFIX,im9.com
 
 # ========================================
-# Weibo - Microblogging ⭐ Shows IP
+# CN Platform - Microblog
 # ========================================
-# China's largest microblogging platform
 
 # > User-Agent Rules
 USER-AGENT,weibo*
 USER-AGENT,*weibo*
 
 # > Domain Rules
-DOMAIN-SUFFIX,weibo.com  # Main domain
-DOMAIN-SUFFIX,weibo.cn  # Backup domain
-DOMAIN-SUFFIX,weibo.com.cn  # Alternative domain
-DOMAIN-SUFFIX,weibocdn.com  # Weibo CDN
-DOMAIN-SUFFIX,sinaimg.cn  # Sina image CDN (most important!)
-DOMAIN-SUFFIX,sinaimg.com  # Sina image backup
-DOMAIN-SUFFIX,sina.com.cn  # Sina main domain
+DOMAIN-SUFFIX,weibo.com
+DOMAIN-SUFFIX,weibo.cn
+DOMAIN-SUFFIX,weibo.com.cn
+DOMAIN-SUFFIX,weibocdn.com
+DOMAIN-SUFFIX,sinaimg.cn
+DOMAIN-SUFFIX,sinaimg.com
+DOMAIN-SUFFIX,sina.com.cn
 DOMAIN-KEYWORD,weibo
 DOMAIN-KEYWORD,sinaimg
 
 # ========================================
-# Baidu Tieba - Forum Community ⭐ Shows IP
+# CN Platform - Forum
 # ========================================
-# China's largest interest-based forum platform
 
 # > User-Agent Rules
 USER-AGENT,*tieba*
 USER-AGENT,*baidu*
 
 # > Domain Rules
-DOMAIN-SUFFIX,tieba.baidu.com  # Main forum
-DOMAIN-SUFFIX,tbcdn.bcebos.com  # Tieba CDN
-DOMAIN-SUFFIX,tiebaimg.com  # Tieba images
-DOMAIN-SUFFIX,bdstatic.com  # Baidu static resources
+DOMAIN-SUFFIX,tieba.baidu.com
+DOMAIN-SUFFIX,tbcdn.bcebos.com
+DOMAIN-SUFFIX,tiebaimg.com
+DOMAIN-SUFFIX,bdstatic.com
 DOMAIN-KEYWORD,tieba
 
 # ========================================
-# Douban - Book/Movie/Music Reviews ⭐ Shows IP
+# CN Platform - Review Community
 # ========================================
-# Cultural and lifestyle community platform
 
 # > User-Agent Rules
 USER-AGENT,*douban*
 
 # > Domain Rules
-DOMAIN-SUFFIX,douban.com  # Main domain
-DOMAIN-SUFFIX,doubanio.com  # Static resources & images
+DOMAIN-SUFFIX,douban.com
+DOMAIN-SUFFIX,doubanio.com
 DOMAIN-KEYWORD,douban
 
 # ========================================
-# Hupu - Sports Community ⭐ Shows IP
+# CN Platform - Sports Community
 # ========================================
-# China's largest sports and male lifestyle community
 
 # > User-Agent Rules
 USER-AGENT,*hupu*
 
 # > Domain Rules
-DOMAIN-SUFFIX,hupu.com  # Main domain
-DOMAIN-SUFFIX,hoopchina.com  # Old domain
-DOMAIN-SUFFIX,hupucdn.com  # CDN
+DOMAIN-SUFFIX,hupu.com
+DOMAIN-SUFFIX,hoopchina.com
+DOMAIN-SUFFIX,hupucdn.com
 DOMAIN-KEYWORD,hupu
 
 # ========================================
-# Jike - Social Network ⭐ Shows IP
+# CN Platform - Social Network
 # ========================================
-# Modern social platform for young people
 
 # > User-Agent Rules
 USER-AGENT,*jike*
 USER-AGENT,*ruguoapp*
 
 # > Domain Rules
-DOMAIN-SUFFIX,okjike.com  # Main domain
-DOMAIN-SUFFIX,ruguoapp.com  # Original name
-DOMAIN-SUFFIX,jikeapp.cn  # App domain
+DOMAIN-SUFFIX,okjike.com
+DOMAIN-SUFFIX,ruguoapp.com
+DOMAIN-SUFFIX,jikeapp.cn
 DOMAIN-KEYWORD,jike
 
 # ========================================
-# QQ Zone - Social Network ⭐ Shows IP
+# CN Platform - IM Social
 # ========================================
-# Tencent's social networking platform
 
 # > User-Agent Rules
 USER-AGENT,*qzone*
 
 # > Domain Rules
-DOMAIN-SUFFIX,qzone.qq.com  # QQ Zone
-DOMAIN-SUFFIX,qpic.cn  # QQ pictures CDN
-DOMAIN-SUFFIX,qlogo.cn  # QQ avatars
-DOMAIN-SUFFIX,gtimg.cn  # Tencent images
+DOMAIN-SUFFIX,qzone.qq.com
+DOMAIN-SUFFIX,qpic.cn
+DOMAIN-SUFFIX,qlogo.cn
+DOMAIN-SUFFIX,gtimg.cn
 DOMAIN-KEYWORD,qzone
 
 # ========================================
-# Other Chinese Communities
+# CN Platform - Others
 # ========================================
 
-# > NGA - Gaming Community
+# > Gaming Community
 DOMAIN-SUFFIX,nga.178.com
 DOMAIN-SUFFIX,ngabbs.com
 DOMAIN,bbs.nga.cn
 
-# > Keylol - Gaming & Tech Community
+# > Tech Community
 DOMAIN-SUFFIX,keylol.com
 DOMAIN-SUFFIX,xiaohuangwen.com
 
-# > TapTap - Mobile Game Community
+# > Mobile Game Community
 DOMAIN-SUFFIX,taptapdada.com
 DOMAIN,api.taptapdada.com
 
-# > Coolapk - Android Community
+# > Android Community
 DOMAIN-SUFFIX,coolapk.com
 DOMAIN,api.coolapk.com
 
-# > Wenshushu - File Sharing
+# > File Sharing
 DOMAIN,www.wenshushu.cn
 
-# > NetEase Games
+# > Game Services
 DOMAIN,god.gameyw.netease.com
 
-# > Huya - Live Streaming
+# > Live Streaming
 DOMAIN-SUFFIX,huya.com
 
-# > Dongqiudi - Football Community
+# > Sports News
 DOMAIN-SUFFIX,dongqiudi.com
 
 # ========================================
-# International Social Media
+# International - Discussion Platform
 # ========================================
-
-# ========================================
-# Reddit - Social News & Discussion ⭐ Shows Location
-# ========================================
-# The front page of the internet
 
 # > User-Agent Rules
 USER-AGENT,*reddit*
 USER-AGENT,*Reddit*
 
 # > Domain Rules
-DOMAIN-SUFFIX,reddit.com  # Main domain
-DOMAIN-SUFFIX,redd.it  # Short link
-DOMAIN-SUFFIX,redditstatic.com  # Static resources
-DOMAIN-SUFFIX,redditmedia.com  # Media CDN
-DOMAIN-SUFFIX,redditinc.com  # Reddit Inc
+DOMAIN-SUFFIX,reddit.com
+DOMAIN-SUFFIX,redd.it
+DOMAIN-SUFFIX,redditstatic.com
+DOMAIN-SUFFIX,redditmedia.com
+DOMAIN-SUFFIX,redditinc.com
 DOMAIN-KEYWORD,reddit
 
 # ========================================
-# Truth Social - Social Network 🚫 Blocks HK IP
+# International - Social Platform
 # ========================================
-# Conservative social media platform by Trump
-# Note: Hong Kong IP addresses are blocked, proxy required
 
 # > User-Agent Rules
 USER-AGENT,*TruthSocial*
 USER-AGENT,*Truth Social*
 
 # > Domain Rules
-DOMAIN-SUFFIX,truthsocial.com  # Main domain
-DOMAIN-SUFFIX,tmtg.com  # Trump Media & Technology Group
-DOMAIN-SUFFIX,truthsocial.co.uk  # UK domain
+DOMAIN-SUFFIX,truthsocial.com
+DOMAIN-SUFFIX,tmtg.com
+DOMAIN-SUFFIX,truthsocial.co.uk
 DOMAIN-KEYWORD,truthsocial
 
 # ========================================
-# LINE - Messaging Platform
+# International - Messaging
 # ========================================
-# Popular messaging app in Asia
 
 # > Domain Rules
-DOMAIN-SUFFIX,line.me  # Main domain
-DOMAIN-SUFFIX,line.naver.jp  # Japan domain
-DOMAIN-SUFFIX,line-scdn.net  # LINE CDN
-DOMAIN-SUFFIX,line-apps.com  # LINE apps
+DOMAIN-SUFFIX,line.me
+DOMAIN-SUFFIX,line.naver.jp
+DOMAIN-SUFFIX,line-scdn.net
+DOMAIN-SUFFIX,line-apps.com
 
-# > LINE IP Ranges (Asia Pacific)
+# > IP Ranges
 IP-CIDR,103.2.28.0/22,no-resolve
 IP-CIDR,119.235.224.0/21,no-resolve
 IP-CIDR,119.235.232.0/23,no-resolve
@@ -218,4 +196,3 @@ IP-CIDR,203.104.103.0/24,no-resolve
 IP-CIDR,203.104.128.0/20,no-resolve
 IP-CIDR,203.174.66.64/26,no-resolve
 IP-CIDR,203.174.77.0/24,no-resolve
-

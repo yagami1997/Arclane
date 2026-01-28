@@ -1,54 +1,38 @@
-# > hulo.list - Chinese Social Media Rules
-# > This ruleset contains rules for Chinese social media platforms
-# > Included: Zhihu and Xiaohongshu (RED)
-# > Use this ruleset to route traffic through proxy for better performance
+# > hulo.list - CN Social Routing Rules
+# > Domain-based routing for network optimization
+# > Use this ruleset to route traffic through proxy
 
 # ========================================
-# Zhihu - Q&A Community Platform ⭐ IP Control
+# CN Social Platform A
 # ========================================
-# China's largest question-and-answer platform
-# Purpose: Control IP location display for posts and comments
 
 # > User-Agent Rules
 USER-AGENT,*zhihu*
 USER-AGENT,zhihu*
-USER-AGENT,*ZhihuHybrid*  # Zhihu APP hybrid framework
-USER-AGENT,*osee*  # Zhihu internal codename
+USER-AGENT,*ZhihuHybrid*
+USER-AGENT,*osee*
 
 # > Domain Rules
-DOMAIN,api.zhihu.com  # Zhihu API - Critical for APP (must be first!)
-DOMAIN-SUFFIX,zhihu.com  # Main domain (includes all subdomains: www, link, etc.)
-DOMAIN-SUFFIX,zhimg.com  # Zhihu image CDN (pic1.zhimg.com, pic2.zhimg.com, etc.)
+DOMAIN,api.zhihu.com
+DOMAIN-SUFFIX,zhihu.com
+DOMAIN-SUFFIX,zhimg.com
 DOMAIN-KEYWORD,zhihu
 
-# > Zhihu IP Ranges - For APP IP Location Display ⭐
-# Note: Carefully selected to avoid conflicts with Xiaohongshu
-
-# > Zhihu Main Service IPs (Aliyun Beijing)
-IP-CIDR,47.94.0.0/16,no-resolve  # Aliyun Beijing - Zhihu API servers
-IP-CIDR,47.95.0.0/16,no-resolve  # Aliyun Beijing - Zhihu web services
-
-# > Zhihu CDN IPs (Aliyun Hangzhou)
-IP-CIDR,47.96.0.0/16,no-resolve  # Aliyun Hangzhou zone A
-IP-CIDR,47.97.0.0/16,no-resolve  # Aliyun Hangzhou zone B
-IP-CIDR,47.98.0.0/16,no-resolve  # Aliyun Hangzhou zone C
-
-# > Zhihu Image CDN (zhimg.com)
-IP-CIDR,121.196.0.0/16,no-resolve  # Zhihu image CDN
-IP-CIDR,121.199.0.0/16,no-resolve  # Zhihu image CDN backup
-
-# > Zhihu API Servers (Specific)
-IP-CIDR,106.75.0.0/16,no-resolve  # Zhihu API backend
-IP-CIDR,120.55.0.0/16,no-resolve  # Zhihu API backend backup
-
-# > Zhihu Video CDN
-IP-CIDR,121.43.0.0/16,no-resolve  # Zhihu video CDN
+# > IP Ranges
+IP-CIDR,47.94.0.0/16,no-resolve
+IP-CIDR,47.95.0.0/16,no-resolve
+IP-CIDR,47.96.0.0/16,no-resolve
+IP-CIDR,47.97.0.0/16,no-resolve
+IP-CIDR,47.98.0.0/16,no-resolve
+IP-CIDR,121.196.0.0/16,no-resolve
+IP-CIDR,121.199.0.0/16,no-resolve
+IP-CIDR,106.75.0.0/16,no-resolve
+IP-CIDR,120.55.0.0/16,no-resolve
+IP-CIDR,121.43.0.0/16,no-resolve
 
 # ========================================
-# Xiaohongshu - Lifestyle Sharing Platform ⭐ IP Control
+# CN Social Platform B
 # ========================================
-# Also known as RED, a lifestyle and social e-commerce platform
-# Purpose: Control IP location display for posts and comments
 
 # > User-Agent Rules
 USER-AGENT,*xiaohongshu*
@@ -56,34 +40,33 @@ USER-AGENT,xiaohongshu*
 USER-AGENT,*redbook*
 
 # > Domain Rules
-DOMAIN-SUFFIX,xiaohongshu.com  # Main domain (includes all subdomains: api, www, edith, sns, etc.)
-DOMAIN-SUFFIX,xiaohongshu.net  # Alternate domain (fallback services)
-DOMAIN-SUFFIX,redbook.com  # Xiaohongshu brand domain
-DOMAIN-SUFFIX,redbook.net  # Xiaohongshu brand domain (alt)
-DOMAIN-SUFFIX,xhscdn.com  # Xiaohongshu CDN (images/videos)
-DOMAIN-SUFFIX,xhscdn.net  # Xiaohongshu CDN backup
-DOMAIN-SUFFIX,xhslink.com  # Share/redirect short link
+DOMAIN-SUFFIX,xiaohongshu.com
+DOMAIN-SUFFIX,xiaohongshu.net
+DOMAIN-SUFFIX,redbook.com
+DOMAIN-SUFFIX,redbook.net
+DOMAIN-SUFFIX,xhscdn.com
+DOMAIN-SUFFIX,xhscdn.net
+DOMAIN-SUFFIX,xhslink.com
 DOMAIN-KEYWORD,xiaohongshu
 
-# > Xiaohongshu Search & API Domains - Critical for Search Function ⭐
-DOMAIN,search.xiaohongshu.com  # Search API (fixes "server lost" error)
-DOMAIN,fe-api.xiaohongshu.com  # Frontend API gateway
-DOMAIN,edith-api.xiaohongshu.com  # Unified API gateway (search/feed/profile)
-DOMAIN,edith.xiaohongshu.com  # App API gateway (legacy)
-DOMAIN,api.xiaohongshu.com  # App API (legacy)
-DOMAIN,sns.xiaohongshu.com  # Social APIs (legacy)
-DOMAIN,rec.xiaohongshu.com  # Recommendation service (affects search results)
-DOMAIN,ark.xiaohongshu.com  # AI/ML service (search ranking)
-DOMAIN,feast.xiaohongshu.com  # Feature service (search features)
-DOMAIN,passport.xiaohongshu.com  # Auth service (search auth)
-DOMAIN,customer.xiaohongshu.com  # Customer service API
-DOMAIN,mp.xiaohongshu.com  # WeChat Mini Program share
-DOMAIN,wx.xiaohongshu.com  # WeChat share bridge
-DOMAIN,ws.xiaohongshu.com  # WebSocket for real-time search suggestions
-DOMAIN-KEYWORD,xhs  # Catch xhs-prefixed domains (xhs-api, xhs-search, etc.)
+# > Subdomain Rules
+DOMAIN,search.xiaohongshu.com
+DOMAIN,fe-api.xiaohongshu.com
+DOMAIN,edith-api.xiaohongshu.com
+DOMAIN,edith.xiaohongshu.com
+DOMAIN,api.xiaohongshu.com
+DOMAIN,sns.xiaohongshu.com
+DOMAIN,rec.xiaohongshu.com
+DOMAIN,ark.xiaohongshu.com
+DOMAIN,feast.xiaohongshu.com
+DOMAIN,passport.xiaohongshu.com
+DOMAIN,customer.xiaohongshu.com
+DOMAIN,mp.xiaohongshu.com
+DOMAIN,wx.xiaohongshu.com
+DOMAIN,ws.xiaohongshu.com
+DOMAIN-KEYWORD,xhs
 
-# > Xiaohongshu IP Ranges ⭐
-# Note: These IP ranges help ensure stable connection for search/feed.
-# IP-CIDR,101.132.0.0/16,no-resolve  # Aliyun Shanghai - XHS Search API servers
-# IP-CIDR,106.52.0.0/16,no-resolve  # Tencent Cloud - XHS API backend
-# IP-CIDR,47.103.0.0/16,no-resolve  # Aliyun East China - XHS core services
+# > IP Ranges (Optional)
+# IP-CIDR,101.132.0.0/16,no-resolve
+# IP-CIDR,106.52.0.0/16,no-resolve
+# IP-CIDR,47.103.0.0/16,no-resolve
