@@ -59,6 +59,7 @@ DOMAIN-KEYWORD,godaddy
 
 # > IP Information & Geolocation Services
 DOMAIN-SUFFIX,whoer.net  # IP & browser fingerprint checker
+DOMAIN-SUFFIX,ping0.cc  # IP detection service
 DOMAIN-SUFFIX,ipinfo.io  # IP address information lookup
 DOMAIN-SUFFIX,ip138.com #IP 138 
 DOMAIN-SUFFIX,ip2location.com  # IP geolocation database
