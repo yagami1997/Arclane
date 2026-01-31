@@ -71,3 +71,4 @@ DOMAIN-KEYWORD,xhs
 # IP-CIDR,101.132.0.0/16,no-resolve
 # IP-CIDR,106.52.0.0/16,no-resolve
 # IP-CIDR,47.103.0.0/16,no-resolve
+IP-CIDR,0.0.0.0/0,REJECT-NO-DROP,no-resolve,proto=udp,port=443
