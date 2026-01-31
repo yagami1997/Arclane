@@ -66,6 +66,7 @@ DOMAIN,mp.xiaohongshu.com
 DOMAIN,wx.xiaohongshu.com
 DOMAIN,ws.xiaohongshu.com
 DOMAIN-KEYWORD,xhs
+AND,((PROTOCOL,UDP), (DEST-PORT,443)),REJECT
 
 # > IP Ranges (Optional)
 # IP-CIDR,101.132.0.0/16,no-resolve
