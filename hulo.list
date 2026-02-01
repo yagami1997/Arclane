@@ -1,6 +1,5 @@
 # > hulo.list - CN Social Routing Rules
 # > Domain-based routing for network optimization
-# > Use this ruleset to route traffic through proxy
 
 # ========================================
 # CN Social Platform A
@@ -39,37 +38,15 @@ USER-AGENT,*xiaohongshu*
 USER-AGENT,xiaohongshu*
 USER-AGENT,*redbook*
 
-# > Domain Rules
+# > Domain Rules (DOMAIN-SUFFIX covers all subdomains)
 DOMAIN-SUFFIX,xiaohongshu.com
-DOMAIN-SUFFIX,xiaohongshu.net
-DOMAIN-SUFFIX,redbook.com
-DOMAIN-SUFFIX,redbook.net
 DOMAIN-SUFFIX,xhscdn.com
 DOMAIN-SUFFIX,xhscdn.net
 DOMAIN-SUFFIX,xhslink.com
-DOMAIN-SUFFIX,fengkongcloud.com  # Security/Risk control service
+DOMAIN-SUFFIX,fengkongcloud.com
 DOMAIN-KEYWORD,xiaohongshu
-
-# > Subdomain Rules
-DOMAIN,search.xiaohongshu.com
-DOMAIN,fe-api.xiaohongshu.com
-DOMAIN,edith-api.xiaohongshu.com
-DOMAIN,edith.xiaohongshu.com
-DOMAIN,api.xiaohongshu.com
-DOMAIN,sns.xiaohongshu.com
-DOMAIN,rec.xiaohongshu.com
-DOMAIN,ark.xiaohongshu.com
-DOMAIN,feast.xiaohongshu.com
-DOMAIN,passport.xiaohongshu.com
-DOMAIN,customer.xiaohongshu.com
-DOMAIN,mp.xiaohongshu.com
-DOMAIN,wx.xiaohongshu.com
-DOMAIN,ws.xiaohongshu.com
 DOMAIN-KEYWORD,xhs
-AND,((PROTOCOL,UDP), (DEST-PORT,443)),REJECT
 
-# > IP Ranges (Optional)
-# IP-CIDR,101.132.0.0/16,no-resolve
-# IP-CIDR,106.52.0.0/16,no-resolve
-# IP-CIDR,47.103.0.0/16,no-resolve
+# > QUIC/UDP Block (Critical for stability)
+AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT
 IP-CIDR,0.0.0.0/0,REJECT-NO-DROP,no-resolve,proto=udp,port=443
