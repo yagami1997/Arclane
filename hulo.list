@@ -17,18 +17,6 @@ DOMAIN-SUFFIX,zhihu.com
 DOMAIN-SUFFIX,zhimg.com
 DOMAIN-KEYWORD,zhihu
 
-# > IP Ranges (Commented out - may affect other Aliyun services)
-# IP-CIDR,47.94.0.0/16,no-resolve
-# IP-CIDR,47.95.0.0/16,no-resolve
-# IP-CIDR,47.96.0.0/16,no-resolve
-# IP-CIDR,47.97.0.0/16,no-resolve
-# IP-CIDR,47.98.0.0/16,no-resolve
-# IP-CIDR,121.196.0.0/16,no-resolve
-# IP-CIDR,121.199.0.0/16,no-resolve
-# IP-CIDR,106.75.0.0/16,no-resolve
-# IP-CIDR,120.55.0.0/16,no-resolve
-# IP-CIDR,121.43.0.0/16,no-resolve
-
 # ========================================
 # CN Social Platform B - Optimized 2026.02
 # ========================================
@@ -57,9 +45,3 @@ DOMAIN-KEYWORD,xhs
 
 # > Third-party Services
 DOMAIN-SUFFIX,fengkongcloud.com
-
-# > QUIC/UDP Block (Only for XHS domains - prevents affecting other apps)
-AND,((PROTOCOL,UDP),(DEST-PORT,443),(DOMAIN-SUFFIX,xiaohongshu.com)),REJECT-NO-DROP
-AND,((PROTOCOL,UDP),(DEST-PORT,443),(DOMAIN-SUFFIX,xhscdn.com)),REJECT-NO-DROP
-AND,((PROTOCOL,UDP),(DEST-PORT,443),(DOMAIN-SUFFIX,xhscdn.net)),REJECT-NO-DROP
-AND,((PROTOCOL,UDP),(DEST-PORT,443),(DOMAIN-SUFFIX,xhslink.com)),REJECT-NO-DROP
