@@ -1,5 +1,40 @@
-# > bytedance.list - CN Short Video Platform Routing Rules
+# > bytedance.list - ByteDance Platform Routing Rules
 # > Domain-based routing for network optimization
+# > Includes: Douyin (CN) + TikTok (International)
+
+# ========================================
+# TikTok (International)
+# ========================================
+
+# > TikTok Main Domains
+DOMAIN-SUFFIX,tiktok.com
+DOMAIN-SUFFIX,tiktokv.com
+DOMAIN-SUFFIX,tiktokcdn.com
+DOMAIN-SUFFIX,tiktokcdn-us.com
+DOMAIN-SUFFIX,tiktokcdn-eu.com
+DOMAIN-SUFFIX,tiktokd.net
+DOMAIN-SUFFIX,tiktokd.org
+DOMAIN-SUFFIX,tiktokvideo.com
+
+# > TikTok Legacy (Musical.ly)
+DOMAIN-SUFFIX,musical.ly
+DOMAIN-SUFFIX,muscdn.com
+
+# > TikTok API & Services
+DOMAIN-SUFFIX,tiktokapis.com
+DOMAIN-SUFFIX,tiktok-row.bsgslb.cn
+DOMAIN-SUFFIX,isnssdk.com
+DOMAIN-SUFFIX,byteoversea.com
+DOMAIN-SUFFIX,ibytedtos.com
+
+# > TikTok User-Agent
+USER-AGENT,TikTok*
+USER-AGENT,tiktok*
+USER-AGENT,musical*
+
+# ========================================
+# Douyin (CN)
+# ========================================
 
 # > Main Domains
 DOMAIN-SUFFIX,douyin.com
