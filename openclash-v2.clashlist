@@ -1,0 +1,214 @@
+rules:
+## Common Rule Examples:
+## - DOMAIN-SUFFIX,google.com,Proxies
+## - DOMAIN-KEYWORD,google,Proxies
+## - IP-CIDR,192.168.1.0/24,DIRECT
+##
+## Rules are applied from top to bottom
+
+# ========================================
+# Section 0: CDN Whitelist (Force Direct)
+# ========================================
+# Purpose: Avoid "return-to-China" traffic in double-proxy setup
+# OpenClash handles CDN → DIRECT, Surge handles API → Proxy
+
+## Xiaohongshu CDN (images/videos)
+## Plan A: Minimal (2 rules, covers 99% cases) - ACTIVE
+- DOMAIN-SUFFIX,xhscdn.com,DIRECT
+- DOMAIN-SUFFIX,xhscdn.net,DIRECT
+
+## Plan B: Complete (4 rules, 100% coverage) - BACKUP
+## Uncomment below if Plan A misses some images:
+# - DOMAIN,qimg.xiaohongshu.com,DIRECT               # Legacy image domain
+# - DOMAIN,picasso-static.xiaohongshu.com,DIRECT     # Static resources
+
+# ========================================
+# Section 1: Social Media
+# Policy: Proxy
+# ========================================
+
+## Weibo (微博)
+- DOMAIN-KEYWORD,weibo,Proxies
+- DOMAIN-SUFFIX,weibo.com,Proxies
+- DOMAIN-SUFFIX,weibo.cn,Proxies
+- DOMAIN-SUFFIX,sina.com.cn,Proxies
+- DOMAIN-KEYWORD,sinaimg,Proxies
+- DOMAIN-SUFFIX,sinaimg.cn,Proxies
+- DOMAIN-SUFFIX,sinaimg.com,Proxies
+- DOMAIN-SUFFIX,weibocdn.com,Proxies
+
+## Xiaohongshu API rules are now handled by Surge (hulo.list)
+## OpenClash only handles CDN whitelist (see Section 0)
+
+# ========================================
+# Section 2: Developer Tools & Academic
+# Policy: Scholar
+# ========================================
+
+## GitHub
+- DOMAIN-KEYWORD,github,Proxies
+- DOMAIN-SUFFIX,github.com,Proxies
+- DOMAIN-SUFFIX,githubusercontent.com,Proxies
+- DOMAIN-SUFFIX,githubassets.com,Proxies
+
+## CDN & Resources
+- DOMAIN-KEYWORD,jsdelivr,Proxies
+- DOMAIN-SUFFIX,jsdelivr.net,Proxies
+- DOMAIN-SUFFIX,cdn.jsdelivr.net,Proxies
+- DOMAIN-SUFFIX,unpkg.com,Proxies
+- DOMAIN-SUFFIX,cdnjs.com,Proxies
+- DOMAIN-SUFFIX,cdnjs.cloudflare.com,Proxies
+- DOMAIN-SUFFIX,cloudflare.com,Proxies
+- DOMAIN-SUFFIX,cloudfront.net,Proxies
+- DOMAIN-SUFFIX,fastly.net,Proxies
+- DOMAIN-SUFFIX,akamai.net,Proxies
+- DOMAIN-SUFFIX,akamaized.net,Proxies
+- DOMAIN-SUFFIX,bootstrapcdn.com,Proxies
+- DOMAIN-SUFFIX,jsdelivr.com,Proxies
+- DOMAIN-KEYWORD,cdn,Proxies
+
+## Development Tools
+- DOMAIN-KEYWORD,evernote,Google
+- DOMAIN-SUFFIX,macosicons.com,Google
+- DOMAIN-SUFFIX,ubuntu.com,Google
+
+## Academic & Research Domains
+- DOMAIN-SUFFIX,aqabatech.edu.rs,Proxies
+- DOMAIN-SUFFIX,aqabatech.co.uk,Proxies
+- DOMAIN-SUFFIX,aqaba.eu.org,Proxies
+- DOMAIN-SUFFIX,3dfx.eu.org,Proxies
+- DOMAIN-SUFFIX,jerusalem.is.eu.org,Proxies
+- DOMAIN-SUFFIX,cell.fr.eu.org,Proxies
+- DOMAIN-SUFFIX,naltech.eu.org,Proxies
+- DOMAIN-SUFFIX,calbio.eu.org,Proxies
+- DOMAIN-SUFFIX,mixhub.uk,Proxies
+
+## Chinese Educational (Direct)
+- DOMAIN-SUFFIX,edu.cn,DIRECT
+
+## International Universities & Educational (Scholar)
+- DOMAIN-SUFFIX,columbia.edu,Google
+- DOMAIN-SUFFIX,edu,Google
+- DOMAIN-SUFFIX,ac.uk,Google
+- DOMAIN-SUFFIX,mit.edu,Google
+- DOMAIN-SUFFIX,stanford.edu,Google
+- DOMAIN-SUFFIX,harvard.edu,Google
+- DOMAIN-SUFFIX,berkeley.edu,Google
+- DOMAIN-SUFFIX,ox.ac.uk,Google
+- DOMAIN-SUFFIX,cam.ac.uk,Google
+
+## Academic Resources & Journals
+- DOMAIN-SUFFIX,researchgate.net,Proxies
+- DOMAIN-SUFFIX,academia.edu,Proxies
+- DOMAIN-SUFFIX,arxiv.org,Proxies
+- DOMAIN-SUFFIX,scholar.google.com,Proxies
+- DOMAIN-SUFFIX,ieee.org,Proxies
+- DOMAIN-SUFFIX,acm.org,Proxies
+- DOMAIN-SUFFIX,springer.com,Proxies
+- DOMAIN-SUFFIX,sciencedirect.com,Proxies
+- DOMAIN-SUFFIX,nature.com,Proxies
+- DOMAIN-SUFFIX,science.org,Proxies
+- DOMAIN-SUFFIX,jstor.org,Proxies
+- DOMAIN-SUFFIX,wiley.com,Proxies
+- DOMAIN-SUFFIX,elsevier.com,Proxies
+- DOMAIN-SUFFIX,ncbi.nlm.nih.gov,Proxies
+- DOMAIN-SUFFIX,pubmed.gov,Proxies
+- DOMAIN-KEYWORD,scholar,Proxies
+- DOMAIN-KEYWORD,research,Proxies
+
+# ========================================
+# Section 3: Personal & Professional Services
+# ========================================
+
+## Email & Privacy → Proxy
+- DOMAIN-SUFFIX,protonmail.com,Proxies
+- DOMAIN-SUFFIX,proton.me,Proxies
+- DOMAIN-SUFFIX,zoho.com,Proxies
+
+## Network & Infrastructure → Proxy
+- DOMAIN-SUFFIX,zerotier.com,Proxies
+- DOMAIN-SUFFIX,vultr.com,Proxies
+- DOMAIN-SUFFIX,xns.one,Proxies
+
+## News & Info → Proxy
+- DOMAIN-SUFFIX,zaobao.com,Proxies
+- DOMAIN-SUFFIX,zaobao.com.sg,Proxies
+- DOMAIN-SUFFIX,ultramobile.com,Proxies
+- DOMAIN-KEYWORD,ultramobile,Proxies
+
+## Finance Info → Proxy
+- DOMAIN-SUFFIX,finance.yahoo.com,Proxies
+- DOMAIN-SUFFIX,query1.finance.yahoo.com,Proxies
+- DOMAIN-SUFFIX,query2.finance.yahoo.com,Proxies
+
+## Personal Domains → Others
+- DOMAIN-SUFFIX,kyowarp.com,Final
+- DOMAIN-KEYWORD,kyowarp,Final
+- DOMAIN-SUFFIX,encveil.dev,Final
+- DOMAIN-KEYWORD,encveil,Final
+
+## Personal Services → Proxy
+- DOMAIN-SUFFIX,javbus.com,Proxies
+
+# ========================================
+# Section 4: Financial Services
+# Policy: Others
+# ========================================
+
+## Brokers
+- DOMAIN-SUFFIX,interactivebrokers.com,Final
+- DOMAIN-SUFFIX,interactivebrokers.com.hk,Final
+- DOMAIN-KEYWORD,interactivebrokers,Final
+- DOMAIN-SUFFIX,moomoo.com,Final
+- DOMAIN-KEYWORD,moomoo,Final
+- DOMAIN-KEYWORD,futu,Final
+- DOMAIN-SUFFIX,futu5.com,Final
+- DOMAIN-SUFFIX,futunn.com,Final
+
+# ========================================
+# Section 5: Life Services
+# Policy: Others
+# ========================================
+
+## Travel & Hotels
+- DOMAIN-SUFFIX,marriott.com.cn,Final
+- DOMAIN-SUFFIX,marriott.com,Final
+- DOMAIN-KEYWORD,marriott,Final
+- DOMAIN-SUFFIX,anytimemailbox.com,Final
+
+## Telecom
+- DOMAIN-SUFFIX,mobal.com.cn,Final
+- DOMAIN-SUFFIX,mobal.com,Final
+- DOMAIN-KEYWORD,mobal,Final
+- DOMAIN-KEYWORD,lifecell.ua,Final
+
+## Cloud Storage & Tools
+- DOMAIN-SUFFIX,mypikpak.com,Proxies
+- DOMAIN-SUFFIX,midjourney.com,Proxies
+- DOMAIN-SUFFIX,civitai.com,Proxies
+- DOMAIN-SUFFIX,namecheap.com,Proxies
+- DOMAIN-KEYWORD,namecheap,Proxies
+- DOMAIN-SUFFIX,ipinfo.io,Proxies
+- DOMAIN-SUFFIX,iproyal.com,Proxies
+
+## Cloud Services
+- DOMAIN-SUFFIX,aqaba.cloud,Final
+- DOMAIN-SUFFIX,aqaba.uk,Final
+- DOMAIN-SUFFIX,cloud.es.eu.org,Final
+- DOMAIN-SUFFIX,uucloud.org,Final
+- DOMAIN-SUFFIX,eaglescapital.co.uk,Final
+
+## Software
+- DOMAIN-KEYWORD,adobe,Final
+
+## IP Addresses
+- IP-CIDR,47.79.90.0/24,Final
+- IP-CIDR,45.63.84.0/24,Final
+
+# ========================================
+# Section 6: China Direct
+# Policy: DIRECT
+# ========================================
+
+## E-commerce
+- DOMAIN-SUFFIX,taobao.com,DIRECT
