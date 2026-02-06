@@ -7,22 +7,6 @@ rules:
 ## Rules are applied from top to bottom
 
 # ========================================
-# Section 0: CDN Whitelist (Force Direct)
-# ========================================
-# Purpose: Avoid "return-to-China" traffic in double-proxy setup
-# OpenClash handles CDN → DIRECT, Surge handles API → Proxy
-
-## Xiaohongshu CDN (images/videos)
-## Plan A: Minimal (2 rules, covers 99% cases) - ACTIVE
-- DOMAIN-SUFFIX,xhscdn.com,DIRECT
-- DOMAIN-SUFFIX,xhscdn.net,DIRECT
-
-## Plan B: Complete (4 rules, 100% coverage) - BACKUP
-## Uncomment below if Plan A misses some images:
-# - DOMAIN,qimg.xiaohongshu.com,DIRECT               # Legacy image domain
-# - DOMAIN,picasso-static.xiaohongshu.com,DIRECT     # Static resources
-
-# ========================================
 # Section 1: Social Media
 # Policy: Proxy
 # ========================================
@@ -37,9 +21,6 @@ rules:
 - DOMAIN-SUFFIX,sinaimg.com,Proxies
 - DOMAIN-SUFFIX,weibocdn.com,Proxies
 
-## Xiaohongshu API rules are now handled by Surge (hulo.list)
-## OpenClash only handles CDN whitelist (see Section 0)
-
 # ========================================
 # Section 2: Developer Tools & Academic
 # Policy: Scholar
@@ -50,6 +31,7 @@ rules:
 - DOMAIN-SUFFIX,github.com,Proxies
 - DOMAIN-SUFFIX,githubusercontent.com,Proxies
 - DOMAIN-SUFFIX,githubassets.com,Proxies
+- DOMAIN,testflight.apple.com,Proxies
 
 ## CDN & Resources
 - DOMAIN-KEYWORD,jsdelivr,Proxies
@@ -65,12 +47,15 @@ rules:
 - DOMAIN-SUFFIX,akamaized.net,Proxies
 - DOMAIN-SUFFIX,bootstrapcdn.com,Proxies
 - DOMAIN-SUFFIX,jsdelivr.com,Proxies
+- DOMAIN-SUFFIX,gcore.com,Proxies
+- DOMAIN-SUFFIX,pages.dev,Proxies
 - DOMAIN-KEYWORD,cdn,Proxies
 
 ## Development Tools
 - DOMAIN-KEYWORD,evernote,Google
 - DOMAIN-SUFFIX,macosicons.com,Google
 - DOMAIN-SUFFIX,ubuntu.com,Google
+- DOMAIN-SUFFIX,geekbench.com,Google
 
 ## Academic & Research Domains
 - DOMAIN-SUFFIX,aqabatech.edu.rs,Proxies
@@ -123,12 +108,26 @@ rules:
 ## Email & Privacy → Proxy
 - DOMAIN-SUFFIX,protonmail.com,Proxies
 - DOMAIN-SUFFIX,proton.me,Proxies
+- DOMAIN-KEYWORD,proton,Proxies
 - DOMAIN-SUFFIX,zoho.com,Proxies
 
 ## Network & Infrastructure → Proxy
 - DOMAIN-SUFFIX,zerotier.com,Proxies
 - DOMAIN-SUFFIX,vultr.com,Proxies
 - DOMAIN-SUFFIX,xns.one,Proxies
+- DOMAIN-SUFFIX,nssurge.com,Proxies
+- DOMAIN-SUFFIX,godaddy.com,Proxies
+- DOMAIN-KEYWORD,godaddy,Proxies
+- DOMAIN-SUFFIX,whoer.net,Proxies
+- DOMAIN-SUFFIX,ping0.cc,Proxies
+- DOMAIN-SUFFIX,ip138.com,Proxies
+- DOMAIN-SUFFIX,ip2location.com,Proxies
+- DOMAIN-SUFFIX,ipqualityscore.com,Proxies
+- DOMAIN-SUFFIX,ipdata.co,Proxies
+- DOMAIN-SUFFIX,ip.sb,Proxies
+- DOMAIN-SUFFIX,ipjiance.com,Proxies
+- DOMAIN-SUFFIX,freecarrierlookup.com,Proxies
+- DOMAIN-SUFFIX,scamalytics.com,Proxies
 
 ## News & Info → Proxy
 - DOMAIN-SUFFIX,zaobao.com,Proxies
@@ -146,9 +145,13 @@ rules:
 - DOMAIN-KEYWORD,kyowarp,Final
 - DOMAIN-SUFFIX,encveil.dev,Final
 - DOMAIN-KEYWORD,encveil,Final
+- DOMAIN-SUFFIX,icloudapp.co.uk,Final
+- DOMAIN-SUFFIX,mengjiucai.com,Final
 
 ## Personal Services → Proxy
 - DOMAIN-SUFFIX,javbus.com,Proxies
+- DOMAIN-SUFFIX,fiverr.com,Proxies
+- DOMAIN-SUFFIX,oracle.com,Proxies
 
 # ========================================
 # Section 4: Financial Services
@@ -159,6 +162,8 @@ rules:
 - DOMAIN-SUFFIX,interactivebrokers.com,Final
 - DOMAIN-SUFFIX,interactivebrokers.com.hk,Final
 - DOMAIN-KEYWORD,interactivebrokers,Final
+- DOMAIN-SUFFIX,ibkr.com,Final
+- DOMAIN-KEYWORD,ibkr,Final
 - DOMAIN-SUFFIX,moomoo.com,Final
 - DOMAIN-KEYWORD,moomoo,Final
 - DOMAIN-KEYWORD,futu,Final
@@ -175,21 +180,30 @@ rules:
 - DOMAIN-SUFFIX,marriott.com,Final
 - DOMAIN-KEYWORD,marriott,Final
 - DOMAIN-SUFFIX,anytimemailbox.com,Final
+- DOMAIN-SUFFIX,ipostal1.com,Final
+- DOMAIN-SUFFIX,ipostalmail.net,Final
+- DOMAIN-SUFFIX,canadagoose.com,Final
+- DOMAIN-SUFFIX,lifecard.co.jp,Final
+- DOMAIN-SUFFIX,usps.com,Final
+- DOMAIN-SUFFIX,wise.com,Final
+- DOMAIN-SUFFIX,weather.com,Final
+- DOMAIN-KEYWORD,weather,Final
 
 ## Telecom
 - DOMAIN-SUFFIX,mobal.com.cn,Final
 - DOMAIN-SUFFIX,mobal.com,Final
 - DOMAIN-KEYWORD,mobal,Final
 - DOMAIN-KEYWORD,lifecell.ua,Final
+- DOMAIN-SUFFIX,airalo.com,Final
 
 ## Cloud Storage & Tools
-- DOMAIN-SUFFIX,mypikpak.com,Proxies
-- DOMAIN-SUFFIX,midjourney.com,Proxies
-- DOMAIN-SUFFIX,civitai.com,Proxies
-- DOMAIN-SUFFIX,namecheap.com,Proxies
-- DOMAIN-KEYWORD,namecheap,Proxies
-- DOMAIN-SUFFIX,ipinfo.io,Proxies
-- DOMAIN-SUFFIX,iproyal.com,Proxies
+- DOMAIN-SUFFIX,mypikpak.com,Steam
+- DOMAIN-SUFFIX,midjourney.com,Steam
+- DOMAIN-SUFFIX,civitai.com,Steam
+- DOMAIN-SUFFIX,namecheap.com,Steam
+- DOMAIN-KEYWORD,namecheap,Steam
+- DOMAIN-SUFFIX,ipinfo.io,Steam
+- DOMAIN-SUFFIX,iproyal.com,Steam
 
 ## Cloud Services
 - DOMAIN-SUFFIX,aqaba.cloud,Final
@@ -197,6 +211,11 @@ rules:
 - DOMAIN-SUFFIX,cloud.es.eu.org,Final
 - DOMAIN-SUFFIX,uucloud.org,Final
 - DOMAIN-SUFFIX,eaglescapital.co.uk,Final
+- DOMAIN-SUFFIX,clashmail.org,Final
+- DOMAIN-SUFFIX,claw.cloud,Final
+- DOMAIN-SUFFIX,run.claw.cloud,Final
+- DOMAIN-SUFFIX,oleafcapital.com,Final
+- DOMAIN-SUFFIX,protostarholding.com,Final
 
 ## Software
 - DOMAIN-KEYWORD,adobe,Final
