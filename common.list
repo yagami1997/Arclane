@@ -178,15 +178,10 @@ DOMAIN-SUFFIX,fiverr.com
 
 # > Personal Business Domains
 DOMAIN-SUFFIX,aqaba.cloud
-DOMAIN-SUFFIX,aqabatech.co.uk
 DOMAIN-SUFFIX,clashmail.org
 DOMAIN-SUFFIX,eaglescapital.co.uk
-DOMAIN-SUFFIX,icloudapp.co.uk
-DOMAIN-SUFFIX,mengjiucai.com
-DOMAIN-SUFFIX,mixhub.uk
 DOMAIN-SUFFIX,oleafcapital.com
 DOMAIN-SUFFIX,protostarholding.com
-DOMAIN-SUFFIX,uucloud.org
 DOMAIN-SUFFIX,xns.one
 
 # ========================================
@@ -220,17 +215,3 @@ DOMAIN-KEYWORD,weather
 
 # > Geekbench - Cross-Platform Benchmark Tool
 DOMAIN-SUFFIX,geekbench.com
-
-# ========================================
-# WiFi Calling IP Ranges (DISABLED)
-# ========================================
-# Temporarily disabled - uncomment if needed
-
-# # > T-Mobile US WiFi Calling
-# IP-CIDR,208.54.0.0/16,no-resolve
-# IP-CIDR,8.219.0.0/16,no-resolve
-
-# # > WiFi Calling DNS
-# DOMAIN-SUFFIX,ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org
-# DOMAIN-SUFFIX,ss.epdg.epc.geo.mnc260.mcc310.pub.3gppnetwork.org
-# DOMAIN-SUFFIX,epdg.epc.mnc260.mcc310.pub.3gppnetwork.org

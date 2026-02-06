@@ -145,8 +145,6 @@ rules:
 - DOMAIN-KEYWORD,kyowarp,Final
 - DOMAIN-SUFFIX,encveil.dev,Final
 - DOMAIN-KEYWORD,encveil,Final
-- DOMAIN-SUFFIX,icloudapp.co.uk,Final
-- DOMAIN-SUFFIX,mengjiucai.com,Final
 
 ## Personal Services → Proxy
 - DOMAIN-SUFFIX,javbus.com,Proxies
@@ -207,9 +205,6 @@ rules:
 
 ## Cloud Services
 - DOMAIN-SUFFIX,aqaba.cloud,Final
-- DOMAIN-SUFFIX,aqaba.uk,Final
-- DOMAIN-SUFFIX,cloud.es.eu.org,Final
-- DOMAIN-SUFFIX,uucloud.org,Final
 - DOMAIN-SUFFIX,eaglescapital.co.uk,Final
 - DOMAIN-SUFFIX,clashmail.org,Final
 - DOMAIN-SUFFIX,claw.cloud,Final
