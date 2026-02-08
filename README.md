@@ -11,15 +11,34 @@
 ![Surge](https://img.shields.io/badge/Surge-Pro%206-4D9DE0?style=for-the-badge&logo=surge&logoColor=white)
 ![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20macOS-E87A90?style=for-the-badge&logo=apple&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-92D293?style=for-the-badge&logo=opensourceinitiative&logoColor=white)
-![Rules](https://img.shields.io/badge/Rules-2000%2B-FF6B6B?style=for-the-badge&logo=databricks&logoColor=white)
+![Rules](https://img.shields.io/badge/Rules-2500%2B-FF6B6B?style=for-the-badge&logo=databricks&logoColor=white)
 
 </div>
 
 <p align="center">
-  <i>🚀 Professional-grade routing rules optimized for speed, privacy, and reliability</i>
+  <i>🚀 Self-hosted routing rules optimized for speed, privacy, and reliability</i>
   <br>
   <i>⚡ Intelligent traffic management | 🎯 Geo-location control | 🔒 Privacy-focused</i>
 </p>
+
+---
+
+## 🔄 Latest Update (Feb 2026)
+
+**Major Infrastructure Migration Completed**
+
+This repository has undergone a comprehensive restructure to ensure **full autonomy and long-term sustainability**:
+
+- ✅ **Self-Contained Ruleset**: Migrated 58 external dependencies to local `ruleset/` directory
+- ✅ **Enhanced Privacy**: Removed all sensitive information and third-party references
+- ✅ **Improved Organization**: Restructured directory layout for better maintainability
+- ✅ **Zero External Dependencies**: All rules now hosted and maintained internally
+
+**What Changed:**
+- New `ruleset/` directory containing 58 comprehensive rule files (media, services, filtering)
+- Updated all URLs to point to self-hosted rules
+- Cleaned up legacy configurations and deprecated files
+- Enhanced documentation and rule categorization
 
 ---
 
@@ -42,7 +61,7 @@
 </tr>
 </table>
 
-## 📦 Ruleset Collection
+## 📦 Self-Built Ruleset Collection
 
 <div align="center">
 
@@ -50,56 +69,78 @@
 <tr>
   <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/9458/9458326.png" width="40" align="center"></td>
   <td><b>Common Services</b><br><sub>Essential productivity tools and infrastructure</sub></td>
-  <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/common.list">common.list</a></td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/common.list">common.list</a></td>
 </tr>
 <tr>
   <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/2936/2936660.png" width="40" align="center"></td>
-  <td><b>Financial Services</b><br><sub>Secure routing for payment and banking</sub></td>
-  <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/paypal.list">paypal.list</a></td>
+  <td><b>Financial Services</b><br><sub>Secure routing for payment and banking (US-focused)</sub></td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/paypal.list">paypal.list</a></td>
 </tr>
 <tr>
   <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/9073/9073032.png" width="40" align="center"></td>
-  <td><b>Social Platforms ⭐</b><br><sub>Advanced geo-location routing capabilities</sub></td>
-  <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/socialsite.list">socialsite.list</a></td>
+  <td><b>Social Platforms ⭐</b><br><sub>International and regional social networks</sub></td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/socialsite.list">socialsite.list</a></td>
 </tr>
 <tr>
   <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968846.png" width="40" align="center"></td>
-  <td><b>Community Networks ⭐</b><br><sub>User-generated content platforms with IP control</sub></td>
-  <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/hulo.list">hulo.list</a></td>
+  <td><b>Community Networks ⭐</b><br><sub>User-generated content platforms (CN-focused)</sub></td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/hulo.list">hulo.list</a></td>
 </tr>
 <tr>
   <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/3330/3330314.png" width="40" align="center"></td>
   <td><b>Academic Resources</b><br><sub>Research databases and educational institutions</sub></td>
-  <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/scholar.list">scholar.list</a></td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/scholar.list">scholar.list</a></td>
 </tr>
 <tr>
   <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/3178/3178285.png" width="40" align="center"></td>
-  <td><b>Content Distribution ⭐</b><br><sub>Media delivery and content platforms</sub></td>
-  <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/bytedance.list">bytedance.list</a></td>
-</tr>
-<tr>
-  <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/888/888859.png" width="40" align="center"></td>
-  <td><b>Streaming Services</b><br><sub>Global media and entertainment platforms</sub></td>
-  <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/globemedia.list">globemedia.list</a></td>
-</tr>
-<tr>
-  <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/2504/2504929.png" width="40" align="center"></td>
-  <td><b>Microsoft Ecosystem</b><br><sub>Cloud services and enterprise solutions</sub></td>
-  <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/microsoft.list">microsoft.list</a></td>
+  <td><b>ByteDance Ecosystem ⭐</b><br><sub>TikTok, Douyin, and related platforms</sub></td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/bytedance.list">bytedance.list</a></td>
 </tr>
 <tr>
   <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968866.png" width="40" align="center"></td>
-  <td><b>AI Platforms</b><br><sub>Machine learning and AI service endpoints</sub></td>
-  <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/openai.list">openai.list</a></td>
+  <td><b>AI Platforms</b><br><sub>OpenAI, Claude, and 50+ AI services</sub></td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/openai.list">openai.list</a></td>
 </tr>
 <tr>
-  <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" width="40" align="center"></td>
-  <td><b>Custom Rules</b><br><sub>Specialized routing configurations</sub></td>
-  <td><a href="https://raw.githubusercontent.com/yagami1997/Surgerulesets/main/special.list">special.list</a></td>
+  <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/8099/8099326.png" width="40" align="center"></td>
+  <td><b>Cryptocurrency</b><br><sub>Exchanges, DeFi, and blockchain services</sub></td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/crypto.list">crypto.list</a></td>
+</tr>
+<tr>
+  <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968968.png" width="40" align="center"></td>
+  <td><b>Discord</b><br><sub>Voice, video, and messaging platform</sub></td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/discord.list">discord.list</a></td>
 </tr>
 </table>
 
 </div>
+
+## 🗂️ Comprehensive Ruleset Library
+
+**New in Feb 2026**: All streaming media, services, and filtering rules are now self-hosted in the `ruleset/` directory.
+
+### Media & Entertainment (44 files)
+- **Streaming**: Netflix, Disney+, YouTube, Max, Spotify, Hulu
+- **Asian TV**: Abema TV, Bahamut, KKTV, ViuTV, Niconico (15 platforms)
+- **Global TV**: BBC iPlayer, DAZN, PBS, Pandora (13 platforms)
+- **CN Mainland**: Bilibili, iQIYI, Tencent Video, Netease Music (7 platforms)
+- **Apple Services**: Apple TV, Apple Music, Apple News
+
+### Services & Tools (8 files)
+- Microsoft, Google FCM, Telegram, Steam
+- TikTok, Apple, Speedtest, miHoYo
+
+### Core Utilities (3 files)
+- AdBlock, HTTPDNS, Special (direct routing)
+- Proxy (international), Domestic (CN), Domestic IPs
+
+**Access all ruleset files:**
+```
+https://raw.githubusercontent.com/yagami1997/surgemac/main/ruleset/
+https://raw.githubusercontent.com/yagami1997/surgemac/main/ruleset/Media/
+```
+
+---
 
 ## 🎯 Advanced Features
 
@@ -127,11 +168,11 @@ Americas Node → Geographic identity: North/South America
 
 ### Rule Types & Coverage
 
-- **DOMAIN Rules**: 1,200+ domain-based routing rules
-- **DOMAIN-SUFFIX Rules**: 600+ wildcard domain patterns
-- **IP-CIDR Rules**: 300+ IP range definitions (IPv4/IPv6)
-- **USER-AGENT Rules**: 100+ application-specific identifiers
-- **DOMAIN-KEYWORD Rules**: 50+ pattern matching entries
+- **DOMAIN Rules**: 1,500+ domain-based routing rules
+- **DOMAIN-SUFFIX Rules**: 800+ wildcard domain patterns
+- **IP-CIDR Rules**: 400+ IP range definitions (IPv4/IPv6)
+- **USER-AGENT Rules**: 150+ application-specific identifiers
+- **DOMAIN-KEYWORD Rules**: 80+ pattern matching entries
 
 ## 🚀 Quick Start Guide
 
@@ -205,7 +246,7 @@ Profile → Edit → External Resources → Update All
 
 - All rulesets are regularly audited for security
 - No third-party tracking or analytics domains included
-- Open-source and community-reviewed
+- Fully self-hosted with zero external dependencies
 - HTTPS-only external ruleset URLs
 
 ## 🔧 Technical Specifications
@@ -220,8 +261,8 @@ Profile → Edit → External Resources → Update All
 ### Performance Metrics
 
 - **Rule Processing**: < 1ms per connection
-- **Memory Footprint**: ~5-10MB total
-- **Update Size**: 50-200KB per ruleset
+- **Memory Footprint**: ~8-12MB total
+- **Update Size**: 50-500KB per ruleset
 - **Reload Time**: < 500ms for full configuration
 
 ### Rule Format
@@ -242,12 +283,12 @@ USER-AGENT,ApplicationName*,POLICY
 
 ## 📊 Project Statistics
 
-- **Total Rules**: 2,000+
-- **Active Rulesets**: 10
-- **Monthly Updates**: 4-6 times
-- **Community Contributors**: Open for PRs
-- **Domains Covered**: 1,500+
-- **IP Ranges**: 300+ CIDR blocks
+- **Total Rules**: 2,500+
+- **Active Rulesets**: 67 files (9 self-built + 58 comprehensive library)
+- **Monthly Updates**: 4-8 times
+- **Domains Covered**: 2,000+
+- **IP Ranges**: 400+ CIDR blocks
+- **Self-Hosted**: 100% autonomy
 
 ## 🛡️ Privacy & Legal
 
@@ -257,7 +298,8 @@ This project respects user privacy:
 - No telemetry or tracking
 - No data collection
 - No third-party dependencies
-- Open-source and auditable
+- Fully self-hosted and auditable
+- Open-source and transparent
 
 ### License
 
@@ -290,6 +332,8 @@ Contributions are welcome! Please ensure:
     <br>
     <sub>Made with ❤️ for the network optimization community</sub>
     <br><br>
-    <sub>Copyright © 2023-2025 | All rights reserved</sub>
+    <sub>Copyright © 2023-2026 | All rights reserved</sub>
+    <br>
+    <sub>Last Updated: February 6, 2026 (PST)</sub>
   </p>
 </div>

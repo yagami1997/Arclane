@@ -7,7 +7,7 @@ DOMAIN-SUFFIX,protonmail.com
 DOMAIN-SUFFIX,proton.me
 DOMAIN-SUFFIX,zoho.com
 
-##> Scholar & Technology & Art site（Part of the rule set collation comes from DLer），it is recommended to visit by proxy
+##> Scholar & Technology & Art site, it is recommended to visit by proxy
 DOMAIN-SUFFIX,acm.org
 DOMAIN-SUFFIX,acs.org
 DOMAIN-SUFFIX,aip.org
