@@ -23,11 +23,11 @@
 
 ---
 
-## 🔄 Latest Update (Feb 2026)
+## 🔄 Latest Update (February 2026)
 
 **Major Infrastructure Migration Completed**
 
-This repository has undergone a comprehensive restructure to ensure **full autonomy and long-term sustainability**:
+This repository has undergone a comprehensive restructure to ensure **complete autonomy and long-term sustainability**:
 
 - ✅ **Self-Contained Ruleset**: Migrated 58 external dependencies to local `ruleset/` directory
 - ✅ **Enhanced Privacy**: Removed all sensitive information and third-party references
@@ -117,7 +117,7 @@ This repository has undergone a comprehensive restructure to ensure **full auton
 
 ## 🗂️ Comprehensive Ruleset Library
 
-**New in Feb 2026**: All streaming media, services, and filtering rules are now self-hosted in the `ruleset/` directory.
+**New in February 2026**: All streaming media, services, and filtering rules are now self-hosted in the `ruleset/` directory for complete autonomy.
 
 ### Media & Entertainment (44 files)
 - **Streaming**: Netflix, Disney+, YouTube, Max, Spotify, Hulu
@@ -169,10 +169,11 @@ Americas Node → Geographic identity: North/South America
 ### Rule Types & Coverage
 
 - **DOMAIN Rules**: 1,500+ domain-based routing rules
-- **DOMAIN-SUFFIX Rules**: 800+ wildcard domain patterns
+- **DOMAIN-SUFFIX Rules**: 800+ wildcard domain patterns  
 - **IP-CIDR Rules**: 400+ IP range definitions (IPv4/IPv6)
 - **USER-AGENT Rules**: 150+ application-specific identifiers
 - **DOMAIN-KEYWORD Rules**: 80+ pattern matching entries
+- **Total Coverage**: 2,500+ routing decisions across 67 rule files
 
 ## 🚀 Quick Start Guide
 
