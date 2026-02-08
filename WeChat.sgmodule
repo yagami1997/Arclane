@@ -1,7 +1,7 @@
 #!name=💬 WeChat ASN Direct Rules
 #!desc=WeChat-specific ASN direct rules - Ensure WeChat image/video sending works properly without affecting other services
-#!author=KyoWarp
-#!homepage=https://github.com/yagami1997/Surgerulesets
+#!author=MUMU
+#!homepage=https://github.com/yagami1997/surgemac
 #!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/WeChat.png
 #!category=💬 WeChat
 
