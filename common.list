@@ -35,12 +35,6 @@ DOMAIN-SUFFIX,zoho.com
 # Personal & Custom Services
 # ========================================
 
-# > User Personal Domains
-DOMAIN-SUFFIX,kyowarp.com  # Personal domain
-DOMAIN-SUFFIX,encveil.dev  # Personal domain
-DOMAIN-KEYWORD,kyowarp
-DOMAIN-KEYWORD,encveil
-
 # > Claw Cloud - Related Services
 DOMAIN-SUFFIX,claw.cloud
 DOMAIN-SUFFIX,run.claw.cloud
@@ -176,13 +170,6 @@ DOMAIN-SUFFIX,oracle.com
 # > Fiverr - Freelance Services Marketplace
 DOMAIN-SUFFIX,fiverr.com
 
-# > Personal Business Domains
-DOMAIN-SUFFIX,aqaba.cloud
-DOMAIN-SUFFIX,clashmail.org
-DOMAIN-SUFFIX,eaglescapital.co.uk
-DOMAIN-SUFFIX,oleafcapital.com
-DOMAIN-SUFFIX,protostarholding.com
-DOMAIN-SUFFIX,xns.one
 
 # ========================================
 # Regional Services

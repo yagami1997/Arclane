@@ -351,3 +351,6 @@ MigrationBackup/
 
 # Local only - do not track
 rules.md
+openclash.clashlist
+openclash-v2.clashlist
+openclash-v3.clashlist
