@@ -1,5 +1,5 @@
 #!name=🍟 Fries: 🌐 ASN China (Optimized)
-#!desc=精简优化版ASN分流规则 - 保证微信、政府网站访问，避免与社交媒体规则冲突 | 规则数量：约72条
+#!desc=Optimized ASN routing rules - Ensure WeChat and government website access, avoid conflicts with social media rules | Rule count: ~72
 #!author=MUMU
 #!homepage=https://github.com/yagami1997/surgemac
 #!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
@@ -7,170 +7,169 @@
 
 [Rule]
 # ========================================
-# 核心运营商骨干网 (Essential ISP Backbones)
-# 用途：确保微信、政府网站基础连接
+# Core ISP Backbones (Essential Carriers)
+# Purpose: Ensure basic connectivity for WeChat and government websites
 # ========================================
 
-# 中国电信骨干网
-IP-ASN,4134,DIRECT,no-resolve // 中国电信骨干网 (China Telecom Backbone)
-IP-ASN,4809,DIRECT,no-resolve // 中国电信下一代承载网
-IP-ASN,4811,DIRECT,no-resolve // 中国电信集团
-IP-ASN,4812,DIRECT,no-resolve // 中国电信集团
-IP-ASN,4813,DIRECT,no-resolve // 中国电信集团
-IP-ASN,4816,DIRECT,no-resolve // 中国电信集团
-IP-ASN,4835,DIRECT,no-resolve // 中国电信集团
+# China Telecom Backbone
+IP-ASN,4134,DIRECT,no-resolve // China Telecom Backbone Network
+IP-ASN,4809,DIRECT,no-resolve // China Telecom Next Generation Network
+IP-ASN,4811,DIRECT,no-resolve // China Telecom Group
+IP-ASN,4812,DIRECT,no-resolve // China Telecom Group
+IP-ASN,4813,DIRECT,no-resolve // China Telecom Group
+IP-ASN,4816,DIRECT,no-resolve // China Telecom Group
+IP-ASN,4835,DIRECT,no-resolve // China Telecom Group
 
-# 中国联通骨干网
-IP-ASN,4808,DIRECT,no-resolve // 中国联通北京省网
-IP-ASN,4837,DIRECT,no-resolve // 中国联通骨干网 (China Unicom Backbone)
-IP-ASN,9800,DIRECT,no-resolve // 中国联通
-IP-ASN,9929,DIRECT,no-resolve // 中国联通工业互联网骨干网
+# China Unicom Backbone
+IP-ASN,4808,DIRECT,no-resolve // China Unicom Beijing
+IP-ASN,4837,DIRECT,no-resolve // China Unicom Backbone Network
+IP-ASN,9800,DIRECT,no-resolve // China Unicom
+IP-ASN,9929,DIRECT,no-resolve // China Unicom Industrial Internet Backbone
 
-# 中国移动骨干网
-IP-ASN,9808,DIRECT,no-resolve // 广东移动通信有限公司
-IP-ASN,24311,DIRECT,no-resolve // 中国移动 IPv6 网络
-IP-ASN,56040,DIRECT,no-resolve // 中国移动通信公司
-IP-ASN,56041,DIRECT,no-resolve // 中国移动通信公司
-IP-ASN,56042,DIRECT,no-resolve // 中国移动通信公司
-IP-ASN,56044,DIRECT,no-resolve // 中国移动通信公司
-IP-ASN,56046,DIRECT,no-resolve // 中国移动通信公司
-IP-ASN,56047,DIRECT,no-resolve // 中国移动通信公司
-IP-ASN,56048,DIRECT,no-resolve // 中国移动通信公司
+# China Mobile Backbone
+IP-ASN,9808,DIRECT,no-resolve // Guangdong Mobile Communications
+IP-ASN,24311,DIRECT,no-resolve // China Mobile IPv6 Network
+IP-ASN,56040,DIRECT,no-resolve // China Mobile Communications
+IP-ASN,56041,DIRECT,no-resolve // China Mobile Communications
+IP-ASN,56042,DIRECT,no-resolve // China Mobile Communications
+IP-ASN,56044,DIRECT,no-resolve // China Mobile Communications
+IP-ASN,56046,DIRECT,no-resolve // China Mobile Communications
+IP-ASN,56047,DIRECT,no-resolve // China Mobile Communications
+IP-ASN,56048,DIRECT,no-resolve // China Mobile Communications
 
-# 中国铁通
-IP-ASN,9394,DIRECT,no-resolve // 中国铁通电讯公司
-IP-ASN,24138,DIRECT,no-resolve // 中国铁通电信公司
-
-# ========================================
-# 省级运营商网络 (Provincial ISP Networks)
-# 用途：确保各省运营商网络连接
-# ========================================
-
-# 主要省份电信网络
-IP-ASN,23650,DIRECT,no-resolve // 中国电信江苏省网
-IP-ASN,17633,DIRECT,no-resolve // 中国电信山东省网
-IP-ASN,17638,DIRECT,no-resolve // 中国电信天津省网
-IP-ASN,17785,DIRECT,no-resolve // 中国电信河南省网
-IP-ASN,17799,DIRECT,no-resolve // 中国电信辽宁省网
-IP-ASN,17897,DIRECT,no-resolve // 中国电信黑龙江省网
-
-# 主要省份联通网络
-IP-ASN,17621,DIRECT,no-resolve // 中国联通上海城网
-IP-ASN,17622,DIRECT,no-resolve // 中国联通广州城网
-IP-ASN,17623,DIRECT,no-resolve // 中国联通深圳城网
-IP-ASN,17816,DIRECT,no-resolve // 中国联通广东省网
-
-# 主要省份移动网络
-IP-ASN,24400,DIRECT,no-resolve // 上海移动通信有限公司
-IP-ASN,24444,DIRECT,no-resolve // 山东移动通信有限公司
-IP-ASN,24445,DIRECT,no-resolve // 河南移动通信有限公司
-IP-ASN,24547,DIRECT,no-resolve // 河北移动通信有限公司
+# China Tietong
+IP-ASN,9394,DIRECT,no-resolve // China Tietong Telecommunications
+IP-ASN,24138,DIRECT,no-resolve // China Tietong Telecom
 
 # ========================================
-# 政府机构与国家信息中心
-# 用途：政府网站正常访问
+# Provincial ISP Networks
+# Purpose: Ensure provincial carrier network connectivity
 # ========================================
-IP-ASN,4611,DIRECT,no-resolve // 中国新华网（新华社）
-IP-ASN,4859,DIRECT,no-resolve // 中华人民共和国国家信息中心
-IP-ASN,7640,DIRECT,no-resolve // 中国国际信托投资公司管理信息中心
-IP-ASN,9306,DIRECT,no-resolve // 中国国际电子商务中心
-IP-ASN,9401,DIRECT,no-resolve // 中国国家图书馆
-IP-ASN,9807,DIRECT,no-resolve // 中国国家统计局数据管理中心
-IP-ASN,9811,DIRECT,no-resolve // 国务院发展研究中心网
-IP-ASN,18118,DIRECT,no-resolve // 中信网络管理有限公司
-IP-ASN,18239,DIRECT,no-resolve // 北京首都公共信息平台
-IP-ASN,18241,DIRECT,no-resolve // 国家电力信息网
-IP-ASN,24430,DIRECT,no-resolve // 中国国家邮政局
-IP-ASN,37937,DIRECT,no-resolve // 中国电子政务信息中心
-IP-ASN,45074,DIRECT,no-resolve // 中国国家统计局数据管理中心
-IP-ASN,45075,DIRECT,no-resolve // 中国中央广播电视总台
+
+# Major Provincial Telecom Networks
+IP-ASN,23650,DIRECT,no-resolve // China Telecom Jiangsu
+IP-ASN,17633,DIRECT,no-resolve // China Telecom Shandong
+IP-ASN,17638,DIRECT,no-resolve // China Telecom Tianjin
+IP-ASN,17785,DIRECT,no-resolve // China Telecom Henan
+IP-ASN,17799,DIRECT,no-resolve // China Telecom Liaoning
+IP-ASN,17897,DIRECT,no-resolve // China Telecom Heilongjiang
+
+# Major Provincial Unicom Networks
+IP-ASN,17621,DIRECT,no-resolve // China Unicom Shanghai
+IP-ASN,17622,DIRECT,no-resolve // China Unicom Guangzhou
+IP-ASN,17623,DIRECT,no-resolve // China Unicom Shenzhen
+IP-ASN,17816,DIRECT,no-resolve // China Unicom Guangdong
+
+# Major Provincial Mobile Networks
+IP-ASN,24400,DIRECT,no-resolve // Shanghai Mobile Communications
+IP-ASN,24444,DIRECT,no-resolve // Shandong Mobile Communications
+IP-ASN,24445,DIRECT,no-resolve // Henan Mobile Communications
+IP-ASN,24547,DIRECT,no-resolve // Hebei Mobile Communications
 
 # ========================================
-# 互联网基础设施 (Internet Infrastructure)
-# 用途：DNS、域名系统等基础服务
+# Government Institutions & National Information Centers
+# Purpose: Normal access to government websites
 # ========================================
-IP-ASN,7497,DIRECT,no-resolve // 计算机网络信息中心 (CNIC)
-IP-ASN,24149,DIRECT,no-resolve // 中国互联网域名系统工程研究中心 (ZDNS)
-IP-ASN,24151,DIRECT,no-resolve // 中国互联网络信息中心 (CNNIC)
+IP-ASN,4611,DIRECT,no-resolve // Xinhua News Agency
+IP-ASN,4859,DIRECT,no-resolve // National Information Center of PRC
+IP-ASN,7640,DIRECT,no-resolve // CITIC Management Information Center
+IP-ASN,9306,DIRECT,no-resolve // China International E-Commerce Center
+IP-ASN,9401,DIRECT,no-resolve // National Library of China
+IP-ASN,9807,DIRECT,no-resolve // National Bureau of Statistics Data Center
+IP-ASN,9811,DIRECT,no-resolve // Development Research Center of State Council
+IP-ASN,18118,DIRECT,no-resolve // CITIC Network Management
+IP-ASN,18239,DIRECT,no-resolve // Beijing Capital Public Information Platform
+IP-ASN,18241,DIRECT,no-resolve // National Power Information Network
+IP-ASN,24430,DIRECT,no-resolve // State Post Bureau of China
+IP-ASN,37937,DIRECT,no-resolve // China E-Government Information Center
+IP-ASN,45074,DIRECT,no-resolve // National Bureau of Statistics Data Center
+IP-ASN,45075,DIRECT,no-resolve // China Media Group
 
 # ========================================
-# 教育网 (CERNET/CERNET2)
-# 用途：教育机构网站访问
+# Internet Infrastructure
+# Purpose: DNS and domain name system infrastructure
 # ========================================
-IP-ASN,4538,DIRECT,no-resolve // 中国教育科研网络中心 (CERNET)
-IP-ASN,4789,DIRECT,no-resolve // 中国北京清华大学教育网
-IP-ASN,9806,DIRECT,no-resolve // 北京教育信息网
-IP-ASN,18011,DIRECT,no-resolve // 中国教育实验网
-IP-ASN,38255,DIRECT,no-resolve // 中国教育研究网 (CERNET)
-IP-ASN,38272,DIRECT,no-resolve // 中国教育研究网 (CERNET)
-
-# CERNET2 核心节点（主要大学）
-IP-ASN,24348,DIRECT,no-resolve // 清华大学 (CERNET2 IX)
-IP-ASN,24349,DIRECT,no-resolve // 北京大学 (CERNET2 IX)
-IP-ASN,24350,DIRECT,no-resolve // 北京邮电大学 (CERNET2 IX)
-IP-ASN,24362,DIRECT,no-resolve // 中国科学技术大学 (CERNET2 IX)
-IP-ASN,24364,DIRECT,no-resolve // 上海交通大学 (CERNET2 IX)
-IP-ASN,24365,DIRECT,no-resolve // 复旦大学 (CERNET2 IX)
-IP-ASN,24367,DIRECT,no-resolve // 浙江大学 (CERNET2 IX)
+IP-ASN,7497,DIRECT,no-resolve // Computer Network Information Center (CNIC)
+IP-ASN,24149,DIRECT,no-resolve // China Internet Domain Name System Engineering Center (ZDNS)
+IP-ASN,24151,DIRECT,no-resolve // China Internet Network Information Center (CNNIC)
 
 # ========================================
-# 广电网络
-# 用途：广播电视网络服务
+# Education Network (CERNET/CERNET2)
+# Purpose: Direct access to education resources
 # ========================================
-IP-ASN,7641,DIRECT,no-resolve // 中国广播电视网
-IP-ASN,23771,DIRECT,no-resolve // 陕西广电网络
-IP-ASN,24150,DIRECT,no-resolve // 四川有线电视网络有限公司
-IP-ASN,24423,DIRECT,no-resolve // 福建广电网络集团
-IP-ASN,38355,DIRECT,no-resolve // 重庆广播电视宽带IP城域网
+IP-ASN,4538,DIRECT,no-resolve // China Education and Research Network Center (CERNET)
+IP-ASN,4789,DIRECT,no-resolve // Tsinghua University Education Network
+IP-ASN,9806,DIRECT,no-resolve // Beijing Education Information Network
+IP-ASN,18011,DIRECT,no-resolve // China Education Experimental Network
+IP-ASN,38255,DIRECT,no-resolve // China Education and Research Network (CERNET)
+IP-ASN,38272,DIRECT,no-resolve // China Education and Research Network (CERNET)
+
+# CERNET2 Core Nodes (Major Universities)
+IP-ASN,24348,DIRECT,no-resolve // Tsinghua University (CERNET2 IX)
+IP-ASN,24349,DIRECT,no-resolve // Peking University (CERNET2 IX)
+IP-ASN,24350,DIRECT,no-resolve // Beijing University of Posts and Telecommunications (CERNET2 IX)
+IP-ASN,24362,DIRECT,no-resolve // University of Science and Technology of China (CERNET2 IX)
+IP-ASN,24364,DIRECT,no-resolve // Shanghai Jiao Tong University (CERNET2 IX)
+IP-ASN,24365,DIRECT,no-resolve // Fudan University (CERNET2 IX)
+IP-ASN,24367,DIRECT,no-resolve // Zhejiang University (CERNET2 IX)
 
 # ========================================
-# 微信专用 (WeChat Specific)
-# ⚠️ 关键：微信图片上传需要
+# Radio and Television Networks
+# Purpose: Broadcasting and television network services
 # ========================================
-IP-ASN,45090,DIRECT,no-resolve // 深圳市腾讯计算机系统有限公司 (Tencent/WeChat)
+IP-ASN,7641,DIRECT,no-resolve // China Broadcasting Network
+IP-ASN,23771,DIRECT,no-resolve // Shaanxi Radio and Television Network
+IP-ASN,24150,DIRECT,no-resolve // Sichuan Cable TV Network
+IP-ASN,24423,DIRECT,no-resolve // Fujian Radio and Television Network Group
+IP-ASN,38355,DIRECT,no-resolve // Chongqing Broadcasting and Television Broadband Network
 
 # ========================================
-# 使用说明 (Usage Instructions)
+# WeChat Specific
+# Warning: Critical for WeChat image upload
+# ========================================
+IP-ASN,45090,DIRECT,no-resolve // Shenzhen Tencent Computer Systems (Tencent/WeChat)
+
+# ========================================
+# Usage Instructions
 # ========================================
 #
-# 【用途】
-# 本模块主要用于解决以下问题：
-# 1. 微信发送图片时可能出现的连接问题
-# 2. 政府网站的正常访问
-# 3. 教育网资源的直连访问
+# [Purpose]
+# This module is primarily used to resolve the following issues:
+# 1. WeChat image sending connection problems
+# 2. Normal access to government websites
+# 3. Direct access to education network resources
 #
-# 【优化说明】
-# - 原版规则：955条 ASN 规则
-# - 当前版本：约72条 ASN 规则（健全优化版）
-# - 精简比例：92% (删除883条)
+# [Optimization Notes]
+# - Original rules: 955 ASN rules
+# - Current version: ~72 ASN rules (optimized)
+# - Reduction ratio: 92% (removed 883 rules)
 #
-# 【已删除内容】（避免与社交媒体规则冲突）
-# ❌ 阿里云CDN (AS37963, AS37969) - 影响小红书、淘宝等
-# ❌ 百度云 (AS38340, AS55967) - 影响百度系服务
-# ❌ 腾讯云其他ASN（保留AS45090微信专用）
-# ❌ 各类商业IDC和CDN服务商（约875条）
-# ❌ 商业公司专用ASN（京东、美团、爱奇艺等）
+# [Removed Content] (To avoid conflicts with social media rules)
+# ❌ Alibaba Cloud CDN (AS37963, AS37969) - Affects social platforms
+# ❌ Baidu Cloud (AS38340, AS55967) - Affects Baidu services
+# ❌ Other Tencent Cloud ASNs (kept AS45090 for WeChat only)
+# ❌ Various commercial IDC and CDN providers (~875 rules)
+# ❌ Commercial company-specific ASNs (JD, Meituan, iQIYI, etc.)
 #
-# 【保留内容】（共约72条规则）
-# ✅ 四大运营商骨干网（电信、联通、移动、铁通）- 约25条
-# ✅ 主要省份运营商网络（14个省份）- 14条
-# ✅ 政府机构和国家信息中心（含新华社等）- 14条
-# ✅ 互联网基础设施（CNNIC、ZDNS等）- 3条
-# ✅ 教育网核心节点（CERNET/CERNET2）- 13条
-# ✅ 广电网络（5个省份）- 5条
-# ✅ 腾讯AS45090（微信图片上传专用）- 1条
+# [Retained Content] (~72 rules total)
+# ✅ Four major carrier backbones (Telecom, Unicom, Mobile, Tietong) - ~25 rules
+# ✅ Major provincial carrier networks (14 provinces) - 14 rules
+# ✅ Government institutions and national information centers - 14 rules
+# ✅ Internet infrastructure (CNNIC, ZDNS, etc.) - 3 rules
+# ✅ Education network core nodes (CERNET/CERNET2) - 13 rules
+# ✅ Radio and television networks (5 provinces) - 5 rules
+# ✅ Tencent AS45090 (WeChat image upload only) - 1 rule
 #
-# 【测试建议】
-# 如果微信发图片正常，建议停用此模块以避免任何潜在冲突
-# 测试项目：
-# 1. 微信发送图片/视频
-# 2. 小红书发帖（查看IP显示是否正确）
-# 3. 知乎评论（查看IP显示是否正确）
-# 4. 政府网站访问
+# [Testing Recommendations]
+# If WeChat image sending works normally, consider disabling this module to avoid potential conflicts
+# Test items:
+# 1. WeChat image/video sending
+# 2. Social media posting (check IP display accuracy)
+# 3. Government website access
 #
-# 【冲突说明】
-# 如果与社交媒体规则(hulo.list/socialsite.list)仍有冲突：
-# 建议完全停用本模块，改用微信专用域名规则
+# [Conflict Notes]
+# If conflicts persist with social media rules (hulo.list/socialsite.list):
+# Consider completely disabling this module and using WeChat domain-based rules instead
 #
-# 更新时间：2025-01-03
-# 版本：v2.0 Optimized
+# Last Updated: 2025-01-03
+# Version: v2.0 Optimized
