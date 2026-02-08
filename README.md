@@ -203,13 +203,13 @@ Activate your configuration and verify routing behavior through Surge's built-in
 
 ### Update Management
 
-Keep your rulesets current with automatic updates:
+Keep your rulesets up-to-date with automatic updates:
 
 ```
 Profile → Edit → External Resources → Update All
 ```
 
-**Recommended Update Frequency**: Weekly
+**Recommended Update Frequency**: Weekly or bi-weekly
 
 ## 💡 Advanced Usage
 
@@ -245,10 +245,10 @@ Profile → Edit → External Resources → Update All
 
 ### Security Considerations
 
-- All rulesets are regularly audited for security
+- All rulesets are regularly audited for security vulnerabilities
 - No third-party tracking or analytics domains included
-- Fully self-hosted with zero external dependencies
-- HTTPS-only external ruleset URLs
+- Fully self-hosted infrastructure with zero external dependencies
+- HTTPS-only ruleset URLs for secure content delivery
 
 ## 🔧 Technical Specifications
 
@@ -286,10 +286,10 @@ USER-AGENT,ApplicationName*,POLICY
 
 - **Total Rules**: 2,500+
 - **Active Rulesets**: 67 files (9 self-built + 58 comprehensive library)
-- **Monthly Updates**: 4-8 times
-- **Domains Covered**: 2,000+
+- **Update Frequency**: 4-8 times per month
+- **Domains Covered**: 2,000+ unique domains
 - **IP Ranges**: 400+ CIDR blocks
-- **Self-Hosted**: 100% autonomy
+- **Self-Hosted**: 100% autonomous infrastructure
 
 ## 🛡️ Privacy & Legal
 
