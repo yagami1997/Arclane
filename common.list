@@ -140,6 +140,9 @@ DOMAIN-SUFFIX,mypikpak.com
 # > ZeroTier - Software-Defined Networking
 DOMAIN-SUFFIX,zerotier.com
 
+# > XNS - DNS Service Provider
+DOMAIN-SUFFIX,xns.one
+
 # > Surge - Network Debugging Tool
 DOMAIN-SUFFIX,nssurge.com
 
