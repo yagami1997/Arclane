@@ -1,3 +1,10 @@
+# ============================================
+# iQIYI - Video Streaming Platform Rules
+# ============================================
+# Purpose: Route iQIYI traffic for optimal streaming
+# Coverage: iQIYI domains, CDN, and API services
+# ============================================
+
 // > IQIYI
 USER-AGENT,*QIYI*
 USER-AGENT,iQiYi*

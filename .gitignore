@@ -349,8 +349,16 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-# Local only - do not track
+# ============================================
+# Local Configuration Files - Do Not Track
+# ============================================
+# These files contain personal configurations and should
+# remain local only for privacy and security reasons
+
+# Personal documentation and reference files
 rules.md
+
+# OpenClash configurations (contain sensitive proxy settings)
 openclash.clashlist
 openclash-v2.clashlist
 openclash-v3.clashlist

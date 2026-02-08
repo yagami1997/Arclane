@@ -1,3 +1,10 @@
+# ============================================
+# TikTok - Social Media Platform Rules
+# ============================================
+# Purpose: Route TikTok traffic for optimal performance
+# Coverage: TikTok domains, CDN, and API services
+# ============================================
+
 # > TikTok
 DOMAIN-SUFFIX,byteoversea.com
 DOMAIN-SUFFIX,ibytedtos.com

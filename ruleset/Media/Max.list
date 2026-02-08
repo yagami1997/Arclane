@@ -1,3 +1,10 @@
+# ============================================
+# Max - Streaming Service Rules
+# ============================================
+# Purpose: Route Max (HBO Max) traffic for optimal streaming
+# Coverage: Max (formerly HBO Max) domains and CDN
+# ============================================
+
 # > Max
 DOMAIN-SUFFIX,max.com
 DOMAIN-SUFFIX,discomax.com

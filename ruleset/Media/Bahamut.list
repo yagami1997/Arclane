@@ -1,3 +1,10 @@
+# ============================================
+# Bahamut - Gaming & Streaming Platform Rules
+# ============================================
+# Purpose: Route Bahamut traffic for Taiwan region
+# Coverage: Bahamut domains and CDN
+# ============================================
+
 # > Bahamut
 USER-AGENT,Anime*
 DOMAIN-SUFFIX,bahamut.com.tw

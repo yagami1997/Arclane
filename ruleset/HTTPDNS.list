@@ -1,3 +1,10 @@
+# ============================================
+# HTTPDNS - DNS Security & Performance Rules
+# ============================================
+# Purpose: Block HTTPDNS to prevent DNS hijacking
+# Coverage: Common HTTPDNS providers and endpoints
+# ============================================
+
 # Block HTTPDNS
 
 

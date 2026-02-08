@@ -1,3 +1,10 @@
+# ============================================
+# Proxy - International Services Routing
+# ============================================
+# Purpose: Route international services through proxy
+# Coverage: Global services, gaming, development tools
+# ============================================
+
 # > TestFlight
 DOMAIN,testflight.apple.com
 

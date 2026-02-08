@@ -1,3 +1,10 @@
+# ============================================
+# Steam - Gaming Platform Rules
+# ============================================
+# Purpose: Optimize Steam downloads and gameplay
+# Coverage: Steam store, CDN, community features
+# ============================================
+
 # > Steam
 DOMAIN-SUFFIX,s.team
 DOMAIN-SUFFIX,steampowered.com

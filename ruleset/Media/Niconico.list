@@ -1,3 +1,10 @@
+# ============================================
+# Niconico - Japanese Video Platform Rules
+# ============================================
+# Purpose: Route Niconico traffic for Japan region
+# Coverage: Niconico domains and streaming services
+# ============================================
+
 # > Niconico
 DOMAIN-SUFFIX,dmc.nico
 DOMAIN-SUFFIX,nicovideo.jp

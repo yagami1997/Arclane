@@ -1,6 +1,13 @@
 # > Fast
 DOMAIN-SUFFIX,fast.com
 
+# ============================================
+# Speedtest - Network Testing Service
+# ============================================
+# Purpose: Route Speedtest traffic for accurate measurements
+# Coverage: Speedtest.net and Ookla services
+# ============================================
+
 # > Speedtest by Ookla
 USER-AGENT,SpeedTest*
 DOMAIN-KEYWORD,speedtest

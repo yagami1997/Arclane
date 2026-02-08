@@ -1,3 +1,10 @@
+# ============================================
+# YouTube - Video Streaming Platform Rules
+# ============================================
+# Purpose: Route YouTube traffic for optimal streaming
+# Coverage: YouTube domains, CDN, and API services
+# ============================================
+
 # > Youtube
 USER-AGENT,*youtube*
 USER-AGENT,YouTube*

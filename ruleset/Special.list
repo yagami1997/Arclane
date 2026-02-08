@@ -1,3 +1,10 @@
+# ============================================
+# Special - Custom Direct Routing Rules
+# ============================================
+# Purpose: Special cases requiring direct connection
+# Coverage: Apple CDN, CN websites, specific services
+# ============================================
+
 # > Apple CDN
 PROCESS-NAME,storedownloadd
 USER-AGENT,com.apple.appstored*

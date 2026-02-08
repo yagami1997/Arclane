@@ -1,3 +1,10 @@
+# ============================================
+# Disney Plus - Streaming Service Rules
+# ============================================
+# Purpose: Route Disney+ traffic for optimal streaming
+# Coverage: Disney+, Hulu, ESPN+, Star+
+# ============================================
+
 # > Disney Plus
 
 USER-AGENT,Disney*

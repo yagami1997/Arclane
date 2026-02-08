@@ -1,3 +1,10 @@
+# ============================================
+# DAZN - Sports Streaming Service Rules
+# ============================================
+# Purpose: Route DAZN traffic for sports streaming
+# Coverage: DAZN domains and CDN infrastructure
+# ============================================
+
 # > DAZN
 USER-AGENT,DAZN*
 

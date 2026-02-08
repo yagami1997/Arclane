@@ -1,3 +1,10 @@
+# ============================================
+# Microsoft - Ecosystem Services Rules
+# ============================================
+# Purpose: Route Microsoft services and Azure infrastructure
+# Coverage: Office 365, Azure, Xbox, Bing, OneDrive
+# ============================================
+
 # > Microsoft
 DOMAIN-SUFFIX,here.com
 DOMAIN-SUFFIX,here.net

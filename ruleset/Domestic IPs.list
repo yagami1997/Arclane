@@ -1,3 +1,10 @@
+# ============================================
+# Domestic IPs - China IP Range Rules
+# ============================================
+# Purpose: Route China IP ranges directly
+# Coverage: Mainland China IP blocks and ASN
+# ============================================
+
 # > Domestic IPs
 IP-CIDR,1.0.1.0/24,no-resolve
 IP-CIDR,1.0.2.0/23,no-resolve

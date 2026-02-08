@@ -1,3 +1,10 @@
+# ============================================
+# Spotify - Music Streaming Platform Rules
+# ============================================
+# Purpose: Route Spotify traffic for optimal streaming
+# Coverage: Spotify domains, CDN, and API services
+# ============================================
+
 # > Spotify
 USER-AGENT,Spotify*
 DOMAIN-KEYWORD,spotify

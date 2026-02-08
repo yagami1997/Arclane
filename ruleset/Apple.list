@@ -1,3 +1,10 @@
+# ============================================
+# Apple Services - Routing Rules
+# ============================================
+# Purpose: Route Apple ecosystem services
+# Coverage: Apple API, iCloud, App Store, iTunes
+# ============================================
+
 # > Apple API
 DOMAIN-KEYWORD,apple.com.akadns.net
 DOMAIN-KEYWORD,icloud.com.akadns.net

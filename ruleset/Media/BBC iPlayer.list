@@ -1,3 +1,10 @@
+# ============================================
+# BBC iPlayer - UK Streaming Service Rules
+# ============================================
+# Purpose: Route BBC iPlayer traffic for UK region
+# Coverage: BBC iPlayer domains and streaming services
+# ============================================
+
 # > BBC iPlayer
 USER-AGENT,BBCiPlayer*
 DOMAIN-KEYWORD,-uk-live.akamaized.net

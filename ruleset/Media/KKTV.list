@@ -1,3 +1,10 @@
+# ============================================
+# KKTV - Taiwan Streaming Service Rules
+# ============================================
+# Purpose: Route KKTV traffic for Taiwan region
+# Coverage: KKTV domains and streaming infrastructure
+# ============================================
+
 # > KKTV
 USER-AGENT,KKTV*
 USER-AGENT,com.kktv*

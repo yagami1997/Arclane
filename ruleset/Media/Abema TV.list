@@ -1,3 +1,10 @@
+# ============================================
+# Abema TV - Japanese Streaming Service Rules
+# ============================================
+# Purpose: Route Abema TV traffic for Japan region
+# Coverage: Abema TV domains and streaming infrastructure
+# ============================================
+
 # > AbemaTV
 USER-AGENT,AbemaTV*
 DOMAIN-SUFFIX,abema-tv.com

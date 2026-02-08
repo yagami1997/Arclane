@@ -1,3 +1,10 @@
+# ============================================
+# Bilibili - Video Streaming Platform Rules
+# ============================================
+# Purpose: Route Bilibili traffic for optimal streaming
+# Coverage: Bilibili domains, CDN, and API services
+# ============================================
+
 # > Bilibili
 USER-AGENT,bili*
 DOMAIN-SUFFIX,acg.tv

@@ -1,3 +1,10 @@
+# ============================================
+# miHoYo - Gaming Platform Rules
+# ============================================
+# Purpose: Optimize miHoYo game traffic routing
+# Coverage: Genshin Impact, Honkai series, Zenless Zone Zero
+# ============================================
+
 # > miHoYo
 DOMAIN-SUFFIX,bh3.com
 DOMAIN-SUFFIX,hoyolab.com

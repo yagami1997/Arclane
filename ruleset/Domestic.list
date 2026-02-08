@@ -1,3 +1,10 @@
+# ============================================
+# Domestic - China Network Routing Rules
+# ============================================
+# Purpose: Route China domestic services directly
+# Coverage: Banks, commerce, government, education
+# ============================================
+
 # China Banks
 # > Agricultural Bank of China
 DOMAIN-SUFFIX,abchina.com
