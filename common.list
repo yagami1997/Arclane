@@ -113,6 +113,10 @@ DOMAIN-KEYWORD,ibkr
 DOMAIN-SUFFIX,moomoo.com
 DOMAIN-KEYWORD,moomoo
 
+# > Kraken - Cryptocurrency Exchange (proxy routing for access)
+DOMAIN-SUFFIX,kraken.com
+DOMAIN-KEYWORD,kraken
+
 # ========================================
 # E-commerce & Shopping
 # ========================================
