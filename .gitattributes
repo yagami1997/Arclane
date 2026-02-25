@@ -1,2 +1,19 @@
-*.md linguist-documentation=false
-*.md linguist-detectable=true
+# Normalize line endings across platforms
+* text=auto
+
+# Force LF for all rule and text files
+*.list text eol=lf
+*.md   text eol=lf
+*.txt  text eol=lf
+*.json text eol=lf
+
+# Binary assets — no diff, no merge
+*.png  binary
+*.jpg  binary
+*.ico  binary
+
+# GitHub Linguist overrides
+*.md   linguist-documentation=false
+*.md   linguist-detectable=true
+*.list linguist-detectable=true
+*.list linguist-language=Text
