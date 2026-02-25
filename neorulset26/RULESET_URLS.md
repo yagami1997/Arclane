@@ -437,46 +437,79 @@ Assign them as needed based on your config requirements.
 Paste this block into your Surge `[Rule]` section in order.  
 Policy group names must match exactly what you define in `[Proxy Group]`.
 
+Priority design rationale:
+- Tier 1 (single rules) fires before any RULE-SET — catches hand-written overrides instantly.
+- Tier 2 (REJECT) runs early so ad/DNS-leak domains are always blocked regardless of later routing rules.
+- Tier 3 (your 5 custom groups) overrides all pre-built rule-sets below, eliminating any overlap conflict.
+- Tier 9 (Proxy.list) acts as international catchall, placed late so it never steals traffic from explicit groups.
+- Tier 10 (Domestic) is the final direct-connect safety net — lowest RULE-SET priority.
+
 ```
-# ── Pre-flight ──────────────────────────────────────────────
+# ════════════════════════════════════════════════════════════
+# TIER 1 — Single custom rules  (absolute highest priority)
+# Add per-domain / per-process / per-IP overrides here.
+# Examples:
+#   DOMAIN,specific.internal.example.com,Direct
+#   PROCESS-NAME,YourApp,Proxy
+#   IP-CIDR,192.168.0.0/16,Direct,no-resolve
+# ════════════════════════════════════════════════════════════
+
+# ════════════════════════════════════════════════════════════
+# TIER 2 — Pre-flight REJECT
+# Must run before any proxy routing to ensure ad/DNS-leak
+# domains are always dropped, even if they appear in later sets.
+# ════════════════════════════════════════════════════════════
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/AdBlock.list,REJECT
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/HTTPDNS.list,REJECT
 
-# ── 01 Proxy ────────────────────────────────────────────────
-RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Proxy.list,Proxy
+# ════════════════════════════════════════════════════════════
+# TIER 3 — Your 5 fully custom groups  (override everything below)
+# PayPal / Common / Social / Bytedance / HULO
+# These files are hand-authored; their policy decisions are final.
+# ════════════════════════════════════════════════════════════
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/paypal.list,PayPal
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/common.list,Common
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/socialsite.list,Social
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/bytedance.list,Bytedance
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/hulo.list,HULO
 
-# ── 02 Domestic ─────────────────────────────────────────────
-RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Domestic.list,Domestic
-RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Domestic%20IPs.list,Domestic
-RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Special.list,Domestic
-
-# ── 04 AI Suite ──────────────────────────────────────────────
+# ════════════════════════════════════════════════════════════
+# TIER 4 — AI + Big Tech
+# ════════════════════════════════════════════════════════════
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/ai.list,AI Suite
-
-# ── 05 Google ────────────────────────────────────────────────
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/google.list,Google
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Google%20FCM.list,Google
-
-# ── 06 Microsoft ─────────────────────────────────────────────
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Microsoft.list,Microsoft
-
-# ── 07 Apple ─────────────────────────────────────────────────
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Apple.list,Apple
-
-# ── 08 Scholar ───────────────────────────────────────────────
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/scholar.list,Scholar
 
-# ── 09 PayPal ────────────────────────────────────────────────
-RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/paypal.list,PayPal
-
-# ── 10 Crypto ────────────────────────────────────────────────
+# ════════════════════════════════════════════════════════════
+# TIER 5 — Crypto & Finance
+# ════════════════════════════════════════════════════════════
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/crypto.list,Crypto
 
-# ── 11 YouTube ───────────────────────────────────────────────
+# ════════════════════════════════════════════════════════════
+# TIER 6 — YouTube (standalone, highest unlock priority)
+# ════════════════════════════════════════════════════════════
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/YouTube.list,YouTube
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/YouTube%20Music.list,YouTube
 
-# ── 12 Streaming-US ──────────────────────────────────────────
+# ════════════════════════════════════════════════════════════
+# TIER 7 — Streaming (by region)
+# ════════════════════════════════════════════════════════════
+
+# ── Streaming-JP ─────────────────────────────────────────────
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Netflix.list,Streaming-JP
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Apple%20TV.list,Streaming-JP
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Abema%20TV.list,Streaming-JP
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/DMM.list,Streaming-JP
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Niconico.list,Streaming-JP
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Hulu%20Japan.list,Streaming-JP
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Japonx.list,Streaming-JP
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/F1%20TV.list,Streaming-JP
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Streaming-JP.list,Streaming-JP
+
+# ── Streaming-US ─────────────────────────────────────────────
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Disney%20Plus.list,Streaming-US
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Max.list,Streaming-US
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Hulu.list,Streaming-US
@@ -492,18 +525,7 @@ RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/DAZN.list,Streaming-US
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Streaming-US.list,Streaming-US
 
-# ── 13 Streaming-JP ──────────────────────────────────────────
-RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Netflix.list,Streaming-JP
-RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Apple%20TV.list,Streaming-JP
-RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Abema%20TV.list,Streaming-JP
-RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/DMM.list,Streaming-JP
-RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Niconico.list,Streaming-JP
-RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Hulu%20Japan.list,Streaming-JP
-RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Japonx.list,Streaming-JP
-RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/F1%20TV.list,Streaming-JP
-RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Streaming-JP.list,Streaming-JP
-
-# ── 14 Streaming-TW ──────────────────────────────────────────
+# ── Streaming-TW ─────────────────────────────────────────────
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/KKTV.list,Streaming-TW
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/KKBOX.list,Streaming-TW
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Line%20TV.list,Streaming-TW
@@ -511,13 +533,13 @@ RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/MOO.list,Streaming-TW
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Streaming-TW.list,Streaming-TW
 
-# ── 15 Streaming-HK ──────────────────────────────────────────
+# ── Streaming-HK ─────────────────────────────────────────────
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/ViuTV.list,Streaming-HK
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/myTV%20SUPER.list,Streaming-HK
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/encoreTVB.list,Streaming-HK
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/WeTV.list,Streaming-HK
 
-# ── 16 CN Mainland TV ────────────────────────────────────────
+# ── CN Mainland TV ───────────────────────────────────────────
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Bilibili.list,CN Mainland TV
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/IQIYI.list,CN Mainland TV
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Youku.list,CN Mainland TV
@@ -528,28 +550,37 @@ RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/JOOX.list,CN Mainland TV
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/Streaming-CN.list,CN Mainland TV
 
-# ── 17 Messenger ─────────────────────────────────────────────
+# ════════════════════════════════════════════════════════════
+# TIER 8 — Messenger + TikTok
+# ════════════════════════════════════════════════════════════
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/messenger.list,Messenger
-
-# ── 18 Social ────────────────────────────────────────────────
-RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/socialsite.list,Social
-
-# ── 19 Bytedance ─────────────────────────────────────────────
-RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/bytedance.list,Bytedance
-
-# ── 20 TikTok ────────────────────────────────────────────────
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/TikTok.list,TikTok
 
-# ── 21 Common ────────────────────────────────────────────────
-RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/common.list,Common
-
-# ── 22 HULO ──────────────────────────────────────────────────
-RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/hulo.list,HULO
-
-# ── 23 Speedtest ─────────────────────────────────────────────
+# ════════════════════════════════════════════════════════════
+# TIER 9 — Speedtest
+# ════════════════════════════════════════════════════════════
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Speedtest.list,Speedtest
 
-# ── Final fallback ───────────────────────────────────────────
+# ════════════════════════════════════════════════════════════
+# TIER 10 — Proxy  (international catchall — placed late intentionally)
+# Catches remaining international traffic not matched by any
+# specific group above. Placed after custom groups to avoid
+# stealing traffic from explicit routing decisions.
+# ════════════════════════════════════════════════════════════
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Proxy.list,Proxy
+
+# ════════════════════════════════════════════════════════════
+# TIER 11 — Domestic  (final direct-connect safety net)
+# Lowest RULE-SET priority. Only handles CN traffic not already
+# matched by the custom groups above (Social/Bytedance/HULO).
+# ════════════════════════════════════════════════════════════
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Domestic.list,Domestic
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Domestic%20IPs.list,Domestic
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Special.list,Domestic
+
+# ════════════════════════════════════════════════════════════
+# FINAL fallback
+# ════════════════════════════════════════════════════════════
 GEOIP,CN,Domestic
 FINAL,Others
 ```
