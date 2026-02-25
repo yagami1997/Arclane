@@ -1,0 +1,47 @@
+# > hulo.list - CN Social Routing Rules
+# > Domain-based routing for network optimization
+
+# ========================================
+# CN Social Platform A
+# ========================================
+
+# > User-Agent Rules
+USER-AGENT,*zhihu*
+USER-AGENT,zhihu*
+USER-AGENT,*ZhihuHybrid*
+USER-AGENT,*osee*
+
+# > Domain Rules
+DOMAIN,api.zhihu.com
+DOMAIN-SUFFIX,zhihu.com
+DOMAIN-SUFFIX,zhimg.com
+DOMAIN-KEYWORD,zhihu
+
+# ========================================
+# CN Social Platform B - Optimized 2026.02
+# ========================================
+
+# > User-Agent Rules
+USER-AGENT,*xiaohongshu*
+USER-AGENT,*redbook*
+
+# > Core Domain Rules
+DOMAIN-SUFFIX,xiaohongshu.com
+DOMAIN-SUFFIX,xhscdn.com
+DOMAIN-SUFFIX,xhscdn.net
+DOMAIN-SUFFIX,xhslink.com
+
+# > Extended Domain Rules (Community contributed)
+DOMAIN-SUFFIX,xhsdns.com
+DOMAIN-SUFFIX,xhsdns.net
+DOMAIN-SUFFIX,xhssys.com
+DOMAIN-SUFFIX,xhsurl.com
+DOMAIN-SUFFIX,xhsredcdn.com
+DOMAIN-SUFFIX,cdnxhs.com
+
+# > Domain Keywords
+DOMAIN-KEYWORD,xiaohongshu
+DOMAIN-KEYWORD,xhs
+
+# > Third-party Services
+DOMAIN-SUFFIX,fengkongcloud.com

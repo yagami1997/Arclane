@@ -1,0 +1,198 @@
+# > socialsite.list - Social Platform Routing Rules
+# > Domain-based routing for network optimization
+
+# ========================================
+# CN Platform - Video Community
+# ========================================
+
+# > User-Agent Rules
+USER-AGENT,bili*
+USER-AGENT,bili-inter*
+
+# > Domain Rules
+DOMAIN-SUFFIX,bilibili.com
+DOMAIN-SUFFIX,bilibili.tv
+DOMAIN-SUFFIX,biliapi.com
+DOMAIN-SUFFIX,biliapi.net
+DOMAIN-SUFFIX,biligame.com
+DOMAIN-SUFFIX,hdslb.com
+DOMAIN-SUFFIX,bilivideo.com
+DOMAIN-SUFFIX,bilivideo.cn
+DOMAIN-SUFFIX,biliimg.com
+DOMAIN-SUFFIX,acg.tv
+DOMAIN-SUFFIX,im9.com
+
+# ========================================
+# CN Platform - Microblog
+# ========================================
+
+# > User-Agent Rules
+USER-AGENT,weibo*
+USER-AGENT,*weibo*
+
+# > Domain Rules
+DOMAIN-SUFFIX,weibo.com
+DOMAIN-SUFFIX,weibo.cn
+DOMAIN-SUFFIX,weibo.com.cn
+DOMAIN-SUFFIX,weibocdn.com
+DOMAIN-SUFFIX,sinaimg.cn
+DOMAIN-SUFFIX,sinaimg.com
+DOMAIN-SUFFIX,sina.com.cn
+DOMAIN-KEYWORD,weibo
+DOMAIN-KEYWORD,sinaimg
+
+# ========================================
+# CN Platform - Forum
+# ========================================
+
+# > User-Agent Rules
+USER-AGENT,*tieba*
+USER-AGENT,*baidu*
+
+# > Domain Rules
+DOMAIN-SUFFIX,tieba.baidu.com
+DOMAIN-SUFFIX,tbcdn.bcebos.com
+DOMAIN-SUFFIX,tiebaimg.com
+DOMAIN-SUFFIX,bdstatic.com
+DOMAIN-KEYWORD,tieba
+
+# ========================================
+# CN Platform - Review Community
+# ========================================
+
+# > User-Agent Rules
+USER-AGENT,*douban*
+
+# > Domain Rules
+DOMAIN-SUFFIX,douban.com
+DOMAIN-SUFFIX,doubanio.com
+DOMAIN-KEYWORD,douban
+
+# ========================================
+# CN Platform - Sports Community
+# ========================================
+
+# > User-Agent Rules
+USER-AGENT,*hupu*
+
+# > Domain Rules
+DOMAIN-SUFFIX,hupu.com
+DOMAIN-SUFFIX,hoopchina.com
+DOMAIN-SUFFIX,hupucdn.com
+DOMAIN-KEYWORD,hupu
+
+# ========================================
+# CN Platform - Social Network
+# ========================================
+
+# > User-Agent Rules
+USER-AGENT,*jike*
+USER-AGENT,*ruguoapp*
+
+# > Domain Rules
+DOMAIN-SUFFIX,okjike.com
+DOMAIN-SUFFIX,ruguoapp.com
+DOMAIN-SUFFIX,jikeapp.cn
+DOMAIN-KEYWORD,jike
+
+# ========================================
+# CN Platform - IM Social
+# ========================================
+
+# > User-Agent Rules
+USER-AGENT,*qzone*
+
+# > Domain Rules
+DOMAIN-SUFFIX,qzone.qq.com
+DOMAIN-SUFFIX,qpic.cn
+DOMAIN-SUFFIX,qlogo.cn
+DOMAIN-SUFFIX,gtimg.cn
+DOMAIN-KEYWORD,qzone
+
+# ========================================
+# CN Platform - Others
+# ========================================
+
+# > Gaming Community
+DOMAIN-SUFFIX,nga.178.com
+DOMAIN-SUFFIX,ngabbs.com
+DOMAIN,bbs.nga.cn
+
+# > Tech Community
+DOMAIN-SUFFIX,keylol.com
+DOMAIN-SUFFIX,xiaohuangwen.com
+
+# > Mobile Game Community
+DOMAIN-SUFFIX,taptapdada.com
+DOMAIN,api.taptapdada.com
+
+# > Android Community
+DOMAIN-SUFFIX,coolapk.com
+DOMAIN,api.coolapk.com
+
+# > File Sharing
+DOMAIN,www.wenshushu.cn
+
+# > Game Services
+DOMAIN,god.gameyw.netease.com
+
+# > Live Streaming
+DOMAIN-SUFFIX,huya.com
+
+# > Sports News
+DOMAIN-SUFFIX,dongqiudi.com
+
+# ========================================
+# International - Discussion Platform
+# ========================================
+
+# > User-Agent Rules
+USER-AGENT,*reddit*
+USER-AGENT,*Reddit*
+
+# > Domain Rules
+DOMAIN-SUFFIX,reddit.com
+DOMAIN-SUFFIX,redd.it
+DOMAIN-SUFFIX,redditstatic.com
+DOMAIN-SUFFIX,redditmedia.com
+DOMAIN-SUFFIX,redditinc.com
+DOMAIN-KEYWORD,reddit
+
+# ========================================
+# International - Social Platform
+# ========================================
+
+# > User-Agent Rules
+USER-AGENT,*TruthSocial*
+USER-AGENT,*Truth Social*
+
+# > Domain Rules
+DOMAIN-SUFFIX,truthsocial.com
+DOMAIN-SUFFIX,tmtg.com
+DOMAIN-SUFFIX,truthsocial.co.uk
+DOMAIN-KEYWORD,truthsocial
+
+# ========================================
+# International - Messaging
+# ========================================
+
+# > Domain Rules
+DOMAIN-SUFFIX,line.me
+DOMAIN-SUFFIX,line.naver.jp
+DOMAIN-SUFFIX,line-scdn.net
+DOMAIN-SUFFIX,line-apps.com
+
+# > IP Ranges
+IP-CIDR,103.2.28.0/22,no-resolve
+IP-CIDR,119.235.224.0/21,no-resolve
+IP-CIDR,119.235.232.0/23,no-resolve
+IP-CIDR,119.235.235.0/24,no-resolve
+IP-CIDR,119.235.236.0/23,no-resolve
+IP-CIDR,125.6.146.0/24,no-resolve
+IP-CIDR,125.6.149.0/24,no-resolve
+IP-CIDR,125.6.190.0/24,no-resolve
+IP-CIDR,125.209.208.0/20,no-resolve
+IP-CIDR,203.104.103.0/24,no-resolve
+IP-CIDR,203.104.128.0/20,no-resolve
+IP-CIDR,203.174.66.64/26,no-resolve
+IP-CIDR,203.174.77.0/24,no-resolve

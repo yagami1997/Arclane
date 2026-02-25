@@ -1,0 +1,214 @@
+# ============================================
+# Common Sites - Essential Services & Tools
+# ============================================
+# This list contains frequently used services that benefit from proxy routing
+# Use these rules when direct connection is slow or unreliable
+# Coverage: Development, Email, Cloud, Finance, Travel, and more
+
+# ========================================
+# Development & Testing Tools
+# ========================================
+
+# > TestFlight - iOS App Beta Testing Platform
+DOMAIN,testflight.apple.com
+
+# > GitHub - Code Hosting & Version Control
+DOMAIN-SUFFIX,github.com
+DOMAIN-KEYWORD,github
+
+# > jsDelivr - Open Source CDN
+DOMAIN-SUFFIX,jsdelivr.com
+DOMAIN-SUFFIX,jsdelivr.net
+DOMAIN-KEYWORD,jsdelivr
+
+# ========================================
+# Email Services
+# ========================================
+
+# > ProtonMail - Encrypted Email Service
+DOMAIN-SUFFIX,protonmail.com
+DOMAIN-SUFFIX,proton.me
+DOMAIN-KEYWORD,proton
+
+# > Zoho - Business Email & Productivity Suite
+DOMAIN-SUFFIX,zoho.com
+
+# ========================================
+# Personal & Custom Services
+# ========================================
+
+# > Cloud Services - Custom Infrastructure
+DOMAIN-SUFFIX,claw.cloud
+DOMAIN-SUFFIX,run.claw.cloud
+
+# ========================================
+# Domain & Hosting Services
+# ========================================
+
+# > GoDaddy - Domain Registrar & Web Hosting
+DOMAIN-SUFFIX,godaddy.com
+DOMAIN-KEYWORD,godaddy
+
+# ========================================
+# IP & Network Testing Tools
+# ========================================
+
+# > IP Information & Geolocation Services
+DOMAIN-SUFFIX,whoer.net  # IP & browser fingerprint checker
+DOMAIN-SUFFIX,ping0.cc  # IP detection service
+DOMAIN-SUFFIX,ippure.com # IP detection service
+DOMAIN-SUFFIX,ipinfo.io  # IP address information lookup
+DOMAIN-SUFFIX,ip138.com #IP 138 
+DOMAIN-SUFFIX,ip2location.com  # IP geolocation database
+DOMAIN-SUFFIX,ipqualityscore.com  # IP quality & fraud detection
+DOMAIN-SUFFIX,ipdata.co  # IP geolocation API
+DOMAIN-SUFFIX,ip.sb  # Simple IP lookup service
+DOMAIN-SUFFIX,ipjiance.com  # IP detection service (CN)
+DOMAIN-SUFFIX,scamalytics.com  # IP fraud score checker
+DOMAIN-SUFFIX,freecarrierlookup.com  # Phone carrier lookup
+
+# ========================================
+# Cloud & CDN Services
+# ========================================
+
+# > Cloudflare Pages - Static Site Hosting
+DOMAIN-SUFFIX,pages.dev
+
+# > G-Core Labs - CDN & Cloud Services
+DOMAIN-SUFFIX,gcore.com
+
+# > iProyal - Proxy & Data Collection Services
+DOMAIN-SUFFIX,iproyal.com
+
+# > Airalo - eSIM & Mobile Data Provider
+DOMAIN-SUFFIX,airalo.com
+
+# ========================================
+# Virtual Address & Mail Services
+# ========================================
+
+# > Anytime Mailbox - Virtual Address Service
+DOMAIN-SUFFIX,anytimemailbox.com
+
+# > iPostal1 - Virtual Mailbox Service
+DOMAIN-SUFFIX,ipostal1.com
+DOMAIN-SUFFIX,ipostalmail.net
+
+# > Mobal - International Mail Forwarding
+DOMAIN-SUFFIX,mobal.com.cn
+DOMAIN-SUFFIX,mobal.com
+DOMAIN-KEYWORD,mobal
+
+# ========================================
+# Financial & Investment Services
+# ========================================
+
+# > Interactive Brokers (IBKR) - Online Brokerage Platform
+DOMAIN-SUFFIX,interactivebrokers.com
+DOMAIN-KEYWORD,interactivebrokers
+DOMAIN-SUFFIX,ibkr.com
+DOMAIN-KEYWORD,ibkr
+
+# > Moomoo - Stock Trading & Investment App
+DOMAIN-SUFFIX,moomoo.com
+DOMAIN-KEYWORD,moomoo
+
+# > Kraken - Cryptocurrency Exchange (proxy routing for access)
+DOMAIN-SUFFIX,kraken.com
+DOMAIN-KEYWORD,kraken
+
+# ========================================
+# E-commerce & Shopping
+# ========================================
+
+# > Canada Goose - Luxury Winter Outerwear
+DOMAIN-SUFFIX,canadagoose.com
+
+# ========================================
+# Travel & Hospitality
+# ========================================
+
+# > Marriott - International Hotel Chain
+DOMAIN-SUFFIX,marriott.com.cn
+DOMAIN-SUFFIX,marriott.com
+DOMAIN-KEYWORD,marriott
+
+# ========================================
+# Storage & File Services
+# ========================================
+
+# > PikPak - Cloud Storage & Download Service
+DOMAIN-SUFFIX,mypikpak.com
+
+# ========================================
+# Networking & VPN Services
+# ========================================
+
+# > ZeroTier - Software-Defined Networking
+DOMAIN-SUFFIX,zerotier.com
+
+# > XNS - DNS Service Provider
+DOMAIN-SUFFIX,xns.one
+
+# > Surge - Network Debugging Tool
+DOMAIN-SUFFIX,nssurge.com
+
+# ========================================
+# Creative & Design Tools
+# ========================================
+
+# > Civitai - AI Art Models Community
+DOMAIN-SUFFIX,civitai.com
+
+# > macOS Icons - Icon Resource Collection
+DOMAIN-SUFFIX,macosicons.com
+
+# ========================================
+# Education & Research
+# ========================================
+
+# > Columbia University - Ivy League Institution
+DOMAIN-SUFFIX,columbia.edu
+
+# ========================================
+# Business & Enterprise Services
+# ========================================
+
+# > Oracle - Enterprise Software & Cloud Solutions
+DOMAIN-SUFFIX,oracle.com
+
+# > Fiverr - Freelance Services Marketplace
+DOMAIN-SUFFIX,fiverr.com
+
+
+# ========================================
+# Regional Services
+# ========================================
+
+# > Zaobao - Singapore Chinese Newspaper
+DOMAIN-SUFFIX,zaobao.com
+DOMAIN-SUFFIX,zaobao.com.sg
+
+# > LifeCard - Japan Prepaid Card Service
+DOMAIN-SUFFIX,lifecard.co.jp
+
+# > USPS - United States Postal Service
+DOMAIN-SUFFIX,usps.com
+
+# > Wise - International Money Transfer
+DOMAIN-SUFFIX,wise.com
+
+# ========================================
+# Weather Services
+# ========================================
+
+# > Weather.com - Weather Forecast & Conditions
+DOMAIN-SUFFIX,weather.com
+DOMAIN-KEYWORD,weather
+
+# ========================================
+# Performance & Benchmarking
+# ========================================
+
+# > Geekbench - Cross-Platform Benchmark Tool
+DOMAIN-SUFFIX,geekbench.com

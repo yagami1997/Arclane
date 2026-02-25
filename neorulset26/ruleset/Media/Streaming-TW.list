@@ -1,0 +1,135 @@
+# ============================================
+# Streaming-TW - Taiwan Streaming Supplement
+# ============================================
+# Strategy Group: Streaming-TW
+# Purpose: Supplemental Taiwan streaming rules not covered by individual service files
+# Coverage: 4GTV, LiTV, Friday Video, Taiwan TV stations, CatchPlay,
+#           PTS+, TaiwanPlay, GigaTV, Hami Video, etc.
+# Node Requirement: TW node (recommended: OIX TW Premium3)
+# Note: Use alongside KKTV.list, KKBOX.list, Line TV.list, Bahamut.list, etc.
+# ============================================
+
+# ========================================
+# 4GTV (4K OTT - Taiwan)
+# ========================================
+
+DOMAIN-SUFFIX,4gtv.tv
+DOMAIN-SUFFIX,4gtvapp.com
+DOMAIN-KEYWORD,4gtv
+
+# ========================================
+# LiTV (Online TV)
+# ========================================
+
+DOMAIN-SUFFIX,litv.tv
+DOMAIN-KEYWORD,litv
+
+# ========================================
+# Friday Video (遠傳)
+# ========================================
+
+DOMAIN-SUFFIX,video.friday.tw
+DOMAIN-SUFFIX,friday.tw
+DOMAIN-KEYWORD,friday.tw
+
+# ========================================
+# CatchPlay (Premium Streaming)
+# ========================================
+
+DOMAIN-SUFFIX,catchplay.com
+DOMAIN-KEYWORD,catchplay
+
+# ========================================
+# PTS+ (公共電視)
+# ========================================
+
+DOMAIN-SUFFIX,pts.org.tw
+DOMAIN-SUFFIX,ptsplus.tw
+DOMAIN-KEYWORD,pts.org.tw
+
+# ========================================
+# TaiwanPlay (台灣大哥大)
+# ========================================
+
+DOMAIN-SUFFIX,taiwanplay.com.tw
+DOMAIN-KEYWORD,taiwanplay
+
+# ========================================
+# GigaTV (亞太電信)
+# ========================================
+
+DOMAIN-SUFFIX,gigatv.com.tw
+DOMAIN-KEYWORD,gigatv
+
+# ========================================
+# Hami Video (中華電信)
+# ========================================
+
+DOMAIN-SUFFIX,hamivideo.hinet.net
+DOMAIN-SUFFIX,hinet.net
+DOMAIN-KEYWORD,hamivideo
+
+# ========================================
+# FTV (民視)
+# ========================================
+
+DOMAIN-SUFFIX,ftv.com.tw
+DOMAIN-KEYWORD,ftv.com.tw
+
+# ========================================
+# TVBS On Demand
+# ========================================
+
+DOMAIN-SUFFIX,tvbs.com.tw
+DOMAIN-KEYWORD,tvbs
+
+# ========================================
+# SET (三立電視)
+# ========================================
+
+DOMAIN-SUFFIX,set.com.tw
+DOMAIN-KEYWORD,set.com.tw
+
+# ========================================
+# EBC (東森電視)
+# ========================================
+
+DOMAIN-SUFFIX,ettoday.net
+DOMAIN-SUFFIX,ebc.net.tw
+DOMAIN-KEYWORD,ettoday
+
+# ========================================
+# CTV (中視)
+# ========================================
+
+DOMAIN-SUFFIX,ctv.com.tw
+DOMAIN-KEYWORD,ctv.com.tw
+
+# ========================================
+# TTV (台視)
+# ========================================
+
+DOMAIN-SUFFIX,ttv.com.tw
+DOMAIN-KEYWORD,ttv.com.tw
+
+# ========================================
+# CTS (華視)
+# ========================================
+
+DOMAIN-SUFFIX,cts.com.tw
+DOMAIN-KEYWORD,cts.com.tw
+
+# ========================================
+# UDN Video (聯合影音)
+# ========================================
+
+DOMAIN-SUFFIX,video.udn.com
+DOMAIN-SUFFIX,udn.com
+DOMAIN-KEYWORD,video.udn
+
+# ========================================
+# Viu Taiwan
+# ========================================
+
+DOMAIN-SUFFIX,viu.com
+DOMAIN-KEYWORD,viu.com

@@ -1,0 +1,134 @@
+# ============================================
+# Streaming-JP - Japan Streaming Supplement
+# ============================================
+# Strategy Group: Streaming-JP
+# Purpose: Supplemental Japan streaming rules not covered by individual service files
+# Coverage: U-NEXT, FOD, TVer, dTV, Lemino, NHK+, Paravi, Disney+ JP,
+#           Rakuten TV, GYAO, Telasa, J:COM On Demand, etc.
+# Node Requirement: JP node with clean IP (recommended: Flower JP Premium2)
+# Note: Use alongside Netflix.list, Abema TV.list, DMM.list, Niconico.list, etc.
+# ============================================
+
+# ========================================
+# U-NEXT
+# ========================================
+
+USER-AGENT,U-NEXT*
+DOMAIN-SUFFIX,unext.jp
+DOMAIN-SUFFIX,video.unext.jp
+DOMAIN-SUFFIX,unext.co.jp
+DOMAIN-KEYWORD,unext
+
+# ========================================
+# TVer (Free TV Catch-up)
+# ========================================
+
+DOMAIN-SUFFIX,tver.jp
+DOMAIN-SUFFIX,tver.akamaized.net
+DOMAIN-KEYWORD,tver
+
+# ========================================
+# FOD (Fuji TV On Demand)
+# ========================================
+
+DOMAIN-SUFFIX,fod.fujitv.co.jp
+DOMAIN-SUFFIX,fujitv.co.jp
+DOMAIN-SUFFIX,fod-sp.fujitv.co.jp
+DOMAIN-KEYWORD,fod.fujitv
+
+# ========================================
+# dTV / Lemino (NTT Docomo)
+# ========================================
+
+DOMAIN-SUFFIX,video.dmkt-sp.jp
+DOMAIN-SUFFIX,dmp.dmkt-sp.jp
+DOMAIN-SUFFIX,dmkt-sp.jp
+DOMAIN-SUFFIX,lemino.docomo.ne.jp
+DOMAIN-SUFFIX,docomo.ne.jp
+DOMAIN-KEYWORD,lemino
+
+# ========================================
+# NHK+ (NHK On Demand)
+# ========================================
+
+DOMAIN-SUFFIX,nhk.or.jp
+DOMAIN-SUFFIX,nhk.jp
+DOMAIN-KEYWORD,nhk.or.jp
+
+# ========================================
+# Paravi (TBS / TV Tokyo)
+# ========================================
+
+DOMAIN-SUFFIX,paravi.jp
+DOMAIN-SUFFIX,videomarket.jp
+DOMAIN-KEYWORD,paravi
+
+# ========================================
+# Rakuten TV
+# ========================================
+
+DOMAIN-SUFFIX,rakuten.tv
+DOMAIN-SUFFIX,rakuten.co.jp
+DOMAIN-SUFFIX,rx.rakuten.co.jp
+DOMAIN-KEYWORD,rakuten.tv
+
+# ========================================
+# TELASA (KDDI / au)
+# ========================================
+
+DOMAIN-SUFFIX,telasa.jp
+DOMAIN-SUFFIX,au.com
+DOMAIN-KEYWORD,telasa
+
+# ========================================
+# J:COM On Demand
+# ========================================
+
+DOMAIN-SUFFIX,jcom.co.jp
+DOMAIN-KEYWORD,jcom.co.jp
+
+# ========================================
+# Bandai Channel (Anime)
+# ========================================
+
+DOMAIN-SUFFIX,b-ch.com
+DOMAIN-KEYWORD,bandaichannel
+
+# ========================================
+# Akiba-Online / Hikari TV
+# ========================================
+
+DOMAIN-SUFFIX,hikaritv.net
+DOMAIN-KEYWORD,hikaritv
+
+# ========================================
+# WOWOW (Premium Cable)
+# ========================================
+
+DOMAIN-SUFFIX,wowow.co.jp
+DOMAIN-KEYWORD,wowow
+
+# ========================================
+# MBS / TBS / TV Asahi (Streaming)
+# ========================================
+
+DOMAIN-SUFFIX,tbs.co.jp
+DOMAIN-SUFFIX,mbs.jp
+DOMAIN-SUFFIX,tv-asahi.co.jp
+DOMAIN-KEYWORD,tver
+
+# ========================================
+# Pixiv Fanbox / Fantia (Anime / Doujin)
+# ========================================
+
+DOMAIN-SUFFIX,pixiv.net
+DOMAIN-SUFFIX,pximg.net
+DOMAIN-SUFFIX,fantia.jp
+DOMAIN-KEYWORD,pixiv
+
+# ========================================
+# Gyao (Yahoo Japan Video - Legacy)
+# ========================================
+
+DOMAIN-SUFFIX,gyao.yahoo.co.jp
+DOMAIN-KEYWORD,gyao

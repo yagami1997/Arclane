@@ -1,0 +1,183 @@
+# ============================================
+# Streaming-US - United States Streaming Supplement
+# ============================================
+# Strategy Group: Streaming-US
+# Purpose: Supplemental US streaming rules not covered by individual service files
+# Coverage: Peacock, Paramount+, AMC+, Crunchyroll, Fubo, Sling, Philo,
+#           Tubi, Pluto TV, Crackle, ESPN, BritBox, Shudder, Mubi, etc.
+# Node Requirement: US node with unlock capability
+# Note: Use alongside Disney Plus.list, Max.list, Hulu.list, Spotify.list, etc.
+# ============================================
+
+# ========================================
+# Peacock (NBCUniversal)
+# ========================================
+
+USER-AGENT,Peacock*
+DOMAIN-SUFFIX,peacocktv.com
+DOMAIN-SUFFIX,nbcuni.com
+DOMAIN-SUFFIX,nbcuniversal.com
+DOMAIN-SUFFIX,nbc.com
+DOMAIN-SUFFIX,nbcsports.com
+DOMAIN-KEYWORD,peacocktv
+
+# ========================================
+# Paramount+
+# ========================================
+
+USER-AGENT,Paramount*
+DOMAIN-SUFFIX,paramountplus.com
+DOMAIN-SUFFIX,paramount.com
+DOMAIN-SUFFIX,cbs.com
+DOMAIN-SUFFIX,cbsinteractive.com
+DOMAIN-SUFFIX,cbsnews.com
+DOMAIN-SUFFIX,cbssports.com
+DOMAIN-SUFFIX,showtime.com
+DOMAIN-KEYWORD,paramountplus
+
+# ========================================
+# AMC Networks
+# ========================================
+
+DOMAIN-SUFFIX,amcplus.com
+DOMAIN-SUFFIX,amc.com
+DOMAIN-SUFFIX,bbcamerica.com
+DOMAIN-SUFFIX,sundancetv.com
+DOMAIN-SUFFIX,ifc.com
+DOMAIN-KEYWORD,amcplus
+
+# ========================================
+# Crunchyroll (Anime)
+# ========================================
+
+USER-AGENT,Crunchyroll*
+DOMAIN-SUFFIX,crunchyroll.com
+DOMAIN-SUFFIX,vrv.co
+DOMAIN-KEYWORD,crunchyroll
+
+# ========================================
+# FuboTV
+# ========================================
+
+DOMAIN-SUFFIX,fubo.tv
+DOMAIN-SUFFIX,fubo.com
+DOMAIN-KEYWORD,fubo
+
+# ========================================
+# Sling TV
+# ========================================
+
+DOMAIN-SUFFIX,sling.com
+DOMAIN-KEYWORD,sling
+
+# ========================================
+# Philo
+# ========================================
+
+DOMAIN-SUFFIX,philo.com
+DOMAIN-KEYWORD,philo
+
+# ========================================
+# Tubi TV
+# ========================================
+
+DOMAIN-SUFFIX,tubitv.com
+DOMAIN-SUFFIX,tubi.com
+DOMAIN-KEYWORD,tubitv
+
+# ========================================
+# Pluto TV
+# ========================================
+
+DOMAIN-SUFFIX,pluto.tv
+DOMAIN-KEYWORD,plutotv
+
+# ========================================
+# Crackle
+# ========================================
+
+DOMAIN-SUFFIX,crackle.com
+DOMAIN-KEYWORD,crackle
+
+# ========================================
+# ESPN / ESPN+
+# ========================================
+
+DOMAIN-SUFFIX,espn.com
+DOMAIN-SUFFIX,espnplus.com
+DOMAIN-SUFFIX,espn.go.com
+DOMAIN-KEYWORD,espnplus
+
+# ========================================
+# BritBox
+# ========================================
+
+DOMAIN-SUFFIX,britbox.com
+DOMAIN-KEYWORD,britbox
+
+# ========================================
+# Shudder (Horror Streaming)
+# ========================================
+
+DOMAIN-SUFFIX,shudder.com
+DOMAIN-KEYWORD,shudder
+
+# ========================================
+# MUBI (Arthouse Cinema)
+# ========================================
+
+DOMAIN-SUFFIX,mubi.com
+DOMAIN-KEYWORD,mubi
+
+# ========================================
+# Plex
+# ========================================
+
+DOMAIN-SUFFIX,plex.tv
+DOMAIN-SUFFIX,plex.direct
+DOMAIN-SUFFIX,plexapp.com
+DOMAIN-KEYWORD,plex
+
+# ========================================
+# Vudu
+# ========================================
+
+DOMAIN-SUFFIX,vudu.com
+DOMAIN-KEYWORD,vudu
+
+# ========================================
+# Funimation (Anime)
+# ========================================
+
+DOMAIN-SUFFIX,funimation.com
+DOMAIN-KEYWORD,funimation
+
+# ========================================
+# Starz
+# ========================================
+
+DOMAIN-SUFFIX,starz.com
+DOMAIN-SUFFIX,starzplay.com
+DOMAIN-KEYWORD,starz
+
+# ========================================
+# Hallmark Movies Now
+# ========================================
+
+DOMAIN-SUFFIX,hallmarkmoviesandmysteries.com
+DOMAIN-SUFFIX,hallmarkchannel.com
+DOMAIN-KEYWORD,hallmark
+
+# ========================================
+# Kanopy (Library Streaming)
+# ========================================
+
+DOMAIN-SUFFIX,kanopy.com
+DOMAIN-KEYWORD,kanopy
+
+# ========================================
+# Hoopla
+# ========================================
+
+DOMAIN-SUFFIX,hoopladigital.com
+DOMAIN-KEYWORD,hoopla

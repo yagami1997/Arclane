@@ -1,0 +1,12 @@
+# ============================================
+# Apple TV - Streaming Service Rules
+# ============================================
+# Purpose: Route Apple TV+ traffic for optimal streaming
+# Coverage: Apple TV+ domains and streaming infrastructure
+# ============================================
+
+# > Apple TV
+DOMAIN,np-edge.itunes.apple.com
+DOMAIN,play-edge.itunes.apple.com
+DOMAIN,uts-api.itunes.apple.com
+DOMAIN-SUFFIX,tv.apple.com

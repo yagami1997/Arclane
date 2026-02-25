@@ -1,0 +1,159 @@
+# ============================================
+# Streaming-CN - China Mainland Streaming Supplement
+# ============================================
+# Strategy Group: CN Mainland TV
+# Purpose: Supplemental mainland China streaming services
+# Coverage: Mango TV, Sohu Video, Phoenix, CCTV, iQIYI HD,
+#           Bilibili Intl, LeTV, PP Sports, Dragon TV, etc.
+# Node Requirement: Direct (Domestic)
+# Note: Use alongside Bilibili.list, IQIYI.list, Youku.list, Tencent Video.list, etc.
+# ============================================
+
+# ========================================
+# Mango TV (芒果TV)
+# ========================================
+
+USER-AGENT,MangoTV*
+DOMAIN-SUFFIX,mgtv.com
+DOMAIN-SUFFIX,hunantv.com
+DOMAIN-SUFFIX,hitv.com
+DOMAIN-KEYWORD,mgtv
+
+# ========================================
+# Sohu Video (搜狐视频)
+# ========================================
+
+USER-AGENT,SohuVideo*
+DOMAIN-SUFFIX,tv.sohu.com
+DOMAIN-SUFFIX,sohu.com
+DOMAIN-KEYWORD,tv.sohu
+
+# ========================================
+# Phoenix TV / iFeng (凤凰卫视)
+# ========================================
+
+DOMAIN-SUFFIX,ifeng.com
+DOMAIN-SUFFIX,phncdn.com
+DOMAIN-SUFFIX,phoenixtv.com
+DOMAIN-KEYWORD,ifeng.com
+
+# ========================================
+# CCTV / CMG (央视)
+# ========================================
+
+DOMAIN-SUFFIX,cctv.com
+DOMAIN-SUFFIX,cntv.cn
+DOMAIN-SUFFIX,yangshipin.cn
+DOMAIN-SUFFIX,cctv.cn
+DOMAIN-KEYWORD,cctv.com
+
+# ========================================
+# Dragon TV / SMG (东方卫视 / 上海广播电视)
+# ========================================
+
+DOMAIN-SUFFIX,dragontv.net
+DOMAIN-SUFFIX,smg.cn
+DOMAIN-SUFFIX,v.smg.cn
+DOMAIN-KEYWORD,dragontv
+
+# ========================================
+# iQIYI (爱奇艺) Additional Domains
+# ========================================
+
+DOMAIN-SUFFIX,iq.com
+DOMAIN-SUFFIX,qiyi.com
+DOMAIN-SUFFIX,71.am
+DOMAIN-KEYWORD,iqiyi
+
+# ========================================
+# PP Sports / PP视频 (苏宁体育)
+# ========================================
+
+DOMAIN-SUFFIX,ppsports.com
+DOMAIN-SUFFIX,pptv.com
+DOMAIN-KEYWORD,ppsports
+
+# ========================================
+# Migu Video (咪咕视频 / China Mobile)
+# ========================================
+
+DOMAIN-SUFFIX,miguvideo.com
+DOMAIN-SUFFIX,migu.cn
+DOMAIN-SUFFIX,cmvideo.cn
+DOMAIN-KEYWORD,miguvideo
+
+# ========================================
+# Tencent Video (腾讯视频) Additional
+# ========================================
+
+DOMAIN-SUFFIX,v.qq.com
+DOMAIN-SUFFIX,film.qq.com
+DOMAIN-KEYWORD,v.qq.com
+
+# ========================================
+# Youku (优酷) Additional
+# ========================================
+
+DOMAIN-SUFFIX,youku.com
+DOMAIN-SUFFIX,soku.com
+DOMAIN-KEYWORD,youku.com
+
+# ========================================
+# LeTV (乐视视频)
+# ========================================
+
+DOMAIN-SUFFIX,le.com
+DOMAIN-SUFFIX,letv.com
+DOMAIN-SUFFIX,letvcloud.com
+DOMAIN-KEYWORD,letv
+
+# ========================================
+# Bilibili (B站) Additional
+# ========================================
+
+DOMAIN-SUFFIX,bilibili.com
+DOMAIN-SUFFIX,bilivideo.cn
+DOMAIN-SUFFIX,bilivideo.com
+DOMAIN-SUFFIX,hdslb.com
+DOMAIN-KEYWORD,bilibili
+
+# ========================================
+# Xigua Video (西瓜视频 / ByteDance)
+# ========================================
+
+DOMAIN-SUFFIX,ixigua.com
+DOMAIN-SUFFIX,xiguavideo.com
+DOMAIN-KEYWORD,ixigua
+
+# ========================================
+# Kuaishou Video (快手)
+# ========================================
+
+DOMAIN-SUFFIX,kuaishou.com
+DOMAIN-SUFFIX,kuaishouzt.com
+DOMAIN-SUFFIX,gifshow.com
+DOMAIN-KEYWORD,kuaishou
+
+# ========================================
+# Weibo Video (微博视频)
+# ========================================
+
+DOMAIN-SUFFIX,weibo.com
+DOMAIN-SUFFIX,weibo.cn
+DOMAIN-KEYWORD,weibo.com
+
+# ========================================
+# Wangyi (网易公开课 / Boolan)
+# ========================================
+
+DOMAIN-SUFFIX,open.163.com
+DOMAIN-SUFFIX,study.163.com
+DOMAIN-KEYWORD,study.163
+
+# ========================================
+# Douyin (抖音国内版)
+# ========================================
+
+DOMAIN-SUFFIX,douyin.com
+DOMAIN-SUFFIX,douyinpic.com
+DOMAIN-KEYWORD,douyin.com

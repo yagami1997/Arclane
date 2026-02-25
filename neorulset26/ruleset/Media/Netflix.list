@@ -1,0 +1,15 @@
+# ============================================
+# Netflix - Streaming Service Rules
+# ============================================
+# Purpose: Route Netflix traffic for optimal streaming
+# Coverage: Netflix domains and CDN infrastructure
+# ============================================
+
+# > Netflix
+DOMAIN-SUFFIX,netflix.com
+DOMAIN-SUFFIX,netflix.net
+DOMAIN-SUFFIX,nflxext.com
+DOMAIN-SUFFIX,nflximg.com
+DOMAIN-SUFFIX,nflximg.net
+DOMAIN-SUFFIX,nflxso.net
+DOMAIN-SUFFIX,nflxvideo.net

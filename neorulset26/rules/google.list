@@ -1,0 +1,167 @@
+# ============================================
+# Google - Core Services
+# ============================================
+# Strategy Group: Google
+# Purpose: Route all Google ecosystem traffic (excl. YouTube / FCM)
+# Coverage: Search, Gmail, Drive, Maps, Play, Photos, Calendar,
+#           Translate, Blogger, Android, Cloud, Analytics, Firebase, etc.
+# Node Requirement: Fast + low latency (recommended: IMM JP)
+# ============================================
+
+# ========================================
+# Core Infrastructure
+# ========================================
+
+DOMAIN-SUFFIX,google.com
+DOMAIN-SUFFIX,googleapis.com
+DOMAIN-SUFFIX,googleusercontent.com
+DOMAIN-SUFFIX,gstatic.com
+DOMAIN-SUFFIX,gvt1.com
+DOMAIN-SUFFIX,gvt2.com
+DOMAIN-SUFFIX,ggpht.com
+DOMAIN-SUFFIX,goo.gl
+DOMAIN-SUFFIX,g.co
+DOMAIN-SUFFIX,googlehosted.com
+DOMAIN-SUFFIX,googlelabs.com
+DOMAIN-SUFFIX,googleplex.com
+DOMAIN-SUFFIX,withgoogle.com
+
+# ========================================
+# Google Services
+# ========================================
+
+# > Gmail / Email
+DOMAIN-SUFFIX,gmail.com
+DOMAIN-SUFFIX,googlemail.com
+
+# > Google Drive & Workspace
+DOMAIN-SUFFIX,googledrive.com
+DOMAIN-SUFFIX,docs.google.com
+DOMAIN-SUFFIX,drive.google.com
+DOMAIN-SUFFIX,sheets.google.com
+DOMAIN-SUFFIX,slides.google.com
+DOMAIN-SUFFIX,forms.google.com
+DOMAIN-SUFFIX,sites.google.com
+DOMAIN-SUFFIX,keep.google.com
+DOMAIN-SUFFIX,jamboard.google.com
+
+# > Google Cloud Platform
+DOMAIN-SUFFIX,cloud.google.com
+DOMAIN-SUFFIX,firebaseio.com
+DOMAIN-SUFFIX,firebaseapp.com
+DOMAIN-SUFFIX,appspot.com
+DOMAIN-SUFFIX,cloudfunctions.net
+DOMAIN-SUFFIX,run.app
+DOMAIN-SUFFIX,googlecode.com
+DOMAIN-SUFFIX,googlesource.com
+DOMAIN-SUFFIX,gerrit.googlesource.com
+DOMAIN-SUFFIX,flutter.io
+DOMAIN-SUFFIX,dartlang.org
+
+# > Maps & Navigation
+DOMAIN-SUFFIX,maps.google.com
+
+# > Google Play
+DOMAIN-SUFFIX,play.google.com
+DOMAIN-SUFFIX,android.com
+DOMAIN-SUFFIX,androidify.com
+DOMAIN-SUFFIX,chromium.org
+
+# > Google Photos
+DOMAIN-SUFFIX,photos.google.com
+
+# > Google Translate
+DOMAIN-SUFFIX,translate.google.com
+DOMAIN-SUFFIX,translate.googleapis.com
+
+# > Google Scholar
+DOMAIN-SUFFIX,scholar.google.com
+
+# > Blogger
+DOMAIN-SUFFIX,blogger.com
+DOMAIN-SUFFIX,blogspot.com
+DOMAIN-SUFFIX,feedburner.com
+
+# > Analytics & Ads (needed for some services to function)
+DOMAIN-SUFFIX,google-analytics.com
+DOMAIN-SUFFIX,googleadservices.com
+DOMAIN-SUFFIX,googlesyndication.com
+DOMAIN-SUFFIX,googletagmanager.com
+DOMAIN-SUFFIX,googleoptimize.com
+DOMAIN-SUFFIX,doubleclick.net
+DOMAIN-SUFFIX,app-measurement.com
+DOMAIN-SUFFIX,2mdn.net
+
+# > reCAPTCHA
+DOMAIN-SUFFIX,recaptcha.net
+DOMAIN-SUFFIX,recaptcha.google.com
+
+# > YouTube Image/Thumbnail CDN (not YouTube video itself)
+DOMAIN-SUFFIX,ytimg.com
+DOMAIN-SUFFIX,youtubeeducation.com
+DOMAIN-SUFFIX,googlecommerce.com
+DOMAIN-SUFFIX,googletravel.com
+DOMAIN-SUFFIX,googleweblight.com
+DOMAIN-SUFFIX,googleadsserving.cn
+DOMAIN-SUFFIX,googleapis.cn
+DOMAIN-SUFFIX,googlevideo.com
+
+# ========================================
+# Google Country Domains (Key Regions)
+# ========================================
+
+DOMAIN-SUFFIX,google.com.hk
+DOMAIN-SUFFIX,google.co.jp
+DOMAIN-SUFFIX,google.com.tw
+DOMAIN-SUFFIX,google.com.sg
+DOMAIN-SUFFIX,google.com.au
+DOMAIN-SUFFIX,google.co.uk
+DOMAIN-SUFFIX,google.de
+DOMAIN-SUFFIX,google.fr
+DOMAIN-SUFFIX,google.co.kr
+DOMAIN-SUFFIX,google.com.br
+DOMAIN-SUFFIX,google.ca
+DOMAIN-SUFFIX,google.it
+DOMAIN-SUFFIX,google.es
+DOMAIN-SUFFIX,google.nl
+DOMAIN-SUFFIX,google.pl
+DOMAIN-SUFFIX,google.ru
+DOMAIN-SUFFIX,google.com.mx
+DOMAIN-SUFFIX,google.com.ar
+DOMAIN-SUFFIX,google.co.in
+DOMAIN-SUFFIX,google.co.id
+DOMAIN-SUFFIX,google.co.th
+DOMAIN-SUFFIX,google.com.tr
+DOMAIN-SUFFIX,google.com.vn
+DOMAIN-SUFFIX,google.com.ph
+DOMAIN-SUFFIX,google.com.my
+DOMAIN-SUFFIX,google.com.ua
+DOMAIN-SUFFIX,google.com.sa
+DOMAIN-SUFFIX,google.com.eg
+DOMAIN-SUFFIX,google.co.za
+DOMAIN-SUFFIX,google.co.nz
+DOMAIN-SUFFIX,google.at
+DOMAIN-SUFFIX,google.be
+DOMAIN-SUFFIX,google.ch
+DOMAIN-SUFFIX,google.cz
+DOMAIN-SUFFIX,google.dk
+DOMAIN-SUFFIX,google.fi
+DOMAIN-SUFFIX,google.gr
+DOMAIN-SUFFIX,google.hu
+DOMAIN-SUFFIX,google.ie
+DOMAIN-SUFFIX,google.no
+DOMAIN-SUFFIX,google.pt
+DOMAIN-SUFFIX,google.ro
+DOMAIN-SUFFIX,google.se
+DOMAIN-SUFFIX,google.sk
+DOMAIN-SUFFIX,google.com.co
+DOMAIN-SUFFIX,google.com.pe
+DOMAIN-SUFFIX,google.com.np
+DOMAIN-SUFFIX,google.com.pk
+DOMAIN-SUFFIX,google.cn
+
+# ========================================
+# Broad Match (catch remaining Google traffic)
+# ========================================
+
+DOMAIN-KEYWORD,google
