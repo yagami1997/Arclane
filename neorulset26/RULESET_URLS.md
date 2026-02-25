@@ -6,6 +6,123 @@
 
 ---
 
+## Strategy Group Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         OUTBOUND TRAFFIC                                    │
+└──────────────────────────────────┬──────────────────────────────────────────┘
+                                   │
+          ┌────────────────────────▼────────────────────────┐
+          │              [Rule Matching Engine]              │
+          │         (processes rules top → bottom)          │
+          └─────────────────────────────────────────────────┘
+                                   │
+   ┌───────────────────────────────┼────────────────────────────────────┐
+   │                               │                                    │
+   ▼                               ▼                                    ▼
+REJECT                          DIRECT                              PROXY GROUPS
+   │                               │                                    │
+   ├─ AdBlock                      ├─ Domestic ──── Domestic.list       │
+   └─ HTTPDNS                      │                Domestic IPs.list   │
+                                   │                Special.list        │
+                                   │                miHoYo (merged)     │
+                                   │                                    │
+                                   ├─ Apple ─────── Apple.list          │
+                                   ├─ CN Mainland ── Bilibili           │
+                                   │   TV           IQIYI / Youku       │
+                                   │                Tencent / Letv      │
+                                   │                IQ / Netease        │
+                                   │                JOOX / CN-Suppl.    │
+                                   └─ HULO ─────── hulo.list            │
+                                                                        │
+                    ┌───────────────────────────────────────────────────┘
+                    │
+                    ▼
+         ┌──────────────────────────────────────────────────────────────┐
+         │                    23 PROXY STRATEGY GROUPS                  │
+         └──────────────────────────────────────────────────────────────┘
+                    │
+    ┌───────────────┼──────────────────────────────────┐
+    │               │                                  │
+    ▼               ▼                                  ▼
+FALLBACK         BIG TECH                           FINANCE
+────────         ────────                           ───────
+01 Proxy         04 AI Suite  ── ai.list            09 PayPal ── paypal.list
+03 Others        05 Google    ── google.list                     (ISP only)
+                              ── Google FCM.list    10 Crypto ── crypto.list
+                 06 Microsoft ── Microsoft.list
+                 07 Apple     ── Apple.list
+                              [Direct]
+                 08 Scholar   ── scholar.list
+
+    ▼               ▼                                  ▼
+YOUTUBE          STREAMING                          SOCIAL & MESSAGING
+───────          ─────────                          ──────────────────
+11 YouTube       12 Streaming-US                    17 Messenger ── messenger.list
+   ── YouTube       Disney+ / Max / Hulu               (Discord + Telegram
+   ── YT Music      Spotify / Discovery+                WhatsApp / Signal
+   [Fast lane]      Amazon / Fox / ABC                  Line / Slack / etc.)
+                    PBS / Pandora / Soundcloud
+                    DAZN / Streaming-US.list        18 Social ── socialsite.list
+
+                 13 Streaming-JP                    19 Bytedance ── bytedance.list
+                    Netflix / Apple TV
+                    Abema / DMM                     20 TikTok ── TikTok.list
+                    Niconico / Hulu JP
+                    Japonx / F1 TV
+                    Streaming-JP.list
+
+                 14 Streaming-TW
+                    KKTV / KKBOX
+                    Line TV / Bahamut
+                    MOO / Streaming-TW.list
+
+                 15 Streaming-HK
+                    ViuTV / myTV SUPER
+                    encoreTVB / WeTV
+
+    ▼               ▼                                  ▼
+CUSTOM           UTILITIES
+──────           ─────────
+21 Common ────── common.list
+22 HULO ──────── hulo.list [Direct]
+                 23 Speedtest ── Speedtest.list
+                                 [Fixed node]
+```
+
+---
+
+## Node Assignment Map
+
+```
+Strategy Group    │ Provider    │ Node Example
+──────────────────┼─────────────┼──────────────────────────
+Proxy / Others    │ Flower      │ Flower JP Premium2
+AI Suite          │ IMM / Flower│ IMM JP (fast) / Flower JP
+Google            │ IMM         │ IMM JP 04/05/06  (17–21ms)
+Microsoft         │ IMM / Dog   │ IMM JP / Dog JP
+Apple             │ —           │ Direct
+Scholar           │ IMM / Flower│ IMM JP / Flower JP
+PayPal            │ ISP only    │ ISP California 1–12
+Crypto            │ ISP / Flower│ ISP or Flower JP Pre2
+YouTube           │ Flower / IMM│ Flower JP Exp1 / IMM JP
+Streaming-US      │ OIX         │ OIX US GIA2
+Streaming-JP      │ Flower      │ Flower JP Premium2 / Pre3
+Streaming-TW      │ OIX         │ OIX TW Premium3
+Streaming-HK      │ IMM         │ IMM HK06
+CN Mainland TV    │ —           │ Direct
+Messenger         │ Flower      │ Flower JP Premium2
+Social            │ Flower      │ Flower JP Premium2
+Bytedance         │ Flower      │ Flower JP Premium2
+TikTok            │ Flower / OIX│ Flower JP / OIX JP
+Common            │ OIX         │ OIX AC16 (HK)
+HULO              │ —           │ Direct
+Speedtest         │ OIX (fixed) │ OIX JP Premium7
+```
+
+---
+
 ## Pre-flight: Special Policies (REJECT / DIRECT)
 
 These rule sets use fixed policies, not proxy groups.
