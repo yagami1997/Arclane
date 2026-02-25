@@ -23,7 +23,18 @@
 
 ---
 
-## 🔄 Latest Update (February 2026)
+## 🔄 Changelog
+
+### February 2026 — v2.1
+
+Ongoing maintenance and internal improvements. Some structural work in progress.
+
+- Continued refinement of rule coverage and categorization
+- Miscellaneous documentation updates
+- Minor adjustments to routing logic for select service groups
+- Internal reorganization for long-term maintainability
+
+### February 2026 — v2.0
 
 **Major Infrastructure Migration Completed**
 
@@ -33,12 +44,6 @@ This repository has undergone a comprehensive restructure to ensure **complete a
 - ✅ **Enhanced Privacy**: Removed all sensitive information and third-party references
 - ✅ **Improved Organization**: Restructured directory layout for better maintainability
 - ✅ **Zero External Dependencies**: All rules now hosted and maintained internally
-
-**What Changed:**
-- New `ruleset/` directory containing 58 comprehensive rule files (media, services, filtering)
-- Updated all URLs to point to self-hosted rules
-- Cleaned up legacy configurations and deprecated files
-- Enhanced documentation and rule categorization
 
 ---
 
