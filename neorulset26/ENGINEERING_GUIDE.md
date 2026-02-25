@@ -299,7 +299,7 @@ neorulset26/
 19  Bytedance           — ByteDance: Douyin, Toutiao, Lark, etc.
 20  TikTok              — TikTok International
 21  Common              — Custom curated services
-22  HULO                — Xiaohongshu, Zhihu (Direct)
+22  HULO                — CN community platforms (Direct)
 23  Speedtest           — Network benchmarking (fixed node)
 ```
 
