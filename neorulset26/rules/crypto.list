@@ -15,6 +15,8 @@ DOMAIN-SUFFIX,coinbase.com
 DOMAIN-SUFFIX,coincheck.com
 DOMAIN-SUFFIX,coinone.co.kr
 DOMAIN-SUFFIX,gemini.com
+DOMAIN-SUFFIX,kraken.com
+DOMAIN-KEYWORD,kraken
 DOMAIN-SUFFIX,korbit.co.kr
 DOMAIN-SUFFIX,kucoin.com
 DOMAIN-SUFFIX,liquid.com
