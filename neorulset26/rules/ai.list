@@ -64,6 +64,9 @@ DOMAIN-SUFFIX,you.com
 # > Phind (AI Search)
 DOMAIN-SUFFIX,phind.com
 
+# > Brave Search (AI Search)
+DOMAIN-SUFFIX,brave.com
+
 # > Kimi (Moonshot AI)
 DOMAIN-SUFFIX,moonshot.cn
 DOMAIN-SUFFIX,kimi.ai
