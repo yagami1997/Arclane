@@ -67,9 +67,8 @@ DOMAIN-SUFFIX,phind.com
 # > Brave Search (AI Search)
 DOMAIN-SUFFIX,brave.com
 
-# > Kimi (Moonshot AI)
-DOMAIN-SUFFIX,moonshot.cn
-DOMAIN-SUFFIX,kimi.ai
+# > Moonshot AI (月之暗面 — International: platform.moonshot.ai)
+DOMAIN-SUFFIX,moonshot.ai
 
 # > Reka AI
 DOMAIN-SUFFIX,reka.ai
@@ -208,12 +207,6 @@ DOMAIN-SUFFIX,blackforestlabs.ai
 
 # > Lexica
 DOMAIN-SUFFIX,lexica.art
-
-# > Tensor.Art
-DOMAIN-SUFFIX,tensor.art
-
-# > Seaart
-DOMAIN-SUFFIX,seaart.ai
 
 # > BlueWillow
 DOMAIN-SUFFIX,bluewillow.ai
