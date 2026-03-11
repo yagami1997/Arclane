@@ -12,10 +12,6 @@
 # > TestFlight - iOS App Beta Testing Platform
 DOMAIN,testflight.apple.com
 
-# > GitHub - Code Hosting & Version Control
-DOMAIN-SUFFIX,github.com
-DOMAIN-KEYWORD,github
-
 # > jsDelivr - Open Source CDN
 DOMAIN-SUFFIX,jsdelivr.com
 DOMAIN-SUFFIX,jsdelivr.net
