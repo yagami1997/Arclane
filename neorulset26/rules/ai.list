@@ -183,6 +183,9 @@ DOMAIN-SUFFIX,nightcafe.studio
 # > Civitai
 DOMAIN-SUFFIX,civitai.com
 
+# > Xiaohuangwen (AI Image)
+DOMAIN-SUFFIX,xiaohuangwen.com
+
 # > Playground AI
 DOMAIN-SUFFIX,playground.com
 DOMAIN-SUFFIX,playgroundai.com
