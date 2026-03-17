@@ -57,7 +57,7 @@ Fallback / Infrastructure
 
 | # | Group Name | Rule Files | Node Requirement | Notes |
 |---|------------|------------|-----------------|-------|
-| 4 | **AI Suite** | openai.list | Fast + stable | Covers OpenAI (ChatGPT, API), Claude, Gemini, Midjourney, Perplexity, Grok, and 50+ AI services. Prioritize low-latency JP or US nodes. Prefer IMM JP or Flower JP. |
+| 4 | **AI Suite** | openai.list | Fast + stable | Covers OpenAI (ChatGPT, API), Claude, Gemini, Midjourney, Perplexity, Grok, and 50+ AI services. Prioritize low-latency JP or US nodes. Prefer IMM JP or Flower JP. Apple Intelligence + ChatGPT integration is maintained in ai.list with a validated minimal relay pair. |
 
 ---
 
@@ -320,6 +320,8 @@ neorulset26/
 6. **Node assignment in Surge**: The `[Proxy Group]` section in your Surge config should define each of the 23 groups above. The node pools for Speed / Unlock / Finance / Stable do not need to be exposed as visible strategy groups — they can be hidden sub-groups (`hidden = true`) used only internally.
 
 7. **Auto-UrlTest**: Keep `Auto-UrlTest` as a utility sub-group for latency-based auto-selection within a provider. Do not expose it as a top-level outbound strategy group.
+
+8. **Apple Intelligence + ChatGPT (validated minimal set)**: For mainland China reachability, keep only the following in `rules/ai.list` under the Apple Intelligence section: `DOMAIN,apple-relay.apple.com` and `DOMAIN,gspe1-ssl.ls.apple.com`. This pair has been validated to restore ChatGPT extension availability in Apple Intelligence. Do not add broader Apple/Cloudflare domains unless a new regression is confirmed.
 
 ---
 
