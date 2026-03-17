@@ -5,7 +5,7 @@
 # Coverage: iQIYI domains, CDN, and API services
 # ============================================
 
-// > IQIYI
+# > IQIYI
 USER-AGENT,*QIYI*
 USER-AGENT,iQiYi*
 DOMAIN-SUFFIX,iqiyi.com
