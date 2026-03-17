@@ -1,7 +1,6 @@
 # > Apple News and Apple Map TOMTOM Version
 USER-AGENT,AppleNews*
 USER-AGENT,com.apple.news*
-DOMAIN,gspe1-ssl.ls.apple.com
 # USER-AGENT,News*
 # DOMAIN,apple.comscoreresearch.com
 # DOMAIN,gateway.icloud.com
