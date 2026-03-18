@@ -25,7 +25,6 @@ DOMAIN-SUFFIX,claudeusercontent.com
 
 # > xAI / Grok
 DOMAIN-SUFFIX,x.ai
-DOMAIN-SUFFIX,grok.x.ai
 DOMAIN-SUFFIX,xai.com
 
 # > Meta AI / Llama
@@ -516,14 +515,3 @@ DOMAIN-SUFFIX,humanloop.com
 # > Snorkel AI
 DOMAIN-SUFFIX,snorkel.ai
 
-# ============================================
-# Discord
-# ============================================
-
-# > Discord
-#DOMAIN-SUFFIX,discord.com
-#DOMAIN-SUFFIX,discord.gg
-#DOMAIN-SUFFIX,discord.media
-#DOMAIN-SUFFIX,discordapp.com
-#DOMAIN-SUFFIX,discordapp.net
-#DOMAIN-SUFFIX,discordstatus.com

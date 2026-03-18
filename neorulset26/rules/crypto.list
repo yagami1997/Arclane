@@ -90,14 +90,12 @@ DOMAIN-SUFFIX,huobigroup.com
 DOMAIN-SUFFIX,huobitoken.com
 DOMAIN-SUFFIX,heco-scan.com
 DOMAIN-SUFFIX,hecoview.com
-DOMAIN-SUFFIX,hbfile.net
 DOMAIN-SUFFIX,huobi.br.com
 DOMAIN-SUFFIX,bitderiv.com
 DOMAIN-SUFFIX,hecochain.com
 DOMAIN-SUFFIX,huobi.ws
 DOMAIN-SUFFIX,huobi.ug
 DOMAIN-SUFFIX,huobi.co.ma
-DOMAIN-SUFFIX,huobi.br.com
 PROCESS-NAME,Huobi.exe
 DOMAIN-KEYWORD,huobi
 
@@ -110,21 +108,20 @@ DOMAIN-KEYWORD,okx
 # > asproex
 DOMAIN-SUFFIX,asproex.com
 DOMAIN-SUFFIX,asproexapi.com
-    
+
 # > bitflyer
 DOMAIN-SUFFIX,bitflyer.com
 DOMAIN-SUFFIX,bitflyer.jp
-    
+
 # > bitsquare
 DOMAIN-SUFFIX,bisq.io
 DOMAIN-SUFFIX,bisq.network
 DOMAIN-SUFFIX,bitsquare.io
-    
+
 # > coinone
-DOMAIN-SUFFIX,coinone.co.kr
 DOMAIN-SUFFIX,coinonecore.com
 DOMAIN-SUFFIX,coinonecorp.com
-    
+
 # > ethereum
 DOMAIN-SUFFIX,devcon.org
 DOMAIN-SUFFIX,ethereum.foundation
@@ -135,7 +132,6 @@ DOMAIN-SUFFIX,ethgasstation.info
 DOMAIN-SUFFIX,watchtheburn.com
 DOMAIN-SUFFIX,flashbots.net
 DOMAIN-SUFFIX,cryptofees.info
-DOMAIN-SUFFIX,etherscan.io
 DOMAIN-SUFFIX,ethereum-magicians.org
 DOMAIN-SUFFIX,vitalik.ca
 DOMAIN-SUFFIX,ethfans.org
@@ -144,7 +140,7 @@ DOMAIN-SUFFIX,ethereum.stackexchange.com
 DOMAIN-SUFFIX,etherscan.com
 DOMAIN-SUFFIX,parity.io
 DOMAIN-SUFFIX,ethernodes.org
-    
+
 # > localbitcoins
 DOMAIN-SUFFIX,localbitcoins.com
 DOMAIN-SUFFIX,localbitcoinschain.com
@@ -154,7 +150,7 @@ DOMAIN-SUFFIX,zb.app
 DOMAIN-SUFFIX,zb.com
 DOMAIN-SUFFIX,zb.io
 DOMAIN-SUFFIX,zb.live
-    
+
 # > Analysis
 DOMAIN-SUFFIX,aicoin.com
 DOMAIN-SUFFIX,aimoon.com
@@ -181,7 +177,6 @@ DOMAIN-SUFFIX,loanscan.io
 DOMAIN-SUFFIX,defirate.com
 DOMAIN-SUFFIX,defipulse.com
 DOMAIN-SUFFIX,apy999.com
-DOMAIN-SUFFIX,defieye.io
 DOMAIN-SUFFIX,dextools.io
 DOMAIN-SUFFIX,tradingview.com
 DOMAIN-SUFFIX,dcabtc.com
@@ -198,7 +193,6 @@ DOMAIN-SUFFIX,cryptorank.io
 DOMAIN-SUFFIX,tradeblock.com
 DOMAIN-SUFFIX,nyctale.io
 DOMAIN-SUFFIX,dovemetrics.com
-DOMAIN-SUFFIX,cryptorank.io
 DOMAIN-SUFFIX,icodrops.com
 DOMAIN-SUFFIX,chainbroker.io
 DOMAIN-SUFFIX,crunchbase.com
@@ -216,7 +210,6 @@ DOMAIN-SUFFIX,btc.com
 DOMAIN-SUFFIX,f2pool.com
 DOMAIN-SUFFIX,cbeci.org
 DOMAIN-SUFFIX,digiconomist.net
-DOMAIN-SUFFIX,1ml.com
 DOMAIN-SUFFIX,bitcoinvisuals.com
 DOMAIN-SUFFIX,crypto51.app
 DOMAIN-SUFFIX,masternodes.online
@@ -224,9 +217,6 @@ DOMAIN-SUFFIX,bitnodes.earn.com
 DOMAIN-SUFFIX,poolin.com
 DOMAIN-SUFFIX,ethermine.org
 DOMAIN-SUFFIX,ewapool.net
-
-# > FTX
-DOMAIN-SUFFIX,ftx.com
 
 # > Metamask
 DOMAIN-KEYWORD,metamask

@@ -16,7 +16,6 @@ DOMAIN-SUFFIX,google.com
 DOMAIN-SUFFIX,googleapis.com
 DOMAIN-SUFFIX,googleusercontent.com
 DOMAIN-SUFFIX,gstatic.com
-DOMAIN-SUFFIX,gvt1.com
 DOMAIN-SUFFIX,gvt2.com
 DOMAIN-SUFFIX,ggpht.com
 DOMAIN-SUFFIX,goo.gl
@@ -96,15 +95,11 @@ DOMAIN-SUFFIX,2mdn.net
 DOMAIN-SUFFIX,recaptcha.net
 DOMAIN-SUFFIX,recaptcha.google.com
 
-# > YouTube Image/Thumbnail CDN (not YouTube video itself)
-DOMAIN-SUFFIX,ytimg.com
-DOMAIN-SUFFIX,youtubeeducation.com
 DOMAIN-SUFFIX,googlecommerce.com
 DOMAIN-SUFFIX,googletravel.com
 DOMAIN-SUFFIX,googleweblight.com
 DOMAIN-SUFFIX,googleadsserving.cn
 DOMAIN-SUFFIX,googleapis.cn
-DOMAIN-SUFFIX,googlevideo.com
 
 # ========================================
 # Google Country Domains (Key Regions)

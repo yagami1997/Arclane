@@ -16,11 +16,6 @@
 
 USER-AGENT,*Discord*
 USER-AGENT,Discord*
-DOMAIN,discord.com
-DOMAIN,discordapp.com
-DOMAIN,discord.gg
-DOMAIN,discord.media
-DOMAIN,discordapp.net
 DOMAIN-SUFFIX,discord.com
 DOMAIN-SUFFIX,discordapp.com
 DOMAIN-SUFFIX,discordapp.net
@@ -196,7 +191,6 @@ DOMAIN-KEYWORD,threema
 
 DOMAIN-SUFFIX,wire.com
 DOMAIN-SUFFIX,wire.community
-DOMAIN-KEYWORD,wire.com
 
 # ========================================
 # Rocket.Chat
