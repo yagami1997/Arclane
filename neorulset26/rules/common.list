@@ -182,8 +182,6 @@ DOMAIN-SUFFIX,zaobao.com.sg
 # > LifeCard - Japan Prepaid Card Service
 DOMAIN-SUFFIX,lifecard.co.jp
 
-# > USPS - United States Postal Service
-DOMAIN-SUFFIX,usps.com
 
 # > Wise - International Money Transfer
 DOMAIN-SUFFIX,wise.com
@@ -194,7 +192,6 @@ DOMAIN-SUFFIX,wise.com
 
 # > Weather.com - Weather Forecast & Conditions
 DOMAIN-SUFFIX,weather.com
-DOMAIN-KEYWORD,weather
 
 # ========================================
 # Performance & Benchmarking
