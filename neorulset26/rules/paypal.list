@@ -1,42 +1,42 @@
 # ============================================
-# US IP-Sensitive Services (Static Residential IP)
+# US IP-Sensitive Services (US Residential ISP IP Only)
 # ============================================
 
 
-# > PayPal
+# > PayPal Core
 USER-AGENT,PayPal*
-DOMAIN-KEYWORD,paypal
 DOMAIN-SUFFIX,paypal.com
 DOMAIN-SUFFIX,paypalobjects.com
+DOMAIN-SUFFIX,paypal-mktg.com
+DOMAIN-SUFFIX,braintreegateway.com
+DOMAIN-SUFFIX,braintreepayments.com
+DOMAIN-SUFFIX,hyperwallet.com
+DOMAIN-SUFFIX,xoom.com
 
 # > Venmo (US Only)
 DOMAIN-SUFFIX,venmo.com
-DOMAIN-KEYWORD,venmo
 
-# > Cash App (US Only)
+# > Cash App / Square (US Only)
 DOMAIN-SUFFIX,cash.app
+DOMAIN-SUFFIX,cash.me
 DOMAIN-SUFFIX,squareup.com
 DOMAIN-SUFFIX,square.com
-DOMAIN-KEYWORD,cashapp
+DOMAIN-SUFFIX,afterpay.com
 
 # > Zelle (US Banks Only)
 DOMAIN-SUFFIX,zellepay.com
-DOMAIN-KEYWORD,zelle
+DOMAIN-SUFFIX,clearxchange.com
 
 # ============================================
 # US Local Banks
 # ============================================
 
 DOMAIN-SUFFIX,chase.com
-DOMAIN-KEYWORD,chase
 DOMAIN-SUFFIX,bankofamerica.com
-DOMAIN-KEYWORD,bankofamerica
 DOMAIN-SUFFIX,wellsfargo.com
-DOMAIN-KEYWORD,wellsfargo
 DOMAIN-SUFFIX,citi.com
 DOMAIN-SUFFIX,citibank.com
 DOMAIN-SUFFIX,usbank.com
-DOMAIN-KEYWORD,usbank
 DOMAIN-SUFFIX,pnc.com
 DOMAIN-SUFFIX,tdbank.com
 DOMAIN-SUFFIX,regions.com
@@ -48,7 +48,6 @@ DOMAIN-SUFFIX,discover.com
 DOMAIN-SUFFIX,synchrony.com
 DOMAIN-SUFFIX,citizensbank.com
 DOMAIN-SUFFIX,firstcenturybank.com
-DOMAIN-KEYWORD,firstcenturybank
 DOMAIN-SUFFIX,lead.bank
 DOMAIN-SUFFIX,leadbank.com
 
@@ -62,25 +61,23 @@ DOMAIN-SUFFIX,varo.com
 DOMAIN-SUFFIX,dave.com
 DOMAIN-SUFFIX,one.app
 DOMAIN-SUFFIX,sofi.com
-DOMAIN-KEYWORD,sofi
 DOMAIN-SUFFIX,revolut.com
-DOMAIN-KEYWORD,revolut
 
 # ============================================
 # US Credit Cards
 # ============================================
 
 DOMAIN-SUFFIX,capitalone.com
-DOMAIN-KEYWORD,capitalone
 DOMAIN-SUFFIX,americanexpress.com
 DOMAIN-SUFFIX,aexp.com
+DOMAIN-SUFFIX,visa.com
+DOMAIN-SUFFIX,mastercard.com
 
 # ============================================
 # US Credit Bureaus (Very IP Sensitive)
 # ============================================
 
 DOMAIN-SUFFIX,equifax.com
-DOMAIN-KEYWORD,equifax
 DOMAIN-SUFFIX,transunion.com
 DOMAIN-SUFFIX,experian.com
 DOMAIN-SUFFIX,annualcreditreport.com
@@ -98,6 +95,12 @@ DOMAIN-SUFFIX,acorns.com
 DOMAIN-SUFFIX,stash.com
 DOMAIN-SUFFIX,betterment.com
 DOMAIN-SUFFIX,wealthfront.com
+DOMAIN-SUFFIX,charlesschwab.com
+DOMAIN-SUFFIX,fidelity.com
+DOMAIN-SUFFIX,vanguard.com
+DOMAIN-SUFFIX,etrade.com
+DOMAIN-SUFFIX,tdameritrade.com
+DOMAIN-SUFFIX,interactivebrokers.com
 
 # ============================================
 # US Tax Services (SSN - Very IP Sensitive)
@@ -108,6 +111,7 @@ DOMAIN-SUFFIX,intuit.com
 DOMAIN-SUFFIX,hrblock.com
 DOMAIN-SUFFIX,taxact.com
 DOMAIN-SUFFIX,freetaxusa.com
+DOMAIN-SUFFIX,taxslayer.com
 
 # ============================================
 # US Government Services
@@ -132,7 +136,6 @@ DOMAIN-SUFFIX,visible.com
 DOMAIN-SUFFIX,mintmobile.com
 DOMAIN-SUFFIX,usmobile.com
 DOMAIN-SUFFIX,ultramobile.com
-DOMAIN-KEYWORD,ultramobile
 DOMAIN-SUFFIX,tello.com
 DOMAIN-SUFFIX,ting.com
 DOMAIN-SUFFIX,cricketwireless.com
@@ -163,6 +166,9 @@ DOMAIN-SUFFIX,spokeo.com
 DOMAIN-SUFFIX,persona.com
 DOMAIN-SUFFIX,socure.com
 DOMAIN-SUFFIX,alloy.com
+DOMAIN-SUFFIX,plaid.com
+DOMAIN-SUFFIX,jumio.com
+DOMAIN-SUFFIX,onfido.com
 
 # ============================================
 # Fraud Detection (Used by US Services)
@@ -172,3 +178,4 @@ DOMAIN-SUFFIX,iesnare.com
 DOMAIN-SUFFIX,iovation.com
 DOMAIN-SUFFIX,threatmetrix.com
 DOMAIN-SUFFIX,sift.com
+DOMAIN-SUFFIX,forter.com
