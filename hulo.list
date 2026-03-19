@@ -2,46 +2,47 @@
 # > Domain-based routing for network optimization
 
 # ========================================
-# CN Social Platform A
+# CN Social Platform A - 知乎 (Zhihu)
 # ========================================
 
 # > User-Agent Rules
 USER-AGENT,*zhihu*
-USER-AGENT,zhihu*
 USER-AGENT,*ZhihuHybrid*
-USER-AGENT,*osee*
 
 # > Domain Rules
-DOMAIN,api.zhihu.com
 DOMAIN-SUFFIX,zhihu.com
 DOMAIN-SUFFIX,zhimg.com
 DOMAIN-KEYWORD,zhihu
 
 # ========================================
-# CN Social Platform B - Optimized 2026.02
+# CN Social Platform B - 小红书 (XHS)
 # ========================================
 
 # > User-Agent Rules
 USER-AGENT,*xiaohongshu*
-USER-AGENT,*redbook*
 
-# > Core Domain Rules
+# > Core & CDN Domains (主站与静态资源)
 DOMAIN-SUFFIX,xiaohongshu.com
+DOMAIN-SUFFIX,xiaohongshu.com.cn
+DOMAIN-SUFFIX,xhs.com
 DOMAIN-SUFFIX,xhscdn.com
 DOMAIN-SUFFIX,xhscdn.net
-DOMAIN-SUFFIX,xhslink.com
-
-# > Extended Domain Rules (Community contributed)
-DOMAIN-SUFFIX,xhsdns.com
-DOMAIN-SUFFIX,xhsdns.net
-DOMAIN-SUFFIX,xhssys.com
-DOMAIN-SUFFIX,xhsurl.com
 DOMAIN-SUFFIX,xhsredcdn.com
 DOMAIN-SUFFIX,cdnxhs.com
 
-# > Domain Keywords
-DOMAIN-KEYWORD,xiaohongshu
-DOMAIN-KEYWORD,xhs
+# > Links & Sharing (分享与短链)
+DOMAIN-SUFFIX,xhslink.com
+DOMAIN-SUFFIX,xhsurl.com
 
-# > Third-party Services
+# > Infrastructure (DNS 与 系统服务)
+DOMAIN-SUFFIX,xhsdns.com
+DOMAIN-SUFFIX,xhsdns.net
+DOMAIN-SUFFIX,xhssys.com
+DOMAIN,dns.xiaohongshu.com
+
+# > Security & Risk Control (风控与反欺诈)
 DOMAIN-SUFFIX,fengkongcloud.com
+DOMAIN-SUFFIX,fengkongcloud.net
+
+# > Domain Keywords (仅保留高精准项)
+DOMAIN-KEYWORD,xiaohongshu
