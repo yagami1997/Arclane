@@ -3,8 +3,8 @@
 # ============================================
 # Strategy Group: Messenger
 # Purpose: Route all instant messaging and chat app traffic
-# Coverage: Discord, Telegram, WhatsApp, Signal, Line, Slack,
-#           Element/Matrix, Viber, Zalo, Keybase, Mattermost,
+# Coverage: Discord (+ hCaptcha verification), Telegram, WhatsApp, Signal,
+#           Line, Slack, Element/Matrix, Viber, Zalo, Keybase, Mattermost,
 #           Session, Threema, Wire, Rocket.Chat
 # Node Requirement: Stable JP (recommended: Flower JP Premium2)
 # Note: Supersedes discord.list and ruleset/Telegram.list
@@ -16,6 +16,12 @@
 
 USER-AGENT,*Discord*
 USER-AGENT,Discord*
+
+# Core domains (precise match, higher priority than KEYWORD)
+DOMAIN,discord.com
+DOMAIN,discordapp.com
+DOMAIN,discordapp.net
+DOMAIN,discord.gg
 DOMAIN-SUFFIX,discord.com
 DOMAIN-SUFFIX,discordapp.com
 DOMAIN-SUFFIX,discordapp.net
@@ -23,7 +29,45 @@ DOMAIN-SUFFIX,discord.gg
 DOMAIN-SUFFIX,discord.media
 DOMAIN-SUFFIX,dis.gd
 DOMAIN-SUFFIX,discordstatus.com
+
+# Discord API & Gateway (WebSocket real-time connection)
+DOMAIN,api.discord.com
+DOMAIN,api.discordapp.com
+DOMAIN,gateway.discord.gg
+DOMAIN,gateway.discordapp.com
+
+# Discord CDN (images, attachments, external image proxy)
+DOMAIN,cdn.discordapp.com
+DOMAIN,media.discordapp.net
+DOMAIN,media.discord.com
+DOMAIN,attachments.discordapp.net
+DOMAIN,cdn.discord.com
+DOMAIN,images-ext-1.discordapp.net
+DOMAIN,images-ext-2.discordapp.net
+
+# Discord updates & client builds (stable / PTB / canary)
+DOMAIN,dl.discordapp.net
+DOMAIN,updates.discord.com
+DOMAIN,ptb.discord.com
+DOMAIN,ptb.discordapp.com
+DOMAIN,canary.discord.com
+DOMAIN,canary.discordapp.com
+
+# Discord misc endpoints
+DOMAIN,status.discord.com
+DOMAIN,latency.discord.com
+DOMAIN,support.discord.com
+DOMAIN,store.discord.com
+DOMAIN,click.discord.com
+
 DOMAIN-KEYWORD,discord
+
+# ---- Human Verification (hCaptcha) ----
+# Discord uses hCaptcha for server join verification.
+# Without these rules, the captcha IP differs from the Discord request IP,
+# triggering risk control and making verification impossible.
+DOMAIN-SUFFIX,hcaptcha.com
+DOMAIN-SUFFIX,hmt.ai
 
 # Discord voice server IP ranges
 IP-CIDR,66.22.196.0/22,no-resolve
@@ -32,6 +76,10 @@ IP-CIDR,66.22.208.0/20,no-resolve
 IP-CIDR,66.22.224.0/20,no-resolve
 IP-CIDR,66.22.240.0/21,no-resolve
 IP-CIDR,66.22.248.0/22,no-resolve
+
+# Discord infrastructure (Google Cloud)
+IP-CIDR,35.214.0.0/16,no-resolve
+IP-CIDR,35.215.0.0/16,no-resolve
 
 # ========================================
 # Telegram
@@ -62,8 +110,10 @@ IP-CIDR,91.108.8.0/21,no-resolve
 IP-CIDR,91.108.16.0/21,no-resolve
 IP-CIDR,91.108.56.0/22,no-resolve
 IP-CIDR,95.161.64.0/20,no-resolve
+IP-CIDR,139.59.210.98/32,no-resolve
 IP-CIDR,149.154.160.0/20,no-resolve
 IP-CIDR,185.76.151.0/24,no-resolve
+IP-CIDR,196.55.216.167/32,no-resolve
 IP-CIDR6,2001:67c:4e8::/48,no-resolve
 IP-CIDR6,2001:b28:f23c::/48,no-resolve
 IP-CIDR6,2001:b28:f23d::/48,no-resolve
@@ -78,6 +128,7 @@ USER-AGENT,WhatsApp*
 DOMAIN-SUFFIX,whatsapp.com
 DOMAIN-SUFFIX,whatsapp.net
 DOMAIN-SUFFIX,whatsapp.org
+DOMAIN-SUFFIX,whatsapp.biz
 DOMAIN-SUFFIX,wa.me
 DOMAIN-SUFFIX,wamessage.com
 DOMAIN-KEYWORD,whatsapp
@@ -87,11 +138,11 @@ DOMAIN-KEYWORD,whatsapp
 # ========================================
 
 DOMAIN-SUFFIX,signal.org
+DOMAIN-SUFFIX,signal.me
 DOMAIN-SUFFIX,signal.art
 DOMAIN-SUFFIX,signalmessenger.org
 DOMAIN-SUFFIX,signal.technology
 DOMAIN-SUFFIX,whispersystems.org
-DOMAIN-SUFFIX,sfu.voip.signal.org
 DOMAIN-KEYWORD,signal
 
 # ========================================
@@ -100,6 +151,7 @@ DOMAIN-KEYWORD,signal
 
 USER-AGENT,Line*
 DOMAIN-SUFFIX,line.me
+DOMAIN-SUFFIX,line.biz
 DOMAIN-SUFFIX,line-apps.com
 DOMAIN-SUFFIX,line-scdn.net
 DOMAIN-SUFFIX,linecorp.com
@@ -119,6 +171,7 @@ DOMAIN-SUFFIX,slack-core.com
 DOMAIN-SUFFIX,slack-imgs.com
 DOMAIN-SUFFIX,slack-redir.com
 DOMAIN-SUFFIX,slack-redir.net
+DOMAIN-SUFFIX,slack-static.net
 DOMAIN-SUFFIX,slackb.com
 DOMAIN-KEYWORD,slack
 
@@ -130,7 +183,9 @@ DOMAIN-SUFFIX,element.io
 DOMAIN-SUFFIX,matrix.org
 DOMAIN-SUFFIX,matrix.to
 DOMAIN-SUFFIX,riot.im
+DOMAIN-SUFFIX,vector.im
 DOMAIN-SUFFIX,modular.im
+DOMAIN-SUFFIX,ems.host
 DOMAIN-KEYWORD,matrix
 
 # ========================================
@@ -191,6 +246,7 @@ DOMAIN-KEYWORD,threema
 
 DOMAIN-SUFFIX,wire.com
 DOMAIN-SUFFIX,wire.community
+DOMAIN-KEYWORD,wire
 
 # ========================================
 # Rocket.Chat
