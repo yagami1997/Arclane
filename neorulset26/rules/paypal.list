@@ -41,7 +41,6 @@ DOMAIN-SUFFIX,pnc.com
 DOMAIN-SUFFIX,tdbank.com
 DOMAIN-SUFFIX,regions.com
 DOMAIN-SUFFIX,53.com
-DOMAIN-SUFFIX,key.com
 DOMAIN-SUFFIX,ally.com
 DOMAIN-SUFFIX,marcus.com
 DOMAIN-SUFFIX,discover.com
@@ -50,6 +49,7 @@ DOMAIN-SUFFIX,citizensbank.com
 DOMAIN-SUFFIX,firstcenturybank.com
 DOMAIN-SUFFIX,lead.bank
 DOMAIN-SUFFIX,leadbank.com
+DOMAIN-SUFFIX,keybank.com
 
 # ============================================
 # US Neobanks (Very IP Sensitive)
@@ -179,3 +179,191 @@ DOMAIN-SUFFIX,iovation.com
 DOMAIN-SUFFIX,threatmetrix.com
 DOMAIN-SUFFIX,sift.com
 DOMAIN-SUFFIX,forter.com
+
+# ============================================
+# Major US Banks (Supplemental)
+# ============================================
+
+DOMAIN-SUFFIX,usaa.com
+DOMAIN-SUFFIX,navyfederal.org
+DOMAIN-SUFFIX,penfed.org
+DOMAIN-SUFFIX,truist.com
+DOMAIN-SUFFIX,comerica.com
+DOMAIN-SUFFIX,huntington.com
+DOMAIN-SUFFIX,flagstar.com
+DOMAIN-SUFFIX,jpmorganchase.com
+DOMAIN-SUFFIX,jpmorgan.com
+DOMAIN-SUFFIX,goldmansachs.com
+DOMAIN-SUFFIX,gs.com
+DOMAIN-SUFFIX,morganstanley.com
+DOMAIN-SUFFIX,westernalliancebank.com
+DOMAIN-SUFFIX,svb.com
+
+# ============================================
+# US Neobanks (Supplemental)
+# ============================================
+
+DOMAIN-SUFFIX,moneylion.com
+DOMAIN-SUFFIX,albertapp.com
+DOMAIN-SUFFIX,empower.me
+DOMAIN-SUFFIX,cleo.ai
+DOMAIN-SUFFIX,brigit.com
+DOMAIN-SUFFIX,earnin.com
+DOMAIN-SUFFIX,aspiration.com
+DOMAIN-SUFFIX,upgrade.com
+DOMAIN-SUFFIX,greenlight.com
+DOMAIN-SUFFIX,step.com
+
+# ============================================
+# US Buy Now Pay Later / BNPL (Very IP Sensitive)
+# ============================================
+
+DOMAIN-SUFFIX,affirm.com
+DOMAIN-SUFFIX,klarna.com
+DOMAIN-SUFFIX,sezzle.com
+DOMAIN-SUFFIX,zip.co
+DOMAIN-SUFFIX,splitit.com
+DOMAIN-SUFFIX,bread.com
+
+# ============================================
+# US Crypto Exchanges (Registered with FinCEN/SEC)
+# ============================================
+
+DOMAIN-SUFFIX,coinbase.com
+DOMAIN-SUFFIX,gemini.com
+DOMAIN-SUFFIX,kraken.com
+DOMAIN-SUFFIX,paxos.com
+DOMAIN-SUFFIX,strike.me
+DOMAIN-SUFFIX,river.com
+
+# ============================================
+# US Insurance (IP + State Residence Sensitive)
+# ============================================
+
+DOMAIN-SUFFIX,geico.com
+DOMAIN-SUFFIX,progressive.com
+DOMAIN-SUFFIX,statefarm.com
+DOMAIN-SUFFIX,allstate.com
+DOMAIN-SUFFIX,libertymutual.com
+DOMAIN-SUFFIX,travelers.com
+DOMAIN-SUFFIX,nationwide.com
+DOMAIN-SUFFIX,lemonade.com
+DOMAIN-SUFFIX,rootinsurance.com
+DOMAIN-SUFFIX,hippo.com
+DOMAIN-SUFFIX,policygenius.com
+
+# ============================================
+# US Mortgage & Student Lending (Very IP Sensitive)
+# ============================================
+
+DOMAIN-SUFFIX,rocketmortgage.com
+DOMAIN-SUFFIX,quickenloans.com
+DOMAIN-SUFFIX,loandepot.com
+DOMAIN-SUFFIX,better.com
+DOMAIN-SUFFIX,lendingclub.com
+DOMAIN-SUFFIX,prosper.com
+DOMAIN-SUFFIX,upstart.com
+DOMAIN-SUFFIX,navient.com
+DOMAIN-SUFFIX,salliemae.com
+DOMAIN-SUFFIX,mohela.com
+DOMAIN-SUFFIX,aidvantage.com
+DOMAIN-SUFFIX,fedloan.org
+
+# ============================================
+# US Payroll & Business Banking (IP Sensitive)
+# ============================================
+
+DOMAIN-SUFFIX,gusto.com
+DOMAIN-SUFFIX,adp.com
+DOMAIN-SUFFIX,paychex.com
+DOMAIN-SUFFIX,rippling.com
+DOMAIN-SUFFIX,brex.com
+DOMAIN-SUFFIX,ramp.com
+DOMAIN-SUFFIX,mercury.com
+DOMAIN-SUFFIX,relay.fi
+DOMAIN-SUFFIX,found.com
+DOMAIN-SUFFIX,lili.co
+
+# ============================================
+# US Brokerages (Supplemental)
+# ============================================
+
+DOMAIN-SUFFIX,merrilledge.com
+DOMAIN-SUFFIX,ml.com
+DOMAIN-SUFFIX,schwab.com
+DOMAIN-SUFFIX,tastytrade.com
+DOMAIN-SUFFIX,moomoo.com
+DOMAIN-SUFFIX,firstrade.com
+DOMAIN-SUFFIX,tradestation.com
+
+# ============================================
+# US Government Services (Supplemental)
+# ============================================
+
+DOMAIN-SUFFIX,fema.gov
+DOMAIN-SUFFIX,sba.gov
+DOMAIN-SUFFIX,ftc.gov
+DOMAIN-SUFFIX,consumerfinance.gov
+DOMAIN-SUFFIX,treasury.gov
+DOMAIN-SUFFIX,federalreserve.gov
+DOMAIN-SUFFIX,sec.gov
+DOMAIN-SUFFIX,fdic.gov
+DOMAIN-SUFFIX,ncua.gov
+DOMAIN-SUFFIX,occ.gov
+DOMAIN-SUFFIX,healthcare.gov
+DOMAIN-SUFFIX,benefits.gov
+DOMAIN-SUFFIX,va.gov
+DOMAIN-SUFFIX,dhs.gov
+DOMAIN-SUFFIX,cbp.gov
+DOMAIN-SUFFIX,state.gov
+DOMAIN-SUFFIX,finra.org
+
+# ============================================
+# US Carriers (Supplemental MVNOs & Cable Mobile)
+# ============================================
+
+DOMAIN-SUFFIX,xfinity.com
+DOMAIN-SUFFIX,comcast.com
+DOMAIN-SUFFIX,spectrum.net
+DOMAIN-SUFFIX,tracfone.com
+DOMAIN-SUFFIX,straighttalk.com
+DOMAIN-SUFFIX,metropcs.com
+DOMAIN-SUFFIX,googlefi.com
+
+# ============================================
+# US Background Check & People Search
+# ============================================
+
+DOMAIN-SUFFIX,beenverified.com
+DOMAIN-SUFFIX,truthfinder.com
+DOMAIN-SUFFIX,intelius.com
+DOMAIN-SUFFIX,peoplefinders.com
+DOMAIN-SUFFIX,instantcheckmate.com
+DOMAIN-SUFFIX,checkr.com
+DOMAIN-SUFFIX,sterlingcheck.com
+DOMAIN-SUFFIX,hireright.com
+DOMAIN-SUFFIX,truepeoplesearch.com
+
+# ============================================
+# Fraud Detection (Supplemental)
+# ============================================
+
+DOMAIN-SUFFIX,kount.com
+DOMAIN-SUFFIX,sardine.ai
+DOMAIN-SUFFIX,signifyd.com
+DOMAIN-SUFFIX,riskified.com
+DOMAIN-SUFFIX,neustar.biz
+DOMAIN-SUFFIX,datavisor.com
+DOMAIN-SUFFIX,lexisnexis.com
+
+# ============================================
+# Identity Verification (Supplemental)
+# ============================================
+
+DOMAIN-SUFFIX,trulioo.com
+DOMAIN-SUFFIX,mitek.com
+DOMAIN-SUFFIX,au10tix.com
+DOMAIN-SUFFIX,veriff.com
+DOMAIN-SUFFIX,acuant.com
+DOMAIN-SUFFIX,incode.com
+DOMAIN-SUFFIX,sheerid.com
