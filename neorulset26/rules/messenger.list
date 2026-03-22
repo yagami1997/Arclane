@@ -15,13 +15,9 @@
 # ========================================
 
 USER-AGENT,*Discord*
-USER-AGENT,Discord*
 
-# Core domains (precise match, higher priority than KEYWORD)
-DOMAIN,discord.com
-DOMAIN,discordapp.com
-DOMAIN,discordapp.net
-DOMAIN,discord.gg
+# All subdomains are covered by DOMAIN-SUFFIX rules below;
+# individual DOMAIN entries are intentionally omitted to reduce rule count.
 DOMAIN-SUFFIX,discord.com
 DOMAIN-SUFFIX,discordapp.com
 DOMAIN-SUFFIX,discordapp.net
@@ -30,42 +26,16 @@ DOMAIN-SUFFIX,discord.media
 DOMAIN-SUFFIX,dis.gd
 DOMAIN-SUFFIX,discordstatus.com
 
-# Discord API & Gateway (WebSocket real-time connection)
-DOMAIN,api.discord.com
-DOMAIN,api.discordapp.com
-DOMAIN,gateway.discord.gg
-DOMAIN,gateway.discordapp.com
-
-# Discord CDN (images, attachments, external image proxy)
-DOMAIN,cdn.discordapp.com
-DOMAIN,media.discordapp.net
-DOMAIN,media.discord.com
-DOMAIN,attachments.discordapp.net
-DOMAIN,cdn.discord.com
-DOMAIN,images-ext-1.discordapp.net
-DOMAIN,images-ext-2.discordapp.net
-
-# Discord updates & client builds (stable / PTB / canary)
-DOMAIN,dl.discordapp.net
-DOMAIN,updates.discord.com
-DOMAIN,ptb.discord.com
-DOMAIN,ptb.discordapp.com
-DOMAIN,canary.discord.com
-DOMAIN,canary.discordapp.com
-
-# Discord misc endpoints
-DOMAIN,status.discord.com
-DOMAIN,latency.discord.com
-DOMAIN,support.discord.com
-DOMAIN,store.discord.com
-DOMAIN,click.discord.com
-
 DOMAIN-KEYWORD,discord
 
 # ---- Human Verification (hCaptcha) ----
-# Discord uses hCaptcha for server join verification.
-# Without these rules, the captcha IP differs from the Discord request IP,
-# triggering risk control and making verification impossible.
+# Discord uses hCaptcha for server-join verification.
+# If hCaptcha traffic is NOT proxied through the same node as Discord,
+# the captcha request IP will differ from the Discord session IP,
+# triggering risk control and potentially locking the account.
+# Known side-effect: all third-party services that also use hCaptcha
+# (e.g. Cloudflare challenge pages) will route through this Messenger node.
+# This is an acceptable trade-off; do NOT remove these entries.
 DOMAIN-SUFFIX,hcaptcha.com
 DOMAIN-SUFFIX,hmt.ai
 
@@ -77,9 +47,10 @@ IP-CIDR,66.22.224.0/20,no-resolve
 IP-CIDR,66.22.240.0/21,no-resolve
 IP-CIDR,66.22.248.0/22,no-resolve
 
-# Discord infrastructure (Google Cloud)
-IP-CIDR,35.214.0.0/16,no-resolve
-IP-CIDR,35.215.0.0/16,no-resolve
+# Note: GCP /16 ranges (35.214-215.0.0/16) have been intentionally removed.
+# Those blocks cover 130,000+ IPs shared across Google Cloud tenants;
+# including them would mis-route a large amount of unrelated GCP traffic.
+# Domain-level rules above are sufficient to identify all Discord connections.
 
 # ========================================
 # Telegram
@@ -110,7 +81,6 @@ IP-CIDR,91.108.8.0/21,no-resolve
 IP-CIDR,91.108.16.0/21,no-resolve
 IP-CIDR,91.108.56.0/22,no-resolve
 IP-CIDR,95.161.64.0/20,no-resolve
-IP-CIDR,139.59.210.98/32,no-resolve
 IP-CIDR,149.154.160.0/20,no-resolve
 IP-CIDR,185.76.151.0/24,no-resolve
 IP-CIDR,196.55.216.167/32,no-resolve
@@ -130,7 +100,6 @@ DOMAIN-SUFFIX,whatsapp.net
 DOMAIN-SUFFIX,whatsapp.org
 DOMAIN-SUFFIX,whatsapp.biz
 DOMAIN-SUFFIX,wa.me
-DOMAIN-SUFFIX,wamessage.com
 DOMAIN-KEYWORD,whatsapp
 
 # ========================================
@@ -153,6 +122,7 @@ DOMAIN-SUFFIX,line.me
 DOMAIN-SUFFIX,line.biz
 DOMAIN-SUFFIX,line-apps.com
 DOMAIN-SUFFIX,line-scdn.net
+DOMAIN-SUFFIX,line-cdn.net
 DOMAIN-SUFFIX,linecorp.com
 DOMAIN-SUFFIX,line.naver.jp
 DOMAIN-KEYWORD,line-apps
@@ -253,3 +223,14 @@ DOMAIN-SUFFIX,wire.community
 DOMAIN-SUFFIX,rocket.chat
 DOMAIN-SUFFIX,rocketcdn.me
 DOMAIN-KEYWORD,rocket.chat
+
+# ========================================
+# Facebook Messenger
+# ========================================
+# Covers Messenger-specific traffic only.
+# facebook.com and fbcdn.net are shared with the broader Facebook platform
+# and should be handled in a dedicated Social rules group to avoid overlap.
+
+USER-AGENT,Messenger*
+DOMAIN-SUFFIX,messenger.com
+DOMAIN-SUFFIX,m.me
