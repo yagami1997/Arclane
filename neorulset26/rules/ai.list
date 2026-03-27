@@ -92,6 +92,9 @@ DOMAIN-SUFFIX,groq.com
 # > OpenRouter (API Gateway)
 DOMAIN-SUFFIX,openrouter.ai
 
+# > MuleRun (AI Agent Platform)
+DOMAIN-SUFFIX,mulerun.com
+
 # > Forefront AI
 DOMAIN-SUFFIX,forefront.ai
 
@@ -514,4 +517,3 @@ DOMAIN-SUFFIX,humanloop.com
 
 # > Snorkel AI
 DOMAIN-SUFFIX,snorkel.ai
-
