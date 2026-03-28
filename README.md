@@ -23,7 +23,26 @@
 
 ---
 
+## Repository Zones
+
+This repository has two different responsibilities, and they should be treated differently:
+
+- `neorulset26/`: personal daily-use ruleset stack with its own architecture and docs
+- repository root + `ruleset/`: stable public endpoints for existing GitHub Raw imports used by other people
+
+That means the root may look flatter than ideal, but those filenames act like published API paths. Moving them would break downstream configs. See [`REPOSITORY_LAYOUT.md`](./REPOSITORY_LAYOUT.md) for the maintenance boundary and future placement rules.
+
 ## 🔄 Changelog
+
+### March 27, 2026 08:49 PM PST — Transition Notice
+
+Repository guidance was updated at `March 27, 2026 08:49 PM PST`.
+
+- `neorulset26/` is now the recommended 2026 ruleset entry point for new users
+- root-level scattered `*.list` and legacy compatibility paths remain available during the transition period
+- if you are starting fresh, please prioritize the `neorulset26` 2026 stack instead of the older loose root rules
+- current plan is to evaluate retiring most scattered legacy root rules by the end of 2026
+- maintenance focus during 2026 will be documentation clarity and gradual migration, not expanding the old flat layout
 
 ### February 2026 — v2.1
 
@@ -48,6 +67,16 @@ This repository has undergone a comprehensive restructure to ensure **complete a
 ---
 
 ## 🌟 Key Features
+
+## 2026 Recommendation
+
+For new setups, use `neorulset26/` first.
+
+- Architecture reference: [`neorulset26/ENGINEERING_GUIDE.md`](./neorulset26/ENGINEERING_GUIDE.md)
+- Rule URL reference: [`neorulset26/RULESET_URLS.md`](./neorulset26/RULESET_URLS.md)
+- Collaboration and transition notes: [`COLLABORATION_GUIDE.md`](./COLLABORATION_GUIDE.md)
+
+Root-level `*.list`, `*.sgmodule`, and `ruleset/` remain available for compatibility, but they should be treated as legacy transition surfaces rather than the preferred 2026 architecture.
 
 <table>
 <tr>
