@@ -100,6 +100,9 @@ DOMAIN-SUFFIX,app-measurement.com
 USER-AGENT,%E8%BF%85%E9%9B%B7
 DOMAIN-SUFFIX,xunlei.com
 
+# > XNS DNS
+DOMAIN-SUFFIX,xns.one
+
 # > Download
 PROCESS-NAME,aria2c
 PROCESS-NAME,fdm

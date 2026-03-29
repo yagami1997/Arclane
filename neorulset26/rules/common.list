@@ -141,8 +141,8 @@ DOMAIN,macxmp.rcv.sandai.net
 # > ZeroTier - Software-Defined Networking
 DOMAIN-SUFFIX,zerotier.com
 
-# > XNS - DNS Service Provider
-DOMAIN-SUFFIX,xns.one
+# > XNS Dashboard - keep panel access on proxy
+DOMAIN,dash.xns.one
 
 # > Surge - Network Debugging Tool
 DOMAIN-SUFFIX,nssurge.com
