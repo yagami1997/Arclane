@@ -40,6 +40,7 @@ DOMAIN-SUFFIX,auth.com
 # > Proxy plugin
 PROCESS-NAME,v2ray
 PROCESS-NAME,ss-local
+PROCESS-NAME,/Library/Application Support/ZeroTier/One/zerotier-one
 
 # > PlayStation
 DOMAIN-SUFFIX,dl.playstation.net
