@@ -11,6 +11,8 @@ DOMAIN-KEYWORD,jsdelivr
 DOMAIN-SUFFIX,protonmail.com
 DOMAIN-SUFFIX,proton.me
 DOMAIN-SUFFIX,zoho.com
+DOMAIN-SUFFIX,weather.com
+DOMAIN-SUFFIX,wttr.in
 
 # > Academic & Research Platforms
 DOMAIN-SUFFIX,acm.org

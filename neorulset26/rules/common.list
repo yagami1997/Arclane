@@ -187,13 +187,6 @@ DOMAIN-SUFFIX,lifecard.co.jp
 DOMAIN-SUFFIX,wise.com
 
 # ========================================
-# Weather Services
-# ========================================
-
-# > Weather.com - Weather Forecast & Conditions
-DOMAIN-SUFFIX,weather.com
-
-# ========================================
 # Performance & Benchmarking
 # ========================================
 
