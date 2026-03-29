@@ -102,6 +102,7 @@ DOMAIN-SUFFIX,xunlei.com
 
 # > XNS DNS
 DOMAIN-SUFFIX,xns.one
+DOMAIN-SUFFIX,novaxns.one
 
 # > Download
 PROCESS-NAME,aria2c
