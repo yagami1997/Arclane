@@ -1,0 +1,45 @@
+# ============================================
+# Google Antigravity - AI Agentic IDE
+# ============================================
+# Strategy Group: PayPal (ISP California)
+# Purpose: Route Antigravity to US ISP nodes
+# Reason: US Gmail account region authentication
+#         requires clean US residential/ISP IP.
+#         Google OAuth geo-check is strict enough
+#         that datacenter IPs (OIX) can mismatch.
+#
+# Rule placement: MUST load before google.list
+# in Surge [Rule] section — these domains are
+# subsets of google.list catch-alls and require
+# earlier matching to redirect to ISP group.
+#
+# IMPORTANT: Antigravity does NOT follow macOS
+# system proxy settings. Surge Enhanced Mode
+# (TUN) is required for rules to take effect.
+# ============================================
+
+# > Core App & OAuth Callback
+# antigravity.google TLD is caught by DOMAIN-KEYWORD,google
+# in google.list — must override here first.
+DOMAIN-SUFFIX,antigravity.google
+
+# > Primary AI API Endpoint
+# Source: elad12390/antigravity-proxy — confirmed internal
+# CloudCode sandbox endpoint, NOT the public Gemini API.
+DOMAIN,daily-cloudcode-pa.sandbox.googleapis.com
+
+# > Cloud AI Companion API (IAM auth path)
+# Source: NoeFabris/opencode-antigravity-auth issue #191
+# "Permission 'cloudaicompanion.companions.generateChat' denied"
+DOMAIN-SUFFIX,cloudaicompanion.googleapis.com
+
+# > Extension Registry
+# Source: discuss.ai.google.dev login thread — user-confirmed whitelist
+# Antigravity uses OpenVSX instead of Microsoft's marketplace.
+DOMAIN-SUFFIX,open-vsx.org
+
+# > VS Code Infrastructure (Antigravity is a VS Code fork)
+# Note: unverified via official docs — included conservatively.
+# These do NOT require US IP; routed here for group consistency.
+DOMAIN-SUFFIX,vscode-cdn.net
+DOMAIN-SUFFIX,vsassets.io

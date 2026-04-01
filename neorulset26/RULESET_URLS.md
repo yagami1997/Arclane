@@ -50,8 +50,8 @@ FALLBACK         BIG TECH                           FINANCE
 ────────         ────────                           ───────
 01 Proxy         04 AI Suite  ── ai.list            09 PayPal ── paypal.list
 03 Others        05 Google    ── google.list                     (ISP only)
-                              ── Google FCM.list    10 Crypto ── crypto.list
-                 06 Microsoft ── Microsoft.list
+                              ── Google FCM.list       Antigravity ── antigravity.list
+                 06 Microsoft ── Microsoft.list     10 Crypto ── crypto.list
                  07 Apple     ── Apple.list
                               [Direct]
                  08 Scholar   ── scholar.list
@@ -105,6 +105,7 @@ Microsoft         │ IMM / Dog   │ IMM JP / Dog JP
 Apple             │ —           │ Direct
 Scholar           │ IMM / Flower│ IMM JP / Flower JP
 PayPal            │ ISP only    │ ISP California 1–12
+Antigravity       │ ISP only    │ ISP California 1–12  (US Gmail auth)
 Crypto            │ ISP / Flower│ ISP or Flower JP Pre2
 YouTube           │ Flower / IMM│ Flower JP Exp1 / IMM JP
 Streaming-US      │ OIX         │ OIX US GIA2
@@ -227,6 +228,21 @@ RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/
 
 ```
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/paypal.list,PayPal
+```
+
+---
+
+## 09b · Antigravity (Google AI Agentic IDE)
+**Policy**: `PayPal` (shares ISP California nodes)  
+**Node**: ISP only — same rationale as PayPal  
+**Placement**: TIER 3 — must load **before** `google.list` to override googleapis.com catch-alls  
+**Requires**: Surge Enhanced Mode (TUN) — Antigravity bypasses macOS system proxy
+
+Domains covered: `antigravity.google`, `daily-cloudcode-pa.sandbox.googleapis.com`,
+`cloudaicompanion.googleapis.com`, `open-vsx.org`, `vscode-cdn.net`, `vsassets.io`
+
+```
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/antigravity.list,PayPal
 ```
 
 ---
@@ -463,11 +479,14 @@ RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/HTTPDNS.list,REJECT
 
 # ════════════════════════════════════════════════════════════
-# TIER 3 — Your 5 fully custom groups  (override everything below)
-# PayPal / Common / Social / Bytedance / HULO
+# TIER 3 — Your fully custom groups  (override everything below)
+# PayPal / Antigravity / Common / Social / Bytedance / HULO
 # These files are hand-authored; their policy decisions are final.
+# Antigravity MUST be here (before TIER 4's google.list) so that
+# its googleapis.com subdomains are caught before the Google group.
 # ════════════════════════════════════════════════════════════
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/paypal.list,PayPal
+RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/antigravity.list,PayPal
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/common.list,Common
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/socialsite.list,Social
 RULE-SET,https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/bytedance.list,Bytedance
