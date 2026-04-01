@@ -17,6 +17,7 @@ Icon
 # Editor & IDE
 # ============================================
 .vscode/
+.claude/
 .cursor/
 *.swp
 *.swo
