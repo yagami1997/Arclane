@@ -17,7 +17,7 @@ This is not positioned as a primary recursive resolver. It is a thin proxy layer
 
 ## What This Worker Does
 
-The implementation in [worker.js](./tools/doh-fallback-worker/worker.js) accepts DoH requests on `/dns-query` and forwards them to multiple upstream resolvers:
+The implementation in [`worker.js`](./worker.js) accepts DoH requests on `/dns-query` and forwards them to multiple upstream resolvers:
 
 - Cloudflare DoH
 - Google Public DNS DoH
@@ -62,7 +62,7 @@ The request lifecycle is:
 
 ## Caching Behavior
 
-Current cache-related constants in [worker.js](./tools/doh-fallback-worker/worker.js):
+Current cache-related constants in [`worker.js`](./worker.js):
 
 - Minimum TTL floor: `60` seconds
 - Maximum TTL ceiling: `86400` seconds
@@ -99,8 +99,8 @@ If you deploy this publicly, treat it as an emergency utility endpoint, not a ge
 
 ## Files
 
-- [worker.js](./tools/doh-fallback-worker/worker.js): Cloudflare Worker implementation
-- [README.ja.md](./tools/doh-fallback-worker/README.ja.md): Japanese version of this document
+- [`worker.js`](./worker.js): Cloudflare Worker implementation
+- [`README.ja.md`](./README.ja.md): Japanese version of this document
 
 ## Deployment
 
@@ -111,7 +111,7 @@ You can deploy this Worker with either the Cloudflare dashboard or Wrangler CLI.
 1. Sign in to the Cloudflare dashboard.
 2. Open `Workers & Pages`.
 3. Create a new Worker.
-4. Replace the default script with the contents of [worker.js](./tools/doh-fallback-worker/worker.js).
+4. Replace the default script with the contents of [`worker.js`](./worker.js).
 5. Save and deploy.
 
 After deployment, Cloudflare will assign a default hostname similar to:

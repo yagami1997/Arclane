@@ -48,11 +48,11 @@ Language:
 
 パス:
 
-- [tools/doh-fallback-worker](./tools/doh-fallback-worker)
+- [`doh-fallback-worker/`](./doh-fallback-worker/)
 
 英語版ドキュメント:
 
-- [tools/doh-fallback-worker/README.md](./tools/doh-fallback-worker/README.md)
+- [`doh-fallback-worker/README.md`](./doh-fallback-worker/README.md)
 
 このツールは、通常の DoH エンドポイントが利用できないときの緊急退避先として使う Cloudflare Worker ベースの DoH リバースプロキシです。
 

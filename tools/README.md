@@ -48,11 +48,11 @@ The following should generally not go into `tools/`:
 
 Path:
 
-- [tools/doh-fallback-worker](./tools/doh-fallback-worker)
+- [`doh-fallback-worker/`](./doh-fallback-worker/)
 
 English documentation:
 
-- [tools/doh-fallback-worker/README.md](./tools/doh-fallback-worker/README.md)
+- [`doh-fallback-worker/README.md`](./doh-fallback-worker/README.md)
 
 This tool provides a Cloudflare Worker based fallback DNS-over-HTTPS reverse proxy for emergency use when a primary DoH endpoint is unavailable.
 
