@@ -70,6 +70,7 @@ The repository is maintained around a few practical rules:
 - **Repository direction**: formalized `tools/` as a parallel support layer alongside the 2026 ruleset mainline and the compatibility publication surface.
 - **Tools**: added repository-level tools documentation at [`tools/README.md`](./tools/README.md).
 - **DoH fallback**: added the first operational utility under `tools/` at [`tools/doh-fallback-worker/README.md`](./tools/doh-fallback-worker/README.md), documenting a Cloudflare Worker based fallback DoH reverse proxy.
+- **Migration support**: added [`neorulset26/MIGRATION_RULE_URLS.md`](./neorulset26/MIGRATION_RULE_URLS.md), a migration-friendly absolute URL list that can be shared directly with friends or handed to AI assistants for Surge config generation.
 - **Documentation**: refreshed the root README structure to better reflect the project's current shape and maintenance direction.
 
 ### March 27, 2026 08:49 PM PDT — 2026 Mainline Transition Guidance
