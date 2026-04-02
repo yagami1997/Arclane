@@ -23,50 +23,23 @@
 
 ---
 
-## Repository Zones
+This repository is a continuously maintained Surge ruleset project with three parallel responsibilities:
 
-This repository has two different responsibilities, and they should be treated differently:
+- a current mainline ruleset architecture under `neorulset26/`
+- a stable compatibility publication surface at the repository root and under `ruleset/`
+- a growing `tools/` layer for operational utilities and recovery-oriented support components
 
-- `neorulset26/`: personal daily-use ruleset stack with its own architecture and docs
-- repository root + `ruleset/`: stable public endpoints for existing GitHub Raw imports used by other people
+If you are new to the repository, start with the 2026 mainline. If you rely on existing raw import paths, the compatibility surface remains available. If you need supporting operational utilities, check the tools layer.
 
-That means the root may look flatter than ideal, but those filenames act like published API paths. Moving them would break downstream configs. See [`REPOSITORY_LAYOUT.md`](./REPOSITORY_LAYOUT.md) for the maintenance boundary and future placement rules.
+## Repository Structure
 
-## 🔄 Changelog
+This repository now has three distinct responsibilities, and they should be read differently:
 
-### March 27, 2026 08:49 PM PST — Transition Notice
+- `neorulset26/`: the preferred 2026 mainline ruleset stack, with its own architecture and documentation
+- repository root + `ruleset/`: stable public endpoints for existing GitHub Raw imports and compatibility consumers
+- `tools/`: repository-wide support tooling for recovery, validation, deployment, and maintenance utilities
 
-Repository guidance was updated at `March 27, 2026 08:49 PM PST`.
-
-- `neorulset26/` is now the recommended 2026 ruleset entry point for new users
-- root-level scattered `*.list` and legacy compatibility paths remain available during the transition period
-- if you are starting fresh, please prioritize the `neorulset26` 2026 stack instead of the older loose root rules
-- current plan is to evaluate retiring most scattered legacy root rules by the end of 2026
-- maintenance focus during 2026 will be documentation clarity and gradual migration, not expanding the old flat layout
-
-### February 2026 — v2.1
-
-Ongoing maintenance and internal improvements. Some structural work in progress.
-
-- Continued refinement of rule coverage and categorization
-- Miscellaneous documentation updates
-- Minor adjustments to routing logic for select service groups
-- Internal reorganization for long-term maintainability
-
-### February 2026 — v2.0
-
-**Major Infrastructure Migration Completed**
-
-This repository has undergone a comprehensive restructure to ensure **complete autonomy and long-term sustainability**:
-
-- ✅ **Self-Contained Ruleset**: Migrated 58 external dependencies to local `ruleset/` directory
-- ✅ **Enhanced Privacy**: Removed all sensitive information and third-party references
-- ✅ **Improved Organization**: Restructured directory layout for better maintainability
-- ✅ **Zero External Dependencies**: All rules now hosted and maintained internally
-
----
-
-## 🌟 Key Features
+The root may still look flatter than ideal because some filenames now function like published API paths. Moving them carelessly would break downstream configurations. See [`REPOSITORY_LAYOUT.md`](./REPOSITORY_LAYOUT.md) for the maintenance boundary and placement rules.
 
 ## 2026 Recommendation
 
@@ -75,8 +48,68 @@ For new setups, use `neorulset26/` first.
 - Architecture reference: [`neorulset26/ENGINEERING_GUIDE.md`](./neorulset26/ENGINEERING_GUIDE.md)
 - Rule URL reference: [`neorulset26/RULESET_URLS.md`](./neorulset26/RULESET_URLS.md)
 - Collaboration and transition notes: [`COLLABORATION_GUIDE.md`](./COLLABORATION_GUIDE.md)
+- Repository tools overview: [`tools/README.md`](./tools/README.md)
 
 Root-level `*.list`, `*.sgmodule`, and `ruleset/` remain available for compatibility, but they should be treated as legacy transition surfaces rather than the preferred 2026 architecture.
+
+## Design Philosophy
+
+The repository is maintained around a few practical rules:
+
+- **Published path stability**: public raw import paths should stay stable once other people depend on them.
+- **Mainline-first evolution**: new ruleset architecture, documentation, and forward-looking maintenance belong in `neorulset26/`.
+- **Self-hosted control**: wherever practical, rules and supporting assets should be maintained internally rather than delegated to drifting external dependencies.
+- **Compatibility without stagnation**: legacy paths stay available, but they should not dictate how the project evolves.
+- **Tools support operations**: recovery utilities, validators, deployment helpers, and similar support components belong under `tools/`, not inside the ruleset mainline.
+- **Documentation should track reality**: because this project changes frequently, the README should explain the current structure, not just preserve old presentation.
+
+## 🔄 Changelog
+
+### April 1, 2026 09:30 PM PDT — Repository Expansion: Tools Track and DoH Fallback Worker
+
+- **Repository direction**: formalized `tools/` as a parallel support layer alongside the 2026 ruleset mainline and the compatibility publication surface.
+- **Tools**: added repository-level tools documentation at [`tools/README.md`](./tools/README.md).
+- **DoH fallback**: added the first operational utility under `tools/` at [`tools/doh-fallback-worker/README.md`](./tools/doh-fallback-worker/README.md), documenting a Cloudflare Worker based fallback DoH reverse proxy.
+- **Documentation**: refreshed the root README structure to better reflect the project's current shape and maintenance direction.
+
+### March 27, 2026 08:49 PM PDT — 2026 Mainline Transition Guidance
+
+- **Repository direction**: `neorulset26/` became the recommended entry point for new 2026 setups.
+- **Compatibility**: root-level scattered `*.list` files and legacy compatibility paths remained available during the transition period.
+- **Migration posture**: new users were directed toward the 2026 stack rather than the older loose root layout.
+- **Maintenance focus**: 2026 work shifted toward documentation clarity, migration guidance, and structural discipline rather than growing the old flat root surface.
+
+### February 2026 — v2.1 Maintenance Cycle
+
+- **Ruleset work**: continued refinement of rule coverage and categorization.
+- **Documentation**: ongoing documentation cleanup and incremental maintenance improvements.
+- **Operations**: minor routing adjustments for select service groups and internal structure refinement for long-term maintainability.
+
+### February 2026 — v2.0 Self-Hosted Infrastructure Migration
+
+- **Self-hosted rulesets**: migrated 58 external dependencies into the local `ruleset/` directory.
+- **Privacy**: removed sensitive references and reduced third-party dependency exposure.
+- **Organization**: restructured the repository for stronger long-term maintainability.
+- **Autonomy**: established a zero-external-dependency direction for ruleset hosting.
+
+## 🧰 Tools
+
+`tools/` is the repository-wide support layer for operational utilities and maintenance-focused components. It exists to hold modules that help run, validate, deploy, recover, or support the broader project without mixing those concerns into the ruleset mainline.
+
+- Tools overview: [`tools/README.md`](./tools/README.md)
+- Current tool: [`tools/doh-fallback-worker/README.md`](./tools/doh-fallback-worker/README.md)
+
+Current direction for `tools/` includes:
+
+- emergency network utilities
+- deployment helpers
+- validators and auditing aids
+- generators and maintenance helpers
+- other repository-level support components with ongoing operational value
+
+---
+
+## 🌟 Key Features
 
 <table>
 <tr>
@@ -210,6 +243,8 @@ Americas Node → Geographic identity: North/South America
 - **Total Coverage**: 2,500+ routing decisions across 67 rule files
 
 ## 🚀 Quick Start Guide
+
+For new setups, start with the `neorulset26/` documentation above. If you are maintaining an existing profile that already imports root-level raw files, those compatibility paths remain available. If you need an emergency network utility rather than a ruleset, start from the [`tools/` overview](./tools/README.md).
 
 ### Installation Steps
 
@@ -369,6 +404,6 @@ Contributions are welcome! Please ensure:
     <br><br>
     <sub>Copyright © 2023-2026 | All rights reserved</sub>
     <br>
-    <sub>Last Updated: February 7, 2026 (PST)</sub>
+    <sub>Last Updated: April 1, 2026 (PDT)</sub>
   </p>
 </div>
