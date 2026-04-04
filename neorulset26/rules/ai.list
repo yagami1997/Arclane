@@ -53,6 +53,7 @@ DOMAIN,api-iam.intercom.io
 DOMAIN,nexus-websocket-a.intercom.io
 DOMAIN,browser-intake-us5-datadoghq.com
 DOMAIN,o1158394.ingest.us.sentry.io
+DOMAIN,registry.npmjs.org
 
 # > xAI / Grok
 DOMAIN-SUFFIX,x.ai
