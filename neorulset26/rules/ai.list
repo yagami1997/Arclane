@@ -19,9 +19,35 @@ DOMAIN,apple-relay.apple.com
 DOMAIN,gspe1-ssl.ls.apple.com
 
 # > Anthropic / Claude
+#   Coverage notes:
+#   - Claude chat on web / desktop / mobile shared service endpoints
+#   - Claude Code in terminal / CLI / IDE integrations / web runner
+#   - Cowork in Claude Desktop
+#   - Anthropic Console / API / Docs / Support / Status
+#   - Claude artifacts / shared outputs / user-hosted asset domains
+#   - Claude install entrypoints: claude.ai/install.sh, install.ps1, install.cmd
+#
+#   Official product references used for scope verification:
+#   - docs.anthropic.com/en/docs/claude-code/setup
+#   - claude.com/product/claude-code
+#   - claude.com/product/cowork
+#   - support.claude.com/.../claude-code-on-the-web
+#
+#   Note:
+#   - Slack / VS Code / JetBrains are delivery surfaces for Claude Code, but their
+#     host-app domains are not Anthropic-owned, so they should be routed by their
+#     own rulesets instead of being mixed into the Claude block.
+#   - Standard CLI install via `npm install -g @anthropic-ai/claude-code` depends on
+#     npm registry / Node.js distribution domains, so Anthropic-owned domains alone
+#     do not fully block first-time installation.
+#   - Claude Code can also authenticate/run through Bedrock or Vertex AI; those paths
+#     would follow AWS / GCP domains rather than Anthropic-owned domains.
 DOMAIN-SUFFIX,anthropic.com
 DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,claude.com
 DOMAIN-SUFFIX,claudeusercontent.com
+DOMAIN-KEYWORD,anthropic
+DOMAIN-KEYWORD,claude
 
 # > xAI / Grok
 DOMAIN-SUFFIX,x.ai
