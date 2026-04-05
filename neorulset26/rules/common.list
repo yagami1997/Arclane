@@ -151,6 +151,9 @@ DOMAIN-SUFFIX,nssurge.com
 # Creative & Design Tools
 # ========================================
 
+# > Canva - Design Platform
+DOMAIN-SUFFIX,canva.com
+
 # > macOS Icons - Icon Resource Collection
 DOMAIN-SUFFIX,macosicons.com
 
@@ -169,6 +172,17 @@ DOMAIN-SUFFIX,columbia.edu
 
 # > Fiverr - Freelance Services Marketplace
 DOMAIN-SUFFIX,fiverr.com
+
+# > Notion - Productivity & AI
+DOMAIN-SUFFIX,notion.so
+DOMAIN-SUFFIX,notion.site
+DOMAIN-SUFFIX,notion.com
+
+# > Grammarly - Writing Assistant
+DOMAIN-SUFFIX,grammarly.com
+
+# > Brave - Browser & Search
+DOMAIN-SUFFIX,brave.com
 
 
 # ========================================
