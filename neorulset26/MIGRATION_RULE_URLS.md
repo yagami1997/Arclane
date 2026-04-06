@@ -38,6 +38,18 @@ Do not rewrite or shorten the URLs.
 https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/
 ```
 
+## Migration Notes
+
+- `antigravity.list` was removed on 2026-04-06 and merged into `rules/google.list`.
+- Use `rules/google.list` for Gemini, Google AI Studio, Antigravity, and related Google AI properties.
+- All URLs below were rechecked against the current repository tree.
+
+## Updated Timestamp
+
+```text
+2026-04-05 20:24 PDT
+```
+
 ## Rules
 
 ```text
