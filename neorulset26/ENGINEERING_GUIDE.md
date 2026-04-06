@@ -76,7 +76,7 @@ Fallback / Infrastructure
 
 | # | Group Name | Rule Files | Node Requirement | Notes |
 |---|------------|------------|-----------------|-------|
-| 9 | **PayPal** | paypal.list, antigravity.list | Clean IP — ISP only | Covers PayPal, Venmo, Cashapp, Zelle, Stripe, major US banks, brokerage accounts, and Google Antigravity IDE. **ISP lines only** (12 ISP nodes). Never route through datacenter or shared proxies. Clean residential/ISP IP is mandatory to avoid fraud detection and account freezes. Antigravity shares this group because its US Gmail authentication requires a US ISP IP for region validation. **Note**: antigravity.list must be placed in TIER 3 (before google.list) in the rule engine — its googleapis.com subdomains would otherwise be captured by the Google group. Antigravity bypasses macOS system proxy; **Surge Enhanced Mode (TUN) is required**. |
+| 9 | **PayPal** | paypal.list | Clean IP — ISP only | Covers PayPal, Venmo, Cashapp, Zelle, Stripe, major US banks, and brokerage accounts. **ISP lines only** (12 ISP nodes). Never route through datacenter or shared proxies. Clean residential/ISP IP is mandatory to avoid fraud detection and account freezes. |
 
 ---
 
@@ -158,7 +158,6 @@ This allows each regional group to be assigned the best unlock node for that geo
 | Apple | Direct | — |
 | Scholar | Fast or stable | IMM JP or Flower JP |
 | PayPal | Clean IP — ISP only | 12× ISP nodes |
-| Antigravity | Clean IP — ISP only | 12× ISP nodes (shares PayPal group) |
 | Crypto | Clean preferred | ISP or Flower JP Pre2 |
 | YouTube | Fast + low latency | Flower JP Exp1 or IMM JP |
 | Streaming-US | US unlock capable | OIX US GIA2 |
@@ -200,7 +199,6 @@ neorulset26/
 │   ├── common.list               ← Custom curated services
 │   ├── scholar.list              ← Academic resources
 │   ├── paypal.list               ← Finance (PayPal, banks, brokers)
-│   ├── antigravity.list          ← Google Antigravity IDE (ISP/PayPal group, US Gmail auth)
 │   ├── crypto.list               ← Crypto exchanges and DeFi
 │   ├── bytedance.list            ← ByteDance ecosystem
 │   ├── socialsite.list           ← Social platforms
@@ -288,7 +286,7 @@ neorulset26/
 06  Microsoft           — Office 365, Azure, Bing, etc.
 07  Apple               — Apple ecosystem (Direct)
 08  Scholar             — Academic & research resources
-09  PayPal              — Finance + Antigravity IDE (ISP only)
+09  PayPal              — Finance (ISP only)
 10  Crypto              — Exchanges & DeFi
 11  YouTube             — YouTube + YouTube Music (fast lane)
 12  Streaming-US        — US streaming: Disney+, Max, Hulu, Spotify, etc.
@@ -317,7 +315,7 @@ neorulset26/
 
 4. **Google FCM**: Remains as `ruleset/Google FCM.list` and is assigned to the **Google** strategy group alongside `google.list`.
 
-5. **Gemini default routing**: Keep `Gemini`, `Google AI Studio`, and related Google AI properties in `google.list` by default instead of splitting them into `ai.list`. Gemini shares Google account, session, static asset, and risk-control infrastructure. If the `Google` and `AI` groups use different countries or line types, splitting Gemini across both can cause region mismatch, unstable auth, or broken sessions. The only intended exception is `antigravity.list`, which stays separate because it has a stricter US ISP requirement.
+5. **Gemini default routing**: Keep `Gemini`, `Google AI Studio`, `Antigravity`, and related Google AI properties in `google.list` by default instead of splitting them into `ai.list`. Gemini shares Google account, session, static asset, and risk-control infrastructure. If the `Google` and `AI` groups use different countries or line types, splitting Google AI traffic across both can cause region mismatch, unstable auth, or broken sessions.
 
 6. **Streaming supplemental files**: `Streaming-US.list`, `Streaming-JP.list`, `Streaming-TW.list`, `Streaming-CN.list` are new files to be created in `neorulset26/ruleset/Media/`. They add coverage beyond the existing per-service files.
 

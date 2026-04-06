@@ -42,7 +42,6 @@ https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/
 
 ```text
 https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/ai.list
-https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/antigravity.list
 https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/bytedance.list
 https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/common.list
 https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/crypto.list

@@ -33,8 +33,14 @@ DOMAIN-SUFFIX,withgoogle.com
 # Keep Gemini, Google AI Studio, and related Google AI properties in the
 # Google group by default. They share Google account/session/risk-control
 # infrastructure, so splitting them into a separate AI line can cause
-# cross-country session mismatch. Only Antigravity is intentionally split
-# out via antigravity.list because it has a stricter US ISP requirement.
+# cross-country session mismatch. For most users, keep Google AI traffic
+# on one clean and consistent route.
+DOMAIN-SUFFIX,antigravity.google
+DOMAIN,daily-cloudcode-pa.sandbox.googleapis.com
+DOMAIN-SUFFIX,cloudaicompanion.googleapis.com
+DOMAIN-SUFFIX,open-vsx.org
+DOMAIN-SUFFIX,vscode-cdn.net
+DOMAIN-SUFFIX,vsassets.io
 
 # > Gmail / Email
 DOMAIN-SUFFIX,gmail.com

@@ -6,7 +6,7 @@
 # Gemini and Google AI Studio are intentionally kept in google.list by default.
 # They share Google account/session/risk-control infrastructure, and splitting
 # them from the main Google line can create cross-country session mismatch.
-# The only Google AI exception maintained separately is antigravity.list.
+# Google AI properties are kept under google.list by default.
 
 # > OpenAI / ChatGPT
 DOMAIN-SUFFIX,ai.com
