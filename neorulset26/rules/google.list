@@ -29,6 +29,13 @@ DOMAIN-SUFFIX,withgoogle.com
 # Google Services
 # ========================================
 
+# > Gemini / Google AI
+# Keep Gemini, Google AI Studio, and related Google AI properties in the
+# Google group by default. They share Google account/session/risk-control
+# infrastructure, so splitting them into a separate AI line can cause
+# cross-country session mismatch. Only Antigravity is intentionally split
+# out via antigravity.list because it has a stricter US ISP requirement.
+
 # > Gmail / Email
 DOMAIN-SUFFIX,gmail.com
 DOMAIN-SUFFIX,googlemail.com

@@ -57,7 +57,7 @@ Fallback / Infrastructure
 
 | # | Group Name | Rule Files | Node Requirement | Notes |
 |---|------------|------------|-----------------|-------|
-| 4 | **AI Suite** | openai.list | Fast + stable | Covers OpenAI (ChatGPT, API), Claude, Gemini, Midjourney, Perplexity, Grok, and 50+ AI services. Prioritize low-latency JP or US nodes. Prefer IMM JP or Flower JP. Apple Intelligence + ChatGPT integration is maintained in ai.list with a validated minimal relay pair. |
+| 4 | **AI Suite** | openai.list | Fast + stable | Covers OpenAI (ChatGPT, API), Claude, Midjourney, Perplexity, Grok, and other non-Google AI services. Prioritize low-latency JP or US nodes. Prefer IMM JP or Flower JP. Apple Intelligence + ChatGPT integration is maintained in ai.list with a validated minimal relay pair. |
 
 ---
 
@@ -65,7 +65,7 @@ Fallback / Infrastructure
 
 | # | Group Name | Rule Files | Node Requirement | Notes |
 |---|------------|------------|-----------------|-------|
-| 5 | **Google** | google.list, ruleset/Google FCM.list | Fast — low latency | Covers Google Search, Gmail, Drive, Docs, Maps, Play, Photos, Calendar, Translate, Firebase, and all google.* TLDs. FCM is included. YouTube is handled separately. Recommended: IMM JP (17–21ms) or Dog JP. |
+| 5 | **Google** | google.list, ruleset/Google FCM.list | Fast — low latency | Covers Google Search, Gmail, Drive, Docs, Maps, Play, Photos, Calendar, Translate, Firebase, Gemini, Google AI Studio, and all google.* TLDs. FCM is included. YouTube is handled separately. Recommended: IMM JP (17–21ms) or Dog JP. Keep Gemini with Google by default to avoid cross-country or cross-line session mismatch. |
 | 6 | **Microsoft** | ruleset/Microsoft.list | Fast — low latency | Covers Office 365, Azure, Bing, OneDrive, Xbox, Teams, GitHub (if not in Common). Recommended: IMM JP or Dog JP. |
 | 7 | **Apple** | ruleset/Apple.list, ruleset/Special.list (Apple CDN portion) | Direct | Apple APIs, iCloud, App Store, TestFlight, Maps. Generally direct is preferred for optimal CDN performance. |
 | 8 | **Scholar** | scholar.list | Fast or stable | Academic databases, research journals, GitHub, jsDelivr, ProtonMail, Zoho, and academic institutions. Placed directly after Apple in the group order. Recommended: IMM JP or Flower JP. |
@@ -195,8 +195,8 @@ neorulset26/
 ├── ENGINEERING_GUIDE.md          ← This file
 │
 ├── rules/                        ← Self-built rules (maintained by owner)
-│   ├── ai.list                   ← AI Suite (OpenAI, Claude, Gemini, etc.)
-│   ├── google.list               ← Google services (excl. YouTube / FCM)
+│   ├── ai.list                   ← AI Suite (OpenAI, Claude, etc.)
+│   ├── google.list               ← Google services incl. Gemini (excl. YouTube / FCM)
 │   ├── common.list               ← Custom curated services
 │   ├── scholar.list              ← Academic resources
 │   ├── paypal.list               ← Finance (PayPal, banks, brokers)
@@ -317,13 +317,15 @@ neorulset26/
 
 4. **Google FCM**: Remains as `ruleset/Google FCM.list` and is assigned to the **Google** strategy group alongside `google.list`.
 
-5. **Streaming supplemental files**: `Streaming-US.list`, `Streaming-JP.list`, `Streaming-TW.list`, `Streaming-CN.list` are new files to be created in `neorulset26/ruleset/Media/`. They add coverage beyond the existing per-service files.
+5. **Gemini default routing**: Keep `Gemini`, `Google AI Studio`, and related Google AI properties in `google.list` by default instead of splitting them into `ai.list`. Gemini shares Google account, session, static asset, and risk-control infrastructure. If the `Google` and `AI` groups use different countries or line types, splitting Gemini across both can cause region mismatch, unstable auth, or broken sessions. The only intended exception is `antigravity.list`, which stays separate because it has a stricter US ISP requirement.
 
-6. **Node assignment in Surge**: The `[Proxy Group]` section in your Surge config should define each of the 23 groups above. The node pools for Speed / Unlock / Finance / Stable do not need to be exposed as visible strategy groups — they can be hidden sub-groups (`hidden = true`) used only internally.
+6. **Streaming supplemental files**: `Streaming-US.list`, `Streaming-JP.list`, `Streaming-TW.list`, `Streaming-CN.list` are new files to be created in `neorulset26/ruleset/Media/`. They add coverage beyond the existing per-service files.
 
-7. **Auto-UrlTest**: Keep `Auto-UrlTest` as a utility sub-group for latency-based auto-selection within a provider. Do not expose it as a top-level outbound strategy group.
+7. **Node assignment in Surge**: The `[Proxy Group]` section in your Surge config should define each of the 23 groups above. The node pools for Speed / Unlock / Finance / Stable do not need to be exposed as visible strategy groups — they can be hidden sub-groups (`hidden = true`) used only internally.
 
-8. **Apple Intelligence + ChatGPT (validated minimal set)**: For mainland China reachability, keep only the following in `rules/ai.list` under the Apple Intelligence section: `DOMAIN,apple-relay.apple.com` and `DOMAIN,gspe1-ssl.ls.apple.com`. This pair has been validated to restore ChatGPT extension availability in Apple Intelligence. Do not add broader Apple/Cloudflare domains unless a new regression is confirmed.
+8. **Auto-UrlTest**: Keep `Auto-UrlTest` as a utility sub-group for latency-based auto-selection within a provider. Do not expose it as a top-level outbound strategy group.
+
+9. **Apple Intelligence + ChatGPT (validated minimal set)**: For mainland China reachability, keep only the following in `rules/ai.list` under the Apple Intelligence section: `DOMAIN,apple-relay.apple.com` and `DOMAIN,gspe1-ssl.ls.apple.com`. This pair has been validated to restore ChatGPT extension availability in Apple Intelligence. Do not add broader Apple/Cloudflare domains unless a new regression is confirmed.
 
 ---
 

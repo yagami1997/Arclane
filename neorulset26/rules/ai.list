@@ -2,17 +2,11 @@
 # AI Platforms Blocked in China/HK/Macau
 # ============================================
 
-# > Google AI / Gemini
-#   Rule placement: MUST load before google.list in Surge [Rule] section.
-#   google.list contains DOMAIN-SUFFIX,googleapis.com and DOMAIN-KEYWORD,google
-#   which would otherwise catch these — specific rules here override to route
-#   Gemini through ISP (SoftBank) rather than datacenter IP.
-DOMAIN-SUFFIX,deepmind.com
-DOMAIN,gemini.google.com
-DOMAIN,aistudio.google.com
-DOMAIN,makersuite.google.com
-DOMAIN-SUFFIX,generativelanguage.googleapis.com
-DOMAIN-SUFFIX,aiplatform.googleapis.com
+# Note:
+# Gemini and Google AI Studio are intentionally kept in google.list by default.
+# They share Google account/session/risk-control infrastructure, and splitting
+# them from the main Google line can create cross-country session mismatch.
+# The only Google AI exception maintained separately is antigravity.list.
 
 # > OpenAI / ChatGPT
 DOMAIN-SUFFIX,ai.com

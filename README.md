@@ -65,6 +65,13 @@ The repository is maintained around a few practical rules:
 
 ## 🔄 Changelog
 
+### April 5, 2026 06:43 PM PDT — AI Routing Review: Claude Coverage, Antigravity Split, and Gemini Safety Default
+
+- **Claude coverage**: expanded `Claude` and `Claude Code CLI` routing coverage across core domains and observed runtime dependencies so the app and CLI are more likely to use the same proxy path in real-world use.
+- **Antigravity**: added [`neorulset26/rules/antigravity.list`](./neorulset26/rules/antigravity.list) to keep Google Antigravity IDE on a stricter ISP-grade route because its account and region checks are more sensitive than normal Google traffic.
+- **⚠️ Gemini default**: `Gemini`, `Google AI Studio`, and related Google AI properties now default back to `google.list` instead of being split into `ai.list`. This avoids cross-country or cross-line session mismatch for users whose `Google` and `AI` groups use different routes.
+- **Recommendation**: as AI LLM and agent risk controls continue to tighten, prefer non-`HK` / non-`MO` routes with better IP cleanliness and stronger long-term acceptance by major AI providers when handling Google-related traffic.
+
 ### April 1, 2026 09:30 PM PDT — Repository Expansion: Tools Track and DoH Fallback Worker
 
 - **Repository direction**: formalized `tools/` as a parallel support layer alongside the 2026 ruleset mainline and the compatibility publication surface.
