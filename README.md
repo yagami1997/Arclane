@@ -213,53 +213,55 @@ Current direction for `tools/` includes:
 
 ## 📦 Self-Built Ruleset Collection
 
+The preferred raw URLs for these maintained rule collections now live under `neorulset26/`.
+
 <div align="center">
 
 <table>
 <tr>
   <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/9458/9458326.png" width="40" align="center"></td>
   <td><b>Common Services</b><br><sub>Essential productivity tools and infrastructure</sub></td>
-  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/common.list">common.list</a></td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/common.list">common.list</a></td>
 </tr>
 <tr>
   <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/2936/2936660.png" width="40" align="center"></td>
   <td><b>Financial Services</b><br><sub>Secure routing for payment and banking (US-focused)</sub></td>
-  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/paypal.list">paypal.list</a></td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/paypal.list">paypal.list</a></td>
 </tr>
 <tr>
   <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/9073/9073032.png" width="40" align="center"></td>
   <td><b>Social Platforms ⭐</b><br><sub>International and regional social networks</sub></td>
-  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/socialsite.list">socialsite.list</a></td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/socialsite.list">socialsite.list</a></td>
 </tr>
 <tr>
   <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968846.png" width="40" align="center"></td>
   <td><b>Community Networks ⭐</b><br><sub>User-generated content platforms (CN-focused)</sub></td>
-  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/hulo.list">hulo.list</a></td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/hulo.list">hulo.list</a></td>
 </tr>
 <tr>
   <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/3330/3330314.png" width="40" align="center"></td>
   <td><b>Academic Resources</b><br><sub>Research databases and educational institutions</sub></td>
-  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/scholar.list">scholar.list</a></td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/scholar.list">scholar.list</a></td>
 </tr>
 <tr>
   <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/3178/3178285.png" width="40" align="center"></td>
   <td><b>ByteDance Ecosystem ⭐</b><br><sub>TikTok, Douyin, and related platforms</sub></td>
-  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/bytedance.list">bytedance.list</a></td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/bytedance.list">bytedance.list</a></td>
 </tr>
 <tr>
   <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968866.png" width="40" align="center"></td>
   <td><b>AI Platforms</b><br><sub>OpenAI, Claude, and 50+ AI services</sub></td>
-  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/openai.list">openai.list</a></td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/ai.list">ai.list</a></td>
 </tr>
 <tr>
   <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/8099/8099326.png" width="40" align="center"></td>
   <td><b>Cryptocurrency</b><br><sub>Exchanges, DeFi, and blockchain services</sub></td>
-  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/crypto.list">crypto.list</a></td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/crypto.list">crypto.list</a></td>
 </tr>
 <tr>
   <td width="60"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968968.png" width="40" align="center"></td>
   <td><b>Discord</b><br><sub>Voice, video, and messaging platform</sub></td>
-  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/discord.list">discord.list</a></td>
+  <td><a href="https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/rules/messenger.list">messenger.list</a></td>
 </tr>
 </table>
 
@@ -267,7 +269,9 @@ Current direction for `tools/` includes:
 
 ## 🗂️ Comprehensive Ruleset Library
 
-**New in February 2026**: All streaming media, services, and filtering rules are now self-hosted in the `ruleset/` directory for complete autonomy.
+The actively maintained shared ruleset library now lives under `neorulset26/ruleset/`.
+
+The historical root `ruleset/` tree has been moved into `archive/legacy/ruleset/` and is retained only for migration until `2027-01-31`.
 
 ### Media & Entertainment (44 files)
 - **Streaming**: Netflix, Disney+, YouTube, Max, Spotify, Hulu
@@ -286,8 +290,8 @@ Current direction for `tools/` includes:
 
 **Access all ruleset files:**
 ```
-https://raw.githubusercontent.com/yagami1997/surgemac/main/ruleset/
-https://raw.githubusercontent.com/yagami1997/surgemac/main/ruleset/Media/
+https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/
+https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/
 ```
 
 ---
@@ -327,7 +331,7 @@ Americas Node → Geographic identity: North/South America
 
 ## 🚀 Quick Start Guide
 
-For new setups, start with the `neorulset26/` documentation above. If you are maintaining an existing profile that already imports root-level raw files, those compatibility paths remain available. If you need an emergency network utility rather than a ruleset, start from the [`tools/` overview](./tools/README.md).
+For new setups, start with the `neorulset26/` documentation above. If you are migrating from historical root-level raw files, replace them using [`archive/legacy/MIGRATION_RULE_URLS.md`](./archive/legacy/MIGRATION_RULE_URLS.md). If you need an emergency network utility rather than a ruleset, start from the [`tools/` overview](./tools/README.md).
 
 ### Installation Steps
 
@@ -337,7 +341,7 @@ Browse the collection above and identify the rulesets relevant to your use case.
 
 **2. Obtain Raw URL**
 
-Click on the desired `.list` file, then click the **RAW** button to get the direct URL.
+Use the raw URLs listed in this README or in `neorulset26/MIGRATION_RULE_URLS.md`.
 
 **3. Configure Surge Pro 6**
 
@@ -351,7 +355,7 @@ Paste URL → Select Policy → Save
 
 **4. Apply & Verify**
 
-Activate your configuration and verify routing behavior through Surge's built-in diagnostics.
+Activate your configuration and verify routing behavior through Surge's built-in diagnostics. If you are replacing historical imports, validate that the new paths now point to `neorulset26/` instead of the old root layout.
 
 ### Update Management
 
@@ -487,6 +491,6 @@ Contributions are welcome! Please ensure:
     <br><br>
     <sub>Copyright © 2023-2026 | All rights reserved</sub>
     <br>
-    <sub>Last Updated: April 1, 2026 (PDT)</sub>
+    <sub>Last Updated: April 7, 2026 (PDT)</sub>
   </p>
 </div>
