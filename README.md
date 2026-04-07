@@ -51,8 +51,7 @@ Current top-level layout:
 ├── tools/              # utilities and online tools
 ├── modules/            # Surge modules
 ├── docs/               # development and user documentation
-├── archive/legacy/     # legacy rules retained until 2027-01-31
-└── openclash-archive/  # local-only sensitive OpenClash rewrite files
+└── archive/legacy/     # legacy rules retained until 2027-01-31
 ```
 
 The repository root is no longer intended to host loose `*.list`, `.sgmodule`, or ad hoc documentation files. See [`docs/development/repository-layout.md`](./docs/development/repository-layout.md) for the current placement rules.
@@ -109,11 +108,9 @@ If you need repository tools or utility services:
 2. Each tool should be read as its own self-contained subproject
 3. Operational tools do not belong inside the ruleset mainline
 
-### 5. Legacy and local-only content
+### 5. Legacy content
 
 - `archive/legacy/` is Git-tracked and visible to users during migration
-- `openclash-archive/` is local-only, sensitive, and intentionally not tracked by Git
-- OpenClash local rewrite files are not part of the published repository surface
 
 
 ## Design Philosophy
@@ -137,7 +134,6 @@ The repository is maintained around a few practical rules:
 - **Legacy rules archived**: moved historical root `*.list` files and the old `ruleset/` tree into [`archive/legacy/`](./archive/legacy/).
 - **Migration guide added**: added [`archive/legacy/MIGRATION_RULE_URLS.md`](./archive/legacy/MIGRATION_RULE_URLS.md) to map historical paths to the 2026 mainline.
 - **Retirement date fixed**: marked `archive/legacy/` as deprecated and scheduled it for removal on `2027-01-31`, with deletion work allowed to begin on `2027-02-01`.
-- **OpenClash isolated**: moved sensitive local OpenClash rewrite files into `openclash-archive/` and excluded that directory from Git tracking.
 - **Root cleaned up**: reduced the repository root to entry files and top-level project directories instead of loose rules and modules.
 - **edge204**: added [`tools/edge204/`](./tools/edge204/) — a self-hosted Cloudflare Worker returning pure HTTP 204 from the CF edge, used as a Surge `url-test` / `fallback` probe. HTTP-only to eliminate TLS handshake overhead from RTT measurements. Includes `/generate_204`, `/204`, `/ping`, and `/trace` endpoints. No upstream fetch, no bindings, fully stateless.
 
