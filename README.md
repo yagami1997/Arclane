@@ -23,23 +23,39 @@
 
 ---
 
-This repository is a continuously maintained Surge ruleset project with three parallel responsibilities:
+This repository is a continuously maintained Surge ruleset project with one active mainline and several clearly separated support areas:
 
 - a current mainline ruleset architecture under `neorulset26/`
-- a stable compatibility publication surface at the repository root and under `ruleset/`
-- a growing `tools/` layer for operational utilities and recovery-oriented support components
+- a `tools/` layer for operational utilities and online network tools
+- a `modules/` layer for shared Surge modules
+- a `docs/` layer for repository, development, and migration documentation
+- an `archive/legacy/` layer for temporary historical compatibility assets
 
-If you are new to the repository, start with the 2026 mainline. If you rely on existing raw import paths, the compatibility surface remains available. If you need supporting operational utilities, check the tools layer.
+If you are new to the repository, start with the 2026 mainline. If you are migrating from older root-level raw import paths, use the legacy archive and migration guide. If you need supporting operational utilities, check the tools layer.
 
 ## Repository Structure
 
-This repository now has three distinct responsibilities, and they should be read differently:
+This repository now has five distinct responsibilities, and they should be read differently:
 
 - `neorulset26/`: the preferred 2026 mainline ruleset stack, with its own architecture and documentation
-- repository root + `ruleset/`: stable public endpoints for existing GitHub Raw imports and compatibility consumers
 - `tools/`: repository-wide support tooling for recovery, validation, deployment, and maintenance utilities
+- `modules/`: tracked shared Surge modules such as `*.sgmodule`
+- `docs/`: repository structure notes, collaboration rules, migration notes, and reference material
+- `archive/legacy/`: historical root rules and the former `ruleset/` library retained only for migration
 
-The root may still look flatter than ideal because some filenames now function like published API paths. Moving them carelessly would break downstream configurations. See [`REPOSITORY_LAYOUT.md`](./REPOSITORY_LAYOUT.md) for the maintenance boundary and placement rules.
+Current top-level layout:
+
+```text
+/
+├── neorulset26/        # active ruleset mainline
+├── tools/              # utilities and online tools
+├── modules/            # Surge modules
+├── docs/               # development and user documentation
+├── archive/legacy/     # legacy rules retained until 2027-01-31
+└── openclash-archive/  # local-only sensitive OpenClash rewrite files
+```
+
+The repository root is no longer intended to host loose `*.list`, `.sgmodule`, or ad hoc documentation files. See [`docs/development/repository-layout.md`](./docs/development/repository-layout.md) for the current placement rules.
 
 ## 2026 Recommendation
 
@@ -47,10 +63,58 @@ For new setups, use `neorulset26/` first.
 
 - Architecture reference: [`neorulset26/ENGINEERING_GUIDE.md`](./neorulset26/ENGINEERING_GUIDE.md)
 - Rule URL reference: [`neorulset26/RULESET_URLS.md`](./neorulset26/RULESET_URLS.md)
-- Collaboration and transition notes: [`COLLABORATION_GUIDE.md`](./COLLABORATION_GUIDE.md)
+- Migration-ready URL list: [`neorulset26/MIGRATION_RULE_URLS.md`](./neorulset26/MIGRATION_RULE_URLS.md)
+- Collaboration and transition notes: [`docs/development/collaboration-guide.md`](./docs/development/collaboration-guide.md)
+- Repository layout notes: [`docs/development/repository-layout.md`](./docs/development/repository-layout.md)
 - Repository tools overview: [`tools/README.md`](./tools/README.md)
+- Modules overview: [`modules/README.md`](./modules/README.md)
 
-Root-level `*.list`, `*.sgmodule`, and `ruleset/` remain available for compatibility, but they should be treated as legacy transition surfaces rather than the preferred 2026 architecture.
+Legacy root rules and the old `ruleset/` library have already been moved into [`archive/legacy/`](./archive/legacy/). They remain available only as a temporary transition surface and are scheduled for removal on `2027-01-31`.
+
+## User Guide
+
+Choose the path that matches your situation:
+
+### 1. New users
+
+If you are building a new Surge setup today:
+
+1. Start with [`neorulset26/ENGINEERING_GUIDE.md`](./neorulset26/ENGINEERING_GUIDE.md)
+2. Use [`neorulset26/MIGRATION_RULE_URLS.md`](./neorulset26/MIGRATION_RULE_URLS.md) for direct raw URLs
+3. Map the listed rule URLs into your own strategy groups
+4. Use [`neorulset26/RULESET_URLS.md`](./neorulset26/RULESET_URLS.md) as the strategy-group reference
+
+### 2. Existing users of old root paths
+
+If your current config still imports old root `*.list` files or the old `ruleset/` tree:
+
+1. Do not keep building on the old paths
+2. Check [`archive/legacy/MIGRATION_RULE_URLS.md`](./archive/legacy/MIGRATION_RULE_URLS.md)
+3. Replace legacy imports with the corresponding `neorulset26/` paths where available
+4. Treat `archive/legacy/` only as a temporary migration buffer
+
+### 3. Module users
+
+If you need Surge modules:
+
+1. Use the files under [`modules/`](./modules/)
+2. Do not rely on root-level `.sgmodule` paths anymore
+3. Follow [`modules/README.md`](./modules/README.md) for the current module placement rules
+
+### 4. Tool users
+
+If you need repository tools or utility services:
+
+1. Start with [`tools/README.md`](./tools/README.md)
+2. Each tool should be read as its own self-contained subproject
+3. Operational tools do not belong inside the ruleset mainline
+
+### 5. Legacy and local-only content
+
+- `archive/legacy/` is Git-tracked and visible to users during migration
+- `openclash-archive/` is local-only, sensitive, and intentionally not tracked by Git
+- OpenClash local rewrite files are not part of the published repository surface
+
 
 ## Design Philosophy
 
@@ -64,6 +128,17 @@ The repository is maintained around a few practical rules:
 - **Documentation should track reality**: because this project changes frequently, the README should explain the current structure, not just preserve old presentation.
 
 ## 🔄 Changelog
+
+### April 7, 2026 09:30 PM PDT — v2.2 Repository Refactor: Mainline, Modules, Docs, and Legacy Archive
+
+- **Mainline preserved**: kept `neorulset26/` fully intact and unchanged as the only active ruleset mainline.
+- **Modules extracted**: moved tracked `.sgmodule` files out of the repository root into [`modules/`](./modules/).
+- **Docs reorganized**: moved repository structure and collaboration notes into [`docs/`](./docs/) so the root no longer acts as a document dump.
+- **Legacy rules archived**: moved historical root `*.list` files and the old `ruleset/` tree into [`archive/legacy/`](./archive/legacy/).
+- **Migration guide added**: added [`archive/legacy/MIGRATION_RULE_URLS.md`](./archive/legacy/MIGRATION_RULE_URLS.md) to map historical paths to the 2026 mainline.
+- **Retirement date fixed**: marked `archive/legacy/` as deprecated and scheduled it for removal on `2027-01-31`, with deletion work allowed to begin on `2027-02-01`.
+- **OpenClash isolated**: moved sensitive local OpenClash rewrite files into `openclash-archive/` and excluded that directory from Git tracking.
+- **Root cleaned up**: reduced the repository root to entry files and top-level project directories instead of loose rules and modules.
 
 ### April 5, 2026 06:52 PM PDT — AI Routing Review: Claude Coverage and Google AI Safety Default
 

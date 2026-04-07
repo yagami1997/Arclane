@@ -48,7 +48,4 @@ __pycache__/
 # These files contain personal settings and
 # must remain local for privacy and security.
 # ============================================
-rules.md
-openclash.clashlist
-openclash-v2.clashlist
-openclash-v3.clashlist
+openclash-archive/
