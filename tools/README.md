@@ -1,6 +1,7 @@
 # Repository Tools
 
 Version created: April 1, 2026 09:30 PM PDT
+Last updated: April 6, 2026 11:23 PM PDT
 
 Language:
 
@@ -46,6 +47,8 @@ The following should generally not go into `tools/`:
 
 ### DoH Fallback Worker
 
+Version: 1.0.0 · Created: April 1, 2026 09:30 PM PDT
+
 Path:
 
 - [`doh-fallback-worker/`](./doh-fallback-worker/)
@@ -55,6 +58,20 @@ English documentation:
 - [`doh-fallback-worker/README.md`](./doh-fallback-worker/README.md)
 
 This tool provides a Cloudflare Worker based fallback DNS-over-HTTPS reverse proxy for emergency use when a primary DoH endpoint is unavailable.
+
+### edge204 — CF Edge 204 Probe
+
+Version: 1.0.0 · Created: April 6, 2026 11:10 PM PDT
+
+Path:
+
+- [`edge204/`](./edge204/)
+
+English documentation:
+
+- [`edge204/README.md`](./edge204/README.md)
+
+This tool provides a Cloudflare Worker that returns pure HTTP 204 responses from the CF edge for use as a Surge proxy-node latency probe. It measures the RTT from proxy node egress to the nearest CF PoP with no TLS overhead and no upstream fetch.
 
 ## Maintenance Expectations
 

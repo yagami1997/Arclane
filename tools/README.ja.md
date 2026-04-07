@@ -1,6 +1,7 @@
 # Repository Tools
 
 バージョン作成日時: 2026年4月2日 13:30 JST
+最終更新日時: 2026年4月7日 15:23 JST
 
 Language:
 
@@ -46,6 +47,8 @@ Language:
 
 ### DoH Fallback Worker
 
+バージョン: 1.0.0 · 作成日時: 2026年4月2日 13:30 JST
+
 パス:
 
 - [`doh-fallback-worker/`](./doh-fallback-worker/)
@@ -55,6 +58,20 @@ Language:
 - [`doh-fallback-worker/README.md`](./doh-fallback-worker/README.md)
 
 このツールは、通常の DoH エンドポイントが利用できないときの緊急退避先として使う Cloudflare Worker ベースの DoH リバースプロキシです。
+
+### edge204 — CF エッジ 204 プローブ
+
+バージョン: 1.0.0 · 作成日時: 2026年4月7日 15:10 JST
+
+パス:
+
+- [`edge204/`](./edge204/)
+
+英語版ドキュメント:
+
+- [`edge204/README.md`](./edge204/README.md)
+
+このツールは、Surge のプロキシノード遅延測定用に CF エッジから純粋な HTTP 204 レスポンスを返す Cloudflare Worker です。TLS 握手コストを排除し、プロキシノード出口から最寄りの CF PoP までの純粋な RTT を測定します。上流へのリクエストは一切発生しません。
 
 ## 保守方針
 

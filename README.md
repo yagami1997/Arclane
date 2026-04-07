@@ -139,6 +139,7 @@ The repository is maintained around a few practical rules:
 - **Retirement date fixed**: marked `archive/legacy/` as deprecated and scheduled it for removal on `2027-01-31`, with deletion work allowed to begin on `2027-02-01`.
 - **OpenClash isolated**: moved sensitive local OpenClash rewrite files into `openclash-archive/` and excluded that directory from Git tracking.
 - **Root cleaned up**: reduced the repository root to entry files and top-level project directories instead of loose rules and modules.
+- **edge204**: added [`tools/edge204/`](./tools/edge204/) — a self-hosted Cloudflare Worker returning pure HTTP 204 from the CF edge, used as a Surge `url-test` / `fallback` probe. HTTP-only to eliminate TLS handshake overhead from RTT measurements. Includes `/generate_204`, `/204`, `/ping`, and `/trace` endpoints. No upstream fetch, no bindings, fully stateless.
 
 ### April 5, 2026 06:52 PM PDT — AI Routing Review: Claude Coverage and Google AI Safety Default
 
@@ -180,7 +181,8 @@ The repository is maintained around a few practical rules:
 `tools/` is the repository-wide support layer for operational utilities and maintenance-focused components. It exists to hold modules that help run, validate, deploy, recover, or support the broader project without mixing those concerns into the ruleset mainline.
 
 - Tools overview: [`tools/README.md`](./tools/README.md)
-- Current tool: [`tools/doh-fallback-worker/README.md`](./tools/doh-fallback-worker/README.md)
+- DoH fallback: [`tools/doh-fallback-worker/README.md`](./tools/doh-fallback-worker/README.md)
+- Edge 204 probe: [`tools/edge204/README.md`](./tools/edge204/README.md)
 
 Current direction for `tools/` includes:
 
@@ -491,6 +493,6 @@ Contributions are welcome! Please ensure:
     <br><br>
     <sub>Copyright © 2023-2026 | All rights reserved</sub>
     <br>
-    <sub>Last Updated: April 7, 2026 (PDT)</sub>
+    <sub>Last Updated: April 6, 2026 11:23 PM PDT</sub>
   </p>
 </div>
