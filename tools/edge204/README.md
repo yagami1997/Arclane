@@ -54,12 +54,12 @@ The Worker is intentionally minimal.
 1. Open the deployed `cf-edge-probe` Worker.
 2. Go to **Settings → Domains & Routes → Add Custom Domain**.
 3. Enter `probe.example.com`.
-4. Cloudflare will automatically create a CNAME record in the `aqabatech.co.uk` zone.
+4. Cloudflare will automatically create a CNAME record in the target zone.
 5. Wait for the domain status to show **Active** (usually under one minute).
 
 ### Step 3: Confirm Zone SSL/TLS Settings
 
-In the `aqabatech.co.uk` zone under **SSL/TLS**, confirm:
+In the target zone under **SSL/TLS**, confirm:
 
 | Setting | Required state |
 |---|---|
@@ -71,7 +71,7 @@ These settings prevent the zone from upgrading HTTP requests to HTTPS before the
 
 ### Step 4: Add WAF Rate Limiting Rule
 
-In the `aqabatech.co.uk` zone under **Security → WAF → Rate Limiting Rules**, create one rule:
+In the target zone under **Security → WAF → Rate Limiting Rules**, create one rule:
 
 | Field | Value |
 |---|---|
