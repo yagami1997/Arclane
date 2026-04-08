@@ -70,63 +70,67 @@ For new setups, use `neorulset26/` first.
 
 Legacy root rules and the old `ruleset/` library have already been moved into [`archive/legacy/`](./archive/legacy/). They remain available only as a temporary transition surface and are scheduled for removal on `2027-01-31`.
 
-## User Guide
+## Quick Navigation
 
 Choose the path that matches your situation:
 
-### 1. New users
+- New Surge setup: start with [`neorulset26/ENGINEERING_GUIDE.md`](./neorulset26/ENGINEERING_GUIDE.md)
+- Direct raw URLs: use [`neorulset26/MIGRATION_RULE_URLS.md`](./neorulset26/MIGRATION_RULE_URLS.md)
+- Strategy-group reference: use [`neorulset26/RULESET_URLS.md`](./neorulset26/RULESET_URLS.md)
+- Existing users on old root paths: migrate with [`archive/legacy/MIGRATION_RULE_URLS.md`](./archive/legacy/MIGRATION_RULE_URLS.md)
+- Surge modules: see [`modules/README.md`](./modules/README.md)
+- Repository tools: see [`tools/README.md`](./tools/README.md)
 
-If you are building a new Surge setup today:
+<details>
+<summary><strong>Expanded Usage Guide</strong></summary>
+
+### New users
 
 1. Start with [`neorulset26/ENGINEERING_GUIDE.md`](./neorulset26/ENGINEERING_GUIDE.md)
 2. Use [`neorulset26/MIGRATION_RULE_URLS.md`](./neorulset26/MIGRATION_RULE_URLS.md) for direct raw URLs
 3. Map the listed rule URLs into your own strategy groups
 4. Use [`neorulset26/RULESET_URLS.md`](./neorulset26/RULESET_URLS.md) as the strategy-group reference
 
-### 2. Existing users of old root paths
-
-If your current config still imports old root `*.list` files or the old `ruleset/` tree:
+### Existing users of old root paths
 
 1. Do not keep building on the old paths
 2. Check [`archive/legacy/MIGRATION_RULE_URLS.md`](./archive/legacy/MIGRATION_RULE_URLS.md)
 3. Replace legacy imports with the corresponding `neorulset26/` paths where available
 4. Treat `archive/legacy/` only as a temporary migration buffer
 
-### 3. Module users
-
-If you need Surge modules:
+### Module users
 
 1. Use the files under [`modules/`](./modules/)
 2. Do not rely on root-level `.sgmodule` paths anymore
 3. Follow [`modules/README.md`](./modules/README.md) for the current module placement rules
 
-### 4. Tool users
-
-If you need repository tools or utility services:
+### Tool users
 
 1. Start with [`tools/README.md`](./tools/README.md)
 2. Each tool should be read as its own self-contained subproject
 3. Operational tools do not belong inside the ruleset mainline
 
-### 5. Legacy content
+### Legacy content
 
-- `archive/legacy/` is Git-tracked and visible to users during migration
+- `archive/legacy/` remains Git-tracked during migration and is scheduled for removal on `2027-01-31`
 
+</details>
 
-## Design Philosophy
-
-The repository is maintained around a few practical rules:
+<details>
+<summary><strong>Design Philosophy</strong></summary>
 
 - **Published path stability**: public raw import paths should stay stable once other people depend on them.
 - **Mainline-first evolution**: new ruleset architecture, documentation, and forward-looking maintenance belong in `neorulset26/`.
-- **Self-hosted control**: wherever practical, rules and supporting assets should be maintained internally rather than delegated to drifting external dependencies.
-- **Compatibility without stagnation**: legacy paths stay available, but they should not dictate how the project evolves.
-- **Tools support operations**: recovery utilities, validators, deployment helpers, and similar support components belong under `tools/`, not inside the ruleset mainline.
-- **Documentation should track reality**: because this project changes frequently, the README should explain the current structure, not just preserve old presentation.
+- **Self-hosted control**: wherever practical, rules and supporting assets should be maintained internally.
+- **Compatibility without stagnation**: legacy paths stay available, but they should not dictate project direction.
+- **Tools support operations**: utilities belong under `tools/`, not inside the ruleset mainline.
+- **Documentation should track reality**: the README should explain the current structure, not preserve obsolete layout.
+
+</details>
 
 ## 🔄 Changelog
 
-### April 8, 2026 09:29 PM PDT — doh-fallback-worker v4: Private DoH Gateway
+### Latest: April 8, 2026 09:29 PM PDT — doh-fallback-worker v4: Private DoH Gateway
 
 - **Major upgrade**: rewrote `tools/doh-fallback-worker` from a generic DoH reverse proxy into a full token-aware private DoH gateway.
 - **Token routing**: added `/dns-query/<token>` path. Each token loads an isolated profile and private rule set from Cloudflare KV without touching source code.
@@ -139,6 +143,9 @@ The repository is maintained around a few practical rules:
 - **Bug fix**: corrected base64url padding for RFC 8484 GET requests.
 - **Backward compatible**: `/dns-query` without a token behaves identically to v3 for all existing clients.
 - **Documentation**: added `wrangler.toml`, full local dev and deployment guides in English and Japanese.
+
+<details>
+<summary><strong>Previous changelog entries</strong></summary>
 
 ### April 7, 2026 09:30 PM PDT — v2.2 Repository Refactor: Mainline, Modules, Docs, and Legacy Archive
 
@@ -186,6 +193,8 @@ The repository is maintained around a few practical rules:
 - **Organization**: restructured the repository for stronger long-term maintainability.
 - **Autonomy**: established a zero-external-dependency direction for ruleset hosting.
 
+</details>
+
 ## 🧰 Tools
 
 `tools/` is the repository-wide support layer for operational utilities and maintenance-focused components. It exists to hold modules that help run, validate, deploy, recover, or support the broader project without mixing those concerns into the ruleset mainline.
@@ -206,22 +215,10 @@ Current direction for `tools/` includes:
 
 ## 🌟 Key Features
 
-<table>
-<tr>
-<td width="33%" align="center">
-<h3>🎯 Smart Routing</h3>
-<p>Intelligent rule-based traffic distribution with optimized paths for different service categories</p>
-</td>
-<td width="33%" align="center">
-<h3>⚡ Performance</h3>
-<p>Reduced latency and improved connection stability through strategic proxy selection</p>
-</td>
-<td width="33%" align="center">
-<h3>🔐 Privacy Control</h3>
-<p>Enhanced privacy protection with DNS optimization and selective routing policies</p>
-</td>
-</tr>
-</table>
+- Smart routing for service-specific traffic distribution
+- Performance-oriented path selection and lower routing overhead
+- Privacy-focused DNS and self-hosted rule delivery
+- Mainline rulesets, modules, and operational tools kept clearly separated
 
 ## 📦 Self-Built Ruleset Collection
 
@@ -281,65 +278,62 @@ The preferred raw URLs for these maintained rule collections now live under `neo
 
 ## 🗂️ Comprehensive Ruleset Library
 
-The actively maintained shared ruleset library now lives under `neorulset26/ruleset/`.
+The actively maintained shared ruleset library lives under `neorulset26/ruleset/`. The historical root `ruleset/` tree has moved to `archive/legacy/ruleset/` and remains only for migration until `2027-01-31`.
 
-The historical root `ruleset/` tree has been moved into `archive/legacy/ruleset/` and is retained only for migration until `2027-01-31`.
+<details>
+<summary><strong>Library coverage and raw path examples</strong></summary>
 
 ### Media & Entertainment (44 files)
+
 - **Streaming**: Netflix, Disney+, YouTube, Max, Spotify, Hulu
-- **Asian TV**: Abema TV, Bahamut, KKTV, ViuTV, Niconico (15 platforms)
-- **Global TV**: BBC iPlayer, DAZN, PBS, Pandora (13 platforms)
-- **CN Mainland**: Bilibili, iQIYI, Tencent Video, Netease Music (7 platforms)
+- **Asian TV**: Abema TV, Bahamut, KKTV, ViuTV, Niconico
+- **Global TV**: BBC iPlayer, DAZN, PBS, Pandora
+- **CN Mainland**: Bilibili, iQIYI, Tencent Video, Netease Music
 - **Apple Services**: Apple TV, Apple Music, Apple News
 
 ### Services & Tools (8 files)
+
 - Microsoft, Google FCM, Telegram, Steam
 - TikTok, Apple, Speedtest, miHoYo
 
 ### Core Utilities (3 files)
-- AdBlock, HTTPDNS, Special (direct routing)
-- Proxy (international), Domestic (CN), Domestic IPs
 
-**Access all ruleset files:**
-```
+- AdBlock, HTTPDNS, Special
+- Proxy, Domestic, Domestic IPs
+
+```text
 https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/
 https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/ruleset/Media/
 ```
+
+</details>
 
 ---
 
 ## 🎯 Advanced Features
 
-### Geo-Location Control System ⭐
+- Geo-location aware routing for selected rulesets marked with `⭐`
+- Multi-region proxy selection for content, identity, and latency control
+- Coverage includes `DOMAIN`, `DOMAIN-SUFFIX`, `IP-CIDR`, `USER-AGENT`, and `DOMAIN-KEYWORD`
+- Total coverage: `2,500+` routing decisions across `67` rule files
 
-Rulesets marked with ⭐ incorporate advanced geo-location routing technology, enabling precise control over your network exit points.
+<details>
+<summary><strong>Geo-location control details</strong></summary>
 
-**Technical Implementation:**
+Rulesets marked with `⭐` incorporate advanced geo-location routing technology, enabling precise control over network exit points.
+
 - Multi-region proxy node selection
 - Dynamic IP address presentation
 - Real-time traffic routing optimization
 - Zero-latency location switching
 
-**Supported Capabilities:**
-- **Regional Identity Management**: Present different geographic identities based on proxy selection
-- **Content Access Optimization**: Bypass regional restrictions intelligently
-- **Privacy Enhancement**: Mask original location with strategic routing
-
-**Example Configuration:**
-```
-Asian Node → Geographic identity: Asia-Pacific region
-European Node → Geographic identity: European Union
-Americas Node → Geographic identity: North/South America
+```text
+Asian Node    -> Asia-Pacific identity
+European Node -> European Union identity
+Americas Node -> North/South America identity
 ```
 
-### Rule Types & Coverage
-
-- **DOMAIN Rules**: 1,500+ domain-based routing rules
-- **DOMAIN-SUFFIX Rules**: 800+ wildcard domain patterns  
-- **IP-CIDR Rules**: 400+ IP range definitions (IPv4/IPv6)
-- **USER-AGENT Rules**: 150+ application-specific identifiers
-- **DOMAIN-KEYWORD Rules**: 80+ pattern matching entries
-- **Total Coverage**: 2,500+ routing decisions across 67 rule files
+</details>
 
 ## 🚀 Quick Start Guide
 
@@ -381,116 +375,60 @@ Profile → Edit → External Resources → Update All
 
 ## 💡 Advanced Usage
 
+<details>
+<summary><strong>Policy recommendations and best practices</strong></summary>
+
 ### Policy Recommendations
 
-<table>
-<tr>
-<td width="50%">
-
-**High-Priority Services**
-- Financial platforms → `DIRECT` or trusted proxy
-- Academic resources → Dedicated `Scholar` policy
-- Cloud services → Low-latency proxy nodes
-
-</td>
-<td width="50%">
-
-**Geo-Sensitive Applications**
-- Social platforms → Regional proxy selection
-- Content platforms → Multi-region strategy
-- Streaming services → CDN-optimized routing
-
-</td>
-</tr>
-</table>
+- Financial platforms -> `DIRECT` or a trusted proxy
+- Academic resources -> dedicated `Scholar` policy
+- Cloud services -> low-latency proxy nodes
+- Social platforms -> regional proxy selection
+- Content platforms -> multi-region strategy
+- Streaming services -> CDN-optimized routing
 
 ### Integration Best Practices
 
-- **DNS Configuration**: Pair with DoH/DoT for enhanced privacy
-- **Proxy Selection**: Choose geographically optimal nodes
-- **Fallback Strategy**: Configure DIRECT fallback for stability
-- **Performance Monitoring**: Regular latency checks and adjustments
+- Pair with DoH/DoT for stronger privacy
+- Choose geographically appropriate nodes
+- Keep a `DIRECT` fallback for stability
+- Recheck latency and routing quality regularly
 
 ### Security Considerations
 
-- All rulesets are regularly audited for security vulnerabilities
+- Rulesets are regularly audited
 - No third-party tracking or analytics domains included
 - Fully self-hosted infrastructure with zero external dependencies
-- HTTPS-only ruleset URLs for secure content delivery
+- HTTPS-only ruleset URLs for delivery
 
-## 🔧 Technical Specifications
+</details>
 
-### Compatibility
+## 🔧 Technical Snapshot
 
-- **Surge Pro 6.x**: Full feature support
-- **Surge Pro 5.x**: Compatible with limitations
-- **iOS**: 15.0+ recommended
-- **macOS**: 12.0+ (Monterey or later)
+- Compatibility: Surge Pro 6.x full support, Surge Pro 5.x partial compatibility
+- Platform baseline: iOS `15.0+`, macOS `12.0+`
+- Performance: rule processing `< 1ms`, reload time `< 500ms`
+- Scale: `2,500+` rules, `67` active rulesets, `2,000+` covered domains
 
-### Performance Metrics
+<details>
+<summary><strong>Rule format examples</strong></summary>
 
-- **Rule Processing**: < 1ms per connection
-- **Memory Footprint**: ~8-12MB total
-- **Update Size**: 50-500KB per ruleset
-- **Reload Time**: < 500ms for full configuration
-
-### Rule Format
-
-```
-# Domain exact match
+```text
 DOMAIN,example.com,POLICY
-
-# Domain suffix wildcard
 DOMAIN-SUFFIX,example.com,POLICY
-
-# IP CIDR range
 IP-CIDR,192.168.1.0/24,POLICY,no-resolve
-
-# User agent matching
 USER-AGENT,ApplicationName*,POLICY
 ```
 
-## 📊 Project Statistics
+</details>
 
-- **Total Rules**: 2,500+
-- **Active Rulesets**: 67 files (9 self-built + 58 comprehensive library)
-- **Update Frequency**: 4-8 times per month
-- **Domains Covered**: 2,000+ unique domains
-- **IP Ranges**: 400+ CIDR blocks
-- **Self-Hosted**: 100% autonomous infrastructure
+## 🛡️ Privacy, License, and Support
 
-## 🛡️ Privacy & Legal
-
-### Privacy Statement
-
-This project respects user privacy:
-- No telemetry or tracking
-- No data collection
-- No third-party dependencies
-- Fully self-hosted and auditable
-- Open-source and transparent
-
-### License
-
-Licensed under the [MIT License](LICENSE) - free for personal and commercial use.
-
-### Disclaimer
-
-These rulesets are provided for **network optimization and educational purposes**. Users are responsible for ensuring compliance with local laws and service terms. The project maintainers assume no liability for misuse.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please ensure:
-- Rule accuracy and testing
-- Privacy-respecting domains only
-- Clear documentation of changes
-- Adherence to project formatting standards
-
-## 📞 Support
-
-- **Issues**: Open a GitHub issue for bug reports
-- **Discussions**: Share configurations and tips
-- **Updates**: Watch this repository for notifications
+- Privacy: no telemetry, no data collection, no third-party rule hosting, fully auditable
+- License: [MIT License](LICENSE)
+- Disclaimer: intended for network optimization and educational use; users remain responsible for legal and service-term compliance
+- Contributing: prioritize rule accuracy, testing, privacy-respecting domains, and clear change notes
+- Support: use GitHub issues for bugs and repository watch/discussions for updates
 
 ---
 
