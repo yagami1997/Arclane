@@ -1,6 +1,6 @@
 /**
  * doh-fallback-worker v4
- * Last updated: April 8, 2026 09:22 PM PDT
+ * Last updated: April 7, 2026 10:05 PM PDT
  *
  * A private DoH gateway built on Cloudflare Workers.
  *
@@ -142,56 +142,6 @@ function readName(view, off) {
 }
 
 /**
- * Detect whether the query message carries an EDNS Client Subnet option (code 8).
- * Used to isolate cache entries so ECS and non-ECS queries never share a slot.
- *
- * @param {ArrayBuffer} buf   raw DNS message bytes
- * @returns {boolean}
- */
-function hasECS(buf) {
-  try {
-    const v = new DataView(buf);
-    if (buf.byteLength < 12) return false;
-
-    const qdcount = v.getUint16(4);
-    const ancount = v.getUint16(6);
-    const nscount = v.getUint16(8);
-    const arcount = v.getUint16(10);
-
-    let off = 12;
-
-    // Skip question section
-    for (let i = 0; i < qdcount; i++) { off = skipName(v, off); off += 4; }
-    // Skip answer and authority sections
-    for (let i = 0; i < ancount + nscount && off < buf.byteLength; i++) {
-      off = skipName(v, off);
-      off += 8; // TYPE + CLASS + TTL
-      off += 2 + v.getUint16(off); // RDLENGTH + RDATA
-    }
-    // Scan additional section for OPT record containing ECS
-    for (let i = 0; i < arcount && off < buf.byteLength; i++) {
-      off = skipName(v, off);
-      const type = v.getUint16(off);
-      off += 8;
-      const rdlen = v.getUint16(off);
-      off += 2;
-      if (type === 41 /* OPT */) {
-        const end = off + rdlen;
-        while (off + 4 <= end) {
-          if (v.getUint16(off) === 8 /* ECS option code */) return true;
-          off += 4 + v.getUint16(off + 2);
-        }
-      } else {
-        off += rdlen;
-      }
-    }
-    return false;
-  } catch {
-    return false;
-  }
-}
-
-/**
  * Extract the minimum TTL from a DNS response, ignoring OPT records (type 41)
  * and zero-TTL records (which must not be cached).
  *
@@ -247,7 +197,7 @@ function parseQuestion(buf) {
     const flags = v.getUint16(2);
 
     const qdcount = v.getUint16(4);
-    if (qdcount < 1) return null;
+    if (qdcount !== 1) return null; // reject empty or multi-question queries
 
     // Single-pass: readName returns both the string and the end offset,
     // eliminating the redundant skipName traversal.
@@ -257,7 +207,38 @@ function parseQuestion(buf) {
     const qtype  = v.getUint16(endOff);
     const qclass = v.getUint16(endOff + 2);
 
-    return { id, flags, qname, qtype, qclass, hasECS: hasECS(buf) };
+    // Detect ECS in-line instead of re-scanning via hasECS()
+    let ecs = false;
+    const ancount = v.getUint16(6);
+    const nscount = v.getUint16(8);
+    const arcount = v.getUint16(10);
+    let scanOff = endOff + 4; // past question section
+    // Skip answer + authority sections
+    for (let i = 0; i < ancount + nscount && scanOff + 10 <= buf.byteLength; i++) {
+      scanOff = skipName(v, scanOff);
+      scanOff += 8; // TYPE + CLASS + TTL
+      scanOff += 2 + v.getUint16(scanOff); // RDLENGTH + RDATA
+    }
+    // Scan additional section for OPT with ECS
+    for (let i = 0; i < arcount && scanOff < buf.byteLength; i++) {
+      scanOff = skipName(v, scanOff);
+      const rtype = v.getUint16(scanOff);
+      scanOff += 8;
+      const rdlen = v.getUint16(scanOff);
+      scanOff += 2;
+      if (rtype === 41) {
+        const rend = scanOff + rdlen;
+        while (scanOff + 4 <= rend) {
+          if (v.getUint16(scanOff) === 8) { ecs = true; break; }
+          scanOff += 4 + v.getUint16(scanOff + 2);
+        }
+        if (ecs) break;
+      } else {
+        scanOff += rdlen;
+      }
+    }
+
+    return { id, flags, qname, qtype, qclass, hasECS: ecs };
   } catch {
     return null;
   }
@@ -311,9 +292,17 @@ async function loadProfile(kv, token) {
 
   if (profile === null) return null; // unknown token
 
+  // Normalize profile: ensure required fields exist with safe defaults
   return {
-    ...profile,
-    privateRules: rules?.privateRules ?? [],
+    name: profile.name || token,
+    upstreams: Array.isArray(profile.upstreams) && profile.upstreams.length > 0
+      ? profile.upstreams
+      : DEFAULT_PROFILE.upstreams,
+    cachePolicy: {
+      ...DEFAULT_PROFILE.cachePolicy,
+      ...(profile.cachePolicy && typeof profile.cachePolicy === 'object' ? profile.cachePolicy : {}),
+    },
+    privateRules: Array.isArray(rules?.privateRules) ? rules.privateRules : [],
   };
 }
 
@@ -503,14 +492,14 @@ function synthesizeDNSResponse(queryBuf, question, rule) {
  * Using a GET Request object satisfies the Cache API, which requires a Request
  * or URL as the key argument.
  *
- * @param {string}  origin       request origin (e.g. "https://worker.example.com")
- * @param {string}  profileName
- * @param {object}  question     result of parseQuestion()
+ * @param {string}       origin    request origin (e.g. "https://worker.example.com")
+ * @param {string|null}  token     private token, or null for the public path
+ * @param {object}       question  result of parseQuestion()
  * @returns {Request}
  */
-function buildCacheKey(origin, profileName, question) {
+function buildCacheKey(origin, token, question) {
   const semantic = [
-    profileName,
+    token ?? '__public__',
     question.qname,
     question.qtype,
     question.qclass,
@@ -598,7 +587,13 @@ function buildUpstreamResponse(buf, ttl) {
 // ─── Error helpers ────────────────────────────────────────────────────────────
 
 function errorResponse(status, message) {
-  return new Response(message, { status, headers: CORS_HEADERS });
+  return new Response(message, {
+    status,
+    headers: {
+      'content-type': 'text/plain; charset=utf-8',
+      ...COMMON_HEADERS,
+    },
+  });
 }
 
 // ─── Multi-upstream racing ────────────────────────────────────────────────────
@@ -730,7 +725,7 @@ export default {
 
     // ── Cache lookup ─────────────────────────────────────────────────────────
     const cache    = caches.default;
-    const cacheKey = buildCacheKey(url.origin, profile.name, question);
+    const cacheKey = buildCacheKey(url.origin, token, question);
     const cached   = await cache.match(cacheKey);
 
     // Evaluate freshness manually so we can distinguish HIT vs STALE.
