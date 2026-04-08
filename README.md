@@ -126,6 +126,20 @@ The repository is maintained around a few practical rules:
 
 ## 🔄 Changelog
 
+### April 8, 2026 09:29 PM PDT — doh-fallback-worker v4: Private DoH Gateway
+
+- **Major upgrade**: rewrote `tools/doh-fallback-worker` from a generic DoH reverse proxy into a full token-aware private DoH gateway.
+- **Token routing**: added `/dns-query/<token>` path. Each token loads an isolated profile and private rule set from Cloudflare KV without touching source code.
+- **Private rule matching**: exact and suffix domain rules are answered locally inside the Worker with no upstream query. Supports A, AAAA, and CNAME record synthesis.
+- **DNS response synthesis**: binary-correct DNS answer packets are built inside the Worker, preserving the original query ID and question section.
+- **Normalized cache keys**: replaced SHA-256(raw body) keys with semantic keys, eliminating cache fragmentation caused by changing DNS transaction IDs.
+- **Remaining-TTL cache**: clients now receive the actual remaining TTL instead of the original value, with a correct `Age` header.
+- **Stale-if-error**: stale cache entries are served when all upstreams fail, within a configurable window. Avoids 502 errors under upstream instability.
+- **KV-backed rule management**: rules and profiles stored in Cloudflare KV, updated with a single `wrangler kv key put` command, no redeployment needed.
+- **Bug fix**: corrected base64url padding for RFC 8484 GET requests.
+- **Backward compatible**: `/dns-query` without a token behaves identically to v3 for all existing clients.
+- **Documentation**: added `wrangler.toml`, full local dev and deployment guides in English and Japanese.
+
 ### April 7, 2026 09:30 PM PDT — v2.2 Repository Refactor: Mainline, Modules, Docs, and Legacy Archive
 
 - **Mainline preserved**: kept `neorulset26/` fully intact and unchanged as the only active ruleset mainline.
@@ -489,6 +503,6 @@ Contributions are welcome! Please ensure:
     <br><br>
     <sub>Copyright © 2023-2026 | All rights reserved</sub>
     <br>
-    <sub>Last Updated: April 6, 2026 11:23 PM PDT</sub>
+    <sub>Last Updated: April 8, 2026 09:29 PM PDT</sub>
   </p>
 </div>
