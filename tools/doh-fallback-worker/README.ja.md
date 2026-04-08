@@ -1,215 +1,307 @@
-# DoH Fallback Worker
+# doh-fallback-worker
 
-バージョン作成日時: 2026年4月2日 13:30 JST
+Cloudflare Workers 上に構築したプライベート DoH ゲートウェイです。
 
-Language:
+- **パブリックパス** `/dns-query` — 高性能な公開 DoH。標準的な DoH クライアントであれば誰でも利用可能
+- **プライベートパス** `/dns-query/<token>` — KV に保存されたトークン別プロファイルとプライベートルールを読み込み
 
-- [English](./README.md)
-- 日本語
+Language: [English](./README.md) / 日本語
 
-## 概要
+## 機能一覧
 
-このディレクトリには、Cloudflare Worker ベースの DoH フォールバック用リバースプロキシ実装が含まれています。
+| # | 機能 |
+|---|------|
+| 1 | トークンルーティング — 各トークンは KV に保存された独立した解決プロファイルに対応 |
+| 2 | プライベートルールマッチング — 完全一致・サフィックス一致で、アップストリームを使わずローカルで応答 |
+| 3 | ローカル DNS 応答合成 — Worker 内部でバイナリ的に正確な DNS 応答を生成 |
+| 4 | 正規化キャッシュキー — セマンティックキーにより、transaction ID の変化によるキャッシュ断片化を解消 |
+| 5 | 複数アップストリームレース — CF / Google / Quad9 / Ali に並列問い合わせし、最初の応答を採用 |
+| 6 | 残余 TTL キャッシュ — クライアントには元の TTL ではなく、実際の残余 TTL を返す |
+| 7 | バックグラウンドプリフェッチ — 残余 TTL が 25% を切った時点で静かに更新 |
+| 8 | ECS 対応キャッシュ分離 — ECS あり・なしのクエリに別々のキャッシュエントリを使用 |
+| 9 | Stale-if-error — 全アップストリーム失敗時、設定ウィンドウ内であれば stale キャッシュを返却 |
 
-用途は明確です。ユーザーが通常利用している DoH エンドポイントが停止、遮断、不安定化、または一時的に劣化した場合に、緊急用のバックアップ DoH エンドポイントとして使います。
+## 事前準備
 
-これはメインのリゾルバとして設計されたものではありません。公開 DoH アップストリームの前段に置く軽量なプロキシであり、目的は可用性の補完と障害時の復旧性です。
+- [Node.js](https://nodejs.org) 18 以降
+- [Cloudflare アカウント](https://dash.cloudflare.com/sign-up)（無料プランで十分）
 
-## この Worker が行うこと
-
-[`worker.js`](./worker.js) は `/dns-query` で DoH リクエストを受け付け、複数のアップストリームリゾルバへ転送します。
-
-- Cloudflare DoH
-- Google Public DNS DoH
-- Quad9 DoH
-
-標準的な DoH の 2 つの形式に対応しています。
-
-- `GET /dns-query?dns=...`
-- `POST /dns-query` with `application/dns-message`
-
-## 実装の主要設計
-
-この Worker は、次の設計方針で構成されています。
-
-1. 複数アップストリームの並列レース
-   複数の DoH 上流へ同時に問い合わせを送り、最初に成功したレスポンスを採用します。勝者が決まった時点で、残りのリクエストは中断されます。
-
-2. TTL ベースのキャッシュ
-   キャッシュ時間を固定値にせず、DNS 応答を解析して最小 TTL を取り出し、その値を `Cache-Control` に反映します。
-
-3. バックグラウンド更新
-   キャッシュが失効間近であれば、現在のキャッシュを即時返却しつつ、`ctx.waitUntil(...)` で背後更新を行います。
-
-4. ECS を考慮したキャッシュ分離
-   ECS（EDNS Client Subnet）を含むクエリは別キャッシュとして扱われ、ECS なしの応答と混ざらないようになっています。
-
-5. POST 用 SHA-256 キャッシュキー
-   POST の DoH リクエストでは、バイナリ DNS ペイロードを SHA-256 でハッシュ化し、その値をキャッシュキーに使います。これにより生のクエリ内容を URL に露出させません。
-
-## リクエスト処理の流れ
-
-処理フローは次の通りです。
-
-1. クライアントが `/dns-query` に DoH リクエストを送信する。
-2. Worker がメソッドとリクエスト形式を検証する。
-3. Worker がキャッシュキーを生成する。
-4. キャッシュがあれば即時返却する。
-5. キャッシュの有効期限が近ければ、バックグラウンド更新を開始する。
-6. キャッシュがなければ、設定済みアップストリームへ並列に問い合わせる。
-7. 最初に成功したアップストリームの応答を返す。
-8. 抽出した TTL に基づいて非同期でキャッシュへ保存する。
-
-## キャッシュ動作
-
-[`worker.js`](./worker.js) 内の現在の設定値:
-
-- 最小 TTL 下限: `60` 秒
-- 最大 TTL 上限: `86400` 秒
-- 解析失敗時のデフォルト TTL: `300` 秒
-- バックグラウンド更新の開始閾値: TTL 消費率 `75%` 以降
-
-実運用上の意味は次の通りです。
-
-- 極端に短い TTL は過剰な再問い合わせを避けるために底上げされます。
-- 極端に長い TTL はキャッシュの残留を防ぐために上限で抑えられます。
-- DNS 応答の解析に失敗した場合でも、安全側の TTL で処理されます。
-
-## 返却ヘッダー
-
-クライアントへ返す主なヘッダー:
-
-- `content-type: application/dns-message`
-- `cache-control: public, max-age=...`
-- `x-cache: HIT` または `MISS`
-- ブラウザ互換のための CORS ヘッダー
-- `x-content-type-options` や `x-frame-options` などの基本的なセキュリティヘッダー
-
-## 制限事項
-
-この Worker は意図的に役割を絞っています。
-
-- `/dns-query` だけを処理します。
-- レート制限は実装していません。
-- 認証は実装していません。
-- メトリクスや可視化ダッシュボードは標準ではありません。
-- 可用性は公開 DoH 上流の状態にも依存します。
-
-公開インターネットにそのまま出す場合は、不特定多数向けの汎用公開リゾルバではなく、障害時の補助エンドポイントとして扱うのが適切です。
-
-## ファイル
-
-- [`worker.js`](./worker.js): Cloudflare Worker 実装本体
-- [`README.md`](./README.md): 英語版ドキュメント
-
-## デプロイ方法
-
-Cloudflare ダッシュボード経由でも、Wrangler CLI 経由でもデプロイできます。
-
-### 方法 A: Cloudflare ダッシュボードでデプロイ
-
-1. Cloudflare ダッシュボードにサインインします。
-2. `Workers & Pages` を開きます。
-3. 新しい Worker を作成します。
-4. デフォルトのスクリプトを [`worker.js`](./worker.js) の内容で置き換えます。
-5. 保存してデプロイします。
-
-デプロイ後、Cloudflare は次のようなデフォルトホスト名を発行します。
-
-```text
-https://doh-fallback-proxy.example-account.workers.dev/dns-query
-```
-
-この URL をそのままフォールバック DoH エンドポイントとして使えます。
-
-### 方法 B: Wrangler でデプロイ
-
-1. Wrangler をインストールします。
+Wrangler をグローバルインストールします。
 
 ```bash
 npm install -g wrangler
 ```
 
-2. Cloudflare にログインします。
+Cloudflare にログインします。
 
 ```bash
 wrangler login
 ```
 
-3. このディレクトリで、必要に応じて最小構成の `wrangler.toml` を作成します。
+ブラウザが開き、認証画面が表示されます。承認して完了です。
 
-```toml
-name = "doh-fallback-worker"
-main = "worker.js"
-compatibility_date = "2026-04-02"
-workers_dev = true
+---
+
+## ローカル開発・動作確認
+
+デプロイ前にローカルで Worker を起動して動作を確認できます。
+`wrangler dev` は KV バインディングを含めて Cloudflare エッジの挙動を再現します。
+
+### 1. ローカルサーバーを起動する
+
+```bash
+cd tools/doh-fallback-worker
+wrangler dev
 ```
 
-4. デプロイします。
+デフォルトで `http://localhost:8787` が起動します。
+
+### 2. パブリックパスを確認する（トークンなし）
+
+```bash
+# google.com の A レコードを GET で問い合わせ
+curl -s "http://localhost:8787/dns-query?dns=AAABAAABAAAAAAAAA3d3dwZnb29nbGUDY29tAAABAAE=" | xxd | head
+```
+
+バイナリ DNS レスポンスが返ります。  
+1 回目のリクエスト: レスポンスヘッダーに `x-cache: MISS`  
+2 回目の同一リクエスト: `x-cache: HIT`
+
+### 3. ローカル KV にテスト用エントリを追加する
+
+`wrangler dev` 中の KV 操作はローカルストアに書き込まれ、本番には影響しません。
+
+別のターミナルで以下を実行します。
+
+```bash
+# テスト用トークンのプロファイルを書き込む
+wrangler kv key put --binding DOH_KV \
+  "profile:test-token-1234" \
+  '{"name":"local-test","upstreams":["cf","google","quad9"],"cachePolicy":{"minTtl":60,"maxTtl":86400,"defaultTtl":300,"prefetchRatio":0.75,"staleIfErrorWindow":120}}' \
+  --local
+
+# 同じトークンのルールを書き込む
+wrangler kv key put --binding DOH_KV \
+  "rules:test-token-1234" \
+  '{"privateRules":[{"match":"exact","domain":"test.internal","type":"A","answers":["127.0.0.1"],"ttl":60}]}' \
+  --local
+```
+
+### 4. プライベートパスを確認する
+
+```bash
+# test.internal を問い合わせ — アップストリームを使わず 127.0.0.1 が合成されて返る
+curl -sv "http://localhost:8787/dns-query/test-token-1234?dns=AAABAAABAAAAAAAABHRlc3QIaW50ZXJuYWwAAAEAAQ=="
+```
+
+### 5. エラーケースを確認する
+
+```bash
+# 無効なトークン — 403 が返ること
+curl -sv "http://localhost:8787/dns-query/invalid-token" 2>&1 | grep "< HTTP"
+
+# dns パラメータなし — 400 が返ること
+curl -sv "http://localhost:8787/dns-query" 2>&1 | grep "< HTTP"
+```
+
+---
+
+## 本番デプロイ手順
+
+### ステップ 1 — KV ネームスペースを作成する
+
+```bash
+wrangler kv namespace create DOH_KV
+```
+
+出力から ID を確認します。
+
+```
+✅ Created namespace "DOH_KV" with ID "abc123..."
+```
+
+`wrangler.toml` のプレースホルダーをこの ID で置き換えます。
+
+```toml
+[[kv_namespaces]]
+binding = "DOH_KV"
+id      = "abc123..."
+```
+
+### ステップ 2 — Worker をデプロイする
 
 ```bash
 wrangler deploy
 ```
 
-成功すると、`workers.dev` の URL が払い出されます。
+成功すると Worker の URL が表示されます。
 
-## カスタムドメイン設定
-
-`workers.dev` を使わず、Cloudflare 上で管理している独自ドメインに Worker を紐付けることもできます。
-
-例として、次のようなドメインを使う想定です。
-
-```text
-doh-backup.example-signal.net
+```
+https://doh-fallback-worker.<あなたのアカウント>.workers.dev
 ```
 
-最終的な DoH エンドポイント例:
+この時点でパブリックパス `/dns-query` がすでに使用可能です。
 
-```text
-https://doh-backup.example-signal.net/dns-query
+### ステップ 3 — トークンを生成する
+
+```bash
+uuidgen
+# 例: ef7e6132-75b6-400e-8fec-0e61f7b44f8e
 ```
 
-一般的な手順:
+このトークンは非公開で管理してください。プライベートルールへのアクセスキーです。
 
-1. 利用するドメインを Cloudflare に追加します。
-2. `Workers & Pages` を開きます。
-3. デプロイ済み Worker を選択します。
-4. カスタムドメインまたはルート割り当て設定を開きます。
-5. `doh-backup.example-signal.net` のようなホスト名を紐付けます。
-6. HTTPS が有効で、正しくルーティングされることを確認します。
+### ステップ 4 — プロファイルとルールを KV に書き込む
 
-DoH クライアント設定では、ホスト名だけでなく必ず `/dns-query` を含む完全な URL を指定してください。この Worker は `/dns-query` でしか応答しません。
+**プロファイルを書き込む:**
 
-## クライアントでの使い方
-
-設定に使う値は、`/dns-query` を含む完全な HTTPS URL です。
-
-```text
-https://doh-backup.example-signal.net/dns-query
+```bash
+wrangler kv key put --binding DOH_KV \
+  "profile:ef7e6132-75b6-400e-8fec-0e61f7b44f8e" \
+  '{"name":"personal","upstreams":["cf","google","quad9"],"cachePolicy":{"minTtl":60,"maxTtl":86400,"defaultTtl":300,"prefetchRatio":0.75,"staleIfErrorWindow":120}}'
 ```
 
-または `workers.dev` を使う場合:
+**`rules.json` を用意し**（フォーマットは後述）、KV に反映します。
 
-```text
-https://doh-fallback-proxy.example-account.workers.dev/dns-query
+```bash
+wrangler kv key put --binding DOH_KV \
+  "rules:ef7e6132-75b6-400e-8fec-0e61f7b44f8e" \
+  --path rules.json
 ```
 
-実際の設定画面はクライアントごとに異なりますが、通常必要なのはこの完全な DoH URL です。
+### ステップ 5 — 動作確認
 
-## 動作確認
+```bash
+# パブリックパス
+curl -s "https://doh-fallback-worker.<あなたのアカウント>.workers.dev/dns-query?dns=AAABAAABAAAAAAAAA3d3dwZnb29nbGUDY29tAAABAAE="
 
-本番の退避先として使う前に、必ず疎通確認を行ってください。
+# プライベートパス
+curl -sv "https://doh-fallback-worker.<あなたのアカウント>.workers.dev/dns-query/ef7e6132-75b6-400e-8fec-0e61f7b44f8e?dns=..."
+```
 
-確認ポイント:
+1 回目: `x-cache: MISS`、2 回目の同一クエリ: `x-cache: HIT` であれば正常です。
 
-1. URL を開いて Cloudflare プラットフォームエラーではなく Worker 自体が応答していることを確認する。
-2. DoH 対応クライアントから実際のクエリを送る。
-3. 同一クエリを繰り返した際に `x-cache: HIT` が返ることを確認する。
-4. 一部アップストリームが遅延または失敗しても利用継続できることを確認する。
+---
 
-## 運用上の指針
+## プライベートルールの管理
 
-- この Worker はフォールバック用途として使う。
-- スクリプトは小さく保ち、監査しやすくする。
-- アップストリーム一覧を変えたら再デプロイする。
-- 将来的にレート制限やアクセス制御を追加する場合は、クライアント互換性に影響するため必ず明記する。
+ルールは KV に保存され、Worker を再デプロイせずに即時反映されます。
+
+### ルール形式（`rules.json`）
+
+```json
+{
+  "privateRules": [
+    {
+      "match": "suffix",
+      "domain": "ads.example.com",
+      "type": "A",
+      "answers": ["0.0.0.0"],
+      "ttl": 300
+    },
+    {
+      "match": "exact",
+      "domain": "nas.home",
+      "type": "A",
+      "answers": ["192.168.1.10"],
+      "ttl": 60
+    },
+    {
+      "match": "suffix",
+      "domain": "internal.example.com",
+      "type": "AAAA",
+      "answers": ["::1"],
+      "ttl": 60
+    }
+  ]
+}
+```
+
+| フィールド | 値 |
+|-----------|-----|
+| `match` | `exact` — 完全一致のみ / `suffix` — ドメインおよびすべてのサブドメインに一致 |
+| `type` | `A`, `AAAA`, `CNAME` |
+| `answers` | IP アドレスまたは CNAME ターゲット名の配列 |
+
+ドメインをブロックするには `answers` を `["0.0.0.0"]` に設定します。
+
+### ルールの更新・削除
+
+```bash
+# ルールを更新する（KV cacheTtl 内、デフォルト 300 秒以内に反映）
+wrangler kv key put --binding DOH_KV "rules:<token>" --path rules.json
+
+# 現在のルールを確認する
+wrangler kv key get --binding DOH_KV "rules:<token>"
+
+# トークンを削除する
+wrangler kv key delete --binding DOH_KV "profile:<token>"
+wrangler kv key delete --binding DOH_KV "rules:<token>"
+```
+
+### プロファイル形式リファレンス
+
+```json
+{
+  "name": "personal",
+  "upstreams": ["cf", "google", "quad9"],
+  "cachePolicy": {
+    "minTtl": 60,
+    "maxTtl": 86400,
+    "defaultTtl": 300,
+    "prefetchRatio": 0.75,
+    "staleIfErrorWindow": 120
+  }
+}
+```
+
+使用可能なアップストリームキー: `cf`, `google`, `quad9`, `ali`
+
+---
+
+## クライアント設定
+
+**Surge**
+
+```ini
+[Proxy]
+DOH-Public  = https://doh-fallback-worker.<あなたのアカウント>.workers.dev/dns-query
+DOH-Private = https://doh-fallback-worker.<あなたのアカウント>.workers.dev/dns-query/<token>
+```
+
+**Clash**
+
+```yaml
+dns:
+  nameserver:
+    - "https://doh-fallback-worker.<あなたのアカウント>.workers.dev/dns-query/ef7e6132-75b6-400e-8fec-0e61f7b44f8e"
+```
+
+---
+
+## セキュリティ
+
+- 不明なトークンは常に `403` を返す — デフォルトプロファイルへのフォールバックなし
+- トークンとルールは KV にのみ保存され、ソースコードには含まれない
+- このリポジトリにはプライベートトークン、キー、ルール一覧を含まない
+
+## 動作リファレンス
+
+| 状況 | レスポンス |
+|------|-----------|
+| 不明なトークン | 403 |
+| 不正な DNS クエリ | 400 |
+| プライベートルール一致 | 合成応答（アップストリームへの問い合わせなし） |
+| HTTPS / SVCB クエリ | アップストリームにそのまま転送 |
+| フレッシュなキャッシュヒット | 200、`x-cache: HIT`、残余 TTL |
+| 全アップストリーム失敗 + stale キャッシュあり | 200、`x-cache: STALE` |
+| 全アップストリーム失敗 + キャッシュなし | 502 |
+
+## ファイル構成
+
+| ファイル | 説明 |
+|---------|------|
+| `worker.js` | Cloudflare Worker 実装本体 |
+| `wrangler.toml` | Wrangler デプロイ設定 |
+| `README.md` | 英語版ドキュメント |
+| `README.ja.md` | このファイル |

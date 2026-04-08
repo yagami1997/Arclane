@@ -1,215 +1,305 @@
-# DoH Fallback Worker
+# doh-fallback-worker
 
-Version created: April 1, 2026 09:30 PM PDT
+A private DoH gateway built on Cloudflare Workers.
 
-Language:
+- **Public path** `/dns-query` — high-performance public DoH, open to any standard DoH client
+- **Private path** `/dns-query/<token>` — loads a per-token profile and private rule set from KV
 
-- English
-- [日本語](./README.ja.md)
+Language: English / [日本語](./README.ja.md)
 
-## Overview
+## Features
 
-This directory contains a Cloudflare Worker that acts as a fallback DNS-over-HTTPS reverse proxy.
+| # | Feature |
+|---|---------|
+| 1 | Token-aware routing — each token maps to an isolated resolution profile stored in KV |
+| 2 | Private rule matching — exact and suffix domain rules answered locally, no upstream needed |
+| 3 | Local DNS response synthesis — binary-correct DNS answers built inside the Worker |
+| 4 | Normalized cache keys — semantic keys eliminate fragmentation from changing transaction IDs |
+| 5 | Multi-upstream racing — CF / Google / Quad9 / Ali, first response wins |
+| 6 | Remaining-TTL cache — clients receive the actual remaining TTL, not the original value |
+| 7 | Background prefetch — silent refresh when remaining TTL falls below 25 % |
+| 8 | ECS-aware cache isolation — ECS and non-ECS queries use separate cache entries |
+| 9 | Stale-if-error — stale cache served when all upstreams fail, within a configurable window |
 
-The intended use case is simple: when a user's primary DoH endpoint is unavailable, blocked, unstable, or temporarily degraded, this Worker can be used as an emergency backup endpoint.
+## Prerequisites
 
-This is not positioned as a primary recursive resolver. It is a thin proxy layer in front of public DoH upstreams, designed for operational resilience and fast recovery.
+- [Node.js](https://nodejs.org) 18 or later
+- A [Cloudflare account](https://dash.cloudflare.com/sign-up) (free tier is sufficient)
 
-## What This Worker Does
-
-The implementation in [`worker.js`](./worker.js) accepts DoH requests on `/dns-query` and forwards them to multiple upstream resolvers:
-
-- Cloudflare DoH
-- Google Public DNS DoH
-- Quad9 DoH
-
-It supports both standard DoH request styles:
-
-- `GET /dns-query?dns=...`
-- `POST /dns-query` with `application/dns-message`
-
-## Core Design
-
-This Worker is built around a few concrete ideas:
-
-1. Multi-upstream racing
-   The Worker sends the query to multiple upstream DoH providers in parallel and returns the first successful response. Once one upstream wins, the remaining in-flight requests are aborted.
-
-2. TTL-driven caching
-   Cache duration is not hardcoded blindly. The Worker parses the DNS response and extracts the minimum effective TTL from the answer set, then uses that value for `Cache-Control`.
-
-3. Background refresh
-   When a cached response is close to expiry, the Worker serves the cached result immediately and refreshes it in the background using `ctx.waitUntil(...)`.
-
-4. ECS-aware cache separation
-   If a query contains ECS (EDNS Client Subnet), the Worker isolates that request into a separate cache key so ECS and non-ECS requests do not contaminate each other.
-
-5. SHA-256 cache keys for POST
-   For POST-based DoH requests, the binary DNS payload is hashed with SHA-256 and used as the cache key path. This avoids exposing raw query payloads in URLs and keeps cache keys stable.
-
-## Request Flow
-
-The request lifecycle is:
-
-1. The client sends a DoH request to `/dns-query`.
-2. The Worker validates the method and request shape.
-3. The Worker builds a cache key.
-4. If a cached response exists, it is returned immediately.
-5. If the cached response is close to expiry, a background refresh is triggered.
-6. If there is no cache hit, the Worker races the configured upstream resolvers.
-7. The first successful upstream response is returned to the client.
-8. The response is cached asynchronously using the extracted TTL.
-
-## Caching Behavior
-
-Current cache-related constants in [`worker.js`](./worker.js):
-
-- Minimum TTL floor: `60` seconds
-- Maximum TTL ceiling: `86400` seconds
-- Default fallback TTL: `300` seconds
-- Background refresh threshold: last `25%` of TTL lifetime
-
-Operationally, this means:
-
-- Very small upstream TTL values are normalized upward to avoid excessive churn.
-- Very large TTL values are capped to prevent over-long cache residency.
-- Malformed or non-parseable responses fall back to a safe default TTL.
-
-## Supported Response Headers
-
-User-facing responses include:
-
-- `content-type: application/dns-message`
-- `cache-control: public, max-age=...`
-- `x-cache: HIT` or `MISS`
-- CORS headers for browser compatibility
-- basic security headers such as `x-content-type-options` and `x-frame-options`
-
-## Limitations
-
-This Worker is intentionally narrow in scope.
-
-- It only serves `/dns-query`.
-- It does not implement rate limiting.
-- It does not perform authentication.
-- It does not expose metrics or logging dashboards by default.
-- It relies on public upstream DoH providers, so upstream policy changes or outages can still affect fallback availability.
-
-If you deploy this publicly, treat it as an emergency utility endpoint, not a general-purpose shared public resolver.
-
-## Files
-
-- [`worker.js`](./worker.js): Cloudflare Worker implementation
-- [`README.ja.md`](./README.ja.md): Japanese version of this document
-
-## Deployment
-
-You can deploy this Worker with either the Cloudflare dashboard or Wrangler CLI.
-
-### Option A: Deploy in the Cloudflare Dashboard
-
-1. Sign in to the Cloudflare dashboard.
-2. Open `Workers & Pages`.
-3. Create a new Worker.
-4. Replace the default script with the contents of [`worker.js`](./worker.js).
-5. Save and deploy.
-
-After deployment, Cloudflare will assign a default hostname similar to:
-
-```text
-https://doh-fallback-proxy.example-account.workers.dev/dns-query
-```
-
-You can use that URL directly as a fallback DoH endpoint.
-
-### Option B: Deploy with Wrangler
-
-1. Install Wrangler:
+Install Wrangler globally:
 
 ```bash
 npm install -g wrangler
 ```
 
-2. Log in to Cloudflare:
+Log in to Cloudflare:
 
 ```bash
 wrangler login
 ```
 
-3. Inside this directory, create a minimal `wrangler.toml` if needed:
+---
 
-```toml
-name = "doh-fallback-worker"
-main = "worker.js"
-compatibility_date = "2026-04-02"
-workers_dev = true
+## Local Development
+
+Run the Worker locally before deploying. Wrangler spins up a local server that
+behaves like the Cloudflare edge, including KV bindings.
+
+### 1. Start the local server
+
+```bash
+cd tools/doh-fallback-worker
+wrangler dev
 ```
 
-4. Publish:
+The Worker starts at `http://localhost:8787` by default.
+
+### 2. Test the public path (no token)
+
+```bash
+# Query google.com A record via GET
+curl -s "http://localhost:8787/dns-query?dns=AAABAAABAAAAAAAAA3d3dwZnb29nbGUDY29tAAABAAE=" | xxd | head
+```
+
+You should receive a binary DNS response. Check the response headers for
+`x-cache: MISS` on the first request and `x-cache: HIT` on the second.
+
+### 3. Add a local KV entry for testing
+
+During `wrangler dev`, KV writes go to a local store that does not affect
+production. Write a test profile and rule set:
+
+```bash
+# In a separate terminal while wrangler dev is running
+
+# Write a profile for a test token
+wrangler kv key put --binding DOH_KV \
+  "profile:test-token-1234" \
+  '{"name":"local-test","upstreams":["cf","google","quad9"],"cachePolicy":{"minTtl":60,"maxTtl":86400,"defaultTtl":300,"prefetchRatio":0.75,"staleIfErrorWindow":120}}' \
+  --local
+
+# Write rules for the same token
+wrangler kv key put --binding DOH_KV \
+  "rules:test-token-1234" \
+  '{"privateRules":[{"match":"exact","domain":"test.internal","type":"A","answers":["127.0.0.1"],"ttl":60}]}' \
+  --local
+```
+
+### 4. Test the private path
+
+```bash
+# Query test.internal — should return synthesized 127.0.0.1 without hitting any upstream
+curl -sv "http://localhost:8787/dns-query/test-token-1234?dns=AAABAAABAAAAAAAABHRlc3QIaW50ZXJuYWwAAAEAAQ=="
+```
+
+### 5. Test error cases
+
+```bash
+# Unknown token — expect 403
+curl -sv "http://localhost:8787/dns-query/invalid-token" 2>&1 | grep "< HTTP"
+
+# Missing dns parameter — expect 400
+curl -sv "http://localhost:8787/dns-query" 2>&1 | grep "< HTTP"
+```
+
+---
+
+## Deployment
+
+### Step 1 — Create a KV namespace
+
+```bash
+wrangler kv namespace create DOH_KV
+```
+
+The output includes the namespace ID:
+
+```
+✅ Created namespace "DOH_KV" with ID "abc123..."
+```
+
+Open `wrangler.toml` and replace the placeholder:
+
+```toml
+[[kv_namespaces]]
+binding = "DOH_KV"
+id      = "abc123..."
+```
+
+### Step 2 — Deploy
 
 ```bash
 wrangler deploy
 ```
 
-Wrangler will return a `workers.dev` URL for the deployed Worker.
+On success, Wrangler prints your Worker URL:
 
-## Custom Domain Setup
-
-If you want to avoid using the default `workers.dev` hostname, bind the Worker to a custom domain you control in Cloudflare.
-
-Example domain:
-
-```text
-doh-backup.example-signal.net
+```
+https://doh-fallback-worker.<your-account>.workers.dev
 ```
 
-Example final endpoint:
+The public path `/dns-query` is live immediately.
 
-```text
-https://doh-backup.example-signal.net/dns-query
+### Step 3 — Generate a token
+
+```bash
+uuidgen
+# example output: ef7e6132-75b6-400e-8fec-0e61f7b44f8e
 ```
 
-Typical flow:
+Keep this value private. It is the key that unlocks your private rule set.
 
-1. Add your domain to Cloudflare.
-2. Go to `Workers & Pages`.
-3. Open the deployed Worker.
-4. Choose the custom domain or route binding option.
-5. Bind a hostname such as `doh-backup.example-signal.net`.
-6. Confirm that HTTPS is active and the route resolves correctly.
+### Step 4 — Write profile and rules to KV
 
-Do not use a naked hostname without the `/dns-query` path when configuring DoH clients. The Worker only answers on `/dns-query`.
+**Write the profile:**
 
-## How To Use It In a Client
-
-Use the full HTTPS endpoint, including the path:
-
-```text
-https://doh-backup.example-signal.net/dns-query
+```bash
+wrangler kv key put --binding DOH_KV \
+  "profile:ef7e6132-75b6-400e-8fec-0e61f7b44f8e" \
+  '{"name":"personal","upstreams":["cf","google","quad9"],"cachePolicy":{"minTtl":60,"maxTtl":86400,"defaultTtl":300,"prefetchRatio":0.75,"staleIfErrorWindow":120}}'
 ```
 
-Or if you stay on the default Workers hostname:
+**Prepare a `rules.json` file** (see format below), then push it:
 
-```text
-https://doh-fallback-proxy.example-account.workers.dev/dns-query
+```bash
+wrangler kv key put --binding DOH_KV \
+  "rules:ef7e6132-75b6-400e-8fec-0e61f7b44f8e" \
+  --path rules.json
 ```
 
-The exact client-side configuration depends on the software, but the value you generally need is the full DoH URL above.
+### Step 5 — Verify
 
-## Validation
+```bash
+# Public path
+curl -s "https://doh-fallback-worker.<your-account>.workers.dev/dns-query?dns=AAABAAABAAAAAAAAA3d3dwZnb29nbGUDY29tAAABAAE="
 
-After deployment, test the endpoint before relying on it.
+# Private path
+curl -sv "https://doh-fallback-worker.<your-account>.workers.dev/dns-query/ef7e6132-75b6-400e-8fec-0e61f7b44f8e?dns=..."
+```
 
-Basic checks:
+First request: `x-cache: MISS`. Second identical request: `x-cache: HIT`.
 
-1. Open the URL in a browser and confirm the Worker responds instead of returning a platform error.
-2. Send an actual DoH request from a compatible client.
-3. Confirm repeated identical queries start returning `x-cache: HIT`.
-4. Confirm the endpoint still works if one upstream is temporarily slower or unavailable.
+---
 
-## Operational Guidance
+## Private Rule Management
 
-- Treat this Worker as a fallback service.
-- Keep the script small and easy to audit.
-- Re-deploy after any upstream list changes.
-- If you later add access control or rate limiting, document those changes clearly because they affect client compatibility.
+Rules are stored in KV and take effect immediately — no redeployment needed.
+
+### Rules format (`rules.json`)
+
+```json
+{
+  "privateRules": [
+    {
+      "match": "suffix",
+      "domain": "ads.example.com",
+      "type": "A",
+      "answers": ["0.0.0.0"],
+      "ttl": 300
+    },
+    {
+      "match": "exact",
+      "domain": "nas.home",
+      "type": "A",
+      "answers": ["192.168.1.10"],
+      "ttl": 60
+    },
+    {
+      "match": "suffix",
+      "domain": "internal.example.com",
+      "type": "AAAA",
+      "answers": ["::1"],
+      "ttl": 60
+    }
+  ]
+}
+```
+
+| Field | Values |
+|-------|--------|
+| `match` | `exact` — full name only / `suffix` — domain and all subdomains |
+| `type` | `A`, `AAAA`, `CNAME` |
+| `answers` | Array of IP addresses or CNAME target name |
+
+To block a domain, set `answers` to `["0.0.0.0"]`.
+
+### Update rules
+
+```bash
+# Push updated rules (takes effect within KV cacheTtl — default 300 s)
+wrangler kv key put --binding DOH_KV "rules:<token>" --path rules.json
+
+# Read current rules
+wrangler kv key get --binding DOH_KV "rules:<token>"
+
+# Delete a token entirely
+wrangler kv key delete --binding DOH_KV "profile:<token>"
+wrangler kv key delete --binding DOH_KV "rules:<token>"
+```
+
+### Profile format reference
+
+```json
+{
+  "name": "personal",
+  "upstreams": ["cf", "google", "quad9"],
+  "cachePolicy": {
+    "minTtl": 60,
+    "maxTtl": 86400,
+    "defaultTtl": 300,
+    "prefetchRatio": 0.75,
+    "staleIfErrorWindow": 120
+  }
+}
+```
+
+Available upstream keys: `cf`, `google`, `quad9`, `ali`
+
+---
+
+## Client Configuration
+
+**Surge**
+
+```ini
+[Proxy]
+DOH-Public  = https://doh-fallback-worker.<your-account>.workers.dev/dns-query
+DOH-Private = https://doh-fallback-worker.<your-account>.workers.dev/dns-query/<token>
+```
+
+**Clash**
+
+```yaml
+dns:
+  nameserver:
+    - "https://doh-fallback-worker.<your-account>.workers.dev/dns-query/ef7e6132-75b6-400e-8fec-0e61f7b44f8e"
+```
+
+---
+
+## Security
+
+- Unknown tokens always return `403` — no fallback to the default profile
+- Tokens and rules are stored in KV only, never in source code
+- This repository contains no private tokens, keys, or rule lists
+
+## Behavior Reference
+
+| Situation | Response |
+|-----------|----------|
+| Unknown token | 403 |
+| Malformed DNS query | 400 |
+| Private rule match | Synthesized answer (no upstream query) |
+| HTTPS / SVCB query | Pass-through to upstreams |
+| Fresh cache hit | 200, `x-cache: HIT`, remaining TTL |
+| All upstreams fail + stale cache available | 200, `x-cache: STALE` |
+| All upstreams fail + no cache | 502 |
+
+## Files
+
+| File | Description |
+|------|-------------|
+| `worker.js` | Cloudflare Worker implementation |
+| `wrangler.toml` | Wrangler deployment config |
+| `README.md` | This document |
+| `README.ja.md` | Japanese version |
