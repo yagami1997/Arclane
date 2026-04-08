@@ -303,3 +303,25 @@ dns:
 | `wrangler.toml` | Wrangler deployment config |
 | `README.md` | This document |
 | `README.ja.md` | Japanese version |
+
+## Changelog
+
+### April 8, 2026 — 9:29 PM PDT — v4 major upgrade
+
+Complete rewrite from a generic DoH reverse proxy into a token-aware private DoH gateway.
+
+**New capabilities**
+- Token routing: `/dns-query/<token>` loads an isolated profile and rule set from Cloudflare KV
+- Private rule matching: exact and suffix domain rules answered locally without hitting any upstream
+- Local DNS response synthesis: binary-correct A / AAAA / CNAME answers built inside the Worker
+- Normalized semantic cache keys: eliminates cache fragmentation caused by changing DNS transaction IDs
+- Remaining-TTL cache: clients now receive the actual remaining TTL with a correct `Age` header
+- Stale-if-error: stale cache entries are served when all upstreams fail, within a configurable window
+- KV-backed profile and rule management: update rules without redeployment
+- `wrangler.toml` added for reproducible deployment
+
+**Bug fixes**
+- Fixed base64url padding for RFC 8484 GET requests — some DoH clients omit `=` padding
+
+**Backward compatibility**
+- `/dns-query` (no token) behaves identically to v3 for all existing clients

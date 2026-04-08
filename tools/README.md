@@ -1,7 +1,7 @@
 # Repository Tools
 
 Version created: April 1, 2026 09:30 PM PDT
-Last updated: April 6, 2026 11:23 PM PDT
+Last updated: April 8, 2026 09:29 PM PDT
 
 Language:
 
@@ -47,7 +47,7 @@ The following should generally not go into `tools/`:
 
 ### DoH Fallback Worker
 
-Version: 1.0.0 · Created: April 1, 2026 09:30 PM PDT
+Version: 4.0.0 · Created: April 1, 2026 09:30 PM PDT · **Updated: April 8, 2026 09:29 PM PDT**
 
 Path:
 
@@ -57,7 +57,9 @@ English documentation:
 
 - [`doh-fallback-worker/README.md`](./doh-fallback-worker/README.md)
 
-This tool provides a Cloudflare Worker based fallback DNS-over-HTTPS reverse proxy for emergency use when a primary DoH endpoint is unavailable.
+A token-aware private DoH gateway built on Cloudflare Workers. The public path `/dns-query` provides high-performance multi-upstream DoH for any client. The private path `/dns-query/<token>` loads a per-token profile and private rule set from KV, enabling local DNS answer synthesis for configured domains without hitting any upstream.
+
+Upgraded in v4 from a generic reverse proxy to a full policy-driven gateway with private rule matching, local response synthesis, normalized cache keys, remaining-TTL semantics, and stale-if-error support.
 
 ### edge204 — CF Edge 204 Probe
 

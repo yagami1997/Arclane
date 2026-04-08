@@ -1,7 +1,7 @@
 # Repository Tools
 
 バージョン作成日時: 2026年4月2日 13:30 JST
-最終更新日時: 2026年4月7日 15:23 JST
+最終更新日時: April 8, 2026 09:29 PM PDT
 
 Language:
 
@@ -47,7 +47,7 @@ Language:
 
 ### DoH Fallback Worker
 
-バージョン: 1.0.0 · 作成日時: 2026年4月2日 13:30 JST
+バージョン: 4.0.0 · 作成日時: 2026年4月2日 13:30 JST · **更新日時: April 8, 2026 09:29 PM PDT**
 
 パス:
 
@@ -57,7 +57,9 @@ Language:
 
 - [`doh-fallback-worker/README.md`](./doh-fallback-worker/README.md)
 
-このツールは、通常の DoH エンドポイントが利用できないときの緊急退避先として使う Cloudflare Worker ベースの DoH リバースプロキシです。
+Cloudflare Workers 上に構築したトークン対応プライベート DoH ゲートウェイ。パブリックパス `/dns-query` は任意のクライアントが利用できる高性能マルチアップストリーム DoH を提供。プライベートパス `/dns-query/<token>` は KV に保存されたトークン別プロファイルとルールセットを読み込み、設定済みドメインに対してアップストリームを使わずローカルで DNS 応答を合成する。
+
+v4 では汎用リバースプロキシからポリシー駆動型ゲートウェイへ全面刷新。プライベートルールマッチング、ローカル応答合成、正規化キャッシュキー、残余 TTL セマンティクス、stale-if-error 対応を追加。
 
 ### edge204 — CF エッジ 204 プローブ
 
