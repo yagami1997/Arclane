@@ -1,3 +1,5 @@
+# Legal Boundary Statement
+
 ## Project Nature Statement
 
 This repository is a third-party documentation and research project for text-based network routing configuration design, compatibility maintenance, and related operational reference tooling. It contains plain-text configuration artifacts, Surge-compatible module files, architecture notes, migration materials, and reference implementations for small self-hosted helpers.

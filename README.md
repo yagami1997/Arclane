@@ -198,14 +198,22 @@ If you are operating in a regulated environment, under enterprise security contr
 
 ## Changelog
 
-### Latest: April 8, 2026 09:29 PM PDT
+### Latest: April 14, 2026
+
+- Renamed repository from `surgemac` to `Arclane` to remove trademark proximity to Surge.
+- Rewrote README to reframe project identity as third-party routing configuration research.
+- Added `docs/legal/LEGAL.md` with full jurisdictional compliance notice, trademark acknowledgment, and liability disclaimer.
+- Removed all provider-specific operational references from `ENGINEERING_GUIDE.md` and `RULESET_URLS.md`.
+- Updated all raw artifact URLs across the repository to reflect the new repository name.
+
+<details>
+<summary><strong>Previous repository milestones</strong></summary>
+
+### April 8, 2026
 
 - Updated `tools/doh-fallback-worker/` toward a token-aware private DoH gateway design.
 - Expanded Worker-side DNS response synthesis, cache normalization, and stale-if-error behavior.
 - Added deployment-oriented documentation for the Worker reference implementation.
-
-<details>
-<summary><strong>Previous repository milestones</strong></summary>
 
 ### April 7, 2026
 
