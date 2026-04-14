@@ -200,11 +200,9 @@ If you are operating in a regulated environment, under enterprise security contr
 
 ### Latest: April 14, 2026
 
-- Renamed repository from `surgemac` to `Arclane` to remove trademark proximity to Surge.
-- Rewrote README to reframe project identity as third-party routing configuration research.
-- Added `docs/legal/LEGAL.md` with full jurisdictional compliance notice, trademark acknowledgment, and liability disclaimer.
-- Removed all provider-specific operational references from `ENGINEERING_GUIDE.md` and `RULESET_URLS.md`.
-- Updated all raw artifact URLs across the repository to reflect the new repository name.
+- Established `docs/legal/LEGAL.md` with full jurisdictional compliance notice, trademark acknowledgment, and liability disclaimer.
+- Restructured project documentation to reflect research and configuration architecture scope.
+- Revised `ENGINEERING_GUIDE.md` and `RULESET_URLS.md` to align with project positioning.
 
 <details>
 <summary><strong>Previous repository milestones</strong></summary>

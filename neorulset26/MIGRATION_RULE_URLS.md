@@ -47,7 +47,7 @@ https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/
 ## Updated Timestamp
 
 ```text
-2026-04-14 — repository renamed from surgemac to Arclane
+2026-04-14
 ```
 
 ## Rules
