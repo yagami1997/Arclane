@@ -13,7 +13,7 @@ This document records the historical rule paths that were moved into `archive/le
 Use the 2026 mainline under:
 
 ```text
-https://raw.githubusercontent.com/yagami1997/surgemac/main/neorulset26/
+https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/
 ```
 
 For a full migration-ready URL list, use:

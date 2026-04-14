@@ -28,6 +28,6 @@ Historical root rules and the old `ruleset/` tree were moved to `archive/legacy/
 
 ## Guidance
 
-- For new Surge setups, use `neorulset26/`.
-- For historical imports, consult the legacy migration document first.
-- Do not add new published rules to the repository root.
+- For reviewing the active configuration mainline, refer to `neorulset26/`.
+- For historical path references, consult the legacy migration document first.
+- Do not add new published configuration artifacts to the repository root.
