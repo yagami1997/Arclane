@@ -1,7 +1,7 @@
 # Repository Tools
 
 バージョン作成日時: 2026年4月2日 13:30 JST
-最終更新日時: April 8, 2026 09:29 PM PDT
+最終更新日時: April 20, 2026 06:00 PM PDT
 
 Language:
 
@@ -47,7 +47,7 @@ Language:
 
 ### DoH Fallback Worker
 
-バージョン: 4.0.0 · 作成日時: 2026年4月2日 13:30 JST · **更新日時: April 8, 2026 09:29 PM PDT**
+バージョン: 4.0.0 · 作成日時: 2026年4月2日 13:30 JST · **更新日時: April 20, 2026 06:00 PM PDT**
 
 パス:
 

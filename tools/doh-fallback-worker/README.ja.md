@@ -15,7 +15,7 @@ Language: [English](./README.md) / 日本語
 | 2 | プライベートルールマッチング — 完全一致・サフィックス一致で、アップストリームを使わずローカルで応答 |
 | 3 | ローカル DNS 応答合成 — Worker 内部でバイナリ的に正確な DNS 応答を生成 |
 | 4 | 正規化キャッシュキー — セマンティックキーにより、transaction ID の変化によるキャッシュ断片化を解消 |
-| 5 | 複数アップストリームレース — CF / Google / Quad9 / Ali に並列問い合わせし、最初の応答を採用 |
+| 5 | 複数アップストリームレース — CF / Google / Quad9 に並列問い合わせし、最初の応答を採用 |
 | 6 | 残余 TTL キャッシュ — クライアントには元の TTL ではなく、実際の残余 TTL を返す |
 | 7 | バックグラウンドプリフェッチ — 残余 TTL が 25% を切った時点で静かに更新 |
 | 8 | ECS 対応キャッシュ分離 — ECS あり・なしのクエリに別々のキャッシュエントリを使用 |
@@ -120,13 +120,20 @@ wrangler kv namespace create DOH_KV
 ✅ Created namespace "DOH_KV" with ID "abc123..."
 ```
 
-`wrangler.toml` のプレースホルダーをこの ID で置き換えます。
+ローカル用テンプレートをコピーし、Git 管理しない設定ファイル側でこの ID に置き換えます。
+
+```bash
+cp wrangler.toml.example wrangler.toml
+```
 
 ```toml
 [[kv_namespaces]]
 binding = "DOH_KV"
 id      = "abc123..."
 ```
+
+`wrangler.toml` は Git で無視されるため、実際の Cloudflare リソース ID を
+リポジトリに入れずに運用できます。
 
 ### ステップ 2 — Worker をデプロイする
 
@@ -255,7 +262,7 @@ wrangler kv key delete --binding DOH_KV "rules:<token>"
 }
 ```
 
-使用可能なアップストリームキー: `cf`, `google`, `quad9`, `ali`
+使用可能なアップストリームキー: `cf`, `google`, `quad9`
 
 ---
 
@@ -302,7 +309,7 @@ dns:
 | ファイル | 説明 |
 |---------|------|
 | `worker.js` | Cloudflare Worker 実装本体 |
-| `wrangler.toml` | Wrangler デプロイ設定 |
+| `wrangler.toml.example` | Wrangler デプロイ用テンプレート |
 | `README.md` | 英語版ドキュメント |
 | `README.ja.md` | このファイル |
 
@@ -320,7 +327,7 @@ dns:
 - 残余 TTL キャッシュ: 正確な `Age` ヘッダーとともに実際の残余 TTL をクライアントへ返却
 - Stale-if-error: 全アップストリーム失敗時、設定ウィンドウ内であれば stale キャッシュを返却
 - KV によるプロファイル・ルール管理: 再デプロイなしでルールを更新可能
-- 再現性のあるデプロイのための `wrangler.toml` を追加
+- ローカル配備用テンプレートとして `wrangler.toml.example` を追加
 
 **バグ修正**
 - RFC 8484 準拠の GET リクエストにおける base64url パディング欠落の修正（一部 DoH クライアントは `=` を省略して送信する）

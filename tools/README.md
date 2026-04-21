@@ -1,7 +1,7 @@
 # Repository Tools
 
 Version created: April 1, 2026 09:30 PM PDT
-Last updated: April 8, 2026 09:29 PM PDT
+Last updated: April 20, 2026 06:00 PM PDT
 
 Language:
 
@@ -47,7 +47,7 @@ The following should generally not go into `tools/`:
 
 ### DoH Fallback Worker
 
-Version: 4.0.0 · Created: April 1, 2026 09:30 PM PDT · **Updated: April 8, 2026 09:29 PM PDT**
+Version: 4.0.0 · Created: April 1, 2026 09:30 PM PDT · **Updated: April 20, 2026 06:00 PM PDT**
 
 Path:
 

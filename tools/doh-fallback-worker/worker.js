@@ -1,6 +1,6 @@
 /**
  * doh-fallback-worker v4
- * Last updated: April 7, 2026 10:05 PM PDT
+ * Last updated: April 20, 2026 06:00 PM PDT
  *
  * A private DoH gateway built on Cloudflare Workers.
  *
@@ -12,7 +12,7 @@
  *   2. Private rule matching — exact and suffix domain rules answered locally without hitting upstreams
  *   3. Local DNS response synthesis — binary-correct DNS answers built inside the Worker
  *   4. Normalized cache keys — semantic keys eliminate fragmentation caused by changing transaction IDs
- *   5. Multi-upstream racing — CF / Google / Quad9 / Ali, first success cancels the rest
+ *   5. Multi-upstream racing — CF / Google / Quad9, first success cancels the rest
  *   6. Remaining-TTL cache — clients receive the actual remaining TTL, not the original value
  *   7. Background prefetch — silent refresh when remaining TTL falls below 25 %
  *   8. ECS-aware cache isolation — ECS and non-ECS queries use separate cache entries
@@ -25,7 +25,6 @@ const UPSTREAM_URLS = {
   cf:     'https://cloudflare-dns.com/dns-query',
   google: 'https://dns.google/dns-query',
   quad9:  'https://dns11.quad9.net/dns-query',
-  ali:    'https://dns.alidns.com/dns-query',
 };
 
 const UPSTREAM_TIMEOUT_MS = 1500;

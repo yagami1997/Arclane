@@ -15,7 +15,7 @@ Language: English / [日本語](./README.ja.md)
 | 2 | Private rule matching — exact and suffix domain rules answered locally, no upstream needed |
 | 3 | Local DNS response synthesis — binary-correct DNS answers built inside the Worker |
 | 4 | Normalized cache keys — semantic keys eliminate fragmentation from changing transaction IDs |
-| 5 | Multi-upstream racing — CF / Google / Quad9 / Ali, first response wins |
+| 5 | Multi-upstream racing — CF / Google / Quad9, first response wins |
 | 6 | Remaining-TTL cache — clients receive the actual remaining TTL, not the original value |
 | 7 | Background prefetch — silent refresh when remaining TTL falls below 25 % |
 | 8 | ECS-aware cache isolation — ECS and non-ECS queries use separate cache entries |
@@ -118,13 +118,20 @@ The output includes the namespace ID:
 ✅ Created namespace "DOH_KV" with ID "abc123..."
 ```
 
-Open `wrangler.toml` and replace the placeholder:
+Copy the local template and replace the placeholder in your local-only config:
+
+```bash
+cp wrangler.toml.example wrangler.toml
+```
 
 ```toml
 [[kv_namespaces]]
 binding = "DOH_KV"
 id      = "abc123..."
 ```
+
+`wrangler.toml` is ignored by Git so your real Cloudflare resource IDs
+stay out of the repository.
 
 ### Step 2 — Deploy
 
@@ -300,7 +307,7 @@ dns:
 | File | Description |
 |------|-------------|
 | `worker.js` | Cloudflare Worker implementation |
-| `wrangler.toml` | Wrangler deployment config |
+| `wrangler.toml.example` | Wrangler deployment template |
 | `README.md` | This document |
 | `README.ja.md` | Japanese version |
 
@@ -318,7 +325,7 @@ Complete rewrite from a generic DoH reverse proxy into a token-aware private DoH
 - Remaining-TTL cache: clients now receive the actual remaining TTL with a correct `Age` header
 - Stale-if-error: stale cache entries are served when all upstreams fail, within a configurable window
 - KV-backed profile and rule management: update rules without redeployment
-- `wrangler.toml` added for reproducible deployment
+- `wrangler.toml.example` added as a local deployment template
 
 **Bug fixes**
 - Fixed base64url padding for RFC 8484 GET requests — some DoH clients omit `=` padding
