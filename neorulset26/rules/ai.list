@@ -49,11 +49,19 @@ DOMAIN,gspe1-ssl.ls.apple.com
 #   - Claude Code can also authenticate/run through Bedrock or Vertex AI; those paths
 #     would follow AWS / GCP domains rather than Anthropic-owned domains.
 DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,clau.de
 DOMAIN-SUFFIX,claude.ai
 DOMAIN-SUFFIX,claude.com
+DOMAIN-SUFFIX,claudemcpclient.com
 DOMAIN-SUFFIX,claudeusercontent.com
+DOMAIN-SUFFIX,sentry.io
+DOMAIN-SUFFIX,statsigapi.net
 DOMAIN-KEYWORD,anthropic
 DOMAIN-KEYWORD,claude
+DOMAIN,servd-anthropic-website.b-cdn.net
+DOMAIN,anthropic.auth0.com
+DOMAIN,anthropic-com.ghost.io
+DOMAIN,anthropic.com.cdn.cloudflare.net
 DOMAIN,widget.intercom.io
 DOMAIN,api-iam.intercom.io
 DOMAIN,nexus-websocket-a.intercom.io
