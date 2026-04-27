@@ -250,5 +250,7 @@ If you are operating in a regulated environment, under enterprise security contr
     <sub>Surge-compatible artifacts are provided only as compatibility materials, not as product affiliation</sub>
     <br><br>
     <sub>Copyright © 2023-2026 YAGAMI</sub>
+    <br>
+    <sub>Last updated: April 27, 2026 PDT</sub>
   </p>
 </div>
