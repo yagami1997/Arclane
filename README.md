@@ -245,9 +245,9 @@ If you are operating in a regulated environment, under enterprise security contr
 
 ## Note
 
-Some days, technical work feels less like building a machine and more like listening for where the system wants to become simpler. A good rule, a careful boundary, or a small piece of documentation can carry a quiet kind of care: it reduces future confusion, leaves fewer sharp edges, and makes room for the next person to think clearly.
+Some days, technical work feels less like building a machine and more like tuning a quiet instrument until its intent can be heard. A good rule, a careful boundary, or a small piece of documentation can hold a patient kind of care: it lowers the noise, leaves fewer sharp edges, and gives the next mind a clear place to begin.
 
-The best engineering mood is not hurry, but attention. Keep the tools honest, keep the assumptions visible, and let every change earn its place.
+The best engineering mood is not haste, but attention with a steady hand. Keep the tools honest, keep the assumptions visible, and let every change arrive with enough grace to deserve its place.
 
 ---
 
