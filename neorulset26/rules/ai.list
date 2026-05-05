@@ -81,6 +81,12 @@ DOMAIN-SUFFIX,llama.meta.com
 # > Mistral AI
 DOMAIN-SUFFIX,mistral.ai
 
+# > DeepSeek (API / Chat / Open Platform)
+#   Official API base URL: https://api.deepseek.com
+#   Covers API, Platform, Chat, Docs, Status, CDN, and App download subdomains.
+DOMAIN-SUFFIX,deepseek.com
+DOMAIN-KEYWORD,deepseek
+
 # > Perplexity AI
 DOMAIN-SUFFIX,perplexity.ai
 DOMAIN-SUFFIX,pplx.ai
