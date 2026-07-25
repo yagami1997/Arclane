@@ -1,7 +1,7 @@
 # Repository Tools
 
 Version created: April 1, 2026 09:30 PM PDT
-Last updated: April 20, 2026 06:00 PM PDT
+Last updated: July 25, 2026
 
 Language:
 
@@ -47,7 +47,7 @@ The following should generally not go into `tools/`:
 
 ### DoH Fallback Worker
 
-Version: 4.0.0 · Created: April 1, 2026 09:30 PM PDT · **Updated: April 20, 2026 06:00 PM PDT**
+Version: 4.0.0 · Created: April 1, 2026 09:30 PM PDT · **Updated: July 25, 2026**
 
 Path:
 
@@ -57,9 +57,14 @@ English documentation:
 
 - [`doh-fallback-worker/README.md`](./doh-fallback-worker/README.md)
 
-A token-aware private DoH gateway built on Cloudflare Workers. The public path `/dns-query` provides high-performance multi-upstream DoH for any client. The private path `/dns-query/<token>` loads a per-token profile and private rule set from KV, enabling local DNS answer synthesis for configured domains without hitting any upstream.
+A self-hosted DoH gateway reference implementation for Cloudflare Workers. The public path `/dns-query` is disabled by default and, when explicitly enabled, uses a conservative single-upstream profile. Bearer authentication or the compatibility path `/dns-query/<token>` loads an isolated KV profile and private rule set.
 
-Upgraded in v4 from a generic reverse proxy to a full policy-driven gateway with private rule matching, local response synthesis, normalized cache keys, remaining-TTL semantics, and stale-if-error support.
+The current v4 implementation includes validated hedged requests for private
+profiles, transaction-ID and remaining-TTL cache correctness, RFC 2308 negative
+caching, isolate-local singleflight, hot-only prefetch, bounded requests, local
+response synthesis, and stale-if-error behavior. Documentation intentionally
+uses placeholders and does not publish maintainer-operated resolver domains or
+private deployment identifiers.
 
 ### edge204 — CF Edge 204 Probe
 

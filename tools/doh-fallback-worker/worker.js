@@ -1,10 +1,10 @@
 /**
  * doh-fallback-worker v4
- * Last updated: April 20, 2026 06:00 PM PDT
+ * Last updated: July 25, 2026
  *
  * A private DoH gateway built on Cloudflare Workers.
  *
- * Public path  /dns-query          — high-performance public DoH, open to all clients
+ * Public path  /dns-query          — disabled by default; opt in with ALLOW_PUBLIC_DOH=true
  * Private path /dns-query/<token>  — loads a per-token profile and private rule set from KV
  *
  * Features
@@ -12,11 +12,12 @@
  *   2. Private rule matching — exact and suffix domain rules answered locally without hitting upstreams
  *   3. Local DNS response synthesis — binary-correct DNS answers built inside the Worker
  *   4. Normalized cache keys — semantic keys eliminate fragmentation caused by changing transaction IDs
- *   5. Multi-upstream racing — CF / Google / Quad9, first success cancels the rest
+ *   5. Validated multi-upstream racing — malformed and DNS error responses do not win
  *   6. Remaining-TTL cache — clients receive the actual remaining TTL, not the original value
- *   7. Background prefetch — silent refresh when remaining TTL falls below 25 %
- *   8. ECS-aware cache isolation — ECS and non-ECS queries use separate cache entries
+ *   7. Hot-only prefetch — refresh after 85 % age only for repeated hits and TTL >= 60s
+ *   8. Flag-aware cache isolation — DO/RD/AD/CD bits are part of the cache key
  *   9. Stale-if-error — stale cache served when all upstreams fail, within a configurable window
+ *  10. Isolate-local singleflight — concurrent misses and prefetches share one upstream operation
  */
 
 // ─── Upstream registry ────────────────────────────────────────────────────────
@@ -28,28 +29,57 @@ const UPSTREAM_URLS = {
 };
 
 const UPSTREAM_TIMEOUT_MS = 1500;
+const DEFAULT_HEDGE_DELAYS_MS = Object.freeze([0, 35, 80]);
+const MIN_PREFETCH_TTL = 60;
+const HOT_ENTRY_WINDOW_MS = 5 * 60 * 1000;
+const HOT_ENTRY_MIN_HITS = 2;
+const MAX_HOT_ENTRY_TRACKING = 512;
+const PROFILE_MEMORY_TTL_MS = 120_000;
+const MAX_PROFILE_MEMORY_ENTRIES = 64;
+const MAX_DNS_MESSAGE_BYTES = 4096;
+const MAX_GET_DNS_PARAM_CHARS = 5464; // base64url size for a 4 KiB DNS message
+const MAX_REQUEST_URL_CHARS = 8192;
+const MAX_ADDITIONAL_RECORDS = 16;
+const STALE_CLIENT_TTL = 15;
+const CACHE_KEY_VERSION = 'v3';
 
 // ─── Default profile (built-in, no KV dependency) ────────────────────────────
 
 const DEFAULT_PROFILE = {
   name: 'default',
+  revision: 1,
   upstreams: ['cf', 'google', 'quad9'],
+  hedgeDelays: DEFAULT_HEDGE_DELAYS_MS,
   privateRules: [],
   cachePolicy: {
-    minTtl: 60,
+    minTtl: 0,
     maxTtl: 86400,
     defaultTtl: 300,
-    prefetchRatio: 0.75,     // trigger background refresh when age / ttl exceeds this
+    prefetchRatio: 0.85,     // trigger background refresh when age / ttl exceeds this
     staleIfErrorWindow: 120, // seconds beyond ttl that stale cache may still be served on error
   },
 };
+
+const PUBLIC_PROFILE = Object.freeze({
+  ...DEFAULT_PROFILE,
+  name: 'public',
+  upstreams: Object.freeze(['cf']),
+  hedgeDelays: Object.freeze([0]),
+});
+
+// Best-effort isolate-local coordination. These maps are deliberately bounded
+// or short-lived; correctness never depends on state surviving isolate churn.
+const inflightQueries = new Map();
+const hotCacheEntries = new Map();
+const profileMemoryCache = new Map();
+const inflightProfileLoads = new Map();
 
 // ─── Static response headers ──────────────────────────────────────────────────
 
 const CORS_HEADERS = Object.freeze({
   'access-control-allow-origin': '*',
   'access-control-allow-methods': 'GET, POST, OPTIONS',
-  'access-control-allow-headers': 'content-type, accept',
+  'access-control-allow-headers': 'content-type, accept, authorization',
   'access-control-max-age': '86400',
 });
 
@@ -73,6 +103,9 @@ const FLAG_QR = 0x8000; // Query/Response
 const FLAG_AA = 0x0400; // Authoritative Answer
 const FLAG_RD = 0x0100; // Recursion Desired (inherited from query)
 const FLAG_RA = 0x0080; // Recursion Available
+const FLAG_AD = 0x0020; // Authentic Data
+const FLAG_CD = 0x0010; // Checking Disabled
+const EDNS_FLAG_DO = 0x8000; // DNSSEC OK in OPT flags
 
 // ─── DNS wire-format utilities ────────────────────────────────────────────────
 
@@ -85,13 +118,21 @@ const FLAG_RA = 0x0080; // Recursion Available
  * @returns {number}
  */
 function skipName(view, off) {
+  const start = off;
   while (off < view.byteLength) {
     const b = view.getUint8(off);
     if (b === 0) return off + 1;           // root label — end of name
-    if ((b & 0xc0) === 0xc0) return off + 2; // compression pointer — two bytes total
+    if ((b & 0xc0) === 0xc0) {
+      if (off + 1 >= view.byteLength) throw new Error('truncated DNS compression pointer');
+      const pointer = ((b & 0x3f) << 8) | view.getUint8(off + 1);
+      if (pointer >= view.byteLength) throw new Error('DNS compression pointer out of bounds');
+      return off + 2;
+    }
+    if ((b & 0xc0) !== 0 || b > 63) throw new Error('invalid DNS label');
     off += 1 + b;                           // normal label — skip length + content
+    if (off > view.byteLength || off - start > 255) throw new Error('invalid DNS name length');
   }
-  return off;
+  throw new Error('unterminated DNS name');
 }
 
 /**
@@ -112,8 +153,12 @@ function readName(view, off) {
   const labels = [];
   let endOff = -1; // wire-level end (set on first pointer jump)
   let hops = 0;    // pointer-chain depth guard
+  let wireLength = 1;
+  const visited = new Set();
 
-  while (off < view.byteLength && hops < 16) {
+  while (off < view.byteLength && hops < 32) {
+    if (visited.has(off)) throw new Error('DNS compression pointer loop');
+    visited.add(off);
     const len = view.getUint8(off);
 
     if (len === 0) {
@@ -122,59 +167,200 @@ function readName(view, off) {
     }
 
     if ((len & 0xc0) === 0xc0) {
+      if (off + 1 >= view.byteLength) throw new Error('truncated DNS compression pointer');
       if (endOff < 0) endOff = off + 2; // record where wire parsing should resume
       off = ((len & 0x3f) << 8) | view.getUint8(off + 1);
+      if (off >= view.byteLength) throw new Error('DNS compression pointer out of bounds');
       hops++;
       continue;
     }
 
+    if ((len & 0xc0) !== 0 || len > 63) throw new Error('invalid DNS label');
+    if (off + 1 + len > view.byteLength) throw new Error('truncated DNS label');
     off += 1;
     let label = '';
     for (let i = 0; i < len; i++) label += String.fromCharCode(view.getUint8(off + i));
     labels.push(label);
     off += len;
+    wireLength += len + 1;
+    if (wireLength > 255) throw new Error('DNS name exceeds 255 wire bytes');
   }
 
-  if (endOff < 0) endOff = off; // no pointer encountered
+  if (hops >= 32 || off >= view.byteLength) throw new Error('unterminated DNS name');
+  if (endOff < 0) endOff = off + 1; // no pointer encountered
 
   return { name: labels.join('.').toLowerCase(), endOff };
 }
 
+function nameFieldUsesCompression(view, off) {
+  while (off < view.byteLength) {
+    const len = view.getUint8(off);
+    if ((len & 0xc0) === 0xc0) return true;
+    if (len === 0) return false;
+    off += 1 + len;
+  }
+  throw new Error('unterminated DNS name');
+}
+
+function skipQuestions(view, count) {
+  let off = 12;
+  for (let i = 0; i < count; i++) {
+    off = skipName(view, off);
+    if (off + 4 > view.byteLength) throw new Error('truncated DNS question');
+    off += 4;
+  }
+  return off;
+}
+
 /**
- * Extract the minimum TTL from a DNS response, ignoring OPT records (type 41)
- * and zero-TTL records (which must not be cached).
- *
- * @param {ArrayBuffer} buf   raw DNS response bytes
- * @param {object}      policy  cachePolicy from the active profile
- * @returns {number}  TTL in seconds, clamped to [minTtl, maxTtl]
+ * Walk all resource records and expose the offsets needed for TTL handling.
+ * Throws if any record is truncated or malformed.
  */
-function extractMinTTL(buf, policy) {
+function walkResourceRecords(buf, visitor) {
+  const view = new DataView(buf);
+  if (buf.byteLength < 12) throw new Error('truncated DNS header');
+
+  const counts = [view.getUint16(6), view.getUint16(8), view.getUint16(10)];
+  let off = skipQuestions(view, view.getUint16(4));
+
+  for (let section = 0; section < counts.length; section++) {
+    for (let i = 0; i < counts[section]; i++) {
+      const nameOff = off;
+      off = skipName(view, off);
+      if (off + 10 > view.byteLength) throw new Error('truncated DNS resource record');
+      const type = view.getUint16(off);
+      const ttlOff = off + 4;
+      const ttl = view.getUint32(ttlOff);
+      const rdlength = view.getUint16(off + 8);
+      const rdataOff = off + 10;
+      const endOff = rdataOff + rdlength;
+      if (endOff > view.byteLength) throw new Error('truncated DNS RDATA');
+      visitor({ view, section, nameOff, type, ttlOff, ttl, rdataOff, rdlength, endOff });
+      off = endOff;
+    }
+  }
+
+  if (off !== view.byteLength) throw new Error('unexpected trailing DNS bytes');
+}
+
+/**
+ * RFC 2308 negative cache TTL is min(SOA RR TTL, SOA.MINIMUM).
+ */
+function readSoaNegativeTTL(record) {
+  const { view, rdataOff, endOff, ttl } = record;
+  let off = skipName(view, rdataOff);
+  off = skipName(view, off);
+  if (off + 20 !== endOff) throw new Error('malformed SOA RDATA');
+  const minimum = view.getUint32(off + 16);
+  return Math.min(ttl, minimum);
+}
+
+function analyzeResponseTtls(buf) {
+  const view = new DataView(buf);
+  if (buf.byteLength < 12 || view.getUint16(4) !== 1) {
+    throw new Error('response must contain exactly one question');
+  }
+  const questionEnd = skipName(view, 12);
+  if (questionEnd + 4 > buf.byteLength) throw new Error('truncated response question');
+
+  const requestedType = view.getUint16(questionEnd);
+  const rcode = view.getUint16(2) & 0x000f;
+  const answerCount = view.getUint16(6);
+  let minTtl = Infinity;
+  let negativeTtl = null;
+  let hasRequestedAnswer = false;
+
+  walkResourceRecords(buf, record => {
+    if (record.type === 41) return; // OPT TTL field contains EDNS metadata
+    minTtl = Math.min(minTtl, record.ttl);
+    if (record.section === 0 &&
+        (record.type === requestedType || requestedType === 255)) {
+      hasRequestedAnswer = true;
+    }
+    if (record.section === 1 && record.type === 6) {
+      negativeTtl = Math.min(negativeTtl ?? Infinity, readSoaNegativeTTL(record));
+    }
+  });
+
+  const isNegative = rcode === 3 ||
+    (rcode === 0 &&
+      (answerCount === 0 || (!hasRequestedAnswer && negativeTtl !== null)));
+  return { isNegative, minTtl, negativeTtl };
+}
+
+/**
+ * Determine how long the Worker may cache a validated DNS response.
+ * Positive answers use the lowest RR TTL. NXDOMAIN and NODATA use the
+ * Authority SOA according to RFC 2308.
+ */
+function extractCacheTTL(buf, policy) {
   const { minTtl, maxTtl, defaultTtl } = policy;
   try {
-    const v = new DataView(buf);
-    if (buf.byteLength < 12) return defaultTtl;
-
-    const qdcount = v.getUint16(4);
-    const rrcount = v.getUint16(6) + v.getUint16(8) + v.getUint16(10);
-    if (rrcount === 0) return defaultTtl;
-
-    let off = 12;
-    for (let i = 0; i < qdcount; i++) { off = skipName(v, off); off += 4; }
-
-    let min = maxTtl;
-    for (let i = 0; i < rrcount && off + 10 <= buf.byteLength; i++) {
-      off = skipName(v, off);
-      const type = v.getUint16(off);
-      off += 4;
-      const ttl = v.getUint32(off);
-      off += 4;
-      off += 2 + v.getUint16(off);
-      if (type !== 41 && ttl > 0 && ttl < min) min = ttl;
-    }
-    return Math.max(minTtl, Math.min(min, maxTtl));
+    const analysis = analyzeResponseTtls(buf);
+    // RFC 2308 provides no negative lifetime without an Authority SOA.
+    // Fail closed instead of inventing a five-minute negative cache entry.
+    const raw = analysis.isNegative
+      ? (analysis.negativeTtl ?? 0)
+      : (analysis.minTtl === Infinity ? defaultTtl : analysis.minTtl);
+    if (raw <= 0) return 0;
+    return Math.max(minTtl, Math.min(raw, maxTtl));
   } catch {
-    return defaultTtl;
+    return 0; // validation/parsing failures must never enter cache
   }
+}
+
+/**
+ * Copy a cached DNS response, restore the current transaction ID, and update
+ * every ordinary RR TTL. OPT's TTL field is EDNS metadata and is untouched.
+ */
+function prepareCachedDnsResponse(
+  buf,
+  transactionId,
+  ageSeconds,
+  stale = false,
+  cacheTtl = Infinity,
+  queryBuf = null,
+  copy = true,
+) {
+  const out = copy ? buf.slice(0) : buf;
+  const view = new DataView(out);
+  if (out.byteLength < 12) throw new Error('truncated cached DNS response');
+  view.setUint16(0, transactionId);
+
+  if (queryBuf) {
+    const queryView = new DataView(queryBuf);
+    if (nameFieldUsesCompression(view, 12) || nameFieldUsesCompression(queryView, 12)) {
+      throw new Error('compressed DNS question is not safe to rewrite');
+    }
+    const cachedQuestionEnd = skipName(view, 12) + 4;
+    const currentQuestionEnd = skipName(queryView, 12) + 4;
+    if (cachedQuestionEnd !== currentQuestionEnd ||
+        cachedQuestionEnd > out.byteLength ||
+        currentQuestionEnd > queryBuf.byteLength) {
+      throw new Error('cached DNS question layout mismatch');
+    }
+    new Uint8Array(out).set(
+      new Uint8Array(queryBuf, 12, currentQuestionEnd - 12),
+      12,
+    );
+  }
+
+  const negative = analyzeResponseTtls(out).isNegative;
+
+  walkResourceRecords(out, record => {
+    if (record.type === 41) return;
+    let ttl = stale
+      ? Math.min(record.ttl, STALE_CLIENT_TTL)
+      : Math.max(0, record.ttl - ageSeconds);
+    // A negative answer's effective lifetime is min(SOA TTL, SOA.MINIMUM).
+    // Cap the cached Authority SOA at the Worker's remaining RFC 2308 TTL so
+    // an unchanged MINIMUM field cannot extend negative caching on every hit.
+    if (!stale && negative && record.section === 1 && record.type === 6) {
+      ttl = Math.min(ttl, Math.max(0, cacheTtl - ageSeconds));
+    }
+    record.view.setUint32(record.ttlOff, ttl);
+  });
+  return out;
 }
 
 /**
@@ -185,18 +371,20 @@ function extractMinTTL(buf, policy) {
  * or a POST body.  Returns null if the message is too short or malformed.
  *
  * @param {ArrayBuffer} buf   raw DNS message bytes
- * @returns {{ id: number, flags: number, qname: string, qtype: number, qclass: number, hasECS: boolean } | null}
+ * @returns {{ id: number, flags: number, qname: string, qtype: number, qclass: number, hasECS: boolean, dnssecOk: boolean, recursionDesired: boolean, authenticData: boolean, checkingDisabled: boolean, hasUnknownEdnsOption: boolean } | null}
  */
 function parseQuestion(buf) {
   try {
     const v = new DataView(buf);
-    if (buf.byteLength < 12) return null;
+    if (buf.byteLength < 12 || buf.byteLength > MAX_DNS_MESSAGE_BYTES) return null;
 
     const id    = v.getUint16(0);
     const flags = v.getUint16(2);
+    if ((flags & FLAG_QR) !== 0 || (flags & 0x7800) !== 0) return null;
 
     const qdcount = v.getUint16(4);
     if (qdcount !== 1) return null; // reject empty or multi-question queries
+    if (v.getUint16(6) !== 0 || v.getUint16(8) !== 0) return null;
 
     // Single-pass: readName returns both the string and the end offset,
     // eliminating the redundant skipName traversal.
@@ -208,36 +396,59 @@ function parseQuestion(buf) {
 
     // Detect ECS in-line instead of re-scanning via hasECS()
     let ecs = false;
-    const ancount = v.getUint16(6);
-    const nscount = v.getUint16(8);
+    let dnssecOk = false;
+    let unknownEdnsOption = false;
+    let optCount = 0;
     const arcount = v.getUint16(10);
+    if (arcount > MAX_ADDITIONAL_RECORDS) return null;
     let scanOff = endOff + 4; // past question section
-    // Skip answer + authority sections
-    for (let i = 0; i < ancount + nscount && scanOff + 10 <= buf.byteLength; i++) {
-      scanOff = skipName(v, scanOff);
-      scanOff += 8; // TYPE + CLASS + TTL
-      scanOff += 2 + v.getUint16(scanOff); // RDLENGTH + RDATA
-    }
     // Scan additional section for OPT with ECS
-    for (let i = 0; i < arcount && scanOff < buf.byteLength; i++) {
+    for (let i = 0; i < arcount; i++) {
+      const nameStart = scanOff;
       scanOff = skipName(v, scanOff);
+      if (scanOff + 10 > buf.byteLength) return null;
       const rtype = v.getUint16(scanOff);
-      scanOff += 8;
-      const rdlen = v.getUint16(scanOff);
-      scanOff += 2;
+      const ttl = v.getUint32(scanOff + 4);
+      const rdlen = v.getUint16(scanOff + 8);
+      scanOff += 10;
+      const rend = scanOff + rdlen;
+      if (rend > buf.byteLength) return null;
       if (rtype === 41) {
-        const rend = scanOff + rdlen;
+        optCount++;
+        if (optCount > 1 || v.getUint8(nameStart) !== 0 || (ttl >>> 16) !== 0) return null;
+        dnssecOk ||= (ttl & EDNS_FLAG_DO) !== 0;
+        if ((ttl & 0x7fff) !== 0) unknownEdnsOption = true;
         while (scanOff + 4 <= rend) {
-          if (v.getUint16(scanOff) === 8) { ecs = true; break; }
-          scanOff += 4 + v.getUint16(scanOff + 2);
+          const optionCode = v.getUint16(scanOff);
+          const optionLength = v.getUint16(scanOff + 2);
+          scanOff += 4;
+          if (scanOff + optionLength > rend) return null;
+          if (optionCode === 8) ecs = true;
+          // Padding does not change DNS semantics; all other options are
+          // conservatively uncacheable until represented in the cache key.
+          else if (optionCode !== 12) unknownEdnsOption = true;
+          scanOff += optionLength;
         }
-        if (ecs) break;
-      } else {
-        scanOff += rdlen;
-      }
+        if (scanOff !== rend) return null;
+      } else unknownEdnsOption = true; // additional data is not represented in the cache key
+      scanOff = rend;
     }
+    if (scanOff !== buf.byteLength) return null;
 
-    return { id, flags, qname, qtype, qclass, hasECS: ecs };
+    return {
+      id,
+      flags,
+      qname,
+      qtype,
+      qclass,
+      compressedQuestion: nameFieldUsesCompression(v, 12),
+      hasECS: ecs,
+      dnssecOk,
+      recursionDesired: (flags & FLAG_RD) !== 0,
+      authenticData: (flags & FLAG_AD) !== 0,
+      checkingDisabled: (flags & FLAG_CD) !== 0,
+      hasUnknownEdnsOption: unknownEdnsOption,
+    };
   } catch {
     return null;
   }
@@ -267,19 +478,69 @@ function decodeGetPayload(encoded) {
 
 // ─── KV profile + rule loading ────────────────────────────────────────────────
 
+function boundedNumber(value, fallback, min, max) {
+  return Number.isFinite(value) ? Math.min(max, Math.max(min, value)) : fallback;
+}
+
+function normalizeCachePolicy(policy) {
+  const source = policy && typeof policy === 'object' ? policy : {};
+  const maxTtl = Math.floor(
+    boundedNumber(source.maxTtl, DEFAULT_PROFILE.cachePolicy.maxTtl, 0, 604800),
+  );
+  return {
+    minTtl: Math.floor(
+      boundedNumber(source.minTtl, DEFAULT_PROFILE.cachePolicy.minTtl, 0, maxTtl),
+    ),
+    maxTtl,
+    defaultTtl: Math.floor(
+      boundedNumber(source.defaultTtl, DEFAULT_PROFILE.cachePolicy.defaultTtl, 0, maxTtl),
+    ),
+    prefetchRatio: boundedNumber(
+      source.prefetchRatio,
+      DEFAULT_PROFILE.cachePolicy.prefetchRatio,
+      0,
+      1,
+    ),
+    staleIfErrorWindow: Math.floor(
+      boundedNumber(
+        source.staleIfErrorWindow,
+        DEFAULT_PROFILE.cachePolicy.staleIfErrorWindow,
+        0,
+        3600,
+      ),
+    ),
+  };
+}
+
+function normalizeHedgeDelays(delays, count) {
+  const source = Array.isArray(delays) ? delays : DEFAULT_HEDGE_DELAYS_MS;
+  const normalized = [];
+  let previous = 0;
+  for (let i = 0; i < count; i++) {
+    const fallback = DEFAULT_HEDGE_DELAYS_MS[i] ??
+      DEFAULT_HEDGE_DELAYS_MS[DEFAULT_HEDGE_DELAYS_MS.length - 1];
+    const delay = i === 0
+      ? 0
+      : Math.floor(boundedNumber(source[i], fallback, previous, UPSTREAM_TIMEOUT_MS - 1));
+    normalized.push(delay);
+    previous = delay;
+  }
+  return normalized;
+}
+
 /**
  * Load the profile and private rules for a given token from Cloudflare KV.
  * Returns null if the token does not exist in KV (caller should respond 403).
  *
  * KV key schema:
- *   "profile:<token>"  →  { name, upstreams, cachePolicy }
+ *   "profile:<token>"  →  { name, revision, upstreams, hedgeDelays, cachePolicy }
  *   "rules:<token>"    →  { privateRules: [...] }
  *
  * @param {KVNamespace} kv
  * @param {string}      token
  * @returns {Promise<object | null>}
  */
-async function loadProfile(kv, token) {
+async function fetchProfileFromKv(kv, token) {
   // cacheTtl: edge-cache KV results for 300s to avoid repeated origin reads.
   // After updating rules via wrangler, changes propagate within this window.
   const kvOpts = { type: 'json', cacheTtl: 300 };
@@ -291,18 +552,59 @@ async function loadProfile(kv, token) {
 
   if (profile === null) return null; // unknown token
 
+  const configuredUpstreams = Array.isArray(profile.upstreams)
+    ? profile.upstreams.filter(key => Object.hasOwn(UPSTREAM_URLS, key))
+    : [];
+  const upstreams = configuredUpstreams.length > 0
+    ? configuredUpstreams
+    : DEFAULT_PROFILE.upstreams;
+
   // Normalize profile: ensure required fields exist with safe defaults
   return {
     name: profile.name || token,
-    upstreams: Array.isArray(profile.upstreams) && profile.upstreams.length > 0
-      ? profile.upstreams
-      : DEFAULT_PROFILE.upstreams,
-    cachePolicy: {
-      ...DEFAULT_PROFILE.cachePolicy,
-      ...(profile.cachePolicy && typeof profile.cachePolicy === 'object' ? profile.cachePolicy : {}),
-    },
+    revision: Number.isSafeInteger(profile.revision) && profile.revision >= 0
+      ? profile.revision
+      : DEFAULT_PROFILE.revision,
+    upstreams,
+    hedgeDelays: normalizeHedgeDelays(profile.hedgeDelays, upstreams.length),
+    cachePolicy: normalizeCachePolicy(profile.cachePolicy),
     privateRules: Array.isArray(rules?.privateRules) ? rules.privateRules : [],
   };
+}
+
+async function loadProfile(kv, token) {
+  const now = Date.now();
+  const cached = profileMemoryCache.get(token);
+  if (cached && cached.expiresAt > now) {
+    profileMemoryCache.delete(token);
+    profileMemoryCache.set(token, cached);
+    return cached.profile;
+  }
+  if (cached) profileMemoryCache.delete(token);
+
+  const existing = inflightProfileLoads.get(token);
+  if (existing) return existing;
+
+  const load = fetchProfileFromKv(kv, token)
+    .then(profile => {
+      // Do not cache unknown tokens: random scans must not fill isolate memory.
+      if (profile) {
+        profileMemoryCache.set(token, {
+          profile,
+          expiresAt: Date.now() + PROFILE_MEMORY_TTL_MS,
+        });
+        if (profileMemoryCache.size > MAX_PROFILE_MEMORY_ENTRIES) {
+          profileMemoryCache.delete(profileMemoryCache.keys().next().value);
+        }
+      }
+      return profile;
+    })
+    .finally(() => {
+      if (inflightProfileLoads.get(token) === load) inflightProfileLoads.delete(token);
+    });
+
+  inflightProfileLoads.set(token, load);
+  return load;
 }
 
 // ─── Private rule matching ────────────────────────────────────────────────────
@@ -486,26 +788,34 @@ function synthesizeDNSResponse(queryBuf, question, rule) {
  * Build a semantic cache key that is stable across DNS transaction ID changes.
  *
  * Key format (URL-encoded path):
- *   /ck/<profileName>|<qname>|<qtype>|<qclass>|<ecs>|v1
+ *   /ck/v3/<token>/<revision>/<qname>/<qtype>/<qclass>/<do>/<rd>/<ad>/<cd>
  *
  * Using a GET Request object satisfies the Cache API, which requires a Request
  * or URL as the key argument.
  *
  * @param {string}       origin    request origin (e.g. "https://worker.example.com")
  * @param {string|null}  token     private token, or null for the public path
+ * @param {object}       profile   active profile
  * @param {object}       question  result of parseQuestion()
  * @returns {Request}
  */
-function buildCacheKey(origin, token, question) {
-  const semantic = [
+function buildCacheKey(origin, token, profile, question) {
+  const components = [
+    CACHE_KEY_VERSION,
     token ?? '__public__',
+    profile.revision,
     question.qname,
     question.qtype,
     question.qclass,
-    question.hasECS ? '1' : '0',
-    'v1',
-  ].join('|');
-  return new Request(`${origin}/ck/${encodeURIComponent(semantic)}`, { method: 'GET' });
+    question.dnssecOk ? '1' : '0',
+    question.recursionDesired ? '1' : '0',
+    question.authenticData ? '1' : '0',
+    question.checkingDisabled ? '1' : '0',
+  ];
+  const path = components
+    .map(component => encodeURIComponent(String(component)))
+    .join('/');
+  return new Request(`${origin}/ck/${path}`, { method: 'GET' });
 }
 
 // ─── Cache response helpers ───────────────────────────────────────────────────
@@ -541,19 +851,33 @@ function makeCacheableResponse(buf, ttl, staleIfErrorWindow = 120) {
  *
  * @param {Response} cached      stored Cache API entry
  * @param {string}   cacheStatus "HIT" | "STALE"
- * @returns {Response}
+ * @param {number}   transactionId current query ID
+ * @param {ArrayBuffer} queryBuf current raw DNS query
+ * @returns {Promise<Response>}
  */
-function buildCacheHitResponse(cached, cacheStatus) {
+async function buildCacheHitResponse(cached, cacheStatus, transactionId, queryBuf) {
   const ts        = parseInt(cached.headers.get('x-cache-ts')  || '0', 10);
   const origTtl   = parseInt(cached.headers.get('x-cache-ttl') || '300', 10);
-  const ageSeconds = Math.floor((Date.now() - ts) / 1000);
+  const ageSeconds = Math.max(0, Math.floor((Date.now() - ts) / 1000));
   const remaining  = Math.max(0, origTtl - ageSeconds);
+  const stale = cacheStatus === 'STALE';
+  const buf = await cached.arrayBuffer();
+  const dnsResponse = prepareCachedDnsResponse(
+    buf,
+    transactionId,
+    ageSeconds,
+    stale,
+    origTtl,
+    queryBuf,
+    false,
+  );
+  const clientTtl = stale ? STALE_CLIENT_TTL : remaining;
 
-  return new Response(cached.body, {
+  return new Response(dnsResponse, {
     status: 200,
     headers: {
       'content-type':   DNS_CONTENT_TYPE,
-      'cache-control':  `public, max-age=${remaining}`,
+      'cache-control':  `public, max-age=${clientTtl}`,
       'age':            String(ageSeconds),
       'x-cache':        cacheStatus,
       ...COMMON_HEADERS,
@@ -597,25 +921,82 @@ function errorResponse(status, message) {
 
 // ─── Multi-upstream racing ────────────────────────────────────────────────────
 
+function validateDnsResponse(buf, question) {
+  const view = new DataView(buf);
+  if (buf.byteLength < 12 || buf.byteLength > 65535) throw new Error('invalid DNS response size');
+
+  const flags = view.getUint16(2);
+  const rcode = flags & 0x000f;
+  if ((flags & FLAG_QR) === 0) throw new Error('upstream returned a DNS query');
+  if ((flags & 0x0200) !== 0) throw new Error('truncated DNS response');
+  if (view.getUint16(0) !== question.id) throw new Error('DNS transaction ID mismatch');
+  if (view.getUint16(4) !== 1) throw new Error('unexpected DNS question count');
+  if (rcode !== 0 && rcode !== 3) throw new Error(`unacceptable DNS RCODE ${rcode}`);
+
+  const { name, endOff } = readName(view, 12);
+  if (nameFieldUsesCompression(view, 12)) {
+    throw new Error('compressed upstream response question');
+  }
+  if (endOff + 4 > buf.byteLength) throw new Error('truncated response question');
+  if (name !== question.qname ||
+      view.getUint16(endOff) !== question.qtype ||
+      view.getUint16(endOff + 2) !== question.qclass) {
+    throw new Error('DNS response question mismatch');
+  }
+
+  let extendedRcode = 0;
+  let optCount = 0;
+  walkResourceRecords(buf, record => {
+    if (record.type === 41) {
+      optCount++;
+      if (optCount > 1 ||
+          record.section !== 2 ||
+          record.view.getUint8(record.nameOff) !== 0 ||
+          record.view.getUint8(record.ttlOff + 1) !== 0) {
+        throw new Error('malformed upstream OPT record');
+      }
+      extendedRcode = record.view.getUint8(record.ttlOff);
+    }
+  });
+  if (extendedRcode !== 0) throw new Error(`unacceptable extended DNS RCODE ${extendedRcode}`);
+  return buf;
+}
+
 /**
  * Dispatch a DoH request to multiple upstreams simultaneously.
- * The first successful response cancels all remaining in-flight requests.
+ * The first fully read and validated response cancels all remaining requests.
  * A shared timeout aborts everything if no upstream replies in time.
  *
  * @param {string[]}     upstreamKeys   ordered list of keys into UPSTREAM_URLS
  * @param {string}       method         "GET" or "POST"
  * @param {ArrayBuffer|null} body       POST body (null for GET)
  * @param {string}       search         raw query string including "?"
- * @returns {Promise<Response | null>}
+ * @param {object}       question       parsed request question
+ * @param {number[]}     hedgeDelays    absolute start delay per upstream
+ * @returns {Promise<ArrayBuffer | null>}
  */
-async function raceFetch(upstreamKeys, method, body, search) {
+async function raceFetch(
+  upstreamKeys,
+  method,
+  body,
+  search,
+  question,
+  hedgeDelays = DEFAULT_HEDGE_DELAYS_MS,
+) {
   const controllers = upstreamKeys.map(() => new AbortController());
   const timer = setTimeout(
     () => controllers.forEach(c => c.abort()),
     UPSTREAM_TIMEOUT_MS,
   );
 
-  const promises = upstreamKeys.map((key, idx) => {
+  const promises = upstreamKeys.map(async (key, idx) => {
+    const hedgeDelay = hedgeDelays[idx] ?? DEFAULT_HEDGE_DELAYS_MS[idx] ?? 80;
+    if (hedgeDelay > 0) {
+      await new Promise(resolve => setTimeout(resolve, hedgeDelay));
+    }
+    if (controllers[idx].signal.aborted) {
+      throw new Error(`upstream ${key} hedge was cancelled before dispatch`);
+    }
     const url     = UPSTREAM_URLS[key];
     const target  = method === 'GET' ? url + search : url;
     const headers = { accept: DNS_CONTENT_TYPE };
@@ -626,10 +1007,13 @@ async function raceFetch(upstreamKeys, method, body, search) {
       headers,
       body:   method === 'POST' ? body : null,
       signal: controllers[idx].signal,
-    }).then(res => {
+    }).then(async res => {
       if (!res.ok) throw new Error(`upstream ${key} returned ${res.status}`);
+      const contentType = (res.headers.get('content-type') || '').split(';', 1)[0].trim().toLowerCase();
+      if (contentType !== DNS_CONTENT_TYPE) throw new Error(`upstream ${key} returned invalid content type`);
+      const buf = validateDnsResponse(await res.arrayBuffer(), question);
       controllers.forEach((c, i) => { if (i !== idx) c.abort(); }); // cancel losers
-      return res;
+      return buf;
     });
   });
 
@@ -642,27 +1026,107 @@ async function raceFetch(upstreamKeys, method, body, search) {
   }
 }
 
-// ─── Background prefetch ──────────────────────────────────────────────────────
+// ─── Singleflight refresh + hot-entry tracking ───────────────────────────────
+
+function releaseInflight(key, entry) {
+  if (inflightQueries.get(key) === entry) inflightQueries.delete(key);
+}
 
 /**
- * Silently refresh a cache entry in the background.
- * Called via ctx.waitUntil() so it does not block the client response.
- *
- * @param {Cache}        cache
- * @param {Request}      key
- * @param {string[]}     upstreamKeys
- * @param {string}       method
- * @param {ArrayBuffer|null} body
- * @param {string}       search
- * @param {object}       cachePolicy
+ * Fetch and optionally populate one semantic cache entry. Concurrent foreground
+ * misses and prefetches in the same isolate share the same result promise.
  */
-async function prefetch(cache, key, upstreamKeys, method, body, search, cachePolicy) {
-  try {
-    const res = await raceFetch(upstreamKeys, method, body, search);
-    if (!res) return;
-    const buf = await res.arrayBuffer();
-    await cache.put(key, makeCacheableResponse(buf, extractMinTTL(buf, cachePolicy), cachePolicy.staleIfErrorWindow));
-  } catch { /* silent — prefetch failure is non-fatal */ }
+function refreshDns({
+  cache,
+  cacheKey,
+  profile,
+  method,
+  body,
+  search,
+  question,
+  ctx,
+}) {
+  if (!cacheKey) {
+    return raceFetch(
+      profile.upstreams,
+      method,
+      body,
+      search,
+      question,
+      profile.hedgeDelays,
+    ).then(buf => ({
+      buf,
+      ttl: buf ? extractCacheTTL(buf, profile.cachePolicy) : 0,
+    }));
+  }
+
+  const inflightKey = cacheKey.url;
+  const existing = inflightQueries.get(inflightKey);
+  if (existing) return existing.result;
+
+  const entry = {};
+  entry.result = (async () => {
+    try {
+      const buf = await raceFetch(
+        profile.upstreams,
+        method,
+        body,
+        search,
+        question,
+        profile.hedgeDelays,
+      );
+      if (!buf) {
+        releaseInflight(inflightKey, entry);
+        return { buf: null, ttl: 0 };
+      }
+
+      const ttl = extractCacheTTL(buf, profile.cachePolicy);
+      if (ttl <= 0) {
+        releaseInflight(inflightKey, entry);
+        return { buf, ttl };
+      }
+
+      let cacheWrite;
+      try {
+        cacheWrite = cache.put(
+          cacheKey,
+          makeCacheableResponse(buf, ttl, profile.cachePolicy.staleIfErrorWindow),
+        );
+      } catch {
+        releaseInflight(inflightKey, entry);
+        return { buf, ttl };
+      }
+
+      const completion = Promise.resolve(cacheWrite)
+        .catch(() => {})
+        .finally(() => releaseInflight(inflightKey, entry));
+      ctx.waitUntil(completion);
+      return { buf, ttl };
+    } catch {
+      releaseInflight(inflightKey, entry);
+      return { buf: null, ttl: 0 };
+    }
+  })();
+
+  inflightQueries.set(inflightKey, entry);
+  return entry.result;
+}
+
+function recordCacheHit(cacheKey) {
+  const key = cacheKey.url;
+  const now = Date.now();
+  const previous = hotCacheEntries.get(key);
+  const count = previous && now - previous.lastHit <= HOT_ENTRY_WINDOW_MS
+    ? previous.count + 1
+    : 1;
+
+  // Refresh insertion order so the first key remains the least recently used.
+  hotCacheEntries.delete(key);
+  hotCacheEntries.set(key, { count, lastHit: now });
+  if (hotCacheEntries.size > MAX_HOT_ENTRY_TRACKING) {
+    hotCacheEntries.delete(hotCacheEntries.keys().next().value);
+  }
+  return count >= HOT_ENTRY_MIN_HITS;
 }
 
 // ─── Main fetch handler ───────────────────────────────────────────────────────
@@ -685,47 +1149,95 @@ export default {
     if (method !== 'GET' && method !== 'POST') {
       return new Response(null, { status: 405, headers: { allow: 'GET, POST, OPTIONS' } });
     }
+    if (request.url.length > MAX_REQUEST_URL_CHARS) {
+      return errorResponse(414, 'Request URL is too long');
+    }
 
     // ── Path routing — extract optional token ────────────────────────────────
-    // Accepted paths: /dns-query  or  /dns-query/<token>
-    const pathMatch = url.pathname.match(/^\/dns-query(?:\/([^/]+))?$/);
+    // Preferred: Authorization: Bearer <token>. The path form remains for DoH
+    // clients that cannot set custom headers.
+    const pathMatch = url.pathname.match(/^\/dns-query(?:\/([A-Za-z0-9._~-]+))?$/);
     if (!pathMatch) return errorResponse(404, 'Not found');
 
-    const token = pathMatch[1] ?? null; // undefined → null for clarity
+    const pathToken = pathMatch[1] ?? null;
+    const authorization = request.headers.get('authorization') || '';
+    const bearerMatch = authorization.match(/^Bearer ([A-Za-z0-9._~-]+)$/i);
+    if (authorization && !bearerMatch) return errorResponse(400, 'Invalid Authorization header');
+    const headerToken = bearerMatch?.[1] ?? null;
+    if (pathToken && headerToken && pathToken !== headerToken) {
+      return errorResponse(400, 'Conflicting authentication tokens');
+    }
+    const token = headerToken ?? pathToken;
 
-    // ── Profile resolution ───────────────────────────────────────────────────
-    let profile;
-    if (token === null) {
-      profile = DEFAULT_PROFILE;
-    } else {
-      const loaded = await loadProfile(env.DOH_KV, token);
-      if (loaded === null) return errorResponse(403, 'Unknown token');
-      profile = loaded;
+    if (token === null &&
+        String(env.ALLOW_PUBLIC_DOH || '').toLowerCase() !== 'true') {
+      return errorResponse(403, 'Public DoH is disabled');
     }
 
     // ── Read DNS payload ─────────────────────────────────────────────────────
     let dnsBuf; // ArrayBuffer containing the raw DNS query message
-    const search = url.search;
+    let search = '';
 
     if (method === 'GET') {
       const dnsParam = url.searchParams.get('dns');
       if (!dnsParam) return errorResponse(400, 'Missing "dns" query parameter');
+      if (dnsParam.length > MAX_GET_DNS_PARAM_CHARS) {
+        return errorResponse(413, 'DNS query is too large');
+      }
       dnsBuf = decodeGetPayload(dnsParam);
       if (!dnsBuf) return errorResponse(400, 'Invalid base64url in "dns" parameter');
+      search = `?dns=${encodeURIComponent(dnsParam)}`;
     } else {
+      const contentType = (request.headers.get('content-type') || '').split(';', 1)[0].trim().toLowerCase();
+      if (contentType !== DNS_CONTENT_TYPE) {
+        return errorResponse(415, `POST requires ${DNS_CONTENT_TYPE}`);
+      }
+      const contentLength = Number(request.headers.get('content-length'));
+      if (Number.isFinite(contentLength) && contentLength > MAX_DNS_MESSAGE_BYTES) {
+        return errorResponse(413, 'DNS query is too large');
+      }
       dnsBuf = await request.arrayBuffer();
     }
+    if (dnsBuf.byteLength > MAX_DNS_MESSAGE_BYTES) return errorResponse(413, 'DNS query is too large');
 
     // ── Parse DNS question ───────────────────────────────────────────────────
     const question = parseQuestion(dnsBuf);
     if (!question) return errorResponse(400, 'Malformed DNS query');
 
+    // Load private KV only after cheap request validation, so oversized or
+    // malformed traffic cannot amplify into KV reads.
+    let profile = token === null ? PUBLIC_PROFILE : DEFAULT_PROFILE;
+    if (token !== null) {
+      if (!env.DOH_KV) return errorResponse(500, 'DOH_KV binding is not configured');
+      const loaded = await loadProfile(env.DOH_KV, token);
+      if (loaded === null) return errorResponse(403, 'Unknown token');
+      profile = loaded;
+    }
+
     const { cachePolicy } = profile;
 
+    // ── Private rule matching ────────────────────────────────────────────────
+    // Rules precede ordinary cache lookup so a newly published rule cannot be
+    // shadowed by an older upstream cache entry.
+    const rule = question.compressedQuestion
+      ? null
+      : matchRule(profile.privateRules, question.qname, question.qtype);
+
+    if (rule) {
+      const synthBuf = synthesizeDNSResponse(dnsBuf, question, rule);
+      if (synthBuf) return buildUpstreamResponse(synthBuf, rule.ttl);
+      // Synthesis failed — fall through to upstream.
+    }
+
     // ── Cache lookup ─────────────────────────────────────────────────────────
-    const cache    = caches.default;
-    const cacheKey = buildCacheKey(url.origin, token, question);
-    const cached   = await cache.match(cacheKey);
+    // ECS and unrepresented EDNS semantics bypass cache completely. This is
+    // safer than allowing distinct client subnets/options to share an answer.
+    const cacheableQuery = !question.compressedQuestion &&
+      !question.hasECS &&
+      !question.hasUnknownEdnsOption;
+    const cache = caches.default;
+    const cacheKey = cacheableQuery ? buildCacheKey(url.origin, token, profile, question) : null;
+    const cached = cacheKey ? await cache.match(cacheKey) : null;
 
     // Evaluate freshness manually so we can distinguish HIT vs STALE.
     // The stored max-age is ttl + staleWindow, so cache.match() returns the
@@ -738,48 +1250,78 @@ export default {
       const age     = (Date.now() - ts) / 1000;
 
       if (age <= origTtl) {
-        // Fresh hit — trigger background refresh if approaching expiry
-        if (age / origTtl >= cachePolicy.prefetchRatio) {
+        const hotEntry = recordCacheHit(cacheKey);
+        const shouldPrefetch = origTtl >= MIN_PREFETCH_TTL &&
+          age / origTtl >= cachePolicy.prefetchRatio &&
+          hotEntry &&
+          !inflightQueries.has(cacheKey.url);
+        if (shouldPrefetch) {
           ctx.waitUntil(
-            prefetch(cache, cacheKey, profile.upstreams, method, dnsBuf, search, cachePolicy),
+            refreshDns({
+              cache,
+              cacheKey,
+              profile,
+              method,
+              body: dnsBuf,
+              search,
+              question,
+              ctx,
+            }).then(() => {}),
           );
         }
-        return buildCacheHitResponse(cached, 'HIT');
+        try {
+          return await buildCacheHitResponse(cached, 'HIT', question.id, dnsBuf);
+        } catch {
+          ctx.waitUntil(cache.delete(cacheKey));
+        }
       }
 
       // Entry is stale — keep it as a fallback for upstream failure
-      staleCandidate = cached;
-    }
-
-    // ── Private rule matching ─────────────────────────────────────────────────
-    const rule = matchRule(profile.privateRules, question.qname, question.qtype);
-
-    if (rule) {
-      const synthBuf = synthesizeDNSResponse(dnsBuf, question, rule);
-      if (synthBuf) {
-        // Cache the synthesized response under its semantic key
-        ctx.waitUntil(cache.put(cacheKey, makeCacheableResponse(synthBuf.slice(0), rule.ttl, cachePolicy.staleIfErrorWindow)));
-        return buildUpstreamResponse(synthBuf, rule.ttl);
-      }
-      // Synthesis failed — fall through to upstream
+      if (age > origTtl) staleCandidate = cached;
     }
 
     // ── Upstream fetch ────────────────────────────────────────────────────────
-    const upstreamRes = await raceFetch(profile.upstreams, method, dnsBuf, search);
+    const { buf: respBuf, ttl } = await refreshDns({
+      cache,
+      cacheKey,
+      profile,
+      method,
+      body: dnsBuf,
+      search,
+      question,
+      ctx,
+    });
 
-    if (!upstreamRes) {
+    if (!respBuf) {
       // All upstreams failed — serve stale cache if available within the error window
-      if (staleCandidate) return buildCacheHitResponse(staleCandidate, 'STALE');
+      if (staleCandidate) {
+        try {
+          return await buildCacheHitResponse(staleCandidate, 'STALE', question.id, dnsBuf);
+        } catch {
+          if (cacheKey) ctx.waitUntil(cache.delete(cacheKey));
+        }
+      }
       return errorResponse(502, 'All upstreams failed and no cached response is available');
     }
 
-    const respBuf = await upstreamRes.arrayBuffer();
-    const ttl     = extractMinTTL(respBuf, cachePolicy);
+    let clientBuf = respBuf;
+    if (cacheKey) {
+      try {
+        // A shared singleflight result carries the leader's DNS identity.
+        // Restore the current request's ID and Question before returning it.
+        clientBuf = prepareCachedDnsResponse(
+          respBuf,
+          question.id,
+          0,
+          false,
+          Infinity,
+          dnsBuf,
+        );
+      } catch {
+        return errorResponse(502, 'Upstream response could not be safely rewritten');
+      }
+    }
 
-    ctx.waitUntil(
-      cache.put(cacheKey, makeCacheableResponse(respBuf.slice(0), ttl, cachePolicy.staleIfErrorWindow)),
-    );
-
-    return buildUpstreamResponse(respBuf, ttl);
+    return buildUpstreamResponse(clientBuf, ttl);
   },
 };

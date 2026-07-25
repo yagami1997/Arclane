@@ -1,10 +1,17 @@
 name               = "doh-fallback-worker"
 main               = "worker.js"
-compatibility_date = "2024-09-23"
+compatibility_date = "2026-03-28"
+
+[vars]
+# Keep false for a private resolver. Set true only when you intentionally want
+# to operate a public DoH endpoint and have deployment-level rate limits.
+ALLOW_PUBLIC_DOH = "false"
 
 # Local deployment template.
 # Copy this file to `wrangler.toml` and replace the placeholder values
 # with your own Cloudflare resource identifiers before deploying.
+# Never commit a real account subdomain, custom resolver route, resource ID,
+# token, or other private deployment metadata to the public repository.
 
 [[kv_namespaces]]
 binding = "DOH_KV"

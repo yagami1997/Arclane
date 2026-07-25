@@ -195,15 +195,29 @@ If you are operating in a regulated environment, under enterprise security contr
 
 ## Changelog
 
-### Latest: May 16, 2026
+### Latest: July 25, 2026
+
+- Hardened the `tools/doh-fallback-worker/` reference implementation with
+  validated hedged upstream requests, transaction-ID and DNS TTL correction on
+  cache hits, RFC 2308 negative caching, semantic cache isolation,
+  isolate-local singleflight, bounded requests, and hot-only prefetch.
+- Consolidated maintained behavior, operational boundaries, verification
+  steps, and development history into the component README files.
+- Removed the temporary audit handoff document after accepted findings were
+  incorporated into source and tests.
+- Standardized all DoH deployment examples on generic placeholders. The public
+  repository does not document maintainer-operated resolver domains, account
+  subdomains, routes, resource IDs, tokens, or other private deployment data.
+
+<details>
+<summary><strong>Previous repository milestones</strong></summary>
+
+### May 16, 2026
 
 - Fully retired and removed the `archive/legacy/` directory, including all historical root rules, the old `ruleset/` tree, and the legacy `MIGRATION_RULE_URLS.md` mirror.
 - Reason: the migration window that justified keeping a legacy mirror has closed. `neorulset26/` is the only maintained mainline; preserving a parallel legacy surface caused path ambiguity, duplicated maintenance, and gave new users the false impression that retired publication paths were still supported.
 - Reality: any downstream still pointing at `archive/legacy/...` URLs will now receive 404 responses and must switch to the equivalents listed in [`neorulset26/RULESET_URLS.md`](./neorulset26/RULESET_URLS.md), using [`neorulset26/MIGRATION_RULE_URLS.md`](./neorulset26/MIGRATION_RULE_URLS.md) for path mapping. Legacy path compatibility is no longer provided and will not be restored.
 - Updated `README.md`, `docs/development/repository-layout.md`, `docs/development/collaboration-guide.md`, and `docs/reference/rules.md` to remove all references to the retired archive surface.
-
-<details>
-<summary><strong>Previous repository milestones</strong></summary>
 
 ### April 14, 2026
 
@@ -263,6 +277,6 @@ The best engineering mood is steady attention: keep the tools honest, keep the a
     <br><br>
     <sub>Copyright © 2023-2026 YAGAMI</sub>
     <br>
-    <sub>Last updated: May 16, 2026 at 5:45 PM PDT</sub>
+    <sub>Last updated: July 25, 2026</sub>
   </p>
 </div>

@@ -1,11 +1,15 @@
 # doh-fallback-worker
 
-Cloudflare Workers 上に構築したプライベート DoH ゲートウェイです。
+Cloudflare Workers 向けのセルフホスト DoH ゲートウェイ参照実装です。
 
-- **パブリックパス** `/dns-query` — 高性能な公開 DoH。標準的な DoH クライアントであれば誰でも利用可能
-- **プライベートパス** `/dns-query/<token>` — KV に保存されたトークン別プロファイルとプライベートルールを読み込み
+- **パブリックパス** `/dns-query` — デフォルト無効。公開リゾルバを意図する場合のみ明示的に有効化
+- **推奨プライベート認証** `Authorization: Bearer <token>` — URL にトークンを含めない方式
+- **互換プライベートパス** `/dns-query/<token>` — カスタムヘッダー非対応クライアント向け
 
 Language: [English](./README.md) / 日本語
+
+このリポジトリが公開するのはソースコードと汎用的なデプロイ例だけです。
+メンテナーが運用する resolver hostname は公開も推奨もしません。
 
 ## 機能一覧
 
@@ -15,11 +19,14 @@ Language: [English](./README.md) / 日本語
 | 2 | プライベートルールマッチング — 完全一致・サフィックス一致で、アップストリームを使わずローカルで応答 |
 | 3 | ローカル DNS 応答合成 — Worker 内部でバイナリ的に正確な DNS 応答を生成 |
 | 4 | 正規化キャッシュキー — セマンティックキーにより、transaction ID の変化によるキャッシュ断片化を解消 |
-| 5 | 複数アップストリームレース — CF / Google / Quad9 に並列問い合わせし、最初の応答を採用 |
-| 6 | 残余 TTL キャッシュ — クライアントには元の TTL ではなく、実際の残余 TTL を返す |
-| 7 | バックグラウンドプリフェッチ — 残余 TTL が 25% を切った時点で静かに更新 |
-| 8 | ECS 対応キャッシュ分離 — ECS あり・なしのクエリに別々のキャッシュエントリを使用 |
-| 9 | Stale-if-error — 全アップストリーム失敗時、設定ウィンドウ内であれば stale キャッシュを返却 |
+| 5 | 検証付き hedged request — 不正・エラー DNS 応答を拒否し、必要時だけバックアップを開始 |
+| 6 | 残余 TTL キャッシュ — transaction ID を復元し、DNS RR 内の TTL を実際に減算 |
+| 7 | ホット項目限定 Prefetch — age 85%、TTL 60 秒以上、直近 2 hit 以上で更新 |
+| 8 | 安全なキャッシュ分離 — ECS・未知 EDNS は cache を迂回し、DO/RD/AD/CD/revision をキー化 |
+| 9 | Stale-if-error — stale 応答のクライアント TTL は 15 秒に制限 |
+| 10 | リクエスト上限 — DNS メッセージを 4 KiB に制限し、不正な name/section を拒否 |
+| 11 | isolate 内 singleflight — 同時 MISS と prefetch が 1 回の上流問い合わせを共有 |
+| 12 | 軽量プロファイルキャッシュ — 有効な private profile を isolate 内で 120 秒保持 |
 
 ## 事前準備
 
@@ -47,6 +54,12 @@ wrangler login
 デプロイ前にローカルで Worker を起動して動作を確認できます。
 `wrangler dev` は KV バインディングを含めて Cloudflare エッジの挙動を再現します。
 
+最初に wire-format のユニットテストを実行します。
+
+```bash
+node --test worker.test.mjs
+```
+
 ### 1. ローカルサーバーを起動する
 
 ```bash
@@ -55,6 +68,8 @@ wrangler dev
 ```
 
 デフォルトで `http://localhost:8787` が起動します。
+パブリックパスのローカルテスト時のみ
+`wrangler dev --var ALLOW_PUBLIC_DOH:true` で起動してください。
 
 ### 2. パブリックパスを確認する（トークンなし）
 
@@ -77,7 +92,7 @@ curl -s "http://localhost:8787/dns-query?dns=AAABAAABAAAAAAAAA3d3dwZnb29nbGUDY29
 # テスト用トークンのプロファイルを書き込む
 wrangler kv key put --binding DOH_KV \
   "profile:test-token-1234" \
-  '{"name":"local-test","upstreams":["cf","google","quad9"],"cachePolicy":{"minTtl":60,"maxTtl":86400,"defaultTtl":300,"prefetchRatio":0.75,"staleIfErrorWindow":120}}' \
+  '{"name":"local-test","revision":1,"upstreams":["cf","google","quad9"],"hedgeDelays":[0,35,80],"cachePolicy":{"minTtl":0,"maxTtl":86400,"defaultTtl":300,"prefetchRatio":0.85,"staleIfErrorWindow":120}}' \
   --local
 
 # 同じトークンのルールを書き込む
@@ -144,16 +159,17 @@ wrangler deploy
 成功すると Worker の URL が表示されます。
 
 ```
-https://doh-fallback-worker.<あなたのアカウント>.workers.dev
+https://<your-worker-domain>
 ```
 
-この時点でパブリックパス `/dns-query` がすでに使用可能です。
+`ALLOW_PUBLIC_DOH=true` を設定しない限り、パブリックパスは無効のままです。
+個人用デプロイでは無効のままにしてください。
 
 ### ステップ 3 — トークンを生成する
 
 ```bash
-uuidgen
-# 例: ef7e6132-75b6-400e-8fec-0e61f7b44f8e
+openssl rand -hex 32
+# 64 桁のランダムな 16 進文字列（256 bit）
 ```
 
 このトークンは非公開で管理してください。プライベートルールへのアクセスキーです。
@@ -164,26 +180,27 @@ uuidgen
 
 ```bash
 wrangler kv key put --binding DOH_KV \
-  "profile:ef7e6132-75b6-400e-8fec-0e61f7b44f8e" \
-  '{"name":"personal","upstreams":["cf","google","quad9"],"cachePolicy":{"minTtl":60,"maxTtl":86400,"defaultTtl":300,"prefetchRatio":0.75,"staleIfErrorWindow":120}}'
+  "profile:<token>" \
+  '{"name":"personal","revision":1,"upstreams":["cf","google","quad9"],"hedgeDelays":[0,35,80],"cachePolicy":{"minTtl":0,"maxTtl":86400,"defaultTtl":300,"prefetchRatio":0.85,"staleIfErrorWindow":120}}'
 ```
 
 **`rules.json` を用意し**（フォーマットは後述）、KV に反映します。
 
 ```bash
 wrangler kv key put --binding DOH_KV \
-  "rules:ef7e6132-75b6-400e-8fec-0e61f7b44f8e" \
+  "rules:<token>" \
   --path rules.json
 ```
 
 ### ステップ 5 — 動作確認
 
 ```bash
-# パブリックパス
-curl -s "https://doh-fallback-worker.<あなたのアカウント>.workers.dev/dns-query?dns=AAABAAABAAAAAAAAA3d3dwZnb29nbGUDY29tAAABAAE="
+# 推奨: Bearer ヘッダー
+curl -sv -H "Authorization: Bearer <token>" \
+  "https://<your-worker-domain>/dns-query?dns=..."
 
-# プライベートパス
-curl -sv "https://doh-fallback-worker.<あなたのアカウント>.workers.dev/dns-query/ef7e6132-75b6-400e-8fec-0e61f7b44f8e?dns=..."
+# カスタムヘッダー非対応クライアント向け互換パス
+curl -sv "https://<your-worker-domain>/dns-query/<token>?dns=..."
 ```
 
 1 回目: `x-cache: MISS`、2 回目の同一クエリ: `x-cache: HIT` であれば正常です。
@@ -192,7 +209,8 @@ curl -sv "https://doh-fallback-worker.<あなたのアカウント>.workers.dev/
 
 ## プライベートルールの管理
 
-ルールは KV に保存され、Worker を再デプロイせずに即時反映されます。
+ルールは KV に保存され、Worker の再デプロイは不要です。KV エッジキャッシュ
+（最大 300 秒）が切れた後に反映され、通常 DNS キャッシュより先に評価されます。
 
 ### ルール形式（`rules.json`）
 
@@ -251,18 +269,48 @@ wrangler kv key delete --binding DOH_KV "rules:<token>"
 ```json
 {
   "name": "personal",
+  "revision": 1,
   "upstreams": ["cf", "google", "quad9"],
+  "hedgeDelays": [0, 35, 80],
   "cachePolicy": {
-    "minTtl": 60,
+    "minTtl": 0,
     "maxTtl": 86400,
     "defaultTtl": 300,
-    "prefetchRatio": 0.75,
+    "prefetchRatio": 0.85,
     "staleIfErrorWindow": 120
   }
 }
 ```
 
 使用可能なアップストリームキー: `cf`, `google`, `quad9`
+
+`hedgeDelays` は `upstreams` に対応する絶対開始遅延です。デフォルトでは
+Cloudflare を即時、Google を 35 ms、Quad9 を 80 ms で開始します。公開
+プロファイルは Cloudflare のみを使用します。
+
+Prefetch は isolate 内の best-effort 処理で、TTL 60 秒以上かつ 5 分以内に
+2 回以上ヒットした項目だけが対象です。foreground MISS と同じ singleflight
+を共有します。有効な KV profile は最大 120 秒、有界メモリキャッシュに保持し、
+不明な token は保持しません。
+
+アップストリームやプロファイルの意味を変更し、旧キャッシュを再利用したくない
+場合は `revision` を増やしてください。`minTtl` のデフォルトは `0` で、権威 TTL
+を不当に引き上げません。NXDOMAIN/NODATA は RFC 2308 に従って SOA から TTL を
+計算します。Authority SOA がない negative response は cache せず、
+CNAME chain が NODATA で終了する場合も SOA 由来の negative TTL を使用します。
+
+### トークンのローテーションとログ
+
+新しいランダムトークンとプロファイルを作成し、クライアントを切り替えてから旧
+トークンの 2 つの KV キーを削除します。Worker 自身はトークンをログ出力しません。
+ただし URL パス形式は Cloudflare のリクエストログ、履歴、スクリーンショット等に
+残る可能性があるため、対応クライアントでは Bearer ヘッダーを使用してください。
+
+### 公開エンドポイントとレート制限
+
+`ALLOW_PUBLIC_DOH=true` を意図的に設定する場合は、Cloudflare Rate Limiting/WAF を
+デプロイ側で設定してください。isolate 内メモリカウンターは分散レート制限として
+信頼できません。
 
 ---
 
@@ -272,8 +320,9 @@ wrangler kv key delete --binding DOH_KV "rules:<token>"
 
 ```ini
 [Proxy]
-DOH-Public  = https://doh-fallback-worker.<あなたのアカウント>.workers.dev/dns-query
-DOH-Private = https://doh-fallback-worker.<あなたのアカウント>.workers.dev/dns-query/<token>
+# ALLOW_PUBLIC_DOH=true の場合のみ:
+DOH-Public  = https://<your-worker-domain>/dns-query
+DOH-Private = https://<your-worker-domain>/dns-query/<token>
 ```
 
 **Clash**
@@ -281,27 +330,41 @@ DOH-Private = https://doh-fallback-worker.<あなたのアカウント>.workers.
 ```yaml
 dns:
   nameserver:
-    - "https://doh-fallback-worker.<あなたのアカウント>.workers.dev/dns-query/ef7e6132-75b6-400e-8fec-0e61f7b44f8e"
+    - "https://<your-worker-domain>/dns-query/<token>"
 ```
 
 ---
 
 ## セキュリティ
 
-- 不明なトークンは常に `403` を返す — デフォルトプロファイルへのフォールバックなし
+- パブリック DoH はデフォルト無効。正しい DNS request で不明な token は `403`
 - トークンとルールは KV にのみ保存され、ソースコードには含まれない
 - このリポジトリにはプライベートトークン、キー、ルール一覧を含まない
+- ドキュメントと例では必ず placeholder を使用する。実際の resolver hostname、
+  Workers.dev account subdomain、custom route、token、KV namespace ID、account ID
+  を commit しない
+
+## 運用上の境界
+
+- 公開アクセスは `ALLOW_PUBLIC_DOH=true` による明示的なデプロイ選択であり、
+  ソースのデフォルトは fail-closed。
+- 組み込み public profile は単一 upstream を使用し、private profile では
+  configurable hedged upstream を利用可能。
+- Singleflight、hot-entry tracking、profile memory cache は isolate 内の
+  best-effort 機能であり、グローバルには協調しない。
+- Abuse control と分散 rate limiting は Cloudflare のデプロイ層で設定する。
+- KV 更新は設定した KV cache TTL に従って edge へ反映される。
 
 ## 動作リファレンス
 
 | 状況 | レスポンス |
 |------|-----------|
-| 不明なトークン | 403 |
+| 正しい DNS request + 不明な token | 403 |
 | 不正な DNS クエリ | 400 |
 | プライベートルール一致 | 合成応答（アップストリームへの問い合わせなし） |
 | HTTPS / SVCB クエリ | アップストリームにそのまま転送 |
-| フレッシュなキャッシュヒット | 200、`x-cache: HIT`、残余 TTL |
-| 全アップストリーム失敗 + stale キャッシュあり | 200、`x-cache: STALE` |
+| フレッシュなキャッシュヒット | 200、`x-cache: HIT`、現在の ID と減算済み RR TTL |
+| 全アップストリーム失敗 + stale キャッシュあり | 200、`x-cache: STALE`、RR TTL 最大 15 秒 |
 | 全アップストリーム失敗 + キャッシュなし | 502 |
 
 ## ファイル構成
@@ -309,11 +372,52 @@ dns:
 | ファイル | 説明 |
 |---------|------|
 | `worker.js` | Cloudflare Worker 実装本体 |
+| `worker.test.mjs` | 依存パッケージ不要の wire-format・request-flow テスト |
 | `wrangler.toml.example` | Wrangler デプロイ用テンプレート |
 | `README.md` | 英語版ドキュメント |
 | `README.ja.md` | このファイル |
 
-## 更新履歴
+## 開発履歴
+
+### 2026年7月25日 — キャッシュ整合性・防御・リクエスト調度
+
+**DNS・キャッシュ整合性**
+
+- キャッシュ応答で現在の transaction ID と Question byte を復元。
+- Answer / Authority / Additional の通常 RR TTL を cache age 分減算し、
+  OPT metadata は TTL として変更しない。
+- stale 応答の通常 RR TTL を最大 15 秒に制限。
+- NXDOMAIN と NODATA は Authority SOA から RFC 2308 TTL を計算。SOA がない
+  negative response は cache しない。
+- cache key は `v3`。各 component を独立 encode し、profile revision、
+  DO、RD、AD、CD を含む。ECS と未表現 EDNS は cache を迂回。
+
+**検証・調度**
+
+- DNS message、Question、ID、QR、RCODE、Content-Type、OPT を検証してから
+  upstream 応答を採用。
+- private profile は絶対 hedge delay を設定可能。デフォルトは
+  `[0, 35, 80]` ms。
+- 同時 MISS と prefetch は isolate 内 singleflight を共有し、各 client の
+  DNS identity は個別に復元。
+- Prefetch は TTL 60 秒以上、cache age 85%、5 分以内 2 hit 以上が条件。
+
+**セキュリティ・運用変更**
+
+- Public DoH はデフォルト無効。明示的に有効化した場合も Cloudflare 単独。
+- POST body は 4 KiB、request URL は 8 KiB に制限。
+- Bearer 認証を推奨し、token path は client 互換性のため維持。同じ制限
+  charset を適用。
+- 有効な private profile は isolate 内で 120 秒、最大 64 件保持。不明 token
+  は保持しない。
+
+**ドキュメントと公開時のプライバシー**
+
+- 実装 invariant、運用上の制限、検証手順を保守対象の README に統合。
+- 採用した監査指摘を実装とテストへ反映したため、一時的な監査引き継ぎ文書を削除。
+- デプロイ先の例を `<your-worker-domain>` placeholder に統一。
+- メンテナーが運用する domain、account subdomain、route、resource ID、token
+  その他の private deployment 情報を公開文書へ記載しない方針を明文化。
 
 ### 2026年4月8日 — 9:29 PM PDT — v4 メジャーアップグレード
 
@@ -332,5 +436,8 @@ dns:
 **バグ修正**
 - RFC 8484 準拠の GET リクエストにおける base64url パディング欠落の修正（一部 DoH クライアントは `=` を省略して送信する）
 
-**後方互換性**
-- `/dns-query`（トークンなし）は既存クライアントに対して v3 と同一の動作を維持
+**過去の互換性に関する注記**
+
+- v4 公開当初は token なし `/dns-query` の従来動作を維持していました。
+  2026年7月25日の hardening で意図的に変更され、現在は
+  `ALLOW_PUBLIC_DOH=true` の場合だけ公開されます。

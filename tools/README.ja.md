@@ -1,7 +1,7 @@
 # Repository Tools
 
 バージョン作成日時: 2026年4月2日 13:30 JST
-最終更新日時: April 20, 2026 06:00 PM PDT
+最終更新日時: 2026年7月25日
 
 Language:
 
@@ -47,7 +47,7 @@ Language:
 
 ### DoH Fallback Worker
 
-バージョン: 4.0.0 · 作成日時: 2026年4月2日 13:30 JST · **更新日時: April 20, 2026 06:00 PM PDT**
+バージョン: 4.0.0 · 作成日時: 2026年4月2日 13:30 JST · **更新日時: 2026年7月25日**
 
 パス:
 
@@ -57,9 +57,13 @@ Language:
 
 - [`doh-fallback-worker/README.md`](./doh-fallback-worker/README.md)
 
-Cloudflare Workers 上に構築したトークン対応プライベート DoH ゲートウェイ。パブリックパス `/dns-query` は任意のクライアントが利用できる高性能マルチアップストリーム DoH を提供。プライベートパス `/dns-query/<token>` は KV に保存されたトークン別プロファイルとルールセットを読み込み、設定済みドメインに対してアップストリームを使わずローカルで DNS 応答を合成する。
+Cloudflare Workers 向けのセルフホスト DoH ゲートウェイ参照実装。パブリックパス `/dns-query` はデフォルト無効で、明示的に有効化した場合は保守的な単一 upstream profile を使用します。Bearer 認証または互換パス `/dns-query/<token>` は KV から独立した profile と private rule set を読み込みます。
 
-v4 では汎用リバースプロキシからポリシー駆動型ゲートウェイへ全面刷新。プライベートルールマッチング、ローカル応答合成、正規化キャッシュキー、残余 TTL セマンティクス、stale-if-error 対応を追加。
+現在の v4 は private profile 向けの検証付き hedged request、transaction ID と
+残余 TTL の cache correctness、RFC 2308 negative caching、isolate 内
+singleflight、hot-only prefetch、request bounds、local response synthesis、
+stale-if-error を備えます。文書では placeholder のみを使用し、メンテナーが
+運用する resolver domain や private deployment identifier は公開しません。
 
 ### edge204 — CF エッジ 204 プローブ
 

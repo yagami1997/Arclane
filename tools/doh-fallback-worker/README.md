@@ -1,11 +1,15 @@
 # doh-fallback-worker
 
-A private DoH gateway built on Cloudflare Workers.
+A self-hosted DoH gateway reference implementation for Cloudflare Workers.
 
-- **Public path** `/dns-query` — high-performance public DoH, open to any standard DoH client
-- **Private path** `/dns-query/<token>` — loads a per-token profile and private rule set from KV
+- **Public path** `/dns-query` — disabled by default; explicitly opt in only when you intend to run a public resolver
+- **Private access** `Authorization: Bearer <token>` — preferred because the token is not placed in the URL
+- **Private compatibility path** `/dns-query/<token>` — for DoH clients that cannot set custom headers
 
 Language: English / [日本語](./README.ja.md)
+
+This repository publishes source code and generic deployment examples only. It
+does not publish or endorse any maintainer-operated resolver hostname.
 
 ## Features
 
@@ -15,11 +19,14 @@ Language: English / [日本語](./README.ja.md)
 | 2 | Private rule matching — exact and suffix domain rules answered locally, no upstream needed |
 | 3 | Local DNS response synthesis — binary-correct DNS answers built inside the Worker |
 | 4 | Normalized cache keys — semantic keys eliminate fragmentation from changing transaction IDs |
-| 5 | Multi-upstream racing — CF / Google / Quad9, first response wins |
-| 6 | Remaining-TTL cache — clients receive the actual remaining TTL, not the original value |
-| 7 | Background prefetch — silent refresh when remaining TTL falls below 25 % |
-| 8 | ECS-aware cache isolation — ECS and non-ECS queries use separate cache entries |
-| 9 | Stale-if-error — stale cache served when all upstreams fail, within a configurable window |
+| 5 | Validated hedged upstreams — malformed/error DNS responses are rejected; backups start only when needed |
+| 6 | Remaining-TTL cache — transaction IDs are restored and DNS RR TTLs are decremented on cache hits |
+| 7 | Hot-only prefetch — after 85% age, TTL ≥ 60s, and at least two recent hits |
+| 8 | Safe cache isolation — ECS/unknown EDNS bypass cache; DO/RD/AD/CD and profile revision are keyed |
+| 9 | Stale-if-error — stale responses use a short 15-second client TTL |
+| 10 | Request bounds — DNS messages are limited to 4 KiB and malformed names/sections are rejected |
+| 11 | Isolate-local singleflight — concurrent misses and prefetches share one upstream operation |
+| 12 | Lightweight profile cache — valid private profiles are retained in-isolate for 120 seconds |
 
 ## Prerequisites
 
@@ -45,6 +52,12 @@ wrangler login
 Run the Worker locally before deploying. Wrangler spins up a local server that
 behaves like the Cloudflare edge, including KV bindings.
 
+Run the wire-format unit tests:
+
+```bash
+node --test worker.test.mjs
+```
+
 ### 1. Start the local server
 
 ```bash
@@ -53,6 +66,9 @@ wrangler dev
 ```
 
 The Worker starts at `http://localhost:8787` by default.
+
+Public DoH is disabled by default. For this local public-path test only, start
+Wrangler with `wrangler dev --var ALLOW_PUBLIC_DOH:true`.
 
 ### 2. Test the public path (no token)
 
@@ -75,7 +91,7 @@ production. Write a test profile and rule set:
 # Write a profile for a test token
 wrangler kv key put --binding DOH_KV \
   "profile:test-token-1234" \
-  '{"name":"local-test","upstreams":["cf","google","quad9"],"cachePolicy":{"minTtl":60,"maxTtl":86400,"defaultTtl":300,"prefetchRatio":0.75,"staleIfErrorWindow":120}}' \
+  '{"name":"local-test","revision":1,"upstreams":["cf","google","quad9"],"hedgeDelays":[0,35,80],"cachePolicy":{"minTtl":0,"maxTtl":86400,"defaultTtl":300,"prefetchRatio":0.85,"staleIfErrorWindow":120}}' \
   --local
 
 # Write rules for the same token
@@ -142,16 +158,17 @@ wrangler deploy
 On success, Wrangler prints your Worker URL:
 
 ```
-https://doh-fallback-worker.<your-account>.workers.dev
+https://<your-worker-domain>
 ```
 
-The public path `/dns-query` is live immediately.
+The public path remains disabled unless `ALLOW_PUBLIC_DOH=true` is configured.
+For a personal deployment, leave it disabled.
 
 ### Step 3 — Generate a token
 
 ```bash
-uuidgen
-# example output: ef7e6132-75b6-400e-8fec-0e61f7b44f8e
+openssl rand -hex 32
+# example output: 64 random hexadecimal characters (256 bits)
 ```
 
 Keep this value private. It is the key that unlocks your private rule set.
@@ -162,26 +179,27 @@ Keep this value private. It is the key that unlocks your private rule set.
 
 ```bash
 wrangler kv key put --binding DOH_KV \
-  "profile:ef7e6132-75b6-400e-8fec-0e61f7b44f8e" \
-  '{"name":"personal","upstreams":["cf","google","quad9"],"cachePolicy":{"minTtl":60,"maxTtl":86400,"defaultTtl":300,"prefetchRatio":0.75,"staleIfErrorWindow":120}}'
+  "profile:<token>" \
+  '{"name":"personal","revision":1,"upstreams":["cf","google","quad9"],"hedgeDelays":[0,35,80],"cachePolicy":{"minTtl":0,"maxTtl":86400,"defaultTtl":300,"prefetchRatio":0.85,"staleIfErrorWindow":120}}'
 ```
 
 **Prepare a `rules.json` file** (see format below), then push it:
 
 ```bash
 wrangler kv key put --binding DOH_KV \
-  "rules:ef7e6132-75b6-400e-8fec-0e61f7b44f8e" \
+  "rules:<token>" \
   --path rules.json
 ```
 
 ### Step 5 — Verify
 
 ```bash
-# Public path
-curl -s "https://doh-fallback-worker.<your-account>.workers.dev/dns-query?dns=AAABAAABAAAAAAAAA3d3dwZnb29nbGUDY29tAAABAAE="
+# Preferred private request
+curl -sv -H "Authorization: Bearer <token>" \
+  "https://<your-worker-domain>/dns-query?dns=..."
 
-# Private path
-curl -sv "https://doh-fallback-worker.<your-account>.workers.dev/dns-query/ef7e6132-75b6-400e-8fec-0e61f7b44f8e?dns=..."
+# Compatibility path for clients without custom-header support
+curl -sv "https://<your-worker-domain>/dns-query/<token>?dns=..."
 ```
 
 First request: `x-cache: MISS`. Second identical request: `x-cache: HIT`.
@@ -190,7 +208,9 @@ First request: `x-cache: MISS`. Second identical request: `x-cache: HIT`.
 
 ## Private Rule Management
 
-Rules are stored in KV and take effect immediately — no redeployment needed.
+Rules are stored in KV and take effect after the KV edge cache expires (up to
+the configured 300-second `cacheTtl`). Private rules are evaluated before the
+ordinary DNS cache.
 
 ### Rules format (`rules.json`)
 
@@ -249,18 +269,52 @@ wrangler kv key delete --binding DOH_KV "rules:<token>"
 ```json
 {
   "name": "personal",
+  "revision": 1,
   "upstreams": ["cf", "google", "quad9"],
+  "hedgeDelays": [0, 35, 80],
   "cachePolicy": {
-    "minTtl": 60,
+    "minTtl": 0,
     "maxTtl": 86400,
     "defaultTtl": 300,
-    "prefetchRatio": 0.75,
+    "prefetchRatio": 0.85,
     "staleIfErrorWindow": 120
   }
 }
 ```
 
-Available upstream keys: `cf`, `google`, `quad9`, `ali`
+Increment `revision` whenever upstream/profile semantics change and old cached
+answers should no longer be reused.
+
+Available upstream keys: `cf`, `google`, `quad9`
+
+`minTtl` defaults to `0`, so a low authoritative TTL is not artificially raised.
+NXDOMAIN and NODATA caching uses the Authority SOA per RFC 2308. Negative
+responses without an Authority SOA are not cached, and CNAME chains ending in
+NODATA use the SOA-derived negative TTL.
+
+`hedgeDelays` contains absolute start delays corresponding to `upstreams`.
+The defaults start Cloudflare immediately, Google at 35 ms, and Quad9 at 80 ms.
+The public profile uses Cloudflare only. Private profiles retain the configured
+ordered list.
+
+Prefetch is best-effort and isolate-local. It requires a cache TTL of at least
+60 seconds and two hits within five minutes, and shares the same singleflight
+operation as foreground misses. Valid KV profiles are held in a bounded
+120-second in-memory cache above KV's own edge cache; unknown tokens are never
+stored in that memory cache.
+
+### Token rotation and logging
+
+Create a new random token/profile, update clients, then delete both KV keys for
+the old token. The Worker itself does not log tokens. However, URL-path tokens
+may still appear in Cloudflare request logs, browser history, screenshots, and
+other intermediaries; use the Bearer header whenever the client supports it.
+
+### Public endpoint and rate limiting
+
+If you deliberately enable `ALLOW_PUBLIC_DOH=true`, configure Cloudflare Rate
+Limiting/WAF rules at deployment level. Per-isolate in-memory counters are not a
+reliable distributed rate limiter.
 
 ---
 
@@ -270,8 +324,9 @@ Available upstream keys: `cf`, `google`, `quad9`, `ali`
 
 ```ini
 [Proxy]
-DOH-Public  = https://doh-fallback-worker.<your-account>.workers.dev/dns-query
-DOH-Private = https://doh-fallback-worker.<your-account>.workers.dev/dns-query/<token>
+# Requires ALLOW_PUBLIC_DOH=true:
+DOH-Public  = https://<your-worker-domain>/dns-query
+DOH-Private = https://<your-worker-domain>/dns-query/<token>
 ```
 
 **Clash**
@@ -279,22 +334,39 @@ DOH-Private = https://doh-fallback-worker.<your-account>.workers.dev/dns-query/<
 ```yaml
 dns:
   nameserver:
-    - "https://doh-fallback-worker.<your-account>.workers.dev/dns-query/ef7e6132-75b6-400e-8fec-0e61f7b44f8e"
+    - "https://<your-worker-domain>/dns-query/<token>"
 ```
 
 ---
 
 ## Security
 
-- Unknown tokens always return `403` — no fallback to the default profile
+- A well-formed request with an unknown token returns `403` — no fallback to
+  the default profile
 - Tokens and rules are stored in KV only, never in source code
 - This repository contains no private tokens, keys, or rule lists
+- Documentation and examples must use placeholders. Do not commit a real
+  resolver hostname, Workers.dev account subdomain, custom route, token, KV
+  namespace ID, or account identifier.
+
+## Operational Boundaries
+
+- Public access is an explicit deployment choice through
+  `ALLOW_PUBLIC_DOH=true`; the source default remains fail-closed.
+- The built-in public profile uses one upstream. Private profiles may use
+  configurable hedged upstreams.
+- Singleflight, hot-entry tracking, and the profile memory cache are
+  best-effort and isolate-local, not globally coordinated.
+- Abuse controls and distributed rate limiting belong at the Cloudflare
+  deployment layer.
+- KV updates are eventually visible at the edge according to the configured KV
+  cache TTL.
 
 ## Behavior Reference
 
 | Situation | Response |
 |-----------|----------|
-| Unknown token | 403 |
+| Well-formed request with unknown token | 403 |
 | Malformed DNS query | 400 |
 | Private rule match | Synthesized answer (no upstream query) |
 | HTTPS / SVCB query | Pass-through to upstreams |
@@ -307,11 +379,58 @@ dns:
 | File | Description |
 |------|-------------|
 | `worker.js` | Cloudflare Worker implementation |
+| `worker.test.mjs` | Dependency-free wire-format and request-flow tests |
 | `wrangler.toml.example` | Wrangler deployment template |
 | `README.md` | This document |
 | `README.ja.md` | Japanese version |
 
-## Changelog
+## Development Log
+
+### July 25, 2026 — cache correctness, hardening, and request scheduling
+
+**DNS and cache correctness**
+
+- Cache hits restore the current transaction ID and Question bytes.
+- Ordinary Answer, Authority, and Additional RR TTLs are decremented by cache
+  age; OPT metadata is not treated as a TTL.
+- Stale responses cap ordinary RR TTLs at 15 seconds.
+- NXDOMAIN and empty-answer NODATA use Authority SOA data for RFC 2308 negative
+  caching.
+- The semantic cache key is version `v3`. Each component is independently
+  encoded, and profile revision, DO, RD, AD, and CD are isolated; ECS and
+  unrepresented EDNS semantics bypass cache.
+
+**Validation and scheduling**
+
+- Upstream responses are accepted only after DNS message, Question,
+  transaction ID, QR, RCODE, Content-Type, and OPT validation.
+- Private profiles use configurable absolute hedge delays, defaulting to
+  `[0, 35, 80]` ms.
+- Concurrent cache misses and prefetches share an isolate-local singleflight
+  operation while each client receives its own DNS identity.
+- Prefetch requires TTL >= 60 seconds, 85% cache age, and two hits within five
+  minutes.
+
+**Security and operational changes**
+
+- Public DoH is disabled by default. When explicitly enabled, the public
+  profile uses Cloudflare only.
+- POST bodies are limited to 4 KiB and request URLs to 8 KiB.
+- Bearer authentication is preferred; the token path remains for client
+  compatibility and now accepts the same restricted token charset.
+- Valid private profiles are cached in isolate memory for 120 seconds with a
+  64-entry bound; unknown tokens are not retained.
+
+**Documentation and publication privacy**
+
+- Consolidated the implementation invariants, operational limits, and
+  verification guidance into the maintained README files.
+- Removed the temporary audit handoff document after its accepted findings were
+  incorporated into the implementation and tests.
+- Replaced deployment-host examples with `<your-worker-domain>` placeholders.
+- Added an explicit rule that maintainer-operated domains, account subdomains,
+  routes, resource IDs, tokens, and other private deployment details must not
+  appear in public documentation.
 
 ### April 8, 2026 — 9:29 PM PDT — v4 major upgrade
 
@@ -330,5 +449,8 @@ Complete rewrite from a generic DoH reverse proxy into a token-aware private DoH
 **Bug fixes**
 - Fixed base64url padding for RFC 8484 GET requests — some DoH clients omit `=` padding
 
-**Backward compatibility**
-- `/dns-query` (no token) behaves identically to v3 for all existing clients
+**Historical compatibility note**
+
+- This v4 release originally retained the unauthenticated `/dns-query`
+  behavior. The July 25 hardening pass intentionally changed that default;
+  public access now requires `ALLOW_PUBLIC_DOH=true`.
