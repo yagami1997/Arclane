@@ -68,7 +68,7 @@ private deployment identifiers.
 
 ### edge204 — CF Edge 204 Probe
 
-Version: 1.0.0 · Created: April 6, 2026 11:10 PM PDT
+Version: 1.1.0 · Created: April 6, 2026 11:10 PM PDT · Updated: July 26, 2026 PDT
 
 Path:
 
@@ -78,7 +78,7 @@ English documentation:
 
 - [`edge204/README.md`](./edge204/README.md)
 
-This tool provides a Cloudflare Worker that returns pure HTTP 204 responses from the CF edge for use as a Surge proxy-node latency probe. It measures the RTT from proxy node egress to the nearest CF PoP with no TLS overhead and no upstream fetch.
+This tool provides a Cloudflare Worker that returns pure HTTP 204 responses from the CF edge for use as a proxy-node latency probe in Surge and Clash/mihomo. It measures the RTT from proxy node egress to the nearest CF PoP, with no upstream fetch. Because it measures the path to Cloudflare rather than to your actual destinations, the tool README documents the method's blind spots — read them before using the numbers to rank nodes.
 
 ## Maintenance Expectations
 

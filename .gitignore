@@ -50,5 +50,9 @@ __pycache__/
 # ============================================
 iDeal/
 openclash-archive/
-tools/doh-fallback-worker/.wrangler/
+# Wrangler local cache — contains the account ID. Matched at any depth
+# because wrangler creates it in whatever directory it is invoked from.
+.wrangler/
+
 tools/doh-fallback-worker/wrangler.toml
+tools/edge204/wrangler.toml

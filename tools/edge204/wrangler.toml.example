@@ -1,0 +1,33 @@
+name               = "edge204"
+main               = "worker.js"
+compatibility_date = "2026-07-26"
+
+# A probe has no use for per-version preview URLs, and each one is another
+# public endpoint that the zone's WAF rate-limiting rule does not cover.
+# Wrangler enables them by default when this key is absent, so it is declared
+# explicitly rather than left to the default.
+preview_urls = false
+
+# Local deployment template.
+# Copy this file to `wrangler.toml` before deploying. This Worker uses no KV,
+# D1, R2, or Durable Object resources, so the copy is normally enough as-is.
+# Never commit a real account subdomain, custom domain, token, or other
+# private deployment metadata to the public repository.
+
+# No `routes` or `[[routes]]` entry is declared on purpose.
+# Bind the Custom Domain once in the Cloudflare dashboard. Custom Domains are
+# preserved across `wrangler deploy`, so deploying updates only the script and
+# never touches the zone's DNS records.
+
+# TRACE_KEY is deliberately absent from `[vars]`.
+# It gates the client IP field on /trace and belongs in an encrypted secret,
+# not in a config file:
+#
+#   wrangler secret put TRACE_KEY
+#
+# Secrets persist across deploys. Leave it unset to run the probe without
+# client IP reporting; every other /trace field works either way.
+
+# Optional notes:
+# - Keep `wrangler.toml` out of version control.
+# - Use `wrangler deploy` for local deployment.

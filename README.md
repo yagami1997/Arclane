@@ -176,6 +176,8 @@ These files are published as text artifacts for study, comparison, maintenance, 
 - DoH fallback reference: [`tools/doh-fallback-worker/README.md`](./tools/doh-fallback-worker/README.md)
 - HTTP 204 probe reference: [`tools/edge204/README.md`](./tools/edge204/README.md)
 
+Each Cloudflare Worker under `tools/` follows the same convention: a tracked `wrangler.toml.example` template, a real `wrangler.toml` that Git ignores, and a checked-in test suite runnable with `node --test`. Deployment examples use generic placeholders only. The public repository does not document maintainer-operated domains, account subdomains, routes, resource IDs, or tokens.
+
 These components are provided as reference implementations. Anyone choosing to deploy or adapt them is solely responsible for platform compliance, lawful operation, security review, and production suitability.
 
 ---
@@ -195,7 +197,34 @@ If you are operating in a regulated environment, under enterprise security contr
 
 ## Changelog
 
-### Latest: July 25, 2026
+### Latest: July 26, 2026
+
+- Revised the `tools/edge204/` HTTP 204 probe after an audit. Response headers
+  were reduced to a single `Cache-Control: no-store`, trailing slashes are now
+  normalized, `/ping` reports the deployed version, and the client IP on
+  `/trace` is gated behind an optional `TRACE_KEY` that degrades silently
+  rather than signalling that a key exists.
+- Documented the limits of the measurement method itself: Anycast bias toward
+  Cloudflare-adjacent egress, plaintext port 80 as an unreliable channel, and
+  the single point of failure created by pointing every health check at one
+  hostname. The prior TLS-overhead rationale was corrected — an extra
+  handshake scales readings proportionally and does not by itself reorder
+  nodes.
+- Added Clash / mihomo health-check configuration alongside the existing Surge
+  examples, covering group-level and provider-level checks.
+- Aligned `tools/edge204/` with the deployment convention already established
+  by `tools/doh-fallback-worker/`: a tracked `wrangler.toml.example`, a
+  gitignored real config, and a checked-in test suite.
+- Replaced an unsound cache verification step. Comparing `/ping` timestamps
+  proves nothing, because the Workers clock does not advance without I/O;
+  `cf-ray` and the absence of `Age` are used instead.
+- Broadened the `.wrangler/` ignore rule to match at any depth, since Wrangler
+  writes its cache into whichever directory it is invoked from.
+
+<details>
+<summary><strong>Previous repository milestones</strong></summary>
+
+### July 25, 2026
 
 - Hardened the `tools/doh-fallback-worker/` reference implementation with
   validated hedged upstream requests, transaction-ID and DNS TTL correction on
@@ -208,9 +237,6 @@ If you are operating in a regulated environment, under enterprise security contr
 - Standardized all DoH deployment examples on generic placeholders. The public
   repository does not document maintainer-operated resolver domains, account
   subdomains, routes, resource IDs, tokens, or other private deployment data.
-
-<details>
-<summary><strong>Previous repository milestones</strong></summary>
 
 ### May 16, 2026
 
@@ -277,6 +303,6 @@ The best engineering mood is steady attention: keep the tools honest, keep the a
     <br><br>
     <sub>Copyright © 2023-2026 YAGAMI</sub>
     <br>
-    <sub>Last updated: July 25, 2026</sub>
+    <sub>Last updated: July 26, 2026 5:14 AM PDT (America/Los_Angeles)</sub>
   </p>
 </div>
