@@ -33,6 +33,36 @@ USER-AGENT,tiktok*
 USER-AGENT,musical*
 
 # ========================================
+# Feishu / Lark
+# ========================================
+
+# > Official client and web service domains
+DOMAIN-SUFFIX,feishu.net
+DOMAIN-SUFFIX,feishu.cn
+DOMAIN-SUFFIX,larkoffice.com
+DOMAIN-SUFFIX,feishucdn.com
+DOMAIN-SUFFIX,zjurl.cn
+DOMAIN-SUFFIX,byted-static.com
+DOMAIN-SUFFIX,feishu-3rd-party-services.com
+DOMAIN-SUFFIX,bytehwm.com
+DOMAIN-SUFFIX,ttwebview.com
+DOMAIN-SUFFIX,kundou.cn
+DOMAIN-SUFFIX,byteeffecttos.com
+DOMAIN-SUFFIX,bytedanceapi.com
+DOMAIN-SUFFIX,volcvideo.com
+DOMAIN-SUFFIX,feishuimg.com
+DOMAIN-SUFFIX,feishuapp.cn
+DOMAIN-SUFFIX,getfeishu.cn
+DOMAIN-SUFFIX,feishupkg.com
+DOMAIN-SUFFIX,feelgood.cn
+DOMAIN-SUFFIX,baseopendev.com
+DOMAIN-SUFFIX,bytedapm.com
+DOMAIN-SUFFIX,ibytedapm.com
+DOMAIN-SUFFIX,larkenterprise.com
+DOMAIN-SUFFIX,aiforce.cloud
+DOMAIN-SUFFIX,aiforce.run
+
+# ========================================
 # Douyin (CN)
 # ========================================
 
