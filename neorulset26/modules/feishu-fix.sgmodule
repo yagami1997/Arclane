@@ -1,0 +1,11 @@
+#!name=Feishu Real-IP & Direct Fix
+#!desc=Keep Feishu/Lark on real DNS answers and route product-specific traffic directly.
+#!system=mac
+
+[General]
+always-real-ip = %APPEND% feishu.cn, *.feishu.cn, feishucdn.com, *.feishucdn.com, larksuite.com, *.larksuite.com, larkoffice.com, *.larkoffice.com, feishu-3rd-party-services.com, *.feishu-3rd-party-services.com, l7-online-feishu-common.s.dsa.cdnbuild.net, lf-cdn-tos.bytescm.com, lf3-cdn-tos.bytescm.com, lf3-short.ibytedapm.com, mcs.snssdk.com, i.snssdk.com, mcs.zijieapi.com, *.bytedns.net, *.bytedns1.com, *.bytedns3.com, *.bytednsdoc.com, *.cdnbuild.net, *.cdngslb.com, *.queniusz.com, *.queniurc.com, *.queniuck.com, *.bytescm.com, *.bytetos.com, l7-online-creative-global-v4.s.dsa.cdnbuild.net
+
+[Rule]
+PROCESS-NAME,/Applications/Lark.app/,DIRECT
+DOMAIN,l7-online-creative-global-v4.s.dsa.cdnbuild.net,DIRECT
+RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/feishu.list,DIRECT,extended-matching
