@@ -47,7 +47,7 @@ https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/
 ## Updated Timestamp
 
 ```text
-2026-04-14
+2026-08-13
 ```
 
 ## Rules
@@ -57,6 +57,7 @@ https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/ai.l
 https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/bytedance.list
 https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/common.list
 https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/crypto.list
+https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/feishu.list
 https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/google.list
 https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/hulo.list
 https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/messenger.list

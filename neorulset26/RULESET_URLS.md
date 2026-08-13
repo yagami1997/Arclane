@@ -67,12 +67,14 @@ YOUTUBE          STREAMING                          SOCIAL & MESSAGING
                     PBS / Pandora / Soundcloud
                     DAZN / Streaming-US.list        18 Social ── socialsite.list
 
-                 13 Streaming-JP                    19 Bytedance ── bytedance.list
+                 13 Streaming-JP                    Feishu [Direct] ── feishu.list
                     Netflix / Apple TV
-                    Abema / DMM                     20 TikTok ── TikTok.list
+                    Abema / DMM                     19 Bytedance ── bytedance.list
                     Niconico / Hulu JP
                     Japonx / F1 TV
                     Streaming-JP.list
+
+                                                    20 TikTok ── TikTok.list
 
                  14 Streaming-TW
                     KKTV / KKBOX
@@ -114,6 +116,7 @@ CUSTOM           UTILITIES
 | CN Mainland TV | Direct |
 | Messenger | Stable |
 | Social | Stable |
+| Feishu | Direct |
 | Bytedance | Stable |
 | TikTok | Stable |
 | Common | Balanced |
@@ -364,6 +367,17 @@ RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/r
 
 ---
 
+## Direct override · Feishu
+**Policy**: `DIRECT`
+
+**Routing**: Direct; load before Bytedance
+
+```
+RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/feishu.list,DIRECT
+```
+
+---
+
 ## 19 · Bytedance
 **Policy**: `Bytedance`  
 **Routing**: Stable
@@ -464,12 +478,13 @@ RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/r
 
 # ════════════════════════════════════════════════════════════
 # TIER 3 — Your fully custom groups  (override everything below)
-# PayPal / Common / Social / Bytedance / HULO
+# PayPal / Common / Social / Feishu / Bytedance / HULO
 # These files are hand-authored; their policy decisions are final.
 # ════════════════════════════════════════════════════════════
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/paypal.list,PayPal
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/common.list,Common
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/socialsite.list,Social
+RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/feishu.list,DIRECT
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/bytedance.list,Bytedance
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/hulo.list,HULO
 

@@ -118,7 +118,8 @@ Streaming services are grouped by their **regional availability requirement**, n
 |---|------------|------------|------------------------|-------|
 | 17 | **Messenger** | messenger.list | Stable | Consolidated IM group. Covers: Discord, Telegram, WhatsApp, Signal, Line, Slack, Element/Matrix, Viber, Zalo, Keybase, Mattermost, Session, Threema, Wire, Rocket.Chat. These services do not require specific regional availability — a stable routing path is sufficient. |
 | 18 | **Social** | socialsite.list | Stable | Domestic and international social platforms: Weibo, Zhihu, Douban, Xiaohongshu, Tieba, Reddit, Truth Social, etc. |
-| 19 | **Bytedance** | bytedance.list | Stable | ByteDance ecosystem: Douyin, TikTok (CN), Toutiao, Xigua, Ixigua, Lark, etc. Stable routing with low jitter is preferred to avoid upload and playback interruptions. |
+| — | **Feishu** | feishu.list | Direct | Feishu/Lark product-specific domains. Load before Bytedance; shared ByteDance infrastructure remains in bytedance.list. |
+| 19 | **Bytedance** | bytedance.list | Stable | ByteDance ecosystem: Douyin, TikTok (CN), Toutiao, Xigua, Ixigua, and shared infrastructure. Stable routing with low jitter is preferred to avoid upload and playback interruptions. |
 | 20 | **TikTok** | ruleset/TikTok.list | Stable | International TikTok. Kept separate from Bytedance because TikTok international uses different CDN and server routing. |
 
 ---
@@ -162,6 +163,7 @@ Streaming services are grouped by their **regional availability requirement**, n
 | CN Mainland TV | Direct |
 | Messenger | Stable |
 | Social | Stable |
+| Feishu | Direct |
 | Bytedance | Stable |
 | TikTok | Stable |
 | Common | Balanced |
@@ -183,6 +185,7 @@ neorulset26/
 │   ├── scholar.list              ← Academic resources
 │   ├── paypal.list               ← Finance (PayPal, banks, brokers)
 │   ├── crypto.list               ← Crypto exchanges and infrastructure
+│   ├── feishu.list               ← Feishu/Lark product domains (Direct)
 │   ├── bytedance.list            ← ByteDance ecosystem
 │   ├── socialsite.list           ← Social platforms
 │   ├── messenger.list            ← IM apps (Discord, Telegram, WhatsApp, etc.)
@@ -279,7 +282,8 @@ neorulset26/
 16  CN Mainland TV      — CN streaming: iQIYI, Youku, Bilibili, etc. (Direct)
 17  Messenger           — IM apps: Discord, Telegram, WhatsApp, Signal, etc.
 18  Social              — Social platforms: Weibo, Reddit, Zhihu, etc.
-19  Bytedance           — ByteDance: Douyin, Toutiao, Lark, etc.
+—   Feishu              — Feishu/Lark product domains (Direct override)
+19  Bytedance           — ByteDance: Douyin, Toutiao, shared infrastructure, etc.
 20  TikTok              — TikTok International
 21  Common              — Custom curated services
 22  HULO                — CN community platforms (Direct)

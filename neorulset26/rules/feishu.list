@@ -1,0 +1,29 @@
+# > feishu.list - Feishu / Lark Routing Rules
+# > Product-specific domains for direct routing
+# > Shared ByteDance infrastructure remains in bytedance.list
+
+# ========================================
+# Feishu / Lark Core
+# ========================================
+
+DOMAIN-SUFFIX,feishu.net
+DOMAIN-SUFFIX,feishu.cn
+DOMAIN-SUFFIX,larksuite.com
+DOMAIN-SUFFIX,larkoffice.com
+DOMAIN-SUFFIX,feishucdn.com
+DOMAIN-SUFFIX,feishu-3rd-party-services.com
+DOMAIN-SUFFIX,kundou.cn
+DOMAIN-SUFFIX,feishuimg.com
+DOMAIN-SUFFIX,feishuapp.cn
+DOMAIN-SUFFIX,getfeishu.cn
+DOMAIN-SUFFIX,feishupkg.com
+DOMAIN-SUFFIX,feelgood.cn
+DOMAIN-SUFFIX,baseopendev.com
+DOMAIN-SUFFIX,larkenterprise.com
+
+# ========================================
+# Feishu Miaoda / AI Application Runtime
+# ========================================
+
+DOMAIN-SUFFIX,aiforce.cloud
+DOMAIN-SUFFIX,aiforce.run

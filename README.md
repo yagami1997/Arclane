@@ -154,6 +154,7 @@ Representative maintained files include:
 - `neorulset26/rules/socialsite.list`
 - `neorulset26/rules/hulo.list`
 - `neorulset26/rules/scholar.list`
+- `neorulset26/rules/feishu.list`
 - `neorulset26/rules/bytedance.list`
 - `neorulset26/rules/ai.list`
 - `neorulset26/rules/crypto.list`
