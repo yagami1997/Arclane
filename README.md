@@ -198,7 +198,46 @@ If you are operating in a regulated environment, under enterprise security contr
 
 ## Changelog
 
-### Latest: July 26, 2026
+### Latest: August 16, 2026
+
+- Corrected the stated measurement boundary of the `tools/edge204/` probe.
+  The reading covers the whole chain from client through proxy node to the
+  Cloudflare Anycast edge, not the node's egress alone. The client's own leg
+  is inside every sample, so the same node measured from two different client
+  ISPs will not produce the same number.
+- Documented a distinct failure mode found in the field: comparisons are only
+  valid between endpoints that cost the same number of round trips. A reading
+  is roughly `round trips × RTT of the weakest leg`, so a TLS handshake, an
+  uncached DNS lookup, or a redirect costs almost nothing on a good link and
+  a great deal on a poor one, amplifying non-linearly under loss. A
+  short-TTL self-hosted hostname measured against a universally cached
+  endpoint can read 100 ms slower while both destinations are equally
+  healthy. This looks exactly like node degradation and is not.
+- Added the diagnostic procedure for that case to the troubleshooting
+  section: confirm an `http://` URL is not being upgraded, then compare both
+  endpoints through the same node at the same protocol with the connect,
+  handshake, and total times split out.
+- Changed the recommended global fallback from `cp.cloudflare.com` to
+  `http://www.gstatic.com/generate_204`. The former is operated separately
+  from the Worker but shares AS13335, the same Anycast fabric, and the same
+  edge infrastructure, which is not fault-domain isolation. Noted that the
+  substitute must stay on plain HTTP to remain comparable, and that node
+  pools with mainland-China egress should use `http://captive.apple.com`
+  instead, where the Google endpoint may be unreachable.
+- Corrected the `/trace` example output. It previously showed `asn=13335`,
+  which is Cloudflare's own ASN and the single most misleading value the
+  field can take. The example now shows a proxy egress ASN, and the text
+  states that `asn` is the network Cloudflare sees the request arriving
+  from — seeing `13335` there means the measured path was not the intended
+  one.
+- Worker source and test suite are unchanged. This revision is limited to
+  measurement semantics and documentation, applied to both `README.md` and
+  `README.ja.md`.
+
+<details>
+<summary><strong>Previous repository milestones</strong></summary>
+
+### July 26, 2026
 
 - Revised the `tools/edge204/` HTTP 204 probe after an audit. Response headers
   were reduced to a single `Cache-Control: no-store`, trailing slashes are now
@@ -221,9 +260,6 @@ If you are operating in a regulated environment, under enterprise security contr
   `cf-ray` and the absence of `Age` are used instead.
 - Broadened the `.wrangler/` ignore rule to match at any depth, since Wrangler
   writes its cache into whichever directory it is invoked from.
-
-<details>
-<summary><strong>Previous repository milestones</strong></summary>
 
 ### July 25, 2026
 
@@ -304,6 +340,6 @@ The best engineering mood is steady attention: keep the tools honest, keep the a
     <br><br>
     <sub>Copyright © 2023-2026 YAGAMI</sub>
     <br>
-    <sub>Last updated: July 26, 2026 5:14 AM PDT (America/Los_Angeles)</sub>
+    <sub>Last updated: August 16, 2026 6:16 PM PDT (America/Los_Angeles)</sub>
   </p>
 </div>

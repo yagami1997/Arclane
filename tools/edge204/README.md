@@ -1,7 +1,7 @@
 # edge204 — CF Edge 204 Probe
 
 Version created: April 6, 2026 11:10 PM PDT
-Version updated: July 26, 2026 PDT
+Version updated: August 16, 2026 PDT
 
 Language:
 
@@ -84,16 +84,33 @@ Nodes that internally upgrade `http://` requests to HTTPS will show inflated lat
 
 These are limits of the method, not bugs in the Worker.
 
-**1. Anycast bias.** The probe measures the path from the node's egress to its *nearest Cloudflare PoP* — not to whatever you actually use. Providers that peer well with Cloudflare, or whose egress sits in a Cloudflare-adjacent network, score better than their general routing deserves. Ranking nodes by this number ranks them by proximity to Cloudflare. Treat it as one signal, not as a verdict.
+**1. Anycast bias.** The probe measures one specific chain — `Client → Proxy Node → Cloudflare Anycast Edge` — and not the node's general Internet quality. Two parts of that chain are not neutral. On the far side, providers that peer well with Cloudflare, or whose egress sits in a Cloudflare-adjacent network, score better than their general routing deserves; ranking nodes by this number ranks them by proximity to Cloudflare. On the near side, the client's own leg to the node is inside every reading, so the same node measured from two different client ISPs will not give you the same number. Treat it as one signal, not as a verdict.
 
-**2. Port 80 is not a clean channel.** Plain HTTP is subject to transparent-proxy interception and injection on some upstreams. More importantly, many proxy configurations route `:80` and `:443` through different outbound paths — in which case the path you measured is not the path you use. `/trace` will reveal the first problem via `colo`; the only way to detect the second is to compare against the HTTPS run above.
+**2. Comparisons are only valid between endpoints that cost the same number of round trips.** This is the failure mode most likely to mislead you, because it looks exactly like node degradation.
 
-**3. Single point of failure.** Every group pointed at this hostname fails together. If the zone, the Custom Domain, or your WAF rule misbehaves, the client marks *all* nodes as timed out and you lose connectivity, not just accuracy. Keep the global fallback on an endpoint you do not operate:
+A probe's reading is roughly `round trips × RTT of the weakest leg`. Anything that adds a round trip — a TLS handshake, an uncached DNS lookup, a redirect — costs almost nothing on a good link and a great deal on a bad one, and it amplifies non-linearly once there is loss. So a self-hosted hostname with a short TTL, measured against a universally cached endpoint like `www.gstatic.com`, can read 100 ms slower over a poor client link while both destinations are equally healthy.
+
+Before concluding that one endpoint's path is degraded, confirm the two probes are actually comparable:
+
+- **Same protocol.** Both plain HTTP, or both HTTPS. Verify with `curl -sv` that an `http://` URL is not being upgraded — see [Step 3](#step-3-confirm-zone-ssltls-settings).
+- **Same resolution cost.** A short-TTL hostname re-resolves on every interval; a long-TTL one does not. That difference lands in the reading.
+- **Cross-check with throughput.** RTT-sensitive readings and bandwidth are independent. Normal download speed alongside a slow 204 points at round-trip count, not at the node.
+
+**3. Port 80 is not a clean channel.** Plain HTTP is subject to transparent-proxy interception and injection on some upstreams. More importantly, many proxy configurations route `:80` and `:443` through different outbound paths — in which case the path you measured is not the path you use. `/trace` will reveal the first problem via `colo`; the only way to detect the second is to compare against the HTTPS run above.
+
+**4. Single point of failure.** Every group pointed at this hostname fails together. If the zone, the Custom Domain, or your WAF rule misbehaves, the client marks *all* nodes as timed out and you lose connectivity, not just accuracy. Keep the global fallback on an endpoint you do not operate, **in a different failure domain**:
 
 ```ini
 [General]
-proxy-test-url = http://cp.cloudflare.com/generate_204
+proxy-test-url = http://www.gstatic.com/generate_204
 ```
+
+`cp.cloudflare.com` is the tempting choice here and it is the wrong one. It is operated separately from your Worker, but it sits in the same AS13335, behind the same Anycast fabric, on the same edge infrastructure. That is not fault-domain isolation. Google's endpoint puts the safety net on a different ASN and a different operator, which is the entire point of having one.
+
+Two conditions on the substitute:
+
+- **Keep it plain HTTP**, matching the probe. A fallback with a different handshake cost is not comparable with the readings it is backing up — see limit 2 above.
+- **If your node pool includes mainland-China egress or known-poisoned resolvers**, `www.gstatic.com` may be unreachable there and will mark healthy nodes dead. Use `http://captive.apple.com` instead — Apple, AS714, still a clean cross-ASN split.
 
 Use this probe for the groups where you want a controlled reading, and keep a third-party URL as the safety net.
 
@@ -259,16 +276,18 @@ Expected: `204`, `204`, `405`, and a `cf-ray` that changes on every request with
 Expected output from `/trace` when called through a proxy node with a valid key:
 
 ```
-colo=LAX
-country=US
-city=Los Angeles
-asn=13335
-ray=8a1b2c3d4e5f6a7b-LAX
+colo=NRT
+country=JP
+city=Tokyo
+asn=2516
+ray=8a1b2c3d4e5f6a7b-NRT
 ip=<proxy egress IP>
 ts=<millisecond timestamp>
 ```
 
 Without a valid key the `ip` line is absent and everything else is identical.
+
+`asn` is the ASN **Cloudflare sees the request arriving from** — that is, your proxy node's egress network (`2516` is KDDI in the example above). It is not Cloudflare's own ASN. If you see `asn=13335` here, the request reached the Worker through something inside Cloudflare's network rather than directly from your node, and the reading describes a path you did not intend to measure.
 
 If `colo` is not the city you expected for that proxy node, the node's egress is routing through a different CF PoP. High latency in that case reflects a routing issue, not node degradation.
 
@@ -349,6 +368,25 @@ curl -x http://<NodeHost>:<Port> 'http://probe.example.com/trace?k=<TRACE_KEY>'
 If `colo` shows a PoP far from the node's listed location, the latency is a routing issue. If `colo` looks correct, the issue is the link between that node and its local CF PoP.
 
 If `colo` looks correct and latency is still high, re-run the HTTP-versus-HTTPS comparison from [Why HTTP, Not HTTPS](#why-http-not-https). A large gap points at a lossy link rather than a slow one.
+
+If the node still looks slow only against *this* probe while a third-party 204 through the same node reads normally, stop suspecting the node and check round-trip parity first:
+
+```bash
+# Is the http:// URL being upgraded? Any TLS or 301 line here is the answer.
+curl -sv -o /dev/null http://probe.example.com/generate_204 2>&1 \
+  | grep -iE 'ALPN|TLS|HTTP/|301|Location'
+
+# Same node, same protocol, both endpoints — split out where the time goes
+for u in http://probe.example.com/generate_204 http://www.gstatic.com/generate_204; do
+  echo "== $u"
+  for i in 1 2 3 4 5; do
+    curl -x http://<NodeHost>:<Port> -o /dev/null -s \
+      -w 'conn=%{time_connect} tls=%{time_appconnect} total=%{time_total}\n' "$u"
+  done
+done
+```
+
+A non-zero `tls` on a plain `http://` URL means the zone or the node upgraded the request, which adds a round trip this probe was designed not to pay. If both endpoints come back level here but the client still reports a gap, the extra round trip is being spent on DNS — see limit 2 in [What This Probe Cannot Tell You](#what-this-probe-cannot-tell-you).
 
 ## Files
 
