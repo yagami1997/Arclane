@@ -1,6 +1,8 @@
 #!name=🪽 Feishu / Lark＋豆包 実 IP・DIRECT 接続
-#!desc=🚀 Feishu / Lark と豆包の公式ドメインおよび CDN の DNS 応答を実 IP に保ち、製品専用トラフィックを DIRECT 接続にします。
+#!desc=🚀 Feishu / Lark と豆包の公式ドメインおよび CDN の DNS 応答を実 IP に保ち、製品専用トラフィックを DIRECT 接続にします。｜v1.1.0｜更新: 2026-08-22 JST
 #!system=mac
+# 🏷️ バージョン: 1.1.0
+# 📅 更新日: 2026-08-22 JST (Asia/Tokyo)
 
 # 🧭 DNS / Fake IP 対策：製品専用ドメインと製品名を含む CNAME のみに限定
 [General]
