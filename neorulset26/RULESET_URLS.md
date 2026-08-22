@@ -373,7 +373,7 @@ RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/r
 **Routing**: Direct; load before Bytedance
 
 ```
-RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/feishu.list,DIRECT
+RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/feishu.list,DIRECT,extended-matching
 ```
 
 ---
@@ -484,7 +484,7 @@ RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/r
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/paypal.list,PayPal
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/common.list,Common
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/socialsite.list,Social
-RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/feishu.list,DIRECT
+RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/feishu.list,DIRECT,extended-matching
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/bytedance.list,Bytedance
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/hulo.list,HULO
 

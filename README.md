@@ -159,6 +159,8 @@ Representative maintained files include:
 - `neorulset26/rules/ai.list`
 - `neorulset26/rules/crypto.list`
 - `neorulset26/rules/messenger.list`
+- `neorulset26/modules/feishu-fix.sgmodule`
+- `neorulset26/modules/feishu-fix-ios.sgmodule`
 
 Additional structured materials live under:
 
@@ -198,7 +200,23 @@ If you are operating in a regulated environment, under enterprise security contr
 
 ## Changelog
 
-### Latest: August 16, 2026
+### Latest: August 22, 2026
+
+- Expanded the platform-specific Feishu/Lark compatibility modules with the
+  current product-domain set, scoped real-IP handling for observed CNAME
+  targets, and direct routing for the Lark CDN.
+- Added direct routing and Fake-IP compatibility for Doubao product domains.
+- Replaced broad ByteDance infrastructure wildcards with product-qualified
+  CNAME patterns. The modules add no shared DNS or domain-routing rules for
+  general Douyin or Toutiao traffic and do not change the existing Bytedance
+  or TikTok rule sets.
+- Kept the macOS and iOS modules separate: only the macOS module contains
+  application process rules. Both modules remain free of `FINAL` rules and
+  proxy policy groups.
+- Added installation and maintenance notes in
+  [`neorulset26/modules/README.md`](./neorulset26/modules/README.md).
+
+### August 16, 2026
 
 - Corrected the stated measurement boundary of the `tools/edge204/` probe.
   The reading covers the whole chain from client through proxy node to the

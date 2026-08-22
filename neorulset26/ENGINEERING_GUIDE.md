@@ -192,6 +192,11 @@ neorulset26/
 │   ├── hulo.list                 ← Xiaohongshu, Zhihu (Direct)
 │   └── discord.list              ← (Legacy, superseded by messenger.list)
 │
+├── modules/                      ← Platform-specific Surge compatibility modules
+│   ├── feishu-fix.sgmodule       ← macOS Feishu/Lark and Doubao real-IP/DIRECT fixes
+│   ├── feishu-fix-ios.sgmodule   ← iOS Feishu/Lark and Doubao real-IP/DIRECT fixes
+│   └── README.md                  ← Installation and scope notes
+│
 └── ruleset/                      ← General-purpose configuration artifacts
     ├── AdBlock.list
     ├── Apple.list
