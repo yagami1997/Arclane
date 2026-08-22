@@ -36,3 +36,7 @@ A standalone `.sgmodule` is not a complete Surge profile. Validate its static
 structure directly, or merge it into a temporary complete profile before
 using `surge-cli --check`; do not add a `FINAL` rule merely to satisfy the
 standalone checker.
+
+---
+
+*Last updated: August 21, 2026 6:59 PM PDT (America/Los_Angeles)*

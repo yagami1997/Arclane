@@ -200,7 +200,7 @@ If you are operating in a regulated environment, under enterprise security contr
 
 ## Changelog
 
-### Latest: August 22, 2026
+### Latest: August 21, 2026
 
 - Expanded the platform-specific Feishu/Lark compatibility modules with the
   current product-domain set, scoped real-IP handling for observed CNAME
@@ -358,6 +358,6 @@ The best engineering mood is steady attention: keep the tools honest, keep the a
     <br><br>
     <sub>Copyright © 2023-2026 YAGAMI</sub>
     <br>
-    <sub>Last updated: August 16, 2026 6:16 PM PDT (America/Los_Angeles)</sub>
+    <sub>Last updated: August 21, 2026 6:59 PM PDT (America/Los_Angeles)</sub>
   </p>
 </div>

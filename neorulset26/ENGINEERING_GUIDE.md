@@ -325,5 +325,5 @@ The configuration artifacts in `neorulset26/` are text files. How they are used,
 
 ---
 
-*Last updated: April 2026*
+*Last updated: August 21, 2026 6:59 PM PDT (America/Los_Angeles)*
 *Repository: github.com/yagami1997/Arclane*

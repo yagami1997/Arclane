@@ -602,4 +602,4 @@ FINAL,Others
 
 ---
 
-*Last updated: April 2026 — Arclane configuration artifact reference*
+*Last updated: August 21, 2026 6:59 PM PDT (America/Los_Angeles) — Arclane configuration artifact reference*
