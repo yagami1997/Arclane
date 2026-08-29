@@ -200,7 +200,30 @@ If you are operating in a regulated environment, under enterprise security contr
 
 ## Changelog
 
-### Latest: August 21, 2026
+### Latest: August 28, 2026
+
+- Investigated recurring Feishu/Lark blank pages, slow external Wiki content,
+  and Chromium `ERR_TIMED_OUT (-7)` failures under Surge Enhanced Mode.
+- Confirmed that the compatibility problem had two separate layers: several
+  product-qualified Feishu CNAME endpoints still received Fake IP responses,
+  while application-wide macOS `DIRECT` rules also captured third-party web
+  resources embedded inside Feishu/Lark and caused direct-connect timeouts.
+- Released v1.2.0 of the macOS module. It replaces blanket application routing
+  with `PROCESS-NAME` plus an inline shared-infrastructure ruleset, preserving
+  direct routing for observed ByteDance dependencies without overriding the
+  main profile's Google and external-site policies.
+- Released v1.2.0 of the iOS/iPadOS module with matching DNS/CNAME coverage and
+  direct product routing, while retaining its platform-appropriate design with
+  no macOS process rules.
+- Added narrowly qualified Feishu and Feishu CDN CNAME patterns for
+  `cdnbuild.net`, `bytedns1.com`, `cdngslb.com`, and `queniusz.com`, plus the
+  observed Feishu creative CDN endpoint. Broad provider suffixes remain absent
+  from global module rules.
+- Verified Mac/iOS parity across 71 `always-real-ip` tokens, checked the macOS
+  logical rules and six iOS CNAME routes, and validated temporary complete
+  profiles with the native `surge-cli --check` command.
+
+### August 21, 2026
 
 - Expanded the platform-specific Feishu/Lark compatibility modules with the
   current product-domain set, scoped real-IP handling for observed CNAME
@@ -358,6 +381,6 @@ The best engineering mood is steady attention: keep the tools honest, keep the a
     <br><br>
     <sub>Copyright © 2023-2026 YAGAMI</sub>
     <br>
-    <sub>Last updated: August 21, 2026 6:59 PM PDT (America/Los_Angeles)</sub>
+    <sub>Last updated: August 28, 2026 7:29 PM PDT (America/Los_Angeles)</sub>
   </p>
 </div>
