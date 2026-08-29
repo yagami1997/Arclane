@@ -8,6 +8,11 @@ Doubao compatibility under Fake-IP and Enhanced Mode.
 Choose the module that matches the Surge platform. Do not install both on the
 same device.
 
+Before installation or update, review the repository-wide
+[usage and safety notice](../../docs/guides/usage-and-safety.md) and the
+[legal boundary statement](../../docs/legal/LEGAL.md). Preserve a known-good
+profile and a tested rollback path.
+
 - macOS: <https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/feishu-fix.sgmodule>
 - iOS/iPadOS: <https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/feishu-fix-ios.sgmodule>
 
@@ -72,4 +77,4 @@ standalone checker.
 
 ---
 
-*Last updated: August 28, 2026 7:29 PM PDT (America/Los_Angeles)*
+*Last updated: August 28, 2026 7:49 PM PDT (America/Los_Angeles)*

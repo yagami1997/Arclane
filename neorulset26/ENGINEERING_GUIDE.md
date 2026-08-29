@@ -321,9 +321,9 @@ neorulset26/
 
 This document describes the routing classification architecture studied and maintained in this repository. It is shared as a research and maintenance reference.
 
-The configuration artifacts in `neorulset26/` are text files. How they are used, by whom, in what software, under what network conditions, and in which jurisdictions is entirely the responsibility of the individual who chooses to review or adapt them. No warranty is made that any configuration artifact will successfully reach, stabilize access to, or improve access to any third-party service. See `docs/legal/LEGAL.md` for the full responsibility boundary statement.
+The configuration artifacts in `neorulset26/` are text files. How they are used, by whom, in what software, under what network conditions, and in which jurisdictions is entirely the responsibility of the individual who chooses to review or adapt them. No warranty is made that any configuration artifact will successfully reach, stabilize access to, or improve access to any third-party service. See [`../docs/guides/usage-and-safety.md`](../docs/guides/usage-and-safety.md) for operational boundaries and [`../docs/legal/LEGAL.md`](../docs/legal/LEGAL.md) for the full responsibility boundary statement.
 
 ---
 
-*Last updated: August 21, 2026 6:59 PM PDT (America/Los_Angeles)*
+*Last updated: August 28, 2026 7:49 PM PDT (America/Los_Angeles)*
 *Repository: github.com/yagami1997/Arclane*

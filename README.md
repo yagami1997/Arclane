@@ -23,8 +23,9 @@ Some artifacts in this repository are compatible with Surge. That compatibility 
 
 The repository currently contains four main asset types:
 
-- routing configuration artifacts under `neorulset26/`
-- shared compatibility modules under `modules/`
+- routing configuration artifacts and mainline-specific modules under
+  `neorulset26/`
+- older repository-wide shared modules under `modules/`
 - operational reference utilities under `tools/`
 - research, migration, and responsibility documentation under `docs/`
 
@@ -65,7 +66,10 @@ Its main purpose is not:
 ## Repository Areas
 
 - `neorulset26/`: the active configuration mainline and supporting references
-- `modules/`: shared compatibility modules such as `*.sgmodule`
+- `neorulset26/modules/`: platform-specific modules released with the active
+  configuration mainline
+- `modules/`: older repository-wide shared modules, maintained separately from
+  the active mainline
 - `tools/`: reference operational utilities and self-hosted support components
 - `docs/`: legal, development, migration, and repository documentation
 
@@ -73,9 +77,9 @@ Current top-level layout:
 
 ```text
 /
-├── neorulset26/        # active configuration mainline
+├── neorulset26/        # active rules and mainline-specific modules
 ├── tools/              # reference operational helpers
-├── modules/            # compatibility modules
+├── modules/            # older repository-wide shared modules
 └── docs/               # legal and project documentation
 ```
 
@@ -106,7 +110,9 @@ If you are trying to understand the project, start with the design and structure
 - Repository layout notes: [`docs/development/repository-layout.md`](./docs/development/repository-layout.md)
 - Collaboration notes: [`docs/development/collaboration-guide.md`](./docs/development/collaboration-guide.md)
 - Legal boundary statement: [`docs/legal/LEGAL.md`](./docs/legal/LEGAL.md)
-- Modules overview: [`modules/README.md`](./modules/README.md)
+- Usage and safety notice: [`docs/guides/usage-and-safety.md`](./docs/guides/usage-and-safety.md)
+- Shared modules overview: [`modules/README.md`](./modules/README.md)
+- Mainline compatibility modules: [`neorulset26/modules/README.md`](./neorulset26/modules/README.md)
 - Tools overview: [`tools/README.md`](./tools/README.md)
 
 <details>
@@ -120,7 +126,8 @@ If you are trying to understand the project, start with the design and structure
 
 ### If you are reviewing compatibility modules
 
-- Start from [`modules/README.md`](./modules/README.md)
+- Start from [`neorulset26/modules/README.md`](./neorulset26/modules/README.md)
+- Read [`docs/guides/usage-and-safety.md`](./docs/guides/usage-and-safety.md)
 - Treat modules as separate compatibility artifacts, not as the project's primary identity
 
 ### If you are reviewing operational helpers
@@ -222,6 +229,13 @@ If you are operating in a regulated environment, under enterprise security contr
 - Verified Mac/iOS parity across 71 `always-real-ip` tokens, checked the macOS
   logical rules and six iOS CNAME routes, and validated temporary complete
   profiles with the native `surge-cli --check` command.
+- Refreshed the legal boundary and added a repository-wide usage and safety
+  notice covering review, backup, rollback, DNS/routing effects, diagnostic
+  metadata, and the limits of remote publication.
+- Clarified ownership between older shared modules in `modules/` and active
+  mainline-specific modules in `neorulset26/modules/`. The two ASN-based legacy
+  modules are now documented as under retirement review and are not recommended
+  for new installations.
 
 <details>
 <summary><strong>Previous repository milestones</strong></summary>
@@ -361,6 +375,7 @@ If you are operating in a regulated environment, under enterprise security contr
 
 - License: [MIT License](./LICENSE)
 - Legal boundary: [`docs/legal/LEGAL.md`](./docs/legal/LEGAL.md)
+- Usage and safety: [`docs/guides/usage-and-safety.md`](./docs/guides/usage-and-safety.md)
 - Contribution standard: prefer accuracy, maintainability, traceable changes, and risk-aware documentation
 
 ---
@@ -381,6 +396,6 @@ The best engineering mood is steady attention: keep the tools honest, keep the a
     <br><br>
     <sub>Copyright © 2023-2026 YAGAMI</sub>
     <br>
-    <sub>Last updated: August 28, 2026 7:29 PM PDT (America/Los_Angeles)</sub>
+    <sub>Last updated: August 28, 2026 7:49 PM PDT (America/Los_Angeles)</sub>
   </p>
 </div>

@@ -3,7 +3,20 @@
 > **Purpose**: This document lists the raw artifact URLs organized by policy group for the `neorulset26` configuration mainline. It is a reference for understanding file organization and classification structure.
 > Base path: `https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26`
 >
-> How any of these artifacts is used, in what software, under what conditions, and in which jurisdiction is the sole responsibility of the individual reviewing or adapting them. See `docs/legal/LEGAL.md` for the full responsibility boundary statement.
+> How any of these artifacts is used, in what software, under what conditions, and in which jurisdiction is the sole responsibility of the individual reviewing or adapting them. See [`../docs/guides/usage-and-safety.md`](../docs/guides/usage-and-safety.md) for operational boundaries and [`../docs/legal/LEGAL.md`](../docs/legal/LEGAL.md) for the full responsibility boundary statement.
+
+## Related Surge Compatibility Modules
+
+These are platform-specific module artifacts, not rule-set replacements. Use
+only the variant matching the target platform and review the module README
+before installation or update.
+
+- macOS Feishu/Lark compatibility module:
+  <https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/feishu-fix.sgmodule>
+- iOS/iPadOS Feishu/Lark compatibility module:
+  <https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/feishu-fix-ios.sgmodule>
+- Scope and installation notes:
+  [`modules/README.md`](./modules/README.md)
 
 ---
 
@@ -602,4 +615,4 @@ FINAL,Others
 
 ---
 
-*Last updated: August 21, 2026 6:59 PM PDT (America/Los_Angeles) — Arclane configuration artifact reference*
+*Last updated: August 28, 2026 7:49 PM PDT (America/Los_Angeles) — Arclane configuration artifact reference*

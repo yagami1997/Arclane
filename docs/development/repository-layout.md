@@ -9,7 +9,9 @@ This repository was refactored to reduce the root surface and make ownership exp
 - `tools/`
   Online tools, operational utilities, and helper subprojects.
 - `modules/`
-  Shared Surge modules. All `.sgmodule` files belong here.
+  Repository-wide shared Surge modules.
+- `neorulset26/modules/`
+  Platform-specific modules maintained as part of the active 2026 mainline.
 - `docs/`
   Development, usage, migration, and reference documents.
 - `openclash-archive/`
@@ -19,7 +21,9 @@ This repository was refactored to reduce the root surface and make ownership exp
 
 - New rules belong in `neorulset26/`.
 - New tooling belongs in `tools/`.
-- New modules belong in `modules/`.
+- New repository-wide shared modules belong in `modules/`.
+- New mainline-specific modules belong in `neorulset26/modules/` when their
+  rules and release lifecycle are owned by `neorulset26/`.
 - New repository documentation belongs in `docs/`.
 - Do not add new business files to the repository root.
 

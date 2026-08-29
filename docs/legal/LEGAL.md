@@ -1,6 +1,6 @@
 # Legal Boundary Statement
 
-*Last updated: April 14, 2026*
+*Last updated: August 28, 2026 (PDT)*
 
 ## 1. Project Characterization
 
@@ -36,6 +36,14 @@ That responsibility may include:
 - conducting your own legal and security review before deploying any reference tool in a production or enterprise environment
 - obtaining independent legal counsel where uncertainty remains
 
+Users are also responsible for the technical consequences of importing or
+updating configuration artifacts. Before use, review the exact rules and DNS
+behavior, preserve a recoverable profile backup, confirm that the artifact is
+appropriate for the target platform, and maintain a tested rollback path.
+Remote publication through a raw-file URL does not make an artifact a managed
+service and does not guarantee continued availability, integrity, compatibility,
+or notice of future changes.
+
 The inclusion of a domain in a configuration file does not grant permission to access, route, mirror, test, or use the associated service in any particular way. It does not authorize conduct that may breach platform rules, contractual restrictions, geographic controls, or applicable law.
 
 ## 4. Jurisdictional Compliance Notice
@@ -61,7 +69,7 @@ Relevant frameworks may include:
 
 - The **Digital Services Act (DSA)**: where a user or organization deploys or operates services that interact with repository artifacts in a way that constitutes regulated intermediary activity, applicable DSA obligations — including notice handling, illegal-content response, and platform accountability rules — may apply to that operator.
 - The **General Data Protection Regulation (GDPR)**: users who process personal data through routing configurations, including IP-level traffic data, must independently assess their obligations as controller or processor, including lawful basis, data minimization, security, and cross-border transfer requirements.
-- **NIS2 Directive**: users operating critical infrastructure or essential services must assess whether their use of self-hosted network tooling satisfies applicable cybersecurity risk-management and incident-reporting obligations.
+- **NIS2 Directive and national implementing law**: Directive (EU) 2022/2555 is implemented through member-state law, and transposition status and requirements differ by jurisdiction. Potentially covered entities must assess the law applicable where they operate rather than assuming that a repository artifact determines their status or obligations.
 - **ePrivacy rules**: configurations that interact with communications metadata may implicate applicable ePrivacy obligations depending on deployment context.
 
 Users must independently confirm compliance and consult qualified legal counsel in their jurisdiction if uncertainty remains.
@@ -72,7 +80,7 @@ Users must independently evaluate whether their review, adaptation, import, depl
 
 Relevant frameworks may include:
 
-- The **Cybersecurity Law of the People's Republic of China (网络安全法)**: network operators and users of network tools must assess compliance with applicable security obligations, real-name requirements, and infrastructure rules.
+- The **Cybersecurity Law of the People's Republic of China (网络安全法)**, as amended on October 28, 2025 and effective from January 1, 2026: network operators and users of network tools must assess compliance with the current security, data, and infrastructure obligations applicable to their own role and deployment.
 - The **Data Security Law (数据安全法)** and the **Personal Information Protection Law (个人信息保护法)**: users who handle data through configured routing environments must independently assess classification, protection, and cross-border transfer obligations applicable to their context.
 - **Telecommunications regulations and internet service rules**: the use of routing software and self-hosted network tools may be subject to licensing, approval, or operational requirements under applicable telecommunications administration rules, including the **Measures for the Administration of Internet Information Services (互联网信息服务管理办法)** and related implementing regulations.
 - **Network routing and cross-border traffic**: the legal status of network routing configurations that affect cross-border traffic is subject to administrative interpretation and enforcement discretion. Any claimed safe-harbor position is conditional rather than automatic. It may be weakened or lost where a user has actual knowledge of unlawful use, materially participates in prohibited conduct, or otherwise falls outside the limits of passive personal configuration.
@@ -85,7 +93,7 @@ Users must independently evaluate whether their review, adaptation, import, depl
 
 Relevant frameworks may include:
 
-- The **Act on the Limitation of Liability for Damages of Specified Telecommunications Service Providers and the Right to Disclose Identification Information of the Senders (プロバイダ責任制限法)**: where a user operates or deploys services using repository artifacts in a way that constitutes specified telecommunications service provision, applicable notice, response, and disclosure obligations may apply to that operator.
+- The **Information Distribution Platform Act (情報流通プラットフォーム対処法)**, the amended framework effective from April 1, 2025: where a user separately operates a covered large-scale platform, applicable transparency, response, removal-policy, or sender-information disclosure duties may apply to that operator. Publication of this repository alone is not represented as creating that status.
 - The **Unauthorized Computer Access Law (不正アクセス行為の禁止等に関する法律)**: users must not use routing configuration to facilitate unauthorized access to computer systems or to circumvent access controls in ways that create exposure under this law.
 - The **Act on Protection of Personal Information (個人情報の保護に関する法律, APPI)**: users who handle personal information through configured routing environments must independently assess applicable protection and handling obligations.
 - **Telecommunications Business Act (電気通信事業法)**: users operating self-hosted network services or relays in Japan should assess whether applicable telecommunications business registration or notification obligations may apply.
@@ -143,6 +151,22 @@ This document is provided for project-positioning and general risk-allocation pu
 
 Before adapting, deploying, or using repository materials in a context with legal uncertainty — including regulated industries, cross-border environments, or jurisdictions with sensitive network-tool restrictions — users should consult qualified local counsel.
 
-## 9. Copyright
+## 9. Source Currency
+
+The jurisdiction summaries above are deliberately high-level and non-exhaustive.
+They may become outdated as statutes, implementing rules, enforcement practice,
+sanctions programs, platform terms, and official interpretations change. Useful
+official starting points reviewed for this revision include:
+
+- [China's National People's Congress notice on the 2025 Cybersecurity Law amendment](https://www.npc.gov.cn/npc/c2/c30834/202510/t20251028_449076.html)
+- [Cybersecurity Administration of China publication of the amended Cybersecurity Law](https://www.cac.gov.cn/2025-12/29/c_1768735112911946.htm)
+- [EUR-Lex text of Directive (EU) 2022/2555](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32022L2555)
+- [European Commission NIS2 transposition status](https://digital-strategy.ec.europa.eu/en/policies/nis-transposition)
+- [Japanese government overview of the Information Distribution Platform Act](https://www.bunka.go.jp/seisaku/bunkashingikai/chosakuken/seisaku/r06_04/pdf/94158101_01.pdf)
+
+These links are references, not a substitute for checking the law and official
+guidance applicable at the time and place of use.
+
+## 10. Copyright
 
 Copyright © 2023–2026 YAGAMI. All rights reserved except as granted by the MIT License included in this repository.

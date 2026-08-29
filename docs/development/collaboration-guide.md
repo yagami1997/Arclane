@@ -6,7 +6,9 @@ This repository now follows a simple placement model.
 
 - New rules go to `neorulset26/`.
 - New tools and utility projects go to `tools/`.
-- New Surge modules go to `modules/`.
+- Repository-wide shared Surge modules go to `modules/`.
+- Mainline-specific modules go to `neorulset26/modules/` when they are released
+  and maintained with the active ruleset line.
 - New repository docs go to `docs/`.
 
 ## What Not To Do

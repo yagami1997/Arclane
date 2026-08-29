@@ -13,6 +13,10 @@ This directory is the repository-wide documentation entry point.
 
 ## Recommended Reading
 
+- `legal/LEGAL.md`
+- `guides/usage-and-safety.md`
 - `development/repository-layout.md`
 - `development/collaboration-guide.md`
 - `reference/rules.md`
+- `../neorulset26/modules/README.md`
+- `../modules/README.md`
