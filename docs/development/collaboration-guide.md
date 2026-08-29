@@ -6,9 +6,8 @@ This repository now follows a simple placement model.
 
 - New rules go to `neorulset26/`.
 - New tools and utility projects go to `tools/`.
-- Repository-wide shared Surge modules go to `modules/`.
-- Mainline-specific modules go to `neorulset26/modules/` when they are released
-  and maintained with the active ruleset line.
+- New Surge modules go to `neorulset26/modules/` and are maintained with the
+  active ruleset line.
 - New repository docs go to `docs/`.
 
 ## What Not To Do
@@ -20,6 +19,10 @@ This repository now follows a simple placement model.
 ## Legacy Handling
 
 The former `archive/legacy/` transition surface was fully removed on May 16, 2026 (PDT). `neorulset26/` is now the only rule mainline; do not reintroduce legacy paths or mirror retired rule files back into the repository.
+
+The former root `modules/` directory and its ASN-wide China/WeChat workarounds
+were removed on August 28, 2026 (PDT). Do not recreate that parallel module
+surface; use `neorulset26/modules/` for maintained modules.
 
 ## Sensitive Local Assets
 

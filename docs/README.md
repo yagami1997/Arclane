@@ -19,4 +19,3 @@ This directory is the repository-wide documentation entry point.
 - `development/collaboration-guide.md`
 - `reference/rules.md`
 - `../neorulset26/modules/README.md`
-- `../modules/README.md`

@@ -21,11 +21,10 @@ This repository is a third-party research and maintenance workspace for text-bas
 
 Some artifacts in this repository are compatible with Surge. That compatibility does not make this project a Surge tool, plugin, service, official resource, or affiliated ecosystem component. Surge compatibility is a technical fact about certain files here, not the identity of the repository itself.
 
-The repository currently contains four main asset types:
+The repository currently contains three main asset types:
 
 - routing configuration artifacts and mainline-specific modules under
   `neorulset26/`
-- older repository-wide shared modules under `modules/`
 - operational reference utilities under `tools/`
 - research, migration, and responsibility documentation under `docs/`
 
@@ -68,8 +67,6 @@ Its main purpose is not:
 - `neorulset26/`: the active configuration mainline and supporting references
 - `neorulset26/modules/`: platform-specific modules released with the active
   configuration mainline
-- `modules/`: older repository-wide shared modules, maintained separately from
-  the active mainline
 - `tools/`: reference operational utilities and self-hosted support components
 - `docs/`: legal, development, migration, and repository documentation
 
@@ -79,7 +76,6 @@ Current top-level layout:
 /
 ├── neorulset26/        # active rules and mainline-specific modules
 ├── tools/              # reference operational helpers
-├── modules/            # older repository-wide shared modules
 └── docs/               # legal and project documentation
 ```
 
@@ -111,7 +107,6 @@ If you are trying to understand the project, start with the design and structure
 - Collaboration notes: [`docs/development/collaboration-guide.md`](./docs/development/collaboration-guide.md)
 - Legal boundary statement: [`docs/legal/LEGAL.md`](./docs/legal/LEGAL.md)
 - Usage and safety notice: [`docs/guides/usage-and-safety.md`](./docs/guides/usage-and-safety.md)
-- Shared modules overview: [`modules/README.md`](./modules/README.md)
 - Mainline compatibility modules: [`neorulset26/modules/README.md`](./neorulset26/modules/README.md)
 - Tools overview: [`tools/README.md`](./tools/README.md)
 
@@ -232,10 +227,12 @@ If you are operating in a regulated environment, under enterprise security contr
 - Refreshed the legal boundary and added a repository-wide usage and safety
   notice covering review, backup, rollback, DNS/routing effects, diagnostic
   metadata, and the limits of remote publication.
-- Clarified ownership between older shared modules in `modules/` and active
-  mainline-specific modules in `neorulset26/modules/`. The two ASN-based legacy
-  modules are now documented as under retirement review and are not recommended
-  for new installations.
+- Removed the legacy root `modules/` directory. Its `ASN.China.sgmodule` and
+  `WeChat.sgmodule` files were historical workarounds for WeChat in-app image
+  sending failures under proxy/Fake-IP conditions, but their broad carrier and
+  Tencent ASN-wide `DIRECT` rules were not product-specific and could not
+  reliably address unresolved hostname traffic because they used `no-resolve`.
+  Maintained modules now live only under `neorulset26/modules/`.
 
 <details>
 <summary><strong>Previous repository milestones</strong></summary>
@@ -396,6 +393,6 @@ The best engineering mood is steady attention: keep the tools honest, keep the a
     <br><br>
     <sub>Copyright © 2023-2026 YAGAMI</sub>
     <br>
-    <sub>Last updated: August 28, 2026 7:49 PM PDT (America/Los_Angeles)</sub>
+    <sub>Last updated: August 28, 2026 7:54 PM PDT (America/Los_Angeles)</sub>
   </p>
 </div>

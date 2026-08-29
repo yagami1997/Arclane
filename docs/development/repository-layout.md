@@ -8,10 +8,9 @@ This repository was refactored to reduce the root surface and make ownership exp
   The only active ruleset mainline. Do not rename or reorganize it casually.
 - `tools/`
   Online tools, operational utilities, and helper subprojects.
-- `modules/`
-  Repository-wide shared Surge modules.
 - `neorulset26/modules/`
-  Platform-specific modules maintained as part of the active 2026 mainline.
+  The only maintained Surge module directory. Platform-specific modules are
+  released with the active 2026 mainline.
 - `docs/`
   Development, usage, migration, and reference documents.
 - `openclash-archive/`
@@ -21,15 +20,18 @@ This repository was refactored to reduce the root surface and make ownership exp
 
 - New rules belong in `neorulset26/`.
 - New tooling belongs in `tools/`.
-- New repository-wide shared modules belong in `modules/`.
-- New mainline-specific modules belong in `neorulset26/modules/` when their
-  rules and release lifecycle are owned by `neorulset26/`.
+- New maintained modules belong in `neorulset26/modules/` and must follow the
+  active mainline's validation and release lifecycle.
 - New repository documentation belongs in `docs/`.
 - Do not add new business files to the repository root.
 
 ## Legacy Policy
 
 The former root `*.list` files and the old `ruleset/` tree are no longer part of the repository. They were retired from the `archive/legacy/` transition surface and fully removed on May 16, 2026 (PDT). Use `neorulset26/` for all rule references; historical publication paths are no longer mirrored in this repository.
+
+The former root `modules/` directory was removed on August 28, 2026 (PDT).
+Its ASN-wide China and WeChat workarounds are not mirrored; maintained modules
+are published only from `neorulset26/modules/`.
 
 ## Root Directory Policy
 
