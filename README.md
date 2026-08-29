@@ -223,6 +223,9 @@ If you are operating in a regulated environment, under enterprise security contr
   logical rules and six iOS CNAME routes, and validated temporary complete
   profiles with the native `surge-cli --check` command.
 
+<details>
+<summary><strong>Previous repository milestones</strong></summary>
+
 ### August 21, 2026
 
 - Expanded the platform-specific Feishu/Lark compatibility modules with the
@@ -274,9 +277,6 @@ If you are operating in a regulated environment, under enterprise security contr
 - Worker source and test suite are unchanged. This revision is limited to
   measurement semantics and documentation, applied to both `README.md` and
   `README.ja.md`.
-
-<details>
-<summary><strong>Previous repository milestones</strong></summary>
 
 ### July 26, 2026
 
