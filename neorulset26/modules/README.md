@@ -17,18 +17,21 @@ Both modules:
 
 - append Feishu/Lark and Doubao product domains to `always-real-ip`;
 - include narrowly qualified CNAME patterns observed behind those products;
+- route those product-qualified CNAME endpoints directly;
 - route the Lark product CDN and Doubao product domain directly;
 - load the dedicated `feishu.list` rule set with `DIRECT` and
   `extended-matching`;
 - contain no `FINAL` rule and define no proxy policy group.
 
-The macOS module additionally routes the installed Lark and Feishu application
-processes directly. The iOS module contains no macOS process paths.
+The macOS module additionally uses process-scoped logical rules to route only
+the ByteDance shared infrastructure observed inside the installed Lark and
+Feishu applications directly. External sites opened inside the applications
+continue through the main profile's normal rules. The iOS module contains no
+macOS process paths or process rules.
 
-Broad shared ByteDance suffixes are intentionally excluded. General Douyin,
-Toutiao, and TikTok traffic in standalone applications or browsers remains
-controlled by the existing Bytedance and TikTok rule sets. On macOS, a link
-opened inside Lark or Feishu follows the module's application process rule.
+Broad shared ByteDance suffixes are intentionally excluded from global module
+rules. General Douyin, Toutiao, and TikTok traffic in standalone applications
+or browsers remains controlled by the existing Bytedance and TikTok rule sets.
 
 ## Validation
 
@@ -39,4 +42,4 @@ standalone checker.
 
 ---
 
-*Last updated: August 21, 2026 6:59 PM PDT (America/Los_Angeles)*
+*Last updated: August 29, 2026 JST (Asia/Tokyo)*
