@@ -12,8 +12,7 @@ profiles, and operational helper code published by Arclane. It supplements the
 - Back up the working profile and keep a tested way to disable or remove the
   artifact.
 - Use only the Real IP module variant intended for the target platform. Do not
-  install both platform variants on the same device, and do not enable a new
-  Real IP module together with a legacy `feishu-fix` module.
+  install both platform variants on the same device.
 - Check the artifact against the complete local profile. A standalone syntax
   check does not prove DNS quality, routing correctness, service availability,
   or application compatibility.

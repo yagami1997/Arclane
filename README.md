@@ -216,9 +216,9 @@ If you are operating in a regulated environment, under enterprise security contr
 - Added exact Real IP handling for `auth.openai.com` so SSRF and anti-rebinding
   protection does not receive Surge's `198.18.0.0/15` Fake IP response. Its
   outbound policy remains controlled by the consuming profile.
-- Preserved the validated Feishu/Lark/Doubao direct-routing behavior and kept
-  the previous module URLs temporarily available for staged migration and
-  rollback.
+- Preserved the validated Feishu/Lark/Doubao direct-routing behavior and
+  retired the superseded product-specific module files after successful live
+  migration to the unified Real IP modules.
 
 <details>
 <summary><strong>Previous repository milestones</strong></summary>

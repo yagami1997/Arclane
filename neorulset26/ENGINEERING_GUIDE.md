@@ -196,8 +196,6 @@ neorulset26/
 │   ├── realip.list               ← Canonical categorized Real IP host catalog
 │   ├── realip.sgmodule           ← Generated macOS Real IP and scoped routing fixes
 │   ├── realip-ios.sgmodule       ← Generated iOS/iPadOS Real IP and routing fixes
-│   ├── feishu-fix.sgmodule       ← Temporary legacy migration artifact
-│   ├── feishu-fix-ios.sgmodule   ← Temporary legacy migration artifact
 │   └── README.md                  ← Installation and scope notes
 │
 └── ruleset/                      ← General-purpose configuration artifacts

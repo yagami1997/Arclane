@@ -74,8 +74,6 @@ is canonical maintenance input and is not a Surge `RULE-SET` artifact.
 ```text
 https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/realip.sgmodule
 https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/realip-ios.sgmodule
-https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/feishu-fix.sgmodule
-https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/feishu-fix-ios.sgmodule
 ```
 
 Canonical maintenance source, not a Surge `RULE-SET` URL:

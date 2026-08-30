@@ -1,148 +1,179 @@
 # Surge Real IP Modules
 
-This directory publishes platform-specific Surge modules that centralize
-verified `always-real-ip` compatibility handling under Fake IP and Enhanced
-Mode. Each device should install only the module matching its platform.
+This directory is the single publication surface for Arclane's maintained
+Surge Real IP modules. The modules centralize verified `always-real-ip`
+compatibility handling for Fake IP and Enhanced Mode while keeping outbound
+routing decisions explicit and reviewable.
 
-## Installation
+## Published Artifacts
 
-- macOS: <https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/realip.sgmodule>
-- iOS/iPadOS: <https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/realip-ios.sgmodule>
+| Platform | Module | Raw URL |
+|---|---|---|
+| macOS | [`realip.sgmodule`](./realip.sgmodule) | <https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/realip.sgmodule> |
+| iOS/iPadOS | [`realip-ios.sgmodule`](./realip-ios.sgmodule) | <https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/realip-ios.sgmodule> |
 
-Before installation or update, review the repository-wide
-[usage and safety notice](../../docs/guides/usage-and-safety.md) and the
-[legal boundary statement](../../docs/legal/LEGAL.md). Preserve a known-good
-profile and a tested rollback path.
+Install only the variant matching the target platform.
 
-Do not enable a new Real IP module together with either legacy `feishu-fix`
-module. Disable the legacy module only after the new module is available and
-has passed validation on the target device.
+Supporting files:
 
-## Architecture
+- [`realip.list`](./realip.list): categorized canonical host catalog;
+- [`../../tools/realip/build.py`](../../tools/realip/build.py): deterministic
+  validator and renderer;
+- [`../../tools/realip/README.md`](../../tools/realip/README.md): maintainer
+  workflow and validation notes.
 
-The categorized canonical host catalog is [`realip.list`](./realip.list). It is
-maintenance input, not a Surge rule set, and must not be loaded with
-`RULE-SET`.
+`realip.list` is source data. It is not a Surge rule set and must not be loaded
+with `RULE-SET`.
 
-[`../../tools/realip/build.py`](../../tools/realip/build.py) validates the
-catalog and renders the same generated `always-real-ip` value into both
-platform modules. The generated value must not be edited manually.
+## What the Module Solves
 
-The initial v2.0.0 catalog contains 177 unique host tokens:
+Surge Enhanced Mode normally returns addresses from `198.18.0.0/15` to
+applications and maps those Fake IP addresses back to domain names when the
+connection reaches the VIF. This is efficient for normal proxy workflows, but
+some applications require the DNS answer itself to be a real address.
 
-- 105 tokens migrated without semantic changes from the maintained Surge
-  profile baseline;
+Typical incompatibilities include:
+
+- SSRF and DNS-rebinding protection rejecting special-use addresses;
+- captive portals or network-detection clients expecting routable answers;
+- STUN, TURN, gaming, and real-time communication workflows that inspect IP
+  addresses directly;
+- local callbacks and service-discovery flows;
+- application WebViews, authentication flows, or CDN dependencies that fail
+  or stall when given a Fake IP.
+
+The module applies Real IP handling only to the curated catalog. It does not
+disable Enhanced Mode and does not globally replace Surge's Fake IP design.
+
+## Catalog Scope
+
+Version 2.0.0 contains 177 unique host tokens:
+
+- 105 established compatibility tokens migrated from the maintained profile
+  baseline;
 - 71 verified Feishu, Lark, Doubao, and product-qualified CDN/CNAME tokens;
-- the exact `auth.openai.com` OAuth endpoint for applications whose SSRF or
-  anti-rebinding protection rejects Surge's `198.18.0.0/15` Fake IP range.
+- the exact `auth.openai.com` OAuth endpoint for SSRF-sensitive token exchange.
 
-## Covered Scenarios
+The catalog is organized by scenario:
 
 - local network and service discovery;
 - operating-system connectivity detection;
 - captive portals and public Wi-Fi providers used by airports, hotels, cafes,
   enterprise guest networks, and similar venues;
-- gaming and real-time communication, including STUN and TURN;
+- gaming and real-time communication;
 - local application callbacks;
 - gaming authentication;
-- music and media compatibility retained from the established baseline;
+- established music and media compatibility;
 - carrier and identity authentication;
 - time and directory services;
 - Feishu, Lark, Doubao, and verified product-qualified dependencies;
 - OAuth and SSRF-sensitive endpoints supported by direct failure evidence.
 
-Brand websites are not added merely because a venue offers public Wi-Fi.
+Brand websites are not added merely because a venue provides public Wi-Fi.
 Prefer the exact captive-portal or network-provider hostname. Broad provider
 wildcards require evidence and review.
 
-## Routing Boundary
+## DNS and Routing Boundary
 
 `always-real-ip` changes the DNS answer returned to the application. It does
 not select the outbound policy.
 
-The modules retain the previously validated Feishu, Lark, and Doubao `DIRECT`
-routing fixes. The macOS variant also retains process-scoped rules for shared
+The modules retain the validated Feishu, Lark, and Doubao `DIRECT` routing
+rules because those fixes were verified together with the related Real IP
+coverage. The macOS module additionally uses process-scoped rules for shared
 ByteDance infrastructure used by the installed Feishu and Lark applications.
-The iOS/iPadOS variant contains no macOS process rules.
+The iOS/iPadOS module contains no macOS process paths.
 
-`auth.openai.com` receives a real DNS answer only. The modules do not force it
-to `DIRECT`; the main profile remains responsible for OpenAI routing.
+`auth.openai.com` receives a real DNS answer only. Its route remains controlled
+by the main profile, such as an existing AI policy group.
 
-Neither module contains a `FINAL` rule, proxy policy group, proxy server,
-MITM configuration, rewrite, script, private resolver, or credential.
+Neither module contains a `FINAL` rule, proxy policy group, proxy server, MITM
+configuration, rewrite, script, private resolver, or credential.
 
-## Maintenance
+## Installation and Profile Cleanup
 
-Edit only [`realip.list`](./realip.list), then run:
+1. Back up the working Surge profile.
+2. Install and enable the platform-appropriate module URL.
+3. Keep Enhanced Mode enabled and verify the effective DNS and routing results.
+4. Test connectivity detection, common applications, Feishu/Lark pages, and
+   any SSRF-sensitive OAuth flow relevant to the device.
+5. After successful validation, remove the base profile's entire inline
+   `always-real-ip = ...` field when all of its tokens are owned by this module.
+
+Do not leave an empty `always-real-ip =` assignment. The field should be absent
+from the base profile when management has been fully delegated to the module.
+
+If a regression occurs, disable the module and restore the known-good inline
+field before continuing diagnosis.
+
+## Maintenance Workflow
+
+Edit only [`realip.list`](./realip.list), then run from the repository root:
 
 ```sh
 python3 tools/realip/build.py
 python3 tools/realip/build.py --check
 ```
 
+The builder rejects duplicates, malformed tokens, and dangerously broad
+top-level wildcard entries. It renders the same generated `always-real-ip`
+value into both platform modules while leaving their platform-specific routing
+sections readable and independently reviewable.
+
 A new token requires a confirmed Fake IP compatibility case or a documented
 network-detection, captive-portal, local-callback, real-time communication, or
-identity-authentication workflow. Prefer exact hostnames. Keep uncertain
-historical entries until they can be reviewed separately without changing the
-baseline during a structural migration.
-
-## Migration from the Feishu Modules
-
-1. Keep the current Surge profile and legacy module available for rollback.
-2. Install and enable the platform-appropriate Real IP module.
-3. Disable the matching legacy `feishu-fix` module.
-4. Confirm that the effective profile contains 177 unique Real IP tokens.
-5. Verify Feishu/Lark pages, OpenAI OAuth, connectivity detection, and common
-   applications while Enhanced Mode remains enabled.
-6. Remove inline `always-real-ip` tokens from the base profile only after the
-   module has passed live validation.
-
-The legacy files remain temporarily available during this migration window:
-
-- `feishu-fix.sgmodule`
-- `feishu-fix-ios.sgmodule`
-
-They are not intended for simultaneous use with the new modules.
+identity-authentication workflow. Prefer exact hostnames. Review uncertain or
+historical entries separately instead of changing behavior during a structural
+migration.
 
 ## Validation
 
-A standalone `.sgmodule` is not a complete Surge profile. Validate its static
-structure directly, or merge it into a temporary complete profile before
-using `surge-cli --check`. Do not add a `FINAL` rule merely to satisfy the
-standalone checker.
+Required release checks:
+
+- canonical token count and case-insensitive uniqueness;
+- exact parity between the macOS and iOS/iPadOS generated host lists;
+- platform-specific process-rule boundaries;
+- routing regression checks for retained product rules;
+- `git diff --check` and relative Markdown-link validation;
+- temporary complete-profile validation with native `surge-cli --check`;
+- live confirmation that selected hosts no longer receive `198.18.0.0/15` or
+  Surge Fake IPv6 answers;
+- route explanation for hosts whose outbound policy must remain unchanged.
+
+A standalone `.sgmodule` is not a complete Surge profile. Do not add a `FINAL`
+rule merely to satisfy the standalone checker.
 
 ## Changelog
 
 ### August 29, 2026 (PDT)
 
-- Introduced the v2.0.0 Real IP module architecture for macOS and iOS/iPadOS.
-- Added a categorized 177-token canonical catalog and deterministic builder.
-- Migrated the established profile baseline and Feishu/Lark/Doubao coverage
-  without changing the original token spelling.
-- Added exact Real IP handling for `auth.openai.com` without changing its
-  outbound routing policy.
-- Retained the validated platform-specific Feishu routing behavior and added
-  an explicit staged migration path from the legacy module URLs.
+- Released the v2.0.0 Real IP architecture for macOS and iOS/iPadOS.
+- Added the categorized 177-token canonical catalog and deterministic builder.
+- Added exact Real IP handling for `auth.openai.com` without forcing a route.
+- Preserved the validated platform-specific Feishu, Lark, and Doubao routing
+  behavior.
+- Retired the superseded product-specific module artifacts after successful
+  live migration to the unified Real IP modules.
 
 <details>
-<summary>Previous module history</summary>
+<summary>Previous module research</summary>
 
 ### August 28, 2026 (PDT)
 
-- Released v1.2.0 of the Feishu/Lark modules after investigating recurring
-  blank pages, external Wiki delays, and `ERR_TIMED_OUT (-7)` failures.
+- Investigated recurring Feishu/Lark blank pages, external Wiki delays, and
+  `ERR_TIMED_OUT (-7)` failures.
 - Added product-qualified CNAME coverage and narrowed macOS process routing so
   embedded external sites continued through the main profile's normal rules.
 - Kept broad ByteDance suffixes out of global module routing rules.
 
 ### August 21, 2026 (PDT)
 
-- Added separate macOS and iOS/iPadOS Feishu/Lark compatibility modules.
-- Added product-domain Real IP handling, dedicated direct routing, and Doubao
+- Added the first platform-specific Feishu/Lark compatibility artifacts.
+- Added product-domain Real IP handling, direct product routing, and Doubao
   compatibility.
 
 </details>
 
 ---
 
-*Last updated: August 29, 2026 8:35 PM PDT (America/Los_Angeles)*
+*Last updated: August 29, 2026 8:55 PM PDT (America/Los_Angeles)*

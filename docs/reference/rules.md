@@ -11,7 +11,8 @@ Primary references:
 - `neorulset26/ENGINEERING_GUIDE.md`
 - `neorulset26/RULESET_URLS.md`
 - `neorulset26/MIGRATION_RULE_URLS.md`
-- `neorulset26/modules/README.md` for mainline-specific compatibility modules
+- `neorulset26/modules/README.md` for the maintained Real IP modules and their
+  DNS/routing boundary
 
 ## Legacy Rules
 
@@ -27,5 +28,7 @@ The former `archive/legacy/` transition surface (historical root rules and the o
 - For reviewing the active configuration mainline, refer to `neorulset26/`.
 - Review `docs/guides/usage-and-safety.md` before importing a remote rule or
   module URL.
+- Treat `neorulset26/modules/realip.list` as module source data, not as a
+  `RULE-SET` URL.
 - Do not add new published configuration artifacts to the repository root.
 - Do not reintroduce a legacy mirror; downstream consumers should migrate to paths listed in `neorulset26/RULESET_URLS.md`.

@@ -8,6 +8,8 @@ This repository now follows a simple placement model.
 - New tools and utility projects go to `tools/`.
 - New Surge modules go to `neorulset26/modules/` and are maintained with the
   active ruleset line.
+- Categorized module source data stays beside its published modules; reusable
+  generators and validators go to `tools/`.
 - New repository docs go to `docs/`.
 
 ## What Not To Do
