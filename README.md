@@ -161,8 +161,9 @@ Representative maintained files include:
 - `neorulset26/rules/ai.list`
 - `neorulset26/rules/crypto.list`
 - `neorulset26/rules/messenger.list`
-- `neorulset26/modules/feishu-fix.sgmodule`
-- `neorulset26/modules/feishu-fix-ios.sgmodule`
+- `neorulset26/modules/realip.sgmodule`
+- `neorulset26/modules/realip-ios.sgmodule`
+- `neorulset26/modules/realip.list`
 
 Additional structured materials live under:
 
@@ -202,7 +203,27 @@ If you are operating in a regulated environment, under enterprise security contr
 
 ## Changelog
 
-### Latest: August 28, 2026
+### Latest: August 29, 2026
+
+- Introduced the v2.0.0 Real IP module architecture for macOS and iOS/iPadOS.
+  The modules centralize 177 verified `always-real-ip` host tokens covering
+  local networks, connectivity detection, captive portals, public Wi-Fi,
+  real-time communication, authentication, established application
+  compatibility, and Feishu/Lark/Doubao dependencies.
+- Added `neorulset26/modules/realip.list` as the categorized canonical source
+  and `tools/realip/build.py` as the deterministic validator and renderer for
+  both platform modules.
+- Added exact Real IP handling for `auth.openai.com` so SSRF and anti-rebinding
+  protection does not receive Surge's `198.18.0.0/15` Fake IP response. Its
+  outbound policy remains controlled by the consuming profile.
+- Preserved the validated Feishu/Lark/Doubao direct-routing behavior and kept
+  the previous module URLs temporarily available for staged migration and
+  rollback.
+
+<details>
+<summary><strong>Previous repository milestones</strong></summary>
+
+### August 28, 2026
 
 - Investigated recurring Feishu/Lark blank pages, slow external Wiki content,
   and Chromium `ERR_TIMED_OUT (-7)` failures under Surge Enhanced Mode.
@@ -233,9 +254,6 @@ If you are operating in a regulated environment, under enterprise security contr
   Tencent ASN-wide `DIRECT` rules were not product-specific and could not
   reliably address unresolved hostname traffic because they used `no-resolve`.
   Maintained modules now live only under `neorulset26/modules/`.
-
-<details>
-<summary><strong>Previous repository milestones</strong></summary>
 
 ### August 21, 2026
 
@@ -393,6 +411,6 @@ The best engineering mood is steady attention: keep the tools honest, keep the a
     <br><br>
     <sub>Copyright © 2023-2026 YAGAMI</sub>
     <br>
-    <sub>Last updated: August 28, 2026 7:54 PM PDT (America/Los_Angeles)</sub>
+    <sub>Last updated: August 29, 2026 8:35 PM PDT (America/Los_Angeles)</sub>
   </p>
 </div>

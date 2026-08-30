@@ -1,7 +1,7 @@
 # Repository Tools
 
 バージョン作成日時: 2026年4月2日 13:30 JST
-最終更新日時: 2026年7月25日
+最終更新日時: 2026年8月30日 JST
 
 Language:
 
@@ -44,6 +44,21 @@ Language:
 - 継続保守しない一時的な scratch ファイル
 
 ## 現在のツール
+
+### Real IP Module Builder
+
+パス:
+
+- [`realip/`](./realip/)
+
+ドキュメント:
+
+- [`realip/README.md`](./realip/README.md)
+
+この依存関係のないPythonユーティリティは、分類されたReal IPホストカタログを
+検証し、macOSおよびiOS/iPadOS向けSurgeモジュールに同一の
+`always-real-ip`値を生成します。重複、不正なトークン、および危険な広域
+ワイルドカードを拒否します。
 
 ### DoH Fallback Worker
 

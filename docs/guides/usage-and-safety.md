@@ -1,6 +1,6 @@
 # Usage and Safety Notice
 
-*Last updated: August 28, 2026 (PDT)*
+*Last updated: August 29, 2026 (PDT)*
 
 This notice applies to the routing rules, Surge-compatible modules, reference
 profiles, and operational helper code published by Arclane. It supplements the
@@ -11,8 +11,9 @@ profiles, and operational helper code published by Arclane. It supplements the
 - Review the exact artifact instead of importing an unfamiliar raw URL blindly.
 - Back up the working profile and keep a tested way to disable or remove the
   artifact.
-- Use only the variant intended for the target platform. Do not install both
-  Feishu module variants on the same device.
+- Use only the Real IP module variant intended for the target platform. Do not
+  install both platform variants on the same device, and do not enable a new
+  Real IP module together with a legacy `feishu-fix` module.
 - Check the artifact against the complete local profile. A standalone syntax
   check does not prove DNS quality, routing correctness, service availability,
   or application compatibility.
@@ -26,10 +27,16 @@ proxy egress, and which existing profile rule handles a request. Those effects
 depend on the user's complete profile, DNS servers, network, platform version,
 and third-party infrastructure.
 
-For the Feishu/Lark compatibility modules:
+For the Real IP compatibility modules:
 
-- `always-real-ip` prevents listed hosts from receiving Fake IP answers; it does
-  not by itself choose the final route.
+- `always-real-ip` prevents listed hosts from receiving Fake IP answers; it
+  does not by itself choose the final route. Real DNS answers may increase
+  lookup latency or expose local resolver differences that Fake IP would have
+  deferred to the selected outbound policy.
+- The categorized catalog includes network detection, captive portals, public
+  Wi-Fi, real-time communication, authentication, established application
+  compatibility, and verified product-specific dependencies. Inclusion does
+  not indicate affiliation with or endorsement by the named service.
 - Routing rules separately send confirmed Feishu/Lark product domains and
   narrowly qualified CNAME dependencies to `DIRECT`.
 - The macOS variant uses process-scoped rules only for observed shared
@@ -38,9 +45,12 @@ For the Feishu/Lark compatibility modules:
 - The iOS/iPadOS variant contains no macOS process paths or process rules.
 - Neither variant defines a `FINAL` rule or a proxy policy group.
 
-These modules are compatibility workarounds, not guarantees that every Feishu,
-Lark, Doubao, CDN, authentication, or embedded third-party page will remain
-available or fast.
+The exact `auth.openai.com` entry changes only the DNS answer. The consuming
+profile remains responsible for its outbound route and security policy.
+
+These modules are compatibility workarounds, not guarantees that every captive
+portal, public Wi-Fi network, Feishu, Lark, Doubao, OAuth, CDN, authentication,
+or embedded third-party page will remain available or fast.
 
 ## Security and Privacy Boundary
 

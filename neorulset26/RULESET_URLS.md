@@ -11,10 +11,10 @@ These are platform-specific module artifacts, not rule-set replacements. Use
 only the variant matching the target platform and review the module README
 before installation or update.
 
-- macOS Feishu/Lark compatibility module:
-  <https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/feishu-fix.sgmodule>
-- iOS/iPadOS Feishu/Lark compatibility module:
-  <https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/feishu-fix-ios.sgmodule>
+- macOS Real IP module:
+  <https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/realip.sgmodule>
+- iOS/iPadOS Real IP module:
+  <https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/realip-ios.sgmodule>
 - Scope and installation notes:
   [`modules/README.md`](./modules/README.md)
 
@@ -615,4 +615,4 @@ FINAL,Others
 
 ---
 
-*Last updated: August 28, 2026 7:49 PM PDT (America/Los_Angeles) — Arclane configuration artifact reference*
+*Last updated: August 29, 2026 8:35 PM PDT (America/Los_Angeles) — Arclane configuration artifact reference*

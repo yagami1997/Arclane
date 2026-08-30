@@ -193,8 +193,11 @@ neorulset26/
 │   └── discord.list              ← (Legacy, superseded by messenger.list)
 │
 ├── modules/                      ← Platform-specific Surge compatibility modules
-│   ├── feishu-fix.sgmodule       ← macOS Feishu/Lark and Doubao real-IP/DIRECT fixes
-│   ├── feishu-fix-ios.sgmodule   ← iOS Feishu/Lark and Doubao real-IP/DIRECT fixes
+│   ├── realip.list               ← Canonical categorized Real IP host catalog
+│   ├── realip.sgmodule           ← Generated macOS Real IP and scoped routing fixes
+│   ├── realip-ios.sgmodule       ← Generated iOS/iPadOS Real IP and routing fixes
+│   ├── feishu-fix.sgmodule       ← Temporary legacy migration artifact
+│   ├── feishu-fix-ios.sgmodule   ← Temporary legacy migration artifact
 │   └── README.md                  ← Installation and scope notes
 │
 └── ruleset/                      ← General-purpose configuration artifacts
@@ -325,5 +328,5 @@ The configuration artifacts in `neorulset26/` are text files. How they are used,
 
 ---
 
-*Last updated: August 28, 2026 7:49 PM PDT (America/Los_Angeles)*
+*Last updated: August 29, 2026 8:35 PM PDT (America/Los_Angeles)*
 *Repository: github.com/yagami1997/Arclane*

@@ -10,7 +10,8 @@ This repository was refactored to reduce the root surface and make ownership exp
   Online tools, operational utilities, and helper subprojects.
 - `neorulset26/modules/`
   The only maintained Surge module directory. Platform-specific modules are
-  released with the active 2026 mainline.
+  released with the active 2026 mainline. Categorized module source data also
+  belongs here when it is part of the published module lifecycle.
 - `docs/`
   Development, usage, migration, and reference documents.
 - `openclash-archive/`
@@ -22,6 +23,8 @@ This repository was refactored to reduce the root surface and make ownership exp
 - New tooling belongs in `tools/`.
 - New maintained modules belong in `neorulset26/modules/` and must follow the
   active mainline's validation and release lifecycle.
+- Reusable module generators and validators belong in `tools/`, not beside the
+  published module artifacts.
 - New repository documentation belongs in `docs/`.
 - Do not add new business files to the repository root.
 

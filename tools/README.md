@@ -1,7 +1,7 @@
 # Repository Tools
 
 Version created: April 1, 2026 09:30 PM PDT
-Last updated: July 25, 2026
+Last updated: August 29, 2026 PDT
 
 Language:
 
@@ -44,6 +44,21 @@ The following should generally not go into `tools/`:
 - ad hoc scratch files that are not meant to be maintained
 
 ## Current Tools
+
+### Real IP Module Builder
+
+Path:
+
+- [`realip/`](./realip/)
+
+Documentation:
+
+- [`realip/README.md`](./realip/README.md)
+
+This dependency-free Python utility validates the categorized Real IP host
+catalog and renders an identical generated `always-real-ip` value into the
+macOS and iOS/iPadOS Surge modules. It rejects duplicates, malformed tokens,
+and dangerously broad top-level wildcards.
 
 ### DoH Fallback Worker
 
