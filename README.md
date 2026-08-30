@@ -397,9 +397,11 @@ If you are operating in a regulated environment, under enterprise security contr
 
 ## Note
 
-Some days, technical work feels less like building a machine and more like tuning a quiet instrument until its intent is easier to hear. A good rule, a careful boundary, or a small piece of documentation can carry patience forward: it lowers the noise, leaves fewer sharp edges, and gives the next mind a clear place to begin.
+Over time, I have come to see technical work as more than the pursuit of a perfectly functioning system. It is also a practice of rebuilding trust: making assumptions visible, drawing careful boundaries, and leaving behind something quieter, clearer, and more dependable than what came before.
 
-The best engineering mood is steady attention: keep the tools honest, keep the assumptions visible, and let each change arrive with enough clarity to earn its place.
+Projects like this are never sustained by individual effort alone. I am deeply grateful to my friends at Kyoto University, whose kindness, encouragement, and steady presence have given me strength through difficult moments. Their support has reminded me that rigor and gentleness can coexist, and that even solitary work can be carried forward by the faith others place in us.
+
+May this repository remain a small record of that lesson: protect what matters, stay honest about uncertainty, and keep building with patience.
 
 ---
 
@@ -411,6 +413,6 @@ The best engineering mood is steady attention: keep the tools honest, keep the a
     <br><br>
     <sub>Copyright © 2023-2026 YAGAMI</sub>
     <br>
-    <sub>Last updated: August 29, 2026 8:35 PM PDT (America/Los_Angeles)</sub>
+    <sub>Last updated: August 29, 2026 9:35 PM PDT (America/Los_Angeles)</sub>
   </p>
 </div>
