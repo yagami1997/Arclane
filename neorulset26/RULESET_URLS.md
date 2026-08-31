@@ -9,7 +9,9 @@
 
 These are platform-specific module artifacts, not rule-set replacements. Use
 only the variant matching the target platform and review the module README
-before installation or update.
+before installation or update. Version 2.1.0 contains 174 Real IP tokens;
+Apple connectivity detection is limited to `captive.apple.com`, while ordinary
+Apple web, account, and store traffic remains under the consuming profile.
 
 - macOS Real IP module:
   <https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/realip.sgmodule>
@@ -96,7 +98,7 @@ YOUTUBE          STREAMING                          SOCIAL & MESSAGING
 
                  15 Streaming-HK
                     ViuTV / myTV SUPER
-                    encoreTVB / WeTV
+                    TVBAnywhere / WeTV
 
     ▼               ▼                                  ▼
 CUSTOM           UTILITIES
@@ -117,7 +119,7 @@ CUSTOM           UTILITIES
 | AI Suite | Low latency + stable |
 | Google | Low latency |
 | Microsoft | Low latency |
-| Apple | Direct |
+| Apple | User-selectable; stable proxy fallback recommended |
 | Scholar | Stable |
 | PayPal | Low-risk IP path — residential or ISP |
 | Crypto | Low-risk IP preferred, or balanced |
@@ -218,11 +220,15 @@ RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/r
 
 ## 07 · Apple
 **Policy**: `Apple`  
-**Node**: Direct
+**Routing**: User-selectable; keep a stable proxy option available when direct access fails
 
 ```
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Apple.list,Apple
 ```
+
+Load service-specific rules such as `Apple TV.list`, `Apple Music.list`, or
+`Apple News.list` before this broad Apple rule set when they use a different
+policy. `Special.list` no longer contains forced-direct Apple Store/CDN rules.
 
 ---
 
@@ -270,7 +276,7 @@ RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/r
 ## 12 · Streaming-US
 **Policy**: `Streaming-US`  
 **Routing**: US-region compatible path  
-**Services**: Disney+, Max, Hulu, Spotify, Discovery+, Amazon, Fox, ABC, PBS, Pandora, Soundcloud, DAZN, Peacock, Paramount+, Crunchyroll, Fubo, Sling, Tubi, Pluto TV, etc.
+**Services**: Disney+, Max, Hulu, Spotify, Discovery+, Amazon, FOX One, ABC, PBS, Pandora, Soundcloud, DAZN, Peacock, Paramount+, Crunchyroll, Fubo, Sling, Tubi, Pluto TV, etc.
 
 ```
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/Disney%20Plus.list,Streaming-US
@@ -280,7 +286,6 @@ RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/r
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/Discovery%20Plus.list,Streaming-US
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/Amazon.list,Streaming-US
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/Fox%20Now.list,Streaming-US
-RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/Fox%2B.list,Streaming-US
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/ABC.list,Streaming-US
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/PBS.list,Streaming-US
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/Pandora.list,Streaming-US
@@ -329,7 +334,7 @@ RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/r
 ## 15 · Streaming-HK
 **Policy**: `Streaming-HK`  
 **Routing**: HK-region compatible path  
-**Services**: ViuTV, myTV SUPER, TVB (encoreTVB), WeTV HK
+**Services**: ViuTV, myTV SUPER, TVBAnywhere North America, WeTV HK
 
 ```
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/ViuTV.list,Streaming-HK
@@ -399,6 +404,9 @@ RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/r
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/bytedance.list,Bytedance
 ```
 
+This file covers mainland ByteDance products and shared infrastructure. Load
+the international TikTok rule set below before this broader shared layer.
+
 ---
 
 ## 20 · TikTok
@@ -451,7 +459,7 @@ Assign them as needed based on your config requirements.
 | `ruleset/Steam.list` | `Proxy` or `Streaming-HK` | Game platform; HK node for best download speed |
 | `ruleset/Telegram.list` | `Messenger` | Legacy file; superseded by `rules/messenger.list` |
 | `ruleset/miHoYo.list` | `Domestic` | Legacy file; domains merged into `ruleset/Domestic.list` |
-| `ruleset/Media/Apple Music.list` | `Apple` or `Streaming-JP` | Assign to Apple (Direct) or JP if region-locked |
+| `ruleset/Media/Apple Music.list` | `Apple` or `Streaming-JP` | Assign to Apple or JP if region-locked; load before broad `Apple.list` |
 | `ruleset/Media/Apple News.list` | `Apple` or `Streaming-US` | Region-locked to US/UK/AU |
 | `ruleset/Media/BBC iPlayer.list` | `Streaming-UK` (if exists) or `Proxy` | UK region only |
 | `ruleset/Media/Pornhub.list` | `Proxy` | Assign to any proxy group |
@@ -470,6 +478,7 @@ Priority design rationale:
 - Tier 3 (your 5 custom groups) overrides all pre-built rule-sets below, eliminating any overlap conflict.
 - Tier 9 (Proxy.list) acts as international catchall, placed late so it never steals traffic from explicit groups.
 - Tier 10 (Domestic) is the final direct-connect safety net — lowest RULE-SET priority.
+- TikTok must precede Bytedance, and Apple media rules must precede the broad Apple rule set.
 
 ```
 # ════════════════════════════════════════════════════════════
@@ -498,6 +507,7 @@ RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/r
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/common.list,Common
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/socialsite.list,Social
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/feishu.list,DIRECT,extended-matching
+RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/TikTok.list,TikTok
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/bytedance.list,Bytedance
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/hulo.list,HULO
 
@@ -508,6 +518,7 @@ RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/r
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/google.list,Google
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Google%20FCM.list,Google
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Microsoft.list,Microsoft
+RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/Apple%20TV.list,Streaming-JP
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Apple.list,Apple
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/scholar.list,Scholar
 
@@ -528,7 +539,6 @@ RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/r
 
 # ── Streaming-JP ─────────────────────────────────────────────
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/Netflix.list,Streaming-JP
-RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/Apple%20TV.list,Streaming-JP
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/Abema%20TV.list,Streaming-JP
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/DMM.list,Streaming-JP
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/Niconico.list,Streaming-JP
@@ -545,7 +555,6 @@ RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/r
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/Discovery%20Plus.list,Streaming-US
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/Amazon.list,Streaming-US
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/Fox%20Now.list,Streaming-US
-RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/Fox%2B.list,Streaming-US
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/ABC.list,Streaming-US
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/PBS.list,Streaming-US
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/Pandora.list,Streaming-US
@@ -579,10 +588,9 @@ RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/r
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/Media/Streaming-CN.list,CN Mainland TV
 
 # ════════════════════════════════════════════════════════════
-# TIER 8 — Messenger + TikTok
+# TIER 8 — Messenger
 # ════════════════════════════════════════════════════════════
 RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/messenger.list,Messenger
-RULE-SET,https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/ruleset/TikTok.list,TikTok
 
 # ════════════════════════════════════════════════════════════
 # TIER 9 — Speedtest
@@ -615,4 +623,4 @@ FINAL,Others
 
 ---
 
-*Last updated: August 29, 2026 8:35 PM PDT (America/Los_Angeles) — Arclane configuration artifact reference*
+*Last updated: August 31, 2026 (PDT) — Arclane configuration artifact reference*

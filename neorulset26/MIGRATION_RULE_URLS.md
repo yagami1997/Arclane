@@ -42,12 +42,17 @@ https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/
 
 - `antigravity.list` was removed on 2026-04-06 and merged into `rules/google.list`.
 - Use `rules/google.list` for Gemini, Google AI Studio, Antigravity, and related Google AI properties.
+- Existing absolute rule URLs remain stable. `Fox Now.list` now documents FOX
+  One while retaining its legacy filename, `Fox+.list` is retained for legacy
+  consumers, and `encoreTVB.list` now covers TVBAnywhere North America.
+- For consuming configurations, place `TikTok.list` before `bytedance.list` and
+  service-specific Apple media lists before `Apple.list`.
 - All URLs below were rechecked against the current repository tree.
 
 ## Updated Timestamp
 
 ```text
-2026-08-29
+2026-08-31
 ```
 
 ## Rules
@@ -69,7 +74,9 @@ https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/soci
 ## Surge Modules
 
 Install only the variant matching the target platform. The `realip.list` file
-is canonical maintenance input and is not a Surge `RULE-SET` artifact.
+is canonical maintenance input and is not a Surge `RULE-SET` artifact. Version
+2.1.0 keeps Apple connectivity detection limited to `captive.apple.com`; the
+public module URLs remain unchanged.
 
 ```text
 https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/realip.sgmodule

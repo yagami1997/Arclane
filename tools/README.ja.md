@@ -1,7 +1,7 @@
 # Repository Tools
 
 バージョン作成日時: 2026年4月2日 13:30 JST
-最終更新日時: 2026年8月30日 JST
+最終更新日時: 2026年8月31日 JST
 
 Language:
 
@@ -58,7 +58,9 @@ Language:
 この依存関係のないPythonユーティリティは、分類されたReal IPホストカタログを
 検証し、macOSおよびiOS/iPadOS向けSurgeモジュールに同一の
 `always-real-ip`値を生成します。重複、不正なトークン、および危険な広域
-ワイルドカードを拒否します。
+ワイルドカードを拒否します。さらに、platform 識別子、許可された
+section、`DIRECT` のみの module routing、および iOS/iPadOS 版に macOS 固有の
+process rule が入っていないことを検証します。
 
 ### DoH Fallback Worker
 

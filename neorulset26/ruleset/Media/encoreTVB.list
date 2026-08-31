@@ -1,5 +1,6 @@
-# > encoreTVB
+# > TVBAnywhere North America (legacy encoreTVB filename retained)
 USER-AGENT,encoreTVB*
 DOMAIN-SUFFIX,encoretvb.com
+DOMAIN-SUFFIX,tvbanywhere.com
 DOMAIN,content.jwplatform.com
 DOMAIN,videos-f.jwpsrv.com

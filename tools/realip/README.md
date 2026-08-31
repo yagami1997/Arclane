@@ -23,8 +23,17 @@ python3 tools/realip/build.py --check
 ```
 
 The builder rejects duplicates, malformed host tokens, and dangerously broad
-top-level wildcard entries. A successful `--check` confirms that both modules
-contain the same generated host list.
+top-level wildcard entries. It also synchronizes module release metadata and
+validates the platform identifier, allowed section set, `DIRECT`-only routing
+boundary, and absence of process rules from the iOS/iPadOS artifact. A
+successful `--check` confirms that both modules contain the same generated host
+list and comply with those boundaries.
+
+Run the unit tests with:
+
+```sh
+python3 tools/realip/test_build.py
+```
 
 ## Maintenance Policy
 
@@ -35,3 +44,8 @@ callback, real-time communication, or identity-authentication workflow.
 Prefer exact hostnames. Wildcards require evidence that the service uses a
 dynamic hostname or a product-qualified CNAME pattern. Do not add a broad
 provider or brand suffix merely because one page or application failed.
+
+Connectivity-detection entries must not double as broad web-routing hints. In
+particular, Apple connectivity handling keeps `captive.apple.com` but leaves
+ordinary Apple websites, account pages, and store traffic on the consuming
+profile's normal Fake IP and outbound-policy path.

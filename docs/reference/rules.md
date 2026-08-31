@@ -30,5 +30,13 @@ The former `archive/legacy/` transition surface (historical root rules and the o
   module URL.
 - Treat `neorulset26/modules/realip.list` as module source data, not as a
   `RULE-SET` URL.
+- Keep connectivity-detection Real IP exceptions narrower than ordinary web
+  routing. Apple detection uses `captive.apple.com`; Apple websites, account
+  pages, and store traffic remain controlled by the consuming profile.
+- The published `.list` files remain the shared source used directly by Surge,
+  Mihomo/OpenClash, and Stash consumers. No generated platform-specific mirror
+  is required. Each consumer keeps its own provider syntax and policy names.
+- Load `TikTok.list` before `bytedance.list`. Load service-specific Apple media
+  lists before the broad `Apple.list` whenever they use different policies.
 - Do not add new published configuration artifacts to the repository root.
 - Do not reintroduce a legacy mirror; downstream consumers should migrate to paths listed in `neorulset26/RULESET_URLS.md`.

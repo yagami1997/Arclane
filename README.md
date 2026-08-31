@@ -203,7 +203,39 @@ If you are operating in a regulated environment, under enterprise security contr
 
 ## Changelog
 
-### Latest: August 29, 2026
+### Latest: August 31, 2026
+
+- Released v2.1.0 of the macOS and iOS/iPadOS Real IP modules with a narrower
+  174-token catalog.
+- Retained `captive.apple.com` for Apple connectivity detection and removed
+  `www.apple.com`, `www.appleiphonecell.com`, and `gsp1.apple.com` from forced
+  Real IP handling. Apple websites, account pages, and store traffic now keep
+  the consuming profile's normal Fake IP and outbound-policy behavior.
+- Extended the deterministic builder to synchronize module release metadata
+  and reject unexpected sections, non-`DIRECT` module routing, platform marker
+  drift, and macOS-only process rules in the iOS/iPadOS artifact.
+- Added unit coverage for catalog parsing and module safety boundaries. Existing
+  Feishu/Lark/Doubao routing behavior and public module URLs are unchanged.
+- Normalized eight IPv4/IPv6 CIDR entries to their equivalent network addresses
+  without expanding or narrowing their effective match ranges, and removed five
+  exact duplicate rules.
+- Kept the published `.list` files as the single directly referenced source for
+  Surge, Mihomo/OpenClash, and Stash; no platform-specific mirror or compilation
+  layer was introduced.
+- Moved international TikTok product coverage into `TikTok.list` while keeping
+  shared ByteDance infrastructure available to both policies. Consumer guidance
+  now places TikTok before the broader ByteDance layer.
+- Removed forced-direct Apple Store and download overrides from `Special.list`.
+  Apple account, store, and download traffic now follows the user-selectable
+  Apple policy, while service-specific Apple media rules retain higher priority.
+- Retained all existing absolute rule URLs while documenting FOX One under the
+  legacy `Fox Now.list` path, marking Fox+ as retired, and extending the legacy
+  `encoreTVB.list` path for TVBAnywhere North America.
+
+<details>
+<summary><strong>Previous repository milestones</strong></summary>
+
+### August 29, 2026
 
 - Introduced the v2.0.0 Real IP module architecture for macOS and iOS/iPadOS.
   The modules centralize 177 verified `always-real-ip` host tokens covering
@@ -219,9 +251,6 @@ If you are operating in a regulated environment, under enterprise security contr
 - Preserved the validated Feishu/Lark/Doubao direct-routing behavior and
   retired the superseded product-specific module files after successful live
   migration to the unified Real IP modules.
-
-<details>
-<summary><strong>Previous repository milestones</strong></summary>
 
 ### August 28, 2026
 
@@ -413,6 +442,6 @@ May this repository remain a small record of that lesson: protect what matters, 
     <br><br>
     <sub>Copyright © 2023-2026 YAGAMI</sub>
     <br>
-    <sub>Last updated: August 29, 2026 9:35 PM PDT (America/Los_Angeles)</sub>
+    <sub>Last updated: August 31, 2026 2:50:34 AM PDT (America/Los_Angeles)</sub>
   </p>
 </div>

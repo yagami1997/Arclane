@@ -1,6 +1,6 @@
 # Usage and Safety Notice
 
-*Last updated: August 29, 2026 (PDT)*
+*Last updated: August 31, 2026 (PDT)*
 
 This notice applies to the routing rules, Surge-compatible modules, reference
 profiles, and operational helper code published by Arclane. It supplements the
@@ -43,6 +43,13 @@ For the Real IP compatibility modules:
   subject to the main profile's normal rules.
 - The iOS/iPadOS variant contains no macOS process paths or process rules.
 - Neither variant defines a `FINAL` rule or a proxy policy group.
+
+Apple connectivity detection is intentionally limited to
+`captive.apple.com`. Ordinary Apple websites, account pages, and store traffic
+are not forced to use Real IP by the module; their DNS and route remain under
+the consuming profile. If Apple pages work through a proxy but fail on
+`DIRECT`, investigate the Apple policy group and direct path before adding
+more Apple hosts to `always-real-ip`.
 
 The exact `auth.openai.com` entry changes only the DNS answer. The consuming
 profile remains responsible for its outbound route and security policy.

@@ -67,7 +67,7 @@ Fallback / Infrastructure
 |---|------------|------------|------------------------|-------|
 | 5 | **Google** | google.list, ruleset/Google FCM.list | Low latency | Covers Google Search, Gmail, Drive, Docs, Maps, Play, Photos, Calendar, Translate, Firebase, Gemini, Google AI Studio, and all google.* TLDs. FCM is included. YouTube is handled separately. Keep Gemini with Google by default to avoid cross-region session mismatch. |
 | 6 | **Microsoft** | ruleset/Microsoft.list | Low latency | Covers Office 365, Azure, Bing, OneDrive, Xbox, Teams, GitHub (if not in Common). |
-| 7 | **Apple** | ruleset/Apple.list, ruleset/Special.list (Apple CDN portion) | Direct | Apple APIs, iCloud, App Store, TestFlight, Maps. Direct is preferred for optimal CDN performance. |
+| 7 | **Apple** | ruleset/Apple.list | User-selectable | Apple APIs, iCloud, App Store, TestFlight, and Maps. Keep a stable proxy option available when the direct path cannot reach Apple account or store services. |
 | 8 | **Scholar** | scholar.list | Stable | Academic databases, research journals, GitHub, jsDelivr, ProtonMail, Zoho, and academic institutions. Placed directly after Apple in the group order. |
 
 ---
@@ -102,10 +102,10 @@ Streaming services are grouped by their **regional availability requirement**, n
 
 | # | Group Name | Rule Files (assigned to this group) | Routing Characteristic | Notes |
 |---|------------|--------------------------------------|------------------------|-------|
-| 12 | **Streaming-US** | ruleset/Media/Disney Plus.list, ruleset/Media/Max.list, ruleset/Media/Hulu.list, ruleset/Media/Spotify.list, ruleset/Media/Discovery Plus.list, ruleset/Media/Amazon.list, ruleset/Media/Fox Now.list, ruleset/Media/Fox+.list, ruleset/Media/ABC.list, ruleset/Media/PBS.list, ruleset/Media/Pandora.list, ruleset/Media/Soundcloud.list, ruleset/Media/DAZN.list (US region), Streaming-US.list (supplemental) | US-region compatible path | US-region streaming: Disney+, Max (HBO), Hulu, Spotify, Discovery+, Amazon Prime, Peacock, Paramount+, DAZN US, etc. |
+| 12 | **Streaming-US** | ruleset/Media/Disney Plus.list, ruleset/Media/Max.list, ruleset/Media/Hulu.list, ruleset/Media/Spotify.list, ruleset/Media/Discovery Plus.list, ruleset/Media/Amazon.list, ruleset/Media/Fox Now.list (FOX One; legacy filename), ruleset/Media/ABC.list, ruleset/Media/PBS.list, ruleset/Media/Pandora.list, ruleset/Media/Soundcloud.list, ruleset/Media/DAZN.list (US region), Streaming-US.list (supplemental) | US-region compatible path | US-region streaming: Disney+, Max (HBO), Hulu, Spotify, Discovery+, Amazon Prime, FOX One, Peacock, Paramount+, DAZN US, etc. `Fox+.list` is retained only for existing URL compatibility. |
 | 13 | **Streaming-JP** | ruleset/Media/Netflix.list, ruleset/Media/Apple TV.list, ruleset/Media/Abema TV.list, ruleset/Media/DMM.list, ruleset/Media/Niconico.list, ruleset/Media/Hulu Japan.list, ruleset/Media/Japonx.list, ruleset/Media/F1 TV.list, Streaming-JP.list (supplemental) | JP-region compatible path, stable IP characteristics preferred | Japan-region streaming: Netflix (JP catalog), Abema, DMM, Niconico, Hulu Japan, U-NEXT, FOD, TVer, etc. Stable IP characteristics are preferred for regional availability. |
 | 14 | **Streaming-TW** | ruleset/Media/KKTV.list, ruleset/Media/KKBOX.list, ruleset/Media/Line TV.list, ruleset/Media/Bahamut.list, ruleset/Media/MOO.list, Streaming-TW.list (supplemental) | TW-region compatible path | Taiwan-region streaming: KKTV, KKBOX, Line TV, Bahamut, MOO, 4GTV, LiTV, etc. |
-| 15 | **Streaming-HK** | ruleset/Media/ViuTV.list, ruleset/Media/myTV SUPER.list, ruleset/Media/encoreTVB.list, ruleset/Media/WeTV.list | HK-region compatible path | Hong Kong streaming: ViuTV, myTV SUPER, TVB, WeTV HK. |
+| 15 | **Streaming-HK** | ruleset/Media/ViuTV.list, ruleset/Media/myTV SUPER.list, ruleset/Media/encoreTVB.list, ruleset/Media/WeTV.list | HK-region compatible path | Hong Kong streaming: ViuTV, myTV SUPER, TVBAnywhere North America (legacy filename retained), and WeTV HK. |
 | 16 | **CN Mainland TV** | ruleset/Media/Bilibili.list, ruleset/Media/IQIYI.list, ruleset/Media/Youku.list, ruleset/Media/Tencent Video.list, ruleset/Media/Letv.list, ruleset/Media/IQ.list, ruleset/Media/Netease Music.list, Streaming-CN.list (supplemental) | Direct or Domestic | Mainland China streaming platforms: Bilibili, iQIYI, Youku, Tencent Video, Mango TV, Sohu Video, etc. Direct routing yields best CDN performance. |
 
 > **Note on Global TV**: If you maintain a "Global TV" category for streaming services not covered by the regional groups above, assign it to **Streaming-US** as a default, or create a separate **Streaming-Global** group configured for the relevant region.
@@ -119,8 +119,13 @@ Streaming services are grouped by their **regional availability requirement**, n
 | 17 | **Messenger** | messenger.list | Stable | Consolidated IM group. Covers: Discord, Telegram, WhatsApp, Signal, Line, Slack, Element/Matrix, Viber, Zalo, Keybase, Mattermost, Session, Threema, Wire, Rocket.Chat. These services do not require specific regional availability — a stable routing path is sufficient. |
 | 18 | **Social** | socialsite.list | Stable | Domestic and international social platforms: Weibo, Zhihu, Douban, Xiaohongshu, Tieba, Reddit, Truth Social, etc. |
 | — | **Feishu** | feishu.list | Direct | Feishu/Lark product-specific domains. Load before Bytedance; shared ByteDance infrastructure remains in bytedance.list. |
-| 19 | **Bytedance** | bytedance.list | Stable | ByteDance ecosystem: Douyin, TikTok (CN), Toutiao, Xigua, Ixigua, and shared infrastructure. Stable routing with low jitter is preferred to avoid upload and playback interruptions. |
+| 19 | **Bytedance** | bytedance.list | Stable | Mainland ByteDance products such as Douyin, Toutiao, and Xigua, plus shared infrastructure. International TikTok product domains are maintained in `TikTok.list`. |
 | 20 | **TikTok** | ruleset/TikTok.list | Stable | International TikTok. Kept separate from Bytedance because TikTok international uses different CDN and server routing. |
+
+Consumer rule order is part of the architecture: load `TikTok.list` before
+`bytedance.list`, and load service-specific Apple media rules such as
+`Apple TV.list` before the broad `Apple.list`. `Special.list` no longer forces
+Apple Store or download traffic to direct routing.
 
 ---
 
@@ -151,7 +156,7 @@ Streaming services are grouped by their **regional availability requirement**, n
 | AI Suite | Low latency + stable |
 | Google | Low latency |
 | Microsoft | Low latency |
-| Apple | Direct |
+| Apple | User-selectable; stable proxy fallback recommended |
 | Scholar | Stable |
 | PayPal | Low-risk IP path — residential or ISP |
 | Crypto | Low-risk IP preferred, or balanced |
@@ -276,7 +281,7 @@ neorulset26/
 04  AI Suite            — OpenAI, Claude, Gemini, etc.
 05  Google              — All Google services (excl. YouTube)
 06  Microsoft           — Office 365, Azure, Bing, etc.
-07  Apple               — Apple ecosystem (Direct)
+07  Apple               — Apple ecosystem (user-selectable)
 08  Scholar             — Academic & research resources
 09  PayPal              — Finance (low-risk IP path)
 10  Crypto              — Exchanges & infrastructure
@@ -316,6 +321,12 @@ neorulset26/
 
 8. **Apple Intelligence + ChatGPT (validated minimal domain set)**: For configurations targeting Apple Intelligence availability in constrained network environments, the following domain pair in `rules/ai.list` has been validated as the minimal required set: `DOMAIN,apple-relay.apple.com` and `DOMAIN,gspe1-ssl.ls.apple.com`. Do not expand this set unless a specific regression is confirmed.
 
+9. **Apple Real IP boundary**: The Real IP compatibility catalog keeps
+   `captive.apple.com` for connectivity detection but does not force ordinary
+   Apple websites, account pages, or store traffic to use locally resolved
+   addresses. Apple routing remains the responsibility of the consuming
+   profile's Apple policy group.
+
 ---
 
 ## Scope and Responsibility
@@ -326,5 +337,5 @@ The configuration artifacts in `neorulset26/` are text files. How they are used,
 
 ---
 
-*Last updated: August 29, 2026 8:35 PM PDT (America/Los_Angeles)*
+*Last updated: August 31, 2026 (PDT)*
 *Repository: github.com/yagami1997/Arclane*

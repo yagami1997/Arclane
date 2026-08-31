@@ -1,7 +1,7 @@
 # Repository Tools
 
 Version created: April 1, 2026 09:30 PM PDT
-Last updated: August 29, 2026 PDT
+Last updated: August 31, 2026 PDT
 
 Language:
 
@@ -58,7 +58,8 @@ Documentation:
 This dependency-free Python utility validates the categorized Real IP host
 catalog and renders an identical generated `always-real-ip` value into the
 macOS and iOS/iPadOS Surge modules. It rejects duplicates, malformed tokens,
-and dangerously broad top-level wildcards.
+dangerously broad top-level wildcards, unexpected module sections, non-direct
+module routing, and macOS-only process rules in the iOS/iPadOS artifact.
 
 ### DoH Fallback Worker
 

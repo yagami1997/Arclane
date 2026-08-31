@@ -47,12 +47,20 @@ disable Enhanced Mode and does not globally replace Surge's Fake IP design.
 
 ## Catalog Scope
 
-Version 2.0.0 contains 177 unique host tokens:
+Version 2.1.0 contains 174 unique host tokens:
 
-- 105 established compatibility tokens migrated from the maintained profile
+- 102 established compatibility tokens migrated from the maintained profile
   baseline;
 - 71 verified Feishu, Lark, Doubao, and product-qualified CDN/CNAME tokens;
 - the exact `auth.openai.com` OAuth endpoint for SSRF-sensitive token exchange.
+
+Apple connectivity handling is deliberately narrow. The default catalog keeps
+`captive.apple.com`, which is the current connectivity-validation endpoint,
+but no longer forces `www.apple.com`, `www.appleiphonecell.com`, or
+`gsp1.apple.com` to use locally resolved addresses. Ordinary Apple websites,
+account pages, and store traffic therefore retain the consuming profile's
+normal Fake IP and outbound-policy behavior. See Apple's current
+[enterprise network host reference](https://support.apple.com/101555).
 
 The catalog is organized by scenario:
 
@@ -117,8 +125,11 @@ python3 tools/realip/build.py --check
 
 The builder rejects duplicates, malformed tokens, and dangerously broad
 top-level wildcard entries. It renders the same generated `always-real-ip`
-value into both platform modules while leaving their platform-specific routing
-sections readable and independently reviewable.
+value and synchronized release metadata into both platform modules while
+leaving their platform-specific routing sections readable and independently
+reviewable. It also enforces the expected platform identifier and section set,
+rejects non-`DIRECT` module routing, and prevents process rules from entering
+the iOS/iPadOS artifact.
 
 A new token requires a confirmed Fake IP compatibility case or a documented
 network-detection, captive-portal, local-callback, real-time communication, or
@@ -140,10 +151,28 @@ Required release checks:
   Surge Fake IPv6 answers;
 - route explanation for hosts whose outbound policy must remain unchanged.
 
+Builder unit tests:
+
+```sh
+python3 tools/realip/test_build.py
+```
+
 A standalone `.sgmodule` is not a complete Surge profile. Do not add a `FINAL`
 rule merely to satisfy the standalone checker.
 
 ## Changelog
+
+### August 31, 2026 (PDT)
+
+- Released v2.1.0 with 174 Real IP host tokens.
+- Retained `captive.apple.com` for Apple connectivity detection while removing
+  `www.apple.com`, `www.appleiphonecell.com`, and `gsp1.apple.com` from forced
+  Real IP handling. This keeps ordinary Apple web, account, and store traffic
+  on the consuming profile's normal DNS and routing path.
+- Added deterministic module version/date rendering and structural safety
+  checks for platform identifiers, allowed sections, `DIRECT`-only module
+  routing, and the iOS/iPadOS process-rule boundary.
+- Added unit coverage for catalog parsing and module safety validation.
 
 ### August 29, 2026 (PDT)
 
@@ -176,4 +205,4 @@ rule merely to satisfy the standalone checker.
 
 ---
 
-*Last updated: August 29, 2026 8:55 PM PDT (America/Los_Angeles)*
+*Last updated: August 31, 2026 (PDT)*

@@ -37,7 +37,8 @@ how those artifacts are organized and reviewed.
 
 - [`../neorulset26/modules/README.md`](../neorulset26/modules/README.md):
   installation, scope, DNS/routing boundaries, profile cleanup, maintenance,
-  and validation for the macOS and iOS/iPadOS Real IP modules.
+  and validation for the macOS and iOS/iPadOS Real IP modules, including the
+  narrow Apple connectivity-detection boundary introduced in v2.1.0.
 - [`../tools/realip/README.md`](../tools/realip/README.md): canonical catalog
   builder and validator workflow.
 
@@ -71,4 +72,4 @@ security, or future behavior.
 
 ---
 
-*Last updated: August 29, 2026 8:55 PM PDT (America/Los_Angeles)*
+*Last updated: August 31, 2026 (PDT)*
