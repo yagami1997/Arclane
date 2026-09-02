@@ -81,6 +81,14 @@ DOMAIN-SUFFIX,llama.meta.com
 # > Mistral AI
 DOMAIN-SUFFIX,mistral.ai
 
+# > Tencent WorkBuddy / CodeBuddy (International)
+#   Keep the public edition on one proxy path before ASN/Domestic fallbacks.
+DOMAIN-SUFFIX,workbuddy.ai
+DOMAIN-SUFFIX,codebuddy.ai
+DOMAIN-SUFFIX,tgalileo.com
+DOMAIN,static.workbuddy.cn
+DOMAIN,acc-1258344699.cos.accelerate.myqcloud.com
+
 # > DeepSeek (API / Chat / Open Platform)
 #   Official API base URL: https://api.deepseek.com
 #   Covers API, Platform, Chat, Docs, Status, CDN, and App download subdomains.
