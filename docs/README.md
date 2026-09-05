@@ -75,4 +75,8 @@ security, or future behavior.
 
 ---
 
-*Last updated: September 4, 2026 (PDT)*
+Repository validation is available through `python3 tools/check.py` and the
+GitHub Actions check workflow. See the [collaboration guide](./development/collaboration-guide.md)
+for coverage and limitations.
+
+*Last updated: September 4, 2026 (PDT, America/Los_Angeles)*

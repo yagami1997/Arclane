@@ -41,7 +41,7 @@ const MAX_GET_DNS_PARAM_CHARS = 5464; // base64url size for a 4 KiB DNS message
 const MAX_REQUEST_URL_CHARS = 8192;
 const MAX_ADDITIONAL_RECORDS = 16;
 const STALE_CLIENT_TTL = 15;
-const CACHE_KEY_VERSION = 'v3';
+const CACHE_KEY_VERSION = 'v4';
 
 // ─── Default profile (built-in, no KV dependency) ────────────────────────────
 
@@ -568,7 +568,7 @@ async function fetchProfileFromKv(kv, token) {
     upstreams,
     hedgeDelays: normalizeHedgeDelays(profile.hedgeDelays, upstreams.length),
     cachePolicy: normalizeCachePolicy(profile.cachePolicy),
-    privateRules: Array.isArray(rules?.privateRules) ? rules.privateRules : [],
+    privateRules: validatePrivateRules(rules?.privateRules),
   };
 }
 
@@ -668,6 +668,10 @@ function encodeDNSName(name) {
  * @returns {Uint8Array}
  */
 function encodeIPv4(ip) {
+  if (typeof ip !== 'string' || !/^(0|[1-9]\d{0,2})(\.(0|[1-9]\d{0,2})){3}$/.test(ip) ||
+      ip.split('.').some(part => Number(part) > 255)) {
+    throw new Error('Invalid IPv4 address');
+  }
   return new Uint8Array(ip.split('.').map(Number));
 }
 
@@ -679,15 +683,48 @@ function encodeIPv4(ip) {
  * @returns {Uint8Array}
  */
 function encodeIPv6(ip) {
+  if (typeof ip !== 'string' || !ip.includes(':')) throw new Error('Invalid IPv6 address');
+  if (ip.includes('.')) {
+    const colon = ip.lastIndexOf(':');
+    const bytes = encodeIPv4(ip.slice(colon + 1));
+    ip = ip.slice(0, colon + 1) + ((bytes[0] << 8) | bytes[1]).toString(16) + ':' +
+      ((bytes[2] << 8) | bytes[3]).toString(16);
+  }
   // Expand "::" shorthand
   const halves = ip.split('::');
   const left   = halves[0] ? halves[0].split(':') : [];
   const right  = halves[1] ? halves[1].split(':') : [];
+  if (halves.length > 2 || [...left, ...right].some(g => !/^[0-9a-f]{1,4}$/i.test(g)) ||
+      (halves.length === 1 ? left.length !== 8 : left.length + right.length >= 8)) {
+    throw new Error('Invalid IPv6 address');
+  }
   const mid    = new Array(8 - left.length - right.length).fill('0');
   const groups = [...left, ...mid, ...right].map(g => parseInt(g || '0', 16));
   const buf    = new Uint8Array(16);
   groups.forEach((g, i) => { buf[i * 2] = g >> 8; buf[i * 2 + 1] = g & 0xff; });
   return buf;
+}
+
+function validatePrivateRules(rules) {
+  if (rules === undefined) return [];
+  if (!Array.isArray(rules)) throw new Error('Invalid private rules');
+  const validName = name => typeof name === 'string' && name.length <= 253 &&
+    name.split('.').every(label => /^[a-z0-9_](?:[a-z0-9_-]{0,61}[a-z0-9_])?$/i.test(label));
+  return rules.map(rule => {
+    if (!rule || !['exact', 'suffix'].includes(rule.match) || !validName(rule.domain) ||
+        !['A', 'AAAA', 'CNAME'].includes(rule.type) ||
+        !Number.isInteger(rule.ttl) || rule.ttl < 0 || rule.ttl > 2147483647 ||
+        !Array.isArray(rule.answers) || rule.answers.length === 0 ||
+        (rule.type === 'CNAME' && rule.answers.length !== 1)) {
+      throw new Error('Invalid private rule');
+    }
+    for (const answer of rule.answers) {
+      if (rule.type === 'A') encodeIPv4(answer);
+      else if (rule.type === 'AAAA') encodeIPv6(answer);
+      else if (!validName(answer)) throw new Error('Invalid CNAME target');
+    }
+    return { ...rule, domain: rule.domain.toLowerCase() };
+  });
 }
 
 /**
@@ -788,7 +825,7 @@ function synthesizeDNSResponse(queryBuf, question, rule) {
  * Build a semantic cache key that is stable across DNS transaction ID changes.
  *
  * Key format (URL-encoded path):
- *   /ck/v3/<token>/<revision>/<qname>/<qtype>/<qclass>/<do>/<rd>/<ad>/<cd>
+ *   /ck/v4/<public|private>/<token>/<revision>/<qname>/<qtype>/<qclass>/<do>/<rd>/<ad>/<cd>
  *
  * Using a GET Request object satisfies the Cache API, which requires a Request
  * or URL as the key argument.
@@ -802,7 +839,8 @@ function synthesizeDNSResponse(queryBuf, question, rule) {
 function buildCacheKey(origin, token, profile, question) {
   const components = [
     CACHE_KEY_VERSION,
-    token ?? '__public__',
+    token === null ? 'public' : 'private',
+    token ?? '',
     profile.revision,
     question.qname,
     question.qtype,
@@ -877,7 +915,8 @@ async function buildCacheHitResponse(cached, cacheStatus, transactionId, queryBu
     status: 200,
     headers: {
       'content-type':   DNS_CONTENT_TYPE,
-      'cache-control':  `public, max-age=${clientTtl}`,
+      'cache-control':  `private, max-age=${clientTtl}`,
+      'vary':           'Authorization',
       'age':            String(ageSeconds),
       'x-cache':        cacheStatus,
       ...COMMON_HEADERS,
@@ -899,7 +938,8 @@ function buildUpstreamResponse(buf, ttl) {
     status: 200,
     headers: {
       'content-type':  DNS_CONTENT_TYPE,
-      'cache-control': `public, max-age=${ttl}`,
+      'cache-control': `private, max-age=${ttl}`,
+      'vary':          'Authorization',
       'age':           '0',
       'x-cache':       'MISS',
       ...COMMON_HEADERS,
@@ -914,9 +954,36 @@ function errorResponse(status, message) {
     status,
     headers: {
       'content-type': 'text/plain; charset=utf-8',
+      'cache-control': 'no-store',
       ...COMMON_HEADERS,
     },
   });
+}
+
+// Enforce the cap while streaming, including bodies without Content-Length.
+async function readBoundedBody(message, limit) {
+  if (!message.body) return new ArrayBuffer(0);
+  const reader = message.body.getReader();
+  const chunks = [];
+  let size = 0;
+  try {
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > limit) {
+        void reader.cancel().catch(() => {});
+        throw new RangeError('DNS message is too large');
+      }
+      chunks.push(value);
+    }
+  } finally {
+    reader.releaseLock();
+  }
+  const result = new Uint8Array(size);
+  let offset = 0;
+  for (const chunk of chunks) { result.set(chunk, offset); offset += chunk.byteLength; }
+  return result.buffer;
 }
 
 // ─── Multi-upstream racing ────────────────────────────────────────────────────
@@ -1011,7 +1078,7 @@ async function raceFetch(
       if (!res.ok) throw new Error(`upstream ${key} returned ${res.status}`);
       const contentType = (res.headers.get('content-type') || '').split(';', 1)[0].trim().toLowerCase();
       if (contentType !== DNS_CONTENT_TYPE) throw new Error(`upstream ${key} returned invalid content type`);
-      const buf = validateDnsResponse(await res.arrayBuffer(), question);
+      const buf = validateDnsResponse(await readBoundedBody(res, 65535), question);
       controllers.forEach((c, i) => { if (i !== idx) c.abort(); }); // cancel losers
       return buf;
     });
@@ -1196,7 +1263,11 @@ export default {
       if (Number.isFinite(contentLength) && contentLength > MAX_DNS_MESSAGE_BYTES) {
         return errorResponse(413, 'DNS query is too large');
       }
-      dnsBuf = await request.arrayBuffer();
+      try {
+        dnsBuf = await readBoundedBody(request, MAX_DNS_MESSAGE_BYTES);
+      } catch (error) {
+        return errorResponse(error instanceof RangeError ? 413 : 400, 'Invalid DNS request body');
+      }
     }
     if (dnsBuf.byteLength > MAX_DNS_MESSAGE_BYTES) return errorResponse(413, 'DNS query is too large');
 
@@ -1209,7 +1280,13 @@ export default {
     let profile = token === null ? PUBLIC_PROFILE : DEFAULT_PROFILE;
     if (token !== null) {
       if (!env.DOH_KV) return errorResponse(500, 'DOH_KV binding is not configured');
-      const loaded = await loadProfile(env.DOH_KV, token);
+      let loaded;
+      try {
+        loaded = await loadProfile(env.DOH_KV, token);
+      } catch {
+        // Fail closed: a broken private rule must not leak queries upstream.
+        return errorResponse(503, 'Private DNS configuration unavailable');
+      }
       if (loaded === null) return errorResponse(403, 'Unknown token');
       profile = loaded;
     }
@@ -1226,7 +1303,7 @@ export default {
     if (rule) {
       const synthBuf = synthesizeDNSResponse(dnsBuf, question, rule);
       if (synthBuf) return buildUpstreamResponse(synthBuf, rule.ttl);
-      // Synthesis failed — fall through to upstream.
+      return errorResponse(503, 'Private DNS answer unavailable');
     }
 
     // ── Cache lookup ─────────────────────────────────────────────────────────

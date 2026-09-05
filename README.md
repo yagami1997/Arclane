@@ -218,6 +218,13 @@ If you are operating in a regulated environment, under enterprise security contr
 
 ### Latest: September 4, 2026 (PDT)
 
+- Hardened the DoH Worker with private client-cache headers, separate public
+  and authenticated cache namespaces, strict private DNS rule validation,
+  fail-closed configuration handling, and streaming request/response limits.
+- Added regression coverage and `python3 tools/check.py` for rule/CIDR checks,
+  informational cross-file overlap counts, local documentation links, Real IP
+  synchronization, and offline tests. GitHub Actions runs the same checks;
+  it does not deploy services or validate live device routing.
 - Released Real IP v2.1.1 for macOS and iOS/iPadOS with 176 shared host tokens.
   Added exact `catalog.openclaw.ai` and `clawhub.ai` exceptions after reproducing
   OpenClaw catalog failures caused by Surge Fake IP answers.
@@ -473,6 +480,6 @@ To my friends at Kyoto University, thank you for the kindness, encouragement, an
     <br><br>
     <sub>Copyright © 2023-2026 YAGAMI</sub>
     <br>
-    <sub>Last updated: September 4, 2026 7:20:10 PM PDT (America/Los_Angeles)</sub>
+    <sub>Last updated: September 4, 2026 7:43:49 PM PDT (America/Los_Angeles)</sub>
   </p>
 </div>

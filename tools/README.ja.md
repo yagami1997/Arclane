@@ -1,7 +1,12 @@
 # Repository Tools
 
 バージョン作成日時: 2026年4月2日 13:30 JST
-最終更新日時: 2026年8月31日 JST
+最終更新日時: 2026年9月4日 PDT (America/Los_Angeles)
+
+共通検証: root で `python3 tools/check.py` を実行します。CI の基準環境は
+Python 3.13 / Node.js 24、追加 package は不要です。rule/CIDR、重複、相対文書リンク、
+Real IP 生成物、offline test を検証します。ファイル間の重複は情報として表示し、
+自動削除しません。外部 URL、見出し anchor、実際の経路と配備は別途確認が必要です。
 
 Language:
 
@@ -71,7 +76,7 @@ process rule が入っていないことを検証します。
 
 ### DoH Fallback Worker
 
-バージョン: 4.0.0 · 作成日時: 2026年4月2日 13:30 JST · **更新日時: 2026年7月25日**
+バージョン: 4.0.0 · 作成日時: 2026年4月2日 13:30 JST · **更新日時: 2026年9月4日 PDT**
 
 パス:
 

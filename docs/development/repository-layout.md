@@ -4,6 +4,9 @@ This repository was refactored to reduce the root surface and make ownership exp
 
 ## Top-Level Structure
 
+- `.github/workflows/`
+  Read-only validation automation; no deployment or private configuration.
+
 - `neorulset26/`
   The only active ruleset mainline. Do not rename or reorganize it casually.
 - `tools/`
@@ -21,6 +24,7 @@ This repository was refactored to reduce the root surface and make ownership exp
 
 - New rules belong in `neorulset26/`.
 - New tooling belongs in `tools/`.
+- `tools/check.py` is the shared offline validation entry point used by CI.
 - New maintained modules belong in `neorulset26/modules/` and must follow the
   active mainline's validation and release lifecycle.
 - Reusable module generators and validators belong in `tools/`, not beside the

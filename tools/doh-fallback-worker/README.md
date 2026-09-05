@@ -13,6 +13,27 @@ does not publish or endorse any maintainer-operated resolver hostname.
 
 ## Features
 
+### Cache and configuration safety
+
+Last updated: September 4, 2026 (PDT, America/Los_Angeles).
+
+All client DNS responses, including public access, use `Cache-Control: private`
+and `Vary: Authorization`. Token-isolated Cloudflare Cache API entries remain
+cacheable internally; external shared caches must not reuse client answers.
+Cache keys use `v4` with distinct public/private namespaces. Existing `v3`
+entries expire naturally and are no longer read; expect a brief cold cache.
+
+Private rules require exact/suffix matching, a valid domain, A/AAAA/CNAME
+answers, and an integer TTL from 0 to 2147483647. IP addresses are validated;
+CNAME accepts one target. Invalid configuration returns a generic, non-cacheable
+503 without querying upstream. Validate KV changes before deployment: strict
+validation can expose previously tolerated mistakes. Existing profile/KV cache
+propagation windows still apply. POST bodies are capped while streaming at
+4096 bytes and upstream DNS responses at 65535 bytes.
+
+Run `python3 tools/check.py` from the repository root before deployment. Local
+tests do not deploy the Worker or prove that an existing deployment is updated.
+
 | # | Feature |
 |---|---------|
 | 1 | Token-aware routing — each token maps to an isolated resolution profile stored in KV |
@@ -386,6 +407,12 @@ dns:
 
 ## Development Log
 
+### September 4, 2026 (PDT) — cache isolation and validation
+
+- Prevented shared client caching and public/private cache-key collisions.
+- Added strict private-rule validation and fail-closed errors without DNS leakage.
+- Enforced streaming body limits and added offline regression tests and CI.
+
 ### July 25, 2026 — cache correctness, hardening, and request scheduling
 
 **DNS and cache correctness**
@@ -396,7 +423,7 @@ dns:
 - Stale responses cap ordinary RR TTLs at 15 seconds.
 - NXDOMAIN and empty-answer NODATA use Authority SOA data for RFC 2308 negative
   caching.
-- The semantic cache key is version `v3`. Each component is independently
+- This release introduced semantic cache key `v3` (superseded by `v4`). Each component is independently
   encoded, and profile revision, DO, RD, AD, and CD are isolated; ECS and
   unrepresented EDNS semantics bypass cache.
 

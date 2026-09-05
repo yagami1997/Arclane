@@ -5,6 +5,8 @@ import test from 'node:test';
 const workerSource = await readFile(new URL('./worker.js', import.meta.url), 'utf8');
 const testableWorkerSource = `${workerSource}
 export {
+  encodeIPv4, encodeIPv6, validatePrivateRules, readBoundedBody,
+  buildUpstreamResponse, buildCacheHitResponse,
   buildCacheKey,
   extractCacheTTL,
   parseQuestion,
@@ -34,6 +36,96 @@ function nameBytes(name) {
   out.push(0);
   return out;
 }
+
+test('public and private cache namespaces never collide', () => {
+  const q = parseQuestion(makeQuery());
+  const p = { revision: 1 };
+  assert.notEqual(buildCacheKey('https://example.test', null, p, q).url,
+    buildCacheKey('https://example.test', '__public__', p, q).url);
+});
+
+test('fresh, HIT and STALE client responses prohibit shared caching', async () => {
+  const fresh = workerModule.buildUpstreamResponse(makeResponse(), 60);
+  assert.equal(fresh.headers.get('cache-control'), 'private, max-age=60');
+  assert.equal(fresh.headers.get('vary'), 'Authorization');
+  for (const state of ['HIT', 'STALE']) {
+    const cached = new Response(makeResponse(), { headers: {
+      'x-cache-ts': String(Date.now()), 'x-cache-ttl': '60',
+    } });
+    const response = await workerModule.buildCacheHitResponse(cached, state, 0x1234, makeQuery());
+    assert.match(response.headers.get('cache-control'), /^private,/);
+    assert.equal(response.headers.get('vary'), 'Authorization');
+  }
+});
+
+test('strict IP encoders reject malformed addresses and support IPv4-mapped IPv6', () => {
+  for (const value of ['999.1.2.3', '1.2.3', '01.2.3.4', '-1.2.3.4', null]) {
+    assert.throws(() => workerModule.encodeIPv4(value));
+  }
+  for (const value of ['1::2::3', 'gggg::1', '1:2:3', '1:2:3:4:5:6:7:8::', '::ffff:999.1.2.3']) {
+    assert.throws(() => workerModule.encodeIPv6(value));
+  }
+  assert.deepEqual([...workerModule.encodeIPv4('192.0.2.1')], [192, 0, 2, 1]);
+  assert.equal(workerModule.encodeIPv6('::').length, 16);
+  assert.deepEqual([...workerModule.encodeIPv6('::ffff:192.0.2.1')].slice(-6), [255, 255, 192, 0, 2, 1]);
+});
+
+test('private rule schema rejects malformed records', () => {
+  const good = { match: 'exact', domain: 'Example.test', type: 'A', answers: ['192.0.2.1'], ttl: 60 };
+  assert.equal(workerModule.validatePrivateRules([good])[0].domain, 'example.test');
+  for (const bad of [null, {}, { ...good, ttl: -1 }, { ...good, answers: [] },
+    { ...good, answers: ['999.1.2.3'] }, { ...good, domain: 'bad..test' },
+    { ...good, type: 'CNAME', answers: ['a.test', 'b.test'] }]) {
+    assert.throws(() => workerModule.validatePrivateRules([bad]));
+  }
+});
+
+test('same URL with different bearer profiles returns isolated private answers', async () => {
+  const dns = Buffer.from(makeQuery({ name: 'example.test' })).toString('base64url');
+  const answers = [];
+  const env = { DOH_KV: { async get(key) {
+    if (key.startsWith('profile:')) return {};
+    return { privateRules: [{ match: 'exact', domain: 'example.test', type: 'A',
+      answers: [key.endsWith('cache-user-a') ? '192.0.2.1' : '192.0.2.2'], ttl: 60 }] };
+  } } };
+  for (const token of ['cache-user-a', 'cache-user-b']) {
+    const response = await worker.fetch(new Request(`https://example.test/dns-query?dns=${dns}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    }), env, {});
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get('cache-control'), 'private, max-age=60');
+    assert.equal(response.headers.get('vary'), 'Authorization');
+    answers.push(Buffer.from(await response.arrayBuffer()).subarray(-4));
+  }
+  assert.deepEqual([...answers[0]], [192, 0, 2, 1]);
+  assert.deepEqual([...answers[1]], [192, 0, 2, 2]);
+});
+
+test('invalid private configuration fails closed without any upstream request', async t => {
+  const original = globalThis.fetch;
+  globalThis.fetch = () => { throw new Error('must not query upstream'); };
+  t.after(() => { globalThis.fetch = original; });
+  const env = { DOH_KV: { async get(key) {
+    return key.startsWith('profile:') ? {} : { privateRules: [null] };
+  } } };
+  const dns = Buffer.from(makeQuery()).toString('base64url');
+  const response = await worker.fetch(new Request(`https://example.test/dns-query?dns=${dns}`, {
+    headers: { Authorization: 'Bearer invalid-rule-regression' },
+  }), env, {});
+  assert.equal(response.status, 503);
+  assert.equal(response.headers.get('cache-control'), 'no-store');
+});
+
+test('streamed body limit cancels oversized bodies without Content-Length', async () => {
+  let cancelled = false;
+  const body = new ReadableStream({
+    pull(controller) { controller.enqueue(new Uint8Array(4097)); },
+    cancel() { cancelled = true; },
+  });
+  await assert.rejects(workerModule.readBoundedBody(new Response(body), 4096), RangeError);
+  assert.equal(cancelled, true);
+  assert.equal((await workerModule.readBoundedBody(new Response(new Uint8Array(4096)), 4096)).byteLength, 4096);
+});
 
 function questionBytes(name = 'example.com', type = 1, qclass = 1) {
   const out = Buffer.alloc(nameBytes(name).length + 4);
@@ -220,7 +312,7 @@ test('parseQuestion rejects non-zero EDNS versions', () => {
   assert.equal(parseQuestion(query), null);
 });
 
-test('cache key isolates revision, DO/RD/AD/CD semantics, and uses v3', () => {
+test('cache key isolates revision, DO/RD/AD/CD semantics, and uses v4', () => {
   const plain = parseQuestion(makeQuery());
   const secure = parseQuestion(makeQuery({ flags: 0x0110, dnssecOk: true }));
   const noRecursion = parseQuestion(makeQuery({ flags: 0 }));
@@ -234,7 +326,7 @@ test('cache key isolates revision, DO/RD/AD/CD semantics, and uses v3', () => {
   assert.notEqual(a, c);
   assert.notEqual(a, d);
   assert.notEqual(a, e);
-  assert.match(a, /\/v3\//);
+  assert.match(a, /\/v4\//);
 });
 
 test('cache-key component encoding prevents token/qname delimiter collisions', () => {

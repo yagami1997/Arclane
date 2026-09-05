@@ -1,7 +1,14 @@
 # Repository Tools
 
 Version created: April 1, 2026 09:30 PM PDT
-Last updated: August 31, 2026 PDT
+Last updated: September 4, 2026 PDT (America/Los_Angeles)
+
+Repository validation: run `python3 tools/check.py` from the repository root
+with Python 3.13 and Node.js 24 (the CI baseline). No third-party packages are
+needed. This checks rule structure/CIDRs, reports cross-file overlaps without
+deleting them, checks relative document targets and generated Real IP modules,
+and runs offline tests. Remote links, heading anchors, effective routing and
+live services require separate verification.
 
 Language:
 
@@ -70,7 +77,7 @@ not required for normal module operation. See the
 
 ### DoH Fallback Worker
 
-Version: 4.0.0 · Created: April 1, 2026 09:30 PM PDT · **Updated: July 25, 2026**
+Version: 4.0.0 · Created: April 1, 2026 09:30 PM PDT · **Updated: September 4, 2026 PDT**
 
 Path:
 

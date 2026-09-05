@@ -13,6 +13,24 @@ Language: [English](./README.md) / 日本語
 
 ## 機能一覧
 
+### キャッシュと設定の安全性
+
+最終更新: 2026年9月4日 PDT (America/Los_Angeles)。
+
+公開アクセスを含むクライアント向け DNS 応答は `Cache-Control: private` と
+`Vary: Authorization` を使用します。内部 Cache API は token ごとの分離を維持し、
+外部共有キャッシュには応答を保存させません。cache key は `v4` で public/private
+名前空間を分離します。旧 `v3` は自然失効し、移行直後は cold cache になります。
+
+private rule は exact/suffix、有効な domain、A/AAAA/CNAME、0〜2147483647 の整数
+TTL が必要です。IP を厳密に検証し、CNAME は単一 target に限定します。不正な設定は
+upstream に転送せず、キャッシュ不可の汎用 503 を返します。従来許容された誤記も
+失敗するため、配備前に KV を検証してください。既存 profile/KV cache の反映待ち時間は
+変わりません。stream 読み取り中に POST 4096 bytes、upstream 65535 bytes を制限します。
+
+配備前にリポジトリ root で `python3 tools/check.py` を実行してください。
+ローカル検証と実際の配備・端末上の動作確認は別です。
+
 | # | 機能 |
 |---|------|
 | 1 | トークンルーティング — 各トークンは KV に保存された独立した解決プロファイルに対応 |
@@ -379,6 +397,12 @@ dns:
 
 ## 開発履歴
 
+### 2026年9月4日 PDT — キャッシュ分離と検証
+
+- client 応答の共有キャッシュと public/private key 衝突を防止。
+- private rule を厳密に検証し、不正設定は DNS を upstream に漏らさず失敗。
+- stream サイズ制限、回帰テスト、共通チェックと CI を追加。
+
 ### 2026年7月25日 — キャッシュ整合性・防御・リクエスト調度
 
 **DNS・キャッシュ整合性**
@@ -389,7 +413,7 @@ dns:
 - stale 応答の通常 RR TTL を最大 15 秒に制限。
 - NXDOMAIN と NODATA は Authority SOA から RFC 2308 TTL を計算。SOA がない
   negative response は cache しない。
-- cache key は `v3`。各 component を独立 encode し、profile revision、
+- 当時の cache key は `v3`（現在は `v4`）。各 component を独立 encode し、profile revision、
   DO、RD、AD、CD を含む。ECS と未表現 EDNS は cache を迂回。
 
 **検証・調度**

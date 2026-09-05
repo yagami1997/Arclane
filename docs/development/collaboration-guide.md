@@ -2,6 +2,18 @@
 
 This repository now follows a simple placement model.
 
+## Validation Gate
+
+Last updated: September 4, 2026 (PDT, America/Los_Angeles).
+
+Run `python3 tools/check.py` before proposing changes. The same command runs
+in `.github/workflows/check.yml` on pushes and pull requests, with read-only
+repository permissions and no deployment secrets. It validates rule structure,
+CIDRs, within-file duplicates, relative document targets, generated modules,
+and offline tests. Cross-file overlaps are informational: review ownership and
+effective profile order before removing any rule. This is not a complete Surge
+parser or a substitute for native/device and live service validation.
+
 ## Where New Work Goes
 
 - New rules go to `neorulset26/`.

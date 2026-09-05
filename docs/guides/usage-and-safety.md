@@ -1,12 +1,20 @@
 # Usage and Safety Notice
 
-*Last updated: September 4, 2026 (PDT)*
+*Last updated: September 4, 2026 (PDT, America/Los_Angeles)*
 
 This notice applies to the routing rules, Surge-compatible modules, reference
 profiles, and operational helper code published by Arclane. It supplements the
 [legal boundary statement](../legal/LEGAL.md) and the MIT License.
 
 ## Before Use
+
+For the self-hosted DoH Worker, validate private KV rules before deploying.
+Invalid rules now fail closed with HTTP 503 instead of forwarding the query.
+Client responses prohibit shared caching; internal token-isolated caching is
+separate. The `v4` cache namespace starts cold. Source updates and passing CI
+do not update an existing Worker deployment automatically. Keep a rollback
+copy of the deployed source and configuration; review cache isolation before
+reverting to an older Worker version.
 
 - Review the exact artifact instead of importing an unfamiliar raw URL blindly.
 - Back up the working profile and keep a tested way to disable or remove the
