@@ -329,6 +329,15 @@ neorulset26/
 
 ---
 
+## OpenClaw DNS Compatibility
+
+The Real IP modules include exact `catalog.openclaw.ai` and `clawhub.ai`
+exceptions alongside the retained `auth.openai.com` entry. These hosts do not
+receive module routing overrides. Maintain them in `modules/realip.list`,
+regenerate both platform modules, and verify system DNS, strict SSRF requests,
+and the unchanged outbound policy separately. See the
+[compatibility guide](../docs/guides/openclaw-fake-ip-compatibility.md).
+
 ## Scope and Responsibility
 
 This document describes the routing classification architecture studied and maintained in this repository. It is shared as a research and maintenance reference.

@@ -47,12 +47,17 @@ disable Enhanced Mode and does not globally replace Surge's Fake IP design.
 
 ## Catalog Scope
 
-Version 2.1.0 contains 174 unique host tokens:
+Version 2.1.1 contains 176 unique host tokens:
 
 - 102 established compatibility tokens migrated from the maintained profile
   baseline;
 - 71 verified Feishu, Lark, Doubao, and product-qualified CDN/CNAME tokens;
-- the exact `auth.openai.com` OAuth endpoint for SSRF-sensitive token exchange.
+- the exact `auth.openai.com` OAuth endpoint for SSRF-sensitive token exchange;
+- `catalog.openclaw.ai` and `clawhub.ai` for OpenClaw hosted catalogs.
+
+OpenClaw exceptions change DNS answers only and preserve the consuming
+profile's outbound policy. See the [OpenClaw compatibility guide](../../docs/guides/openclaw-fake-ip-compatibility.md)
+for tested request paths, security boundaries, and repeatable checks.
 
 Apple connectivity handling is deliberately narrow. The default catalog keeps
 `captive.apple.com`, which is the current connectivity-validation endpoint,
@@ -162,6 +167,15 @@ rule merely to satisfy the standalone checker.
 
 ## Changelog
 
+### September 4, 2026 (PDT)
+
+- Released v2.1.1 with 176 host tokens shared by both platform modules.
+- Added exact `catalog.openclaw.ai` and `clawhub.ai` DNS exceptions after
+  reproducing strict SSRF failures with synthetic DNS answers.
+- Preserved existing routing rules and application security settings.
+- Added an OpenClaw request-path audit and an opt-in live compatibility probe
+  with offline SSRF rejection controls.
+
 ### August 31, 2026 (PDT)
 
 - Released v2.1.0 with 174 Real IP host tokens.
@@ -205,4 +219,4 @@ rule merely to satisfy the standalone checker.
 
 ---
 
-*Last updated: August 31, 2026 (PDT)*
+*Last updated: September 4, 2026 (PDT)*

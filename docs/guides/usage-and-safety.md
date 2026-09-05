@@ -1,6 +1,6 @@
 # Usage and Safety Notice
 
-*Last updated: August 31, 2026 (PDT)*
+*Last updated: September 4, 2026 (PDT)*
 
 This notice applies to the routing rules, Surge-compatible modules, reference
 profiles, and operational helper code published by Arclane. It supplements the
@@ -51,11 +51,26 @@ the consuming profile. If Apple pages work through a proxy but fail on
 `DIRECT`, investigate the Apple policy group and direct path before adding
 more Apple hosts to `always-real-ip`.
 
-The exact `auth.openai.com` entry changes only the DNS answer. The consuming
-profile remains responsible for its outbound route and security policy.
+The exact `auth.openai.com`, `catalog.openclaw.ai`, and `clawhub.ai` entries
+change only DNS answers. They do not add DIRECT rules or disable OpenClaw's
+SSRF checks. Exceptions affect all clients using that Surge resolver. The
+consuming profile remains responsible for outbound routing. See the
+[OpenClaw compatibility guide](./openclaw-fake-ip-compatibility.md).
+
+The optional `check-openclaw.mjs` diagnostic sends unauthenticated requests to
+two public catalogs and checks three public hostnames with the installed
+OpenClaw SSRF runtime. It runs only when invoked and does not read user config
+or exchange credentials. The destination services and DNS operators still
+observe ordinary request metadata. Its negative controls simulate DNS answers
+without contacting private or special-use addresses. Passing these checks is
+not an exhaustive security audit or proof of the running Gateway's state.
+
+Trusted-proxy modes transfer resolved-destination enforcement to the proxy.
+Do not enable them merely to avoid Fake IP errors unless that proxy's HTTP
+and HTTPS CONNECT destination filtering has been independently verified.
 
 These modules are compatibility workarounds, not guarantees that every captive
-portal, public Wi-Fi network, Feishu, Lark, Doubao, OAuth, CDN, authentication,
+portal, public Wi-Fi network, Feishu, Lark, Doubao, OpenClaw, OAuth, CDN, authentication,
 or embedded third-party page will remain available or fast.
 
 ## Security and Privacy Boundary

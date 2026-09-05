@@ -165,6 +165,12 @@ Representative maintained files include:
 - `neorulset26/modules/realip-ios.sgmodule`
 - `neorulset26/modules/realip.list`
 
+The v2.1.1 Real IP modules share 176 host tokens. Exact OpenClaw model and
+plugin catalog exceptions return real DNS answers while preserving the main
+profile's routing and application SSRF checks. The [module README](./neorulset26/modules/README.md)
+describes installation; the [OpenClaw compatibility guide](./docs/guides/openclaw-fake-ip-compatibility.md)
+documents request-path differences and verification limits.
+
 Additional structured materials live under:
 
 - `neorulset26/ruleset/`
@@ -181,6 +187,13 @@ These files are published as text artifacts for study, comparison, maintenance, 
 - Tools overview: [`tools/README.md`](./tools/README.md)
 - DoH fallback reference: [`tools/doh-fallback-worker/README.md`](./tools/doh-fallback-worker/README.md)
 - HTTP 204 probe reference: [`tools/edge204/README.md`](./tools/edge204/README.md)
+- Real IP builder and opt-in OpenClaw compatibility probe:
+  [`tools/realip/README.md`](./tools/realip/README.md)
+
+The OpenClaw probe uses the locally installed SSRF runtime to check public DNS,
+two unauthenticated catalog requests, and offline special-address rejection
+controls. It is a manually invoked diagnostic, not a background service or
+security certification. It does not read user configuration or exchange tokens.
 
 Each Cloudflare Worker under `tools/` follows the same convention: a tracked `wrangler.toml.example` template, a real `wrangler.toml` that Git ignores, and a checked-in test suite runnable with `node --test`. Deployment examples use generic placeholders only. The public repository does not document maintainer-operated domains, account subdomains, routes, resource IDs, or tokens.
 
@@ -203,7 +216,26 @@ If you are operating in a regulated environment, under enterprise security contr
 
 ## Changelog
 
-### Latest: August 31, 2026
+### Latest: September 4, 2026 (PDT)
+
+- Released Real IP v2.1.1 for macOS and iOS/iPadOS with 176 shared host tokens.
+  Added exact `catalog.openclaw.ai` and `clawhub.ai` exceptions after reproducing
+  OpenClaw catalog failures caused by Surge Fake IP answers.
+- Preserved Enhanced Mode, existing outbound policies, and OpenClaw SSRF
+  protection. No broad OpenClaw wildcard or DIRECT rule was introduced.
+- Verified real system DNS, strict catalog GETs, unchanged routing, and actual
+  model-catalog refresh on macOS. Both generated lists and native configuration
+  syntax passed validation; on-device iOS testing remains separate.
+- Added an opt-in diagnostic with nine offline SSRF rejection controls and
+  documented why arbitrary URLs need a separately validated proxy boundary.
+- Consolidated the public compatibility guide under `docs/guides/`, updated
+  module/tool references and usage notices, and retained private diagnostics
+  outside the repository.
+
+<details>
+<summary><strong>Previous repository milestones</strong></summary>
+
+### August 31, 2026
 
 - Released v2.1.0 of the macOS and iOS/iPadOS Real IP modules with a narrower
   174-token catalog.
@@ -231,9 +263,6 @@ If you are operating in a regulated environment, under enterprise security contr
 - Retained all existing absolute rule URLs while documenting FOX One under the
   legacy `Fox Now.list` path, marking Fox+ as retired, and extending the legacy
   `encoreTVB.list` path for TVBAnywhere North America.
-
-<details>
-<summary><strong>Previous repository milestones</strong></summary>
 
 ### August 29, 2026
 
@@ -426,11 +455,13 @@ If you are operating in a regulated environment, under enterprise security contr
 
 ## Note
 
-Over time, I have come to see technical work as more than the pursuit of a perfectly functioning system. It is also a practice of rebuilding trust: making assumptions visible, drawing careful boundaries, and leaving behind something quieter, clearer, and more dependable than what came before.
+There is something quietly humbling about watching an AI system, capable of working through pages of code, come to a halt before a single address. A name is resolved, a boundary is checked, and the conversation with the outside world stops. So much of what we call intelligence still depends on these small permissions to proceed.
 
-Projects like this are never sustained by individual effort alone. I am deeply grateful to my friends at Kyoto University, whose kindness, encouragement, and steady presence have given me strength through difficult moments. Their support has reminded me that rigor and gentleness can coexist, and that even solitary work can be carried forward by the faith others place in us.
+A proxy gives the network another vocabulary. Names become temporary addresses; a request takes a different road. Such translations can make distant things reachable, yet something understood by one layer may look like a warning to the next. Working where AI meets this machinery has made me wary of effortless promises. I want tools whose decisions I can trace, whose boundaries I can understand, and whose mistakes leave enough evidence for someone to put things right.
 
-May this repository remain a small record of that lesson: protect what matters, stay honest about uncertainty, and keep building with patience.
+For me, progress often lives in an unremarkable moment: a request finally arrives without a safeguard being dismantled to let it through. The page opens. Work resumes. The repair disappears into the ordinary day it has made possible. I find more hope in that quiet usefulness than in another promise that everything will soon run itself.
+
+To my friends at Kyoto University, thank you for the kindness, encouragement, and strength you have given me. Your support reaches into work you may never see, including these small acts of patience with an imperfect network. I hope some of that care travels onward with what I build.
 
 ---
 
@@ -442,6 +473,6 @@ May this repository remain a small record of that lesson: protect what matters, 
     <br><br>
     <sub>Copyright © 2023-2026 YAGAMI</sub>
     <br>
-    <sub>Last updated: August 31, 2026 2:50:34 AM PDT (America/Los_Angeles)</sub>
+    <sub>Last updated: September 4, 2026 7:20:10 PM PDT (America/Los_Angeles)</sub>
   </p>
 </div>

@@ -207,3 +207,6 @@ lf3-cdn-tos.bytescm.com
 
 # OAuth and SSRF-sensitive Endpoints
 auth.openai.com
+# OpenClaw hosted catalogs: exact DNS exceptions, no routing override.
+catalog.openclaw.ai
+clawhub.ai

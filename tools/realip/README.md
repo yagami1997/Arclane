@@ -49,3 +49,22 @@ Connectivity-detection entries must not double as broad web-routing hints. In
 particular, Apple connectivity handling keeps `captive.apple.com` but leaves
 ordinary Apple websites, account pages, and store traffic on the consuming
 profile's normal Fake IP and outbound-policy path.
+
+## OpenClaw Compatibility Probe
+
+After loading the module, run the opt-in probe with Node.js and the installed
+OpenClaw package root (not its configuration directory):
+
+```sh
+node tools/realip/check-openclaw.mjs /path/to/node_modules/openclaw
+```
+
+The probe uses OpenClaw's installed SSRF runtime, checks system DNS for three
+public endpoints, and sends unauthenticated GETs to two public catalogs. It
+does not read user configuration, exchange tokens, install plugins, or restart
+the Gateway. Private/special-use rejection controls use an injected resolver
+and never contact those addresses. Runtime import failures fail explicitly.
+
+This proves strict guarded-fetch compatibility, not the running Gateway's
+configuration, plugin trust validation, or actual outbound policy. Check those
+separately; see the [guide](../../docs/guides/openclaw-fake-ip-compatibility.md).

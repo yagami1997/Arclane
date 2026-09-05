@@ -38,9 +38,12 @@ how those artifacts are organized and reviewed.
 - [`../neorulset26/modules/README.md`](../neorulset26/modules/README.md):
   installation, scope, DNS/routing boundaries, profile cleanup, maintenance,
   and validation for the macOS and iOS/iPadOS Real IP modules, including the
-  narrow Apple connectivity-detection boundary introduced in v2.1.0.
+  narrow Apple connectivity boundary and v2.1.1's 176-token catalog.
+- [`guides/openclaw-fake-ip-compatibility.md`](./guides/openclaw-fake-ip-compatibility.md):
+  OpenClaw request-path findings, exact DNS exceptions, verification, and
+  trusted-proxy limitations.
 - [`../tools/realip/README.md`](../tools/realip/README.md): canonical catalog
-  builder and validator workflow.
+  builder, validator, and opt-in OpenClaw compatibility probe workflow.
 
 ## Recommended Reading Order
 
@@ -72,4 +75,4 @@ security, or future behavior.
 
 ---
 
-*Last updated: August 31, 2026 (PDT)*
+*Last updated: September 4, 2026 (PDT)*

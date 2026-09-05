@@ -1,6 +1,7 @@
 # Legal Boundary Statement
 
-*Last updated: August 28, 2026 (PDT)*
+*Last updated: September 4, 2026 (PDT); technical tool scope updated.
+Jurisdiction summaries were not re-reviewed in this revision.*
 
 ## 1. Project Characterization
 
@@ -8,7 +9,7 @@ Arclane is a third-party research repository containing text-based network routi
 
 Arclane is designed around the following model:
 
-- all published artifacts are plain text files expressing routing logic, domain classification, and configuration structure
+- published artifacts include text configuration, documentation, and executable helper source code
 - the repository does not operate, broker, or host any proxy server, VPN endpoint, network relay, or managed access infrastructure
 - no user accounts, subscription services, or managed connectivity products are offered
 - the repository is maintained by a single author for personal configuration research and documentation purposes
@@ -109,7 +110,7 @@ Users in all other jurisdictions are responsible for independently evaluating wh
 Arclane is maintained with design and documentation choices intended to reflect reasonable diligence by the project author:
 
 - the repository is positioned as a configuration research project, not as a proxy service, managed access product, or network infrastructure offering
-- published artifacts are plain text files; no executable client software, managed relay infrastructure, or subscription access service is distributed
+- published configuration and helper source code do not include a bundled VPN/proxy client, managed relay infrastructure, or subscription access service
 - the documentation does not provide instructions optimized for any specific unlawful use case
 - provider-specific operational recommendations have been deliberately excluded from public documentation to avoid constituting a deployment guide for any commercial proxy service
 - the repository has substantial lawful uses, including personal network configuration management, routing architecture research, DNS and privacy configuration study, and configuration migration and maintenance work
@@ -129,6 +130,16 @@ In addition to the disclaimer contained in the MIT License, the following projec
 - reference tools under `tools/` are not production assurances; anyone deploying them is solely responsible for platform terms, lawful operation, abuse prevention, security hardening, monitoring, incident response, and downstream effects
 
 ## 7. Intended Use
+
+The opt-in OpenClaw compatibility probe is source code run by the user. It
+queries public hostnames and requests public catalogs; destination services
+and resolvers can observe ordinary network metadata. It does not read user
+configuration or submit credentials. Its simulated private-address tests do
+not connect to private systems. Passing the probe is a bounded technical
+observation, not a security certification, service-availability guarantee, or
+authorization to access other systems. Details are maintained in the
+[usage notice](../guides/usage-and-safety.md) and
+[compatibility guide](../guides/openclaw-fake-ip-compatibility.md).
 
 This repository is intended for:
 

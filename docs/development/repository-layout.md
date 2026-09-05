@@ -26,6 +26,9 @@ This repository was refactored to reduce the root surface and make ownership exp
 - Reusable module generators and validators belong in `tools/`, not beside the
   published module artifacts.
 - New repository documentation belongs in `docs/`.
+- Reusable compatibility and troubleshooting guides belong in `docs/guides/`;
+  keep the module directory focused on installable artifacts, canonical source,
+  and its README. Keep raw diagnostics and private profile backups out of Git.
 - Do not add new business files to the repository root.
 
 ## Legacy Policy

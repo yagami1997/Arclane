@@ -9,9 +9,11 @@
 
 These are platform-specific module artifacts, not rule-set replacements. Use
 only the variant matching the target platform and review the module README
-before installation or update. Version 2.1.0 contains 174 Real IP tokens;
+before installation or update. Version 2.1.1 contains 176 Real IP tokens;
 Apple connectivity detection is limited to `captive.apple.com`, while ordinary
 Apple web, account, and store traffic remains under the consuming profile.
+Exact OpenClaw catalog exceptions preserve outbound policy and SSRF checks.
+See the [compatibility guide](../docs/guides/openclaw-fake-ip-compatibility.md).
 
 - macOS Real IP module:
   <https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/realip.sgmodule>

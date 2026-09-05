@@ -11,6 +11,9 @@ This repository now follows a simple placement model.
 - Categorized module source data stays beside its published modules; reusable
   generators and validators go to `tools/`.
 - New repository docs go to `docs/`.
+- Version reusable service compatibility guidance under `docs/guides/`.
+  Put opt-in probes beside their relevant tool; do not publish machine-specific
+  logs, effective profiles, credentials, or rollback backups.
 
 ## What Not To Do
 

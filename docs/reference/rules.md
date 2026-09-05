@@ -30,6 +30,9 @@ The former `archive/legacy/` transition surface (historical root rules and the o
   module URL.
 - Treat `neorulset26/modules/realip.list` as module source data, not as a
   `RULE-SET` URL.
+- OpenClaw catalog exceptions are exact DNS tokens, not routing rules.
+  See [the compatibility guide](../guides/openclaw-fake-ip-compatibility.md);
+  do not infer DIRECT routing from Real IP membership.
 - Keep connectivity-detection Real IP exceptions narrower than ordinary web
   routing. Apple detection uses `captive.apple.com`; Apple websites, account
   pages, and store traffic remain controlled by the consuming profile.

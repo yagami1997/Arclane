@@ -75,8 +75,10 @@ https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/rules/soci
 
 Install only the variant matching the target platform. The `realip.list` file
 is canonical maintenance input and is not a Surge `RULE-SET` artifact. Version
-2.1.0 keeps Apple connectivity detection limited to `captive.apple.com`; the
-public module URLs remain unchanged.
+2.1.1 contains 176 tokens, keeps Apple connectivity detection limited to
+`captive.apple.com`, and adds exact OpenClaw catalog DNS exceptions. The public
+module URLs and existing routing remain unchanged. See the
+[compatibility guide](../docs/guides/openclaw-fake-ip-compatibility.md).
 
 ```text
 https://raw.githubusercontent.com/yagami1997/Arclane/main/neorulset26/modules/realip.sgmodule

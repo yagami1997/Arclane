@@ -62,6 +62,13 @@ Language:
 section、`DIRECT` のみの module routing、および iOS/iPadOS 版に macOS 固有の
 process rule が入っていないことを検証します。
 
+同じディレクトリの [`check-openclaw.mjs`](./realip/check-openclaw.mjs) は、
+インストール済み OpenClaw の SSRF runtime を使う手動実行の Node.js 診断です。
+公開ホスト3件の DNS、認証情報を送信しないカタログ GET 2件、ネットワーク通信を
+行わない拒否確認9件を検証します。Surge や OpenClaw の設定を変更せず、
+モジュールの通常動作にも不要です。
+[互換性ガイド](../docs/guides/openclaw-fake-ip-compatibility.md)を参照してください。
+
 ### DoH Fallback Worker
 
 バージョン: 4.0.0 · 作成日時: 2026年4月2日 13:30 JST · **更新日時: 2026年7月25日**

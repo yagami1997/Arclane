@@ -61,6 +61,13 @@ macOS and iOS/iPadOS Surge modules. It rejects duplicates, malformed tokens,
 dangerously broad top-level wildcards, unexpected module sections, non-direct
 module routing, and macOS-only process rules in the iOS/iPadOS artifact.
 
+The same directory includes [`check-openclaw.mjs`](./realip/check-openclaw.mjs),
+an opt-in Node.js diagnostic using the installed OpenClaw SSRF runtime. It
+checks three public DNS names, two unauthenticated catalog GETs, and nine
+offline rejection controls. It does not configure Surge or OpenClaw and is
+not required for normal module operation. See the
+[compatibility guide](../docs/guides/openclaw-fake-ip-compatibility.md).
+
 ### DoH Fallback Worker
 
 Version: 4.0.0 · Created: April 1, 2026 09:30 PM PDT · **Updated: July 25, 2026**

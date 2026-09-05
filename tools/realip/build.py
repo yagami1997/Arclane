@@ -11,9 +11,9 @@ from pathlib import Path
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 HOST_CATALOG = REPOSITORY_ROOT / "neorulset26/modules/realip.list"
-MODULE_VERSION = "2.1.0"
-MODULE_UPDATED = "2026-08-31 PDT"
-MODULE_UPDATED_LONG = "2026-08-31 PDT (America/Los_Angeles)"
+MODULE_VERSION = "2.1.1"
+MODULE_UPDATED = "2026-09-04 PDT"
+MODULE_UPDATED_LONG = "2026-09-04 PDT (America/Los_Angeles)"
 MODULE_TARGETS = (
     (REPOSITORY_ROOT / "neorulset26/modules/realip.sgmodule", "mac"),
     (REPOSITORY_ROOT / "neorulset26/modules/realip-ios.sgmodule", "ios"),
