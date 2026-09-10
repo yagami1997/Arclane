@@ -153,7 +153,8 @@ IP-CIDR,60.8.0.0/16,no-resolve
 IP-CIDR,60.181.0.0/16,no-resolve
 IP-CIDR,110.242.68.0/24,no-resolve
 IP-CIDR,111.206.0.0/16,no-resolve
-IP-CIDR,220.194.0.0/16,no-resolve
+# Shared CDN range 220.194.0.0/16 is intentionally excluded:
+# observed WeChat media traffic must follow the profile's domestic routing.
 IP-CIDR,58.220.0.0/16,no-resolve
 IP-CIDR,61.135.0.0/16,no-resolve
 IP-CIDR,163.171.0.0/16,no-resolve
