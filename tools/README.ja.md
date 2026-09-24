@@ -72,7 +72,7 @@ process rule が入っていないことを検証します。
 公開ホスト3件の DNS、認証情報を送信しないカタログ GET 2件、ネットワーク通信を
 行わない拒否確認9件を検証します。Surge や OpenClaw の設定を変更せず、
 モジュールの通常動作にも不要です。
-[互換性ガイド](../docs/guides/openclaw-fake-ip-compatibility.md)を参照してください。
+検証範囲は[ツールの説明](./realip/README.md)を参照してください。
 
 ### DoH Fallback Worker
 

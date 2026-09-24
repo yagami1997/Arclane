@@ -210,3 +210,56 @@ auth.openai.com
 # OpenClaw hosted catalogs: exact DNS exceptions, no routing override.
 catalog.openclaw.ai
 clawhub.ai
+
+# AI Product DNS Compatibility (maintainer-requested preventive coverage)
+# DNS answers only: no DIRECT override and no claim of a reproduced failure.
+# Shared cloud, analytics, and identity-provider suffixes are not included.
+# ChatGPT / OpenAI and product-owned assets
+chatgpt.com
+*.chatgpt.com
+openai.com
+*.openai.com
+oaistatic.com
+*.oaistatic.com
+oaiusercontent.com
+*.oaiusercontent.com
+# Claude / Anthropic and product-owned assets
+claude.ai
+*.claude.ai
+claude.com
+*.claude.com
+anthropic.com
+*.anthropic.com
+claudeusercontent.com
+*.claudeusercontent.com
+# Gemini / AI Studio: product-qualified hosts, never *.google.com
+gemini.google.com
+*.gemini.google.com
+aistudio.google.com
+*.aistudio.google.com
+generativelanguage.googleapis.com
+*.generativelanguage.googleapis.com
+# Grok / xAI
+grok.com
+*.grok.com
+x.ai
+*.x.ai
+# Perplexity
+perplexity.ai
+*.perplexity.ai
+pplx.ai
+*.pplx.ai
+# DeepSeek
+deepseek.com
+*.deepseek.com
+# Qwen
+qwen.ai
+*.qwen.ai
+# Kimi / Moonshot
+kimi.com
+*.kimi.com
+moonshot.ai
+*.moonshot.ai
+moonshot.cn
+*.moonshot.cn
+# Doubao root and wildcard are already present in the existing product section.

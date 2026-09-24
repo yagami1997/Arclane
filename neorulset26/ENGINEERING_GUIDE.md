@@ -335,8 +335,7 @@ The Real IP modules include exact `catalog.openclaw.ai` and `clawhub.ai`
 exceptions alongside the retained `auth.openai.com` entry. These hosts do not
 receive module routing overrides. Maintain them in `modules/realip.list`,
 regenerate both platform modules, and verify system DNS, strict SSRF requests,
-and the unchanged outbound policy separately. See the
-[compatibility guide](../docs/guides/openclaw-fake-ip-compatibility.md).
+and the unchanged outbound policy separately.
 
 ## Scope and Responsibility
 

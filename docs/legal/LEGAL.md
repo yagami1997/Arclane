@@ -138,8 +138,7 @@ configuration or submit credentials. Its simulated private-address tests do
 not connect to private systems. Passing the probe is a bounded technical
 observation, not a security certification, service-availability guarantee, or
 authorization to access other systems. Details are maintained in the
-[usage notice](../guides/usage-and-safety.md) and
-[compatibility guide](../guides/openclaw-fake-ip-compatibility.md).
+[usage notice](../guides/usage-and-safety.md).
 
 This repository is intended for:
 

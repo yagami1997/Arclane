@@ -1,6 +1,6 @@
 # Usage and Safety Notice
 
-*Last updated: September 4, 2026 (PDT, America/Los_Angeles)*
+*Last updated: September 23, 2026 (PDT, America/Los_Angeles)*
 
 This notice applies to the routing rules, Surge-compatible modules, reference
 profiles, and operational helper code published by Arclane. It supplements the
@@ -44,6 +44,11 @@ For the Real IP compatibility modules:
   Wi-Fi, real-time communication, authentication, established application
   compatibility, and verified product-specific dependencies. Inclusion does
   not indicate affiliation with or endorsement by the named service.
+- Version 2.2.0 adds maintainer-requested preventive AI product-domain coverage.
+  Those entries are not claims of reproduced failures or live service recovery.
+  They do not add DIRECT routes, disable SSRF protection, or fix regional access
+  restrictions. Refresh the matching installed module after publication and
+  verify system DNS, actual outbound policy, and the affected application.
 - Routing rules separately send confirmed Feishu/Lark product domains and
   narrowly qualified CNAME dependencies to `DIRECT`.
 - The macOS variant uses process-scoped rules only for observed shared
@@ -62,8 +67,7 @@ more Apple hosts to `always-real-ip`.
 The exact `auth.openai.com`, `catalog.openclaw.ai`, and `clawhub.ai` entries
 change only DNS answers. They do not add DIRECT rules or disable OpenClaw's
 SSRF checks. Exceptions affect all clients using that Surge resolver. The
-consuming profile remains responsible for outbound routing. See the
-[OpenClaw compatibility guide](./openclaw-fake-ip-compatibility.md).
+consuming profile remains responsible for outbound routing.
 
 The optional `check-openclaw.mjs` diagnostic sends unauthenticated requests to
 two public catalogs and checks three public hostnames with the installed

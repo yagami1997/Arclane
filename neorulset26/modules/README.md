@@ -1,7 +1,7 @@
 # Surge Real IP Modules
 
 This directory is the single publication surface for Arclane's maintained
-Surge Real IP modules. The modules centralize verified `always-real-ip`
+Surge Real IP modules. The modules centralize curated `always-real-ip`
 compatibility handling for Fake IP and Enhanced Mode while keeping outbound
 routing decisions explicit and reviewable.
 
@@ -47,17 +47,34 @@ disable Enhanced Mode and does not globally replace Surge's Fake IP design.
 
 ## Catalog Scope
 
-Version 2.1.1 contains 176 unique host tokens:
+Version 2.2.0 contains 216 unique host tokens:
 
 - 102 established compatibility tokens migrated from the maintained profile
   baseline;
 - 71 verified Feishu, Lark, Doubao, and product-qualified CDN/CNAME tokens;
 - the exact `auth.openai.com` OAuth endpoint for SSRF-sensitive token exchange;
-- `catalog.openclaw.ai` and `clawhub.ai` for OpenClaw hosted catalogs.
+- `catalog.openclaw.ai` and `clawhub.ai` for OpenClaw hosted catalogs;
+- 40 preventive AI product tokens requested by the maintainer: ChatGPT/OpenAI,
+  Claude/Anthropic, Gemini/AI Studio, Grok/xAI, Perplexity, DeepSeek, Qwen, and
+  Kimi/Moonshot. Doubao coverage already exists in the verified product section.
+
+The new category uses product roots and subdomain wildcards; Google coverage
+is limited to Gemini, AI Studio, and the Generative Language API hosts, not
+`*.google.com` or `*.googleapis.com`. This is preventive DNS compatibility
+coverage, not a claim that every service reproduced a Fake IP bug. It adds no
+DIRECT rules and does not alter the existing routing sections. Local DNS must
+still return usable answers; Real IP alone cannot fix DNS poisoning, regional
+restrictions, proxy failures, or application errors. Existing exact
+`auth.openai.com` is retained as a documented observed OAuth exception even
+though the new OpenAI wildcard also covers it.
+
+Product references: [Qwen](https://qwen.ai/qwenchat),
+[Kimi](https://www.kimi.com/en/help/new-user-guide/overview), and
+[Gemini](https://support.google.com/gemini/answer/14886647).
 
 OpenClaw exceptions change DNS answers only and preserve the consuming
-profile's outbound policy. See the [OpenClaw compatibility guide](../../docs/guides/openclaw-fake-ip-compatibility.md)
-for tested request paths, security boundaries, and repeatable checks.
+profile's outbound policy. DNS coverage does not bypass application SSRF checks
+or prove that an application's authenticated workflows are working.
 
 Apple connectivity handling is deliberately narrow. The default catalog keeps
 `captive.apple.com`, which is the current connectivity-validation endpoint,
@@ -81,6 +98,8 @@ The catalog is organized by scenario:
 - time and directory services;
 - Feishu, Lark, Doubao, and verified product-qualified dependencies;
 - OAuth and SSRF-sensitive endpoints supported by direct failure evidence.
+- explicitly requested preventive AI product-domain coverage, distinct from
+  observed compatibility fixes.
 
 Brand websites are not added merely because a venue provides public Wi-Fi.
 Prefer the exact captive-portal or network-provider hostname. Broad provider
@@ -142,6 +161,10 @@ identity-authentication workflow. Prefer exact hostnames. Review uncertain or
 historical entries separately instead of changing behavior during a structural
 migration.
 
+An explicit maintainer request can also authorize preventive product-domain
+coverage, as in v2.2.0. Label that scope separately, retain DNS/routing separation,
+and do not describe it as a reproduced failure or verified end-to-end recovery.
+
 ## Validation
 
 Required release checks:
@@ -166,6 +189,14 @@ A standalone `.sgmodule` is not a complete Surge profile. Do not add a `FINAL`
 rule merely to satisfy the standalone checker.
 
 ## Changelog
+
+### September 23, 2026 (PDT)
+
+- Released v2.2.0 with 216 shared host tokens: 40 preventive AI product entries.
+- Kept all 176 existing tokens and both platform routing sections unchanged.
+- Generator checks, 55 offline tests, and native syntax checks of temporary
+  complete profiles passed. Installed module refresh and live AI service tests
+  remain separate deployment steps.
 
 ### September 4, 2026 (PDT)
 
@@ -219,4 +250,4 @@ rule merely to satisfy the standalone checker.
 
 ---
 
-*Last updated: September 4, 2026 (PDT)*
+*Last updated: September 23, 2026 (PDT, America/Los_Angeles)*

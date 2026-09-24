@@ -73,7 +73,7 @@ an opt-in Node.js diagnostic using the installed OpenClaw SSRF runtime. It
 checks three public DNS names, two unauthenticated catalog GETs, and nine
 offline rejection controls. It does not configure Surge or OpenClaw and is
 not required for normal module operation. See the
-[compatibility guide](../docs/guides/openclaw-fake-ip-compatibility.md).
+[tool documentation](./realip/README.md) for its verification boundaries.
 
 ### DoH Fallback Worker
 

@@ -165,11 +165,11 @@ Representative maintained files include:
 - `neorulset26/modules/realip-ios.sgmodule`
 - `neorulset26/modules/realip.list`
 
-The v2.1.1 Real IP modules share 176 host tokens. Exact OpenClaw model and
+The v2.2.0 Real IP modules share 216 host tokens, including a maintainer-requested
+preventive AI product-domain baseline with no new routing overrides. Exact OpenClaw model and
 plugin catalog exceptions return real DNS answers while preserving the main
 profile's routing and application SSRF checks. The [module README](./neorulset26/modules/README.md)
-describes installation; the [OpenClaw compatibility guide](./docs/guides/openclaw-fake-ip-compatibility.md)
-documents request-path differences and verification limits.
+describes installation, scope, and validation boundaries.
 
 Additional structured materials live under:
 
@@ -216,7 +216,27 @@ If you are operating in a regulated environment, under enterprise security contr
 
 ## Changelog
 
-### Latest: September 4, 2026 (PDT)
+### Latest: September 23, 2026 (PDT)
+
+- Updated macOS and iOS/iPadOS Real IP modules to v2.2.0, adding 40 AI product
+  DNS tokens, including `chatgpt.com` and `*.chatgpt.com`.
+- Expanded the catalog from 176 to 216 tokens for ChatGPT/OpenAI,
+  Claude/Anthropic, Gemini/AI Studio, Grok/xAI, Perplexity, DeepSeek, Qwen,
+  and Kimi/Moonshot. Existing Doubao coverage is retained without duplication.
+- Preserved all existing tokens and routing sections. The new coverage is
+  preventive and does not imply service-by-service runtime verification.
+- Retired the standalone OpenClaw guide and removed its documentation links;
+  existing DNS exceptions and the optional diagnostic tool remain unchanged.
+- Kept Enhanced Mode, application SSRF checks, and outbound policy selection
+  unchanged; no new DIRECT rules or shared Google/cloud-provider wildcards.
+- Passed generator parity checks, 55 offline tests, and native syntax checks
+  of temporary complete profiles for both module variants. Repository changes
+  do not automatically refresh modules already installed on a device.
+
+<details>
+<summary><strong>Previous repository milestones</strong></summary>
+
+### September 4, 2026 (PDT)
 
 - Hardened the DoH Worker with private client-cache headers, separate public
   and authenticated cache namespaces, strict private DNS rule validation,
@@ -238,9 +258,6 @@ If you are operating in a regulated environment, under enterprise security contr
 - Consolidated the public compatibility guide under `docs/guides/`, updated
   module/tool references and usage notices, and retained private diagnostics
   outside the repository.
-
-<details>
-<summary><strong>Previous repository milestones</strong></summary>
 
 ### August 31, 2026
 
@@ -480,6 +497,6 @@ To my friends at Kyoto University, thank you for the kindness, encouragement, an
     <br><br>
     <sub>Copyright © 2023-2026 YAGAMI</sub>
     <br>
-    <sub>Last updated: September 4, 2026 7:43:49 PM PDT (America/Los_Angeles)</sub>
+    <sub>Last updated: September 23, 2026 6:39:45 PM PDT (America/Los_Angeles)</sub>
   </p>
 </div>

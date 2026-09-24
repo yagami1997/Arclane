@@ -1,5 +1,7 @@
 # Real IP Module Builder
 
+Last updated: September 23, 2026 (PDT, America/Los_Angeles).
+
 This maintenance tool renders the canonical categorized host catalog into the
 macOS and iOS/iPadOS Surge modules.
 
@@ -37,6 +39,11 @@ python3 tools/realip/test_build.py
 
 ## Maintenance Policy
 
+Version 2.2.0 additionally includes an explicitly maintainer-requested AI
+product-domain baseline. These preventive exceptions are not evidence that
+every listed service has a reproduced Fake IP failure. Keep this category
+separate from observed fixes; never expand it to shared cloud-provider suffixes.
+
 Add a host only when a Fake IP compatibility failure has been observed or when
 the host belongs to a documented network-detection, captive-portal, local-
 callback, real-time communication, or identity-authentication workflow.
@@ -67,4 +74,4 @@ and never contact those addresses. Runtime import failures fail explicitly.
 
 This proves strict guarded-fetch compatibility, not the running Gateway's
 configuration, plugin trust validation, or actual outbound policy. Check those
-separately; see the [guide](../../docs/guides/openclaw-fake-ip-compatibility.md).
+separately.
