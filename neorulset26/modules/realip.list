@@ -263,3 +263,10 @@ moonshot.ai
 moonshot.cn
 *.moonshot.cn
 # Doubao root and wildcard are already present in the existing product section.
+
+# Public Weather Fetch Endpoints (observed Fake IP / SSRF incompatibility)
+# Exact DNS exceptions only; outbound routing and SSRF policy stay unchanged.
+# Add redirect hosts only after observing a required cross-host redirect.
+wttr.in
+wttr.is
+weather.yahoo.co.jp
