@@ -270,3 +270,7 @@ moonshot.cn
 wttr.in
 wttr.is
 weather.yahoo.co.jp
+
+# DoH endpoints: maintainer-requested Fake IP exclusions; cause unconfirmed.
+hk-hkg.doh.sb
+public.dns.iij.jp

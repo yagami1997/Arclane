@@ -216,7 +216,19 @@ If you are operating in a regulated environment, under enterprise security contr
 
 ## Changelog
 
-### Latest: September 23, 2026 (PDT)
+### Latest: October 11, 2026 (PDT)
+
+- Added exact `always-real-ip` exceptions for `hk-hkg.doh.sb` and
+  `public.dns.iij.jp` to both macOS and iOS/iPadOS Real IP modules.
+- Expanded the shared catalog from 219 to 221 unique host tokens, preserving
+  all existing entries and routing rules.
+- These exceptions bypass Fake IP responses; they do not correct erroneous
+  upstream DNS answers such as `127.0.0.1` or guarantee DoH connectivity.
+- Passed generator parity checks, seven Real IP tests, and native syntax
+  checks using temporary complete profiles for both module variants.
+  Local file updates do not automatically publish or reload installed modules.
+
+### September 23, 2026 (PDT)
 
 - Updated macOS and iOS/iPadOS Real IP modules to v2.2.0, adding 40 AI product
   DNS tokens, including `chatgpt.com` and `*.chatgpt.com`.
@@ -497,6 +509,6 @@ To my friends at Kyoto University, thank you for the kindness, encouragement, an
     <br><br>
     <sub>Copyright © 2023-2026 YAGAMI</sub>
     <br>
-    <sub>Last updated: September 23, 2026 6:39:45 PM PDT (America/Los_Angeles)</sub>
+    <sub>Last updated: October 11, 2026 (PDT, America/Los_Angeles)</sub>
   </p>
 </div>

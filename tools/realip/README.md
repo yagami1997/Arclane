@@ -1,6 +1,6 @@
 # Real IP Module Builder
 
-Last updated: September 23, 2026 (PDT, America/Los_Angeles).
+Last updated: October 11, 2026 (PDT, America/Los_Angeles).
 
 This maintenance tool renders the canonical categorized host catalog into the
 macOS and iOS/iPadOS Surge modules.
