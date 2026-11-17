@@ -236,6 +236,12 @@ DOMAIN-SUFFIX,ghcr.io
 DOMAIN-SUFFIX,cursor.sh
 DOMAIN-SUFFIX,cursor.com
 
+# > Kilo Code / Kilo Desktop
+DOMAIN-SUFFIX,kilo.ai
+DOMAIN-SUFFIX,kilocode.ai
+DOMAIN,auto-routing.kiloapps.io
+DOMAIN,events.kiloapps.io
+
 # > Codeium
 DOMAIN-SUFFIX,codeium.com
 
