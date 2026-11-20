@@ -16,6 +16,9 @@ DOMAIN-SUFFIX,volcvideo.com
 DOMAIN-SUFFIX,bytedapm.com
 DOMAIN-SUFFIX,ibytedapm.com
 
+# > Toutiao (including the creator portal at mp.toutiao.com)
+DOMAIN-SUFFIX,toutiao.com
+
 # ========================================
 # Douyin (CN)
 # ========================================
